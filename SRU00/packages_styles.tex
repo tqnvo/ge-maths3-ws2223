@@ -10,10 +10,10 @@
 \usepackage{graphicx}
 \usepackage[caption=true]{subfig}
 \usepackage[
-  colorlinks = true,
-  citecolor = red,
-  % linkcolor = darkblue, % internal references
-  % urlcolor = darkblue,
+	colorlinks = true,
+	citecolor = red,
+	% linkcolor = darkblue, % internal references
+	% urlcolor = darkblue,
 ]{hyperref}
 \usepackage{cleveref}
 \crefname{figure}{Figure}{Figures}
@@ -29,7 +29,7 @@
 % \newcommand{\Bv}{\bm v} 
 % \newcommand{\Bg}{\bm g} 
 % \newcommand{\Bb}{\bm b} 
-\newcommand{\divv}{\text{divv}} 
+\newcommand{\divv}{\text{divv}}
 %---------------------------------------------------------
 \usepackage{lineno}
 % \linenumbers     
@@ -48,7 +48,13 @@
 \usepackage{mdframed}
 % \newmdtheoremenv{theo}{Theorem}
 \newmdtheoremenv{interestingfactboxed}{Interesting fact}
+\newmdtheoremenv{observationboxed}{Observation}
 \newmdtheoremenv{exampleboxed}{Example}
+\newmdtheoremenv{questionboxed}{Question}
+\newmdtheoremenv{summaryboxed}{Summary}
 
 %For big integral sign
 \usepackage{bigints}
+
+%For [i)] in enumerate
+\usepackage{enumerate}
