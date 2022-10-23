@@ -39,7 +39,7 @@ Mathe III $\cdot$ SRU00 $\cdot$ WS22/23
 			y \mapsto
 			F(y):= 
 			\frac{1}{2}
-			\bigintssss_{-1}^1
+			\bigintsss_{-1}^1
 			\left( x\,y'(x) \right)^2 dx,
 		\end{cases}
 	\end{align}
@@ -68,66 +68,88 @@ and
 \eqref{eq:conditiony},
 in $v$ direction satisfying
 \eqref{eq:conditiony}, 
-we need to compute the limit,
+we need to compute the limit, by definiton,
 as shown in \eqref{eq:variationformular}.
+First, we shall write down the corresponding term 
+for $F(y+t\,v)$ based on
+the functional $F(y)$ given in
+\eqref{eq:functionalexample}, which means
+\begin{align}
+	\label{eq:termextra}
+	F(y+t\,v)
+	= 
+	\bigintsss_{-1}^{1}
+	\Big(
+	x \,
+	(y+t\,v)^\prime(x)
+	\Big)^2\,dx,
+\end{align}
+then by substituting both \eqref{eq:termextra}
+and \eqref{eq:functionalexample}
+into \eqref{eq:variationformular}
+we obtain 
 \begin{align}
 	\delta F(y;v)
 	 & :=  \lim_{t\to 0}\frac{F(y+t\,v)-F(y)}{t} \notag \\
 	 & =  \lim_{t\to 0} \frac{1}{t}
 	\left(
 	\frac{1}{2}
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	\Big(
 	x \,
 	(y+t\,v)^\prime(x)
 	\Big)^2\,dx
 	-
 	\frac{1}{2}
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	\Big(
 	x \, y^\prime(x)
 	\Big)^2\,dx
 	\right)\notag                                       \\
 	 & =  \lim_{t\to 0} \frac{1}{2t}
 	\left(
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	\Big(
 	x \,
 	(y(x)+t\,v(x))^\prime
 	\Big)^2\,dx
 	-
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	\Big(
 	x \, y^\prime(x)
 	\Big)^2\,dx
-	\right) \notag                                      \\
+	\right), 
+\end{align}
+where we will now compute those terms within the parenthesis, as follows
+\begin{align}
+	\delta F(y;v)
 	 & =  \lim_{t\to 0} \frac{1}{2t}
 	\left(
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	\Big(
 	x \,
 	(y^\prime(x)+t\,v^\prime(x))
 	\Big)^2\,dx
 	-
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	\Big(
 	x \, y^\prime(x)
 	\Big)^2\,dx
-	\right)\notag                                       \\
+	\right)\notag                    \\
 	 & =  \lim_{t\to 0} \frac{1}{2t}
 	\left(
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	x^2 \,
 	\Big(y^\prime(x)+t\,v^\prime(x)\Big)^2
 	\,dx
 	-
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	x^2 \, (y^\prime(x))^2\,dx
-	\right)\notag                                       \\
+	\right)\notag                    \\
 	 & =  \lim_{t\to 0} \frac{1}{2t}
 	\!
-	\bigintssss_{-1}^{1}
-	\!\!
+	\bigintsss_{-1}^{1}
+	\!\!\!\!
 	x^2 \,
 	\Big(
 	(y^\prime(x))^2 
@@ -135,13 +157,13 @@ as shown in \eqref{eq:variationformular}.
 	+ t^2\,(v^\prime(x))^2
 	\Big)
 	\,dx
-	-\!\!
-	\bigintssss_{-1}^{1}
-	\!\!
-	x^2 \, (y^\prime(x))^2\,dx\notag                    \\
+	-\!\!\!
+	\bigintsss_{-1}^{1}
+	\!\!\!\!
+	x^2 \, (y^\prime(x))^2\,dx\notag \\
 	 & =  \lim_{t\to 0} \frac{1}{2t}
-	\bigintssss_{-1}^{1}
-	\!\!
+	\bigintsss_{-1}^{1}
+	\!\!\!\!
 	\Big(
 	\cancel{x^2\,(y^\prime(x))^2}
 	+ 2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
@@ -149,16 +171,17 @@ as shown in \eqref{eq:variationformular}.
 	- \cancel{x^2\,(y^\prime(x))^2}
 	\Big)
 	\,dx
-	\notag                                              \\
+	\notag                           \\
 	 & =  \lim_{t\to 0} \frac{1}{2t}
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	\Big(
 	2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
 	+ x^2\,t^2\,(v^\prime(x))^2
 	\Big)
-	\,dx
+	\,dx.
 	\label{eq:reducedform}
 \end{align}
+
 Next, the expression in \eqref{eq:reducedform} is computed further,
 by first computing terms within the integrand going with $t$
 and then splitting into two terms going with the limit, as follows
@@ -166,7 +189,7 @@ and then splitting into two terms going with the limit, as follows
 	\delta F(y;v)
 	 & \stackrel{\eqref{eq:reducedform}}{=}
 	\lim_{t\to 0} \frac{1}{2t}
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	\Big(
 	2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
 	+ x^2\,t^2\,(v^\prime(x))^2
@@ -174,13 +197,13 @@ and then splitting into two terms going with the limit, as follows
 	\,dx\notag                              \\
 	 & =
 	\lim_{t\to 0}
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	\frac{2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
 		+ x^2\,t^2\,(v^\prime(x))^2}{2t}
 	\,dx\notag                              \\
 	 & =
 	\lim_{t\to 0}
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	\Big(
 	x^2\,y^\prime(x)\,v^\prime(x)
 	+ \frac{1}{2}x^2\,t\,(v^\prime(x))^2
@@ -188,23 +211,23 @@ and then splitting into two terms going with the limit, as follows
 	\,dx\notag                              \\
 	 & =
 	\lim_{t\to 0}
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	x^2\,y^\prime(x)\,v^\prime(x)
 	\,dx
 	+ 
 	\lim_{t\to 0}
 	\frac{1}{2}
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	x^2\,t\,(v^\prime(x))^2
 	\,dx \notag                             \\
 	 & =
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	x^2\,y^\prime(x)\,v^\prime(x)
 	\,dx
 	+
 	\underbrace{\lim_{t\to 0}
 		\frac{t}{2}
-		\bigintssss_{-1}^{1}
+		\bigintsss_{-1}^{1}
 		x^2\,(v^\prime(x))^2
 		\,dx}_{=0}.
 	\label{eq:reducedform2}
@@ -218,13 +241,85 @@ Herein, for the limit showing in \eqref{eq:reducedform2}
 we have been not doing so, but rather bringing the $t$ out of the integral.
 Finally, the first variation of functional $F$ is processed further as follows
 \begin{align}
+	\label{eq:reducedform3}
 	\delta F(y;v)
 	\stackrel{\eqref{eq:reducedform2}}{=}
-	\bigintssss_{-1}^{1}
+	\bigintsss_{-1}^{1}
 	x^2\,y^\prime(x)\,v^\prime(x)
-	\,dx
+	\,dx.
+\end{align}
+We will compute \eqref{eq:reducedform3}
+by taking into consideration the \textbf{integration by parts}, as follows 
+\begin{align}
+	\label{eq:integrationbyparts}
+	\boxed{
+		\bigintsss a'b =  ab - \bigintsss ab'
+	}
+\end{align}
+where we will assign
+\begin{align}
+	\label{eq:assignedab}
+	\begin{cases}
+		a := v(x), \\
+		b := x^2\,y'(x),
+	\end{cases}
+\end{align}
+which leads to 
+\begin{align}
+	\delta F(y;v)
+	 & \stackrel{\eqref{eq:reducedform3}}{=}
+	\bigintsss_{-1}^{1}
+	\underbrace{v^\prime(x)}_{a'}
+	\underbrace{x^2\,y^\prime(x)}_{b}
+	\,dx\notag                               \\
+	 & 
+	\stackrel{
+		\stackrel{\mbox{\scriptsize$\eqref{eq:assignedab}$}}{\eqref{eq:integrationbyparts}}
+	}{=}
+	\Big(
+	\underbrace{v(x)}_{a}
+	\,
+	\underbrace{x^2\,y'(x)}_{b}
+	\Big)\Bigg|_{x=-1}^{x=1}
+	-
+	\bigintsss_{-1}^{1}
+	\underbrace{v(x)}_{a}
+	\underbrace{
+		\frac{d(x^2\,y'(x))}{dx}
+	}_{b'}\,dx\notag                         \\
+	 & =
+	\underbrace{v(1)}_{=0}\,
+	(1)^2\,
+	\underbrace{y'(1)}_{=1}
+	- 
+	\underbrace{v(-1)}_{=0}\,
+	(-1)^2\,
+	\underbrace{y'(-1)}_{=1}
+	-\bigintsss_{-1}^{1}v(x)\frac{d(x^2\,y'(x))}{dx}\,dx
+	\label{eq:somethingtonote}               \\
+	 & =
+	-\bigintsss_{-1}^{1}v(x)\frac{d(x^2\,y'(x))}{dx}\,dx.
 \end{align}
 
+Note in passing that the definition 
+in \eqref{eq:conditiony}
+and \eqref{eq:conditionv}
+yield the following equalities
+\begin{align}
+	y(1)=y(-1)=1, \\
+	v(1)=v(-1)=0,
+\end{align}
+which we have used in \eqref{eq:somethingtonote}.
+Therefore, we obtain the final result 
+\begin{align}
+	\therefore\quad\boxed{
+		\delta F(y;v)
+		=
+		-\bigintsss_{-1}^{1}v(x)\frac{d(x^2\,y'(x))}{dx}\,dx,
+		\quad
+		\forall\, v(x)\in D_{0},\, y(x)\in D. 
+	}
+\end{align}
 % Let us now forget the argument $(x)$
 % in \eqref{eq:first1} and \eqref{eq:first2}
 % for a while, i.e. by dropping it temporarily, 
@@ -650,12 +745,12 @@ Finally, the first variation of functional $F$ is processed further as follows
 % 		      these ICs directly for the new system of
 % 		      three ODEs.
 % 	      \end{observationboxed}
-	      
+
 % 	      Therefore, we shall need three first order ODEs 
 % 	      for the new system. Besides, 
 % 	      the transformation is done by setting 
 % 	      new variables for $y(t)$, $y'(t)$ and $y''(t)$.
-	      
+
 % 	      Transformation: We now need to set
 % 	      $y(t)$, $y'(t)$ and $y''(t)$
 % 	      to new variables, 
@@ -670,7 +765,7 @@ Finally, the first variation of functional $F$ is processed further as follows
 % 		      y^{\prime\prime}(t) & := u_2(t). 
 % 		      \label{eq:newvariablesu2}
 % 	      \end{align}
-	      
+
 % 	      Then, by taking the derivative of 
 % 	      the new variable $u_0(t)$, $u_1(t)$ and $u_2(t)$,
 % 	      as newly defined in
@@ -798,7 +893,7 @@ Finally, the first variation of functional $F$ is processed further as follows
 % 		      Solve this system numerically 
 % 		      by using the explicit Euler method.
 % 	      \end{summaryboxed}
-	      
+
 % 	      Approach:
 % 	      We need to approximate $\Bu'(t)$ arising in 
 % 	      \eqref{eq:newBuprime} by some numerical schemes, 
