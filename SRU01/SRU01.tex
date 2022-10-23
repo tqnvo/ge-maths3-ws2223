@@ -28,91 +28,79 @@ Mathe III $\cdot$ SRU00 $\cdot$ WS22/23
 \end{center}
 %------------------------------------------------------------------------------
 \section{Step-by-step with A1a-SRU01}
-A function which takes its argument as a function is called 
-functional.
-\begin{align}
-	\boxed{
-		\text{functional = function of function}
-	}
-\end{align}
 \begin{exampleboxed}
 	Examine the first variation of the functional $F$ in $v$ direction
 	\begin{align}
 		\label{eq:functionalexample}
 		F:
 		\begin{cases}
-			C^2([-1,1]) \rightarrow \mathbb{R}, \\
+			D \rightarrow \mathbb{R}, \\
 			\displaystyle
 			y \mapsto
-			F(y):= \bigintssss_{-1}^1
-			\left( y(x) y'(x) + e^{{y^\prime}(x)^2} \right)dx,
-		\end{cases}
-		\text{with}\
-		y:
-		\begin{cases}
-			[-1,1] \rightarrow \mathbb{R}, \\
-			x \mapsto y(x),
+			F(y):= 
+			\frac{1}{2}
+			\bigintssss_{-1}^1
+			\left( x\,y'(x) \right)^2 dx,
 		\end{cases}
 	\end{align}
-	where $C^2$ is called space of continuous functions, i.e. function space.
-	The number $2$ in $C^2$ indicates that those functions
-	living in $C^2$ are those continuously twice differentiable.
-	Herein, $y$ is such function living in $C^2$,
-	as shown in $\eqref{eq:functionalexample}_{1}$.
-	Besides, the function $y$ takes $x$ as its only variable.
-	In this case, the only variable $x$
-	is defined on the closed interval $[-1,1]$, as shown in
-	$\eqref{eq:functionalexample}_{2}$.
+	where 
+	\begin{align}
+		y \in D     & = \left\{ \omega \in C^2([-1,1]): \omega(-1)=\omega(1)=1 \right\}, 
+		\label{eq:conditiony}
+		\\
+		v \in D_{0} & = \left\{ \omega \in C^2([-1,1]): \omega(-1)=\omega(1)=0 \right\}.
+		\label{eq:conditionv}
+	\end{align}
 \end{exampleboxed}
 
 Approach: By using the definition, as follows 
 \begin{align}
 	\label{eq:variationformular}
 	\boxed{
-		\delta F(y;v) := \lim_{s\to 0}\frac{F(y+sv)-F(y)}{s},
+		\delta F(y;v) := \lim_{t\to 0}\frac{F(y+tv)-F(y)}{s}.
 	}
 \end{align}
-where $\delta F$ is called variation of the functional $F$, 
-and the symbol $\delta$ stands for variation.
 
-\begin{interestingfactboxed}
-	The symbol $\delta$ seen in variation of a functional
-	is not the same one often seen in 
-	partial derivative, which is $\partial$. 
-	In \mbox{\LaTeX} their commands are called,
-	either from maths' package such as 
-	\textbf{amsmath} or \textbf{mathtools}, 
-	as follows
-	\begin{align}
-		\begin{array}{clll}
-			\delta   & \rightarrow \backslash delta   & \rightarrow & \text{variation of a functional}                       \\
-			\partial & \rightarrow \backslash partial & \rightarrow & \text{partial derivative of a multi-variable function}
-		\end{array}
-	\end{align}
-\end{interestingfactboxed}
-\newpage
-In order to find the variation of the functional $F$
-in $v$ direction, we need to compute the limit,
+In order to find the variation of the functional $F$,
+which fulfills 
+\eqref{eq:functionalexample}
+and 
+\eqref{eq:conditiony},
+in $v$ direction satisfying
+\eqref{eq:conditiony}
+, we need to compute the limit,
 as shown in \eqref{eq:variationformular}.
 \begin{align}
 	\delta F(y;v)
-	 & :=  \lim_{s\to 0}\frac{F(y+s\,v)-F(y)}{s} \notag \\
-	 & =  \lim_{s\to 0} \frac{1}{s}
+	 & :=  \lim_{s\to 0}\frac{F(y+t\,v)-F(y)}{t} \notag \\
+	 & =  \lim_{s\to 0} \frac{1}{t}
+	\left(
+	\frac{1}{2}
 	\bigintssss_{-1}^{1}
 	\left(
-	(y+s\,v)(x) \,
-	(y+s\,v)^\prime(x)
-	+ \exp{\Big((y+s\,v)^{\prime 2}(x)\Big)}
-	\right)\,dx
-	\label{eq:first1}                                   \\
-	% 
-	 & \qquad\qquad\qquad\qquad\qquad
-	-\lim_{s\to 0} \frac{1}{s}
+	x \,
+	(y+t\,v)^\prime(x)
+	\right)^2\,dx
+	-
+	\frac{1}{2}
 	\bigintssss_{-1}^{1}
 	\left(
-	y(x)y'(x) + \exp{\Big( y^{\prime 2}(x) \Big)}
-	\right)\,dx                            
-	\label{eq:first2}
+	x \, y^\prime(x)
+	\right)^2\,dx
+	\right)\notag                                       \\
+	 & =  \lim_{s\to 0} \frac{1}{2t}
+	\left(
+	\bigintssss_{-1}^{1}
+	\left(
+	x \,
+	(y+t\,v)^\prime(x)
+	\right)^2\,dx
+	-
+	\bigintssss_{-1}^{1}
+	\left(
+	x \, y^\prime(x)
+	\right)^2\,dx
+	\right)
 \end{align}
 
 Let us now forget the argument $(x)$
