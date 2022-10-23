@@ -57,7 +57,7 @@ Approach: By using the definition, as follows
 \begin{align}
 	\label{eq:variationformular}
 	\boxed{
-		\delta F(y;v) := \lim_{t\to 0}\frac{F(y+tv)-F(y)}{s}.
+		\delta F(y;v) := \lim_{t\to 0}\frac{F(y+tv)-F(y)}{t}.
 	}
 \end{align}
 
@@ -67,792 +67,914 @@ which fulfills
 and 
 \eqref{eq:conditiony},
 in $v$ direction satisfying
-\eqref{eq:conditiony}
-, we need to compute the limit,
+\eqref{eq:conditiony}, 
+we need to compute the limit,
 as shown in \eqref{eq:variationformular}.
 \begin{align}
 	\delta F(y;v)
-	 & :=  \lim_{s\to 0}\frac{F(y+t\,v)-F(y)}{t} \notag \\
-	 & =  \lim_{s\to 0} \frac{1}{t}
+	 & :=  \lim_{t\to 0}\frac{F(y+t\,v)-F(y)}{t} \notag \\
+	 & =  \lim_{t\to 0} \frac{1}{t}
 	\left(
 	\frac{1}{2}
 	\bigintssss_{-1}^{1}
-	\left(
+	\Big(
 	x \,
 	(y+t\,v)^\prime(x)
-	\right)^2\,dx
+	\Big)^2\,dx
 	-
 	\frac{1}{2}
 	\bigintssss_{-1}^{1}
-	\left(
+	\Big(
 	x \, y^\prime(x)
-	\right)^2\,dx
+	\Big)^2\,dx
 	\right)\notag                                       \\
-	 & =  \lim_{s\to 0} \frac{1}{2t}
+	 & =  \lim_{t\to 0} \frac{1}{2t}
 	\left(
 	\bigintssss_{-1}^{1}
-	\left(
+	\Big(
 	x \,
-	(y+t\,v)^\prime(x)
-	\right)^2\,dx
+	(y(x)+t\,v(x))^\prime
+	\Big)^2\,dx
 	-
 	\bigintssss_{-1}^{1}
-	\left(
+	\Big(
 	x \, y^\prime(x)
-	\right)^2\,dx
-	\right)
-\end{align}
-
-Let us now forget the argument $(x)$
-in \eqref{eq:first1} and \eqref{eq:first2}
-for a while, i.e. by dropping it temporarily, 
-just for a sake of a better overview. 
-Then, the new expression without $(x)$
-will take the form
-\begin{align}
-	\delta F(y;v)
-	 & :=  \lim_{s\to 0}\frac{F(y+s\,v)-F(y)}{s} \notag \\
-	 & =  \lim_{s\to 0} \frac{1}{s}
-	\bigintssss_{-1}^{1}
-	\Big(
-	(y+s\,v) \left(y+s\,v\right)^\prime
-	+ \exp{\Big((y+s\,v)^{\prime 2}\Big)}
-	\Big)\,dx \notag                                    \\
-	% 
-	 & \qquad\qquad\qquad\qquad\qquad\qquad
-	-\lim_{s\to 0} \frac{1}{s}
-	\bigintssss_{-1}^{1}
-	\Big(
-	y\,y' + \exp{\Big(y^{\prime 2}\Big)}
-	\Big)\,dx                            
-	\label{eq:first22}
-\end{align}
-which leads to further analysis, as follows
-\begin{align}
-	\delta F(y;v)
-	 & \stackrel{\eqref{eq:first22}}{:=}
-	\lim_{s\to 0}\frac{F(y+s\,v)-F(y)}{s}   \notag \\
-	%  & =  \lim_{s\to 0} \frac{1}{s}
-	% \bigintssss_{-1}^{1}
-	% \Big(
-	% (y+s\,v) \left(y+s\,v\right)^\prime
-	% + \exp{\Big((y+s\,v)^{\prime 2}\Big)}
-	% \Big)\,dx
-	% \label{eq:first123}                          \\
-	% % 
-	%  & \qquad\qquad\qquad\qquad\qquad\qquad
-	% -\lim_{s\to 0} \frac{1}{s}
-	% \bigintssss_{-1}^{1}
-	% \Big(
-	% y\,y' + \exp{\Big(y^{\prime 2}\Big)}
-	% \Big)\,dx                            
-	% \label{eq:first223}                          \\
-	%-----------------------------------------------------
-	 & =  \lim_{s\to 0} \frac{1}{s}
-	\bigintssss_{-1}^{1}
-	\Big(
-	(y+s\,v) (y^\prime+s\,v^\prime)
-	+ \exp{\Big((y+s\,v)^{\prime 2}\Big)}
-	\Big)\,dx                               \notag \\
-	% 
-	 & \qquad\qquad\qquad\qquad\qquad\qquad
-	-\lim_{s\to 0} \frac{1}{s}
-	\bigintssss_{-1}^{1}
-	\Big(
-	y\,y' + \exp{\Big(y^{\prime 2}\Big)}
-	\Big)\,dx                               \notag \\     
-	%-----------------------------------------------------   
-	 & =  \lim_{s\to 0} \frac{1}{s}
-	\bigintssss_{-1}^{1}
-	\Big(
-	y\,y^\prime 
-	+ s\,y\,v^\prime  
-	+ s\,v\,y^\prime
-	+ s^2\,v\,v^\prime
-	+ \exp{\Big((y+s\,v)^{\prime 2}\Big)}
-	\Big)\,dx                               \notag \\
-	% 
-	 & \qquad\qquad\qquad\qquad\qquad\qquad
-	-\lim_{s\to 0} \frac{1}{s}
-	\bigintssss_{-1}^{1}
-	\Big(
-	y\,y' + \exp{\Big(y^{\prime 2}\Big)}
-	\Big)\,dx                               \notag \\ 
-	%-----------------------------------------------------   
-	 & =  \lim_{s\to 0} \frac{1}{s}
-	\bigintssss_{-1}^{1}
-	\Big(
-	y\,y^\prime 
-	+ s\,y\,v^\prime  
-	+ s\,v\,y^\prime
-	+ s^2\,v\,v^\prime
-	- y\,y^\prime
-	\Big)\,dx                               \notag \\
-	% 
-	 & \qquad\qquad\qquad\qquad
-	+\lim_{s\to 0} \frac{1}{s}
-	\bigintssss_{-1}^{1}
-	\Big(
-	\exp{\Big((y+s\,v)^{\prime 2}\Big)}
-	- \exp{\Big(y^{\prime 2}\Big)}
-	\Big)\,dx                               \notag \\ 
-	%-----------------------------------------------------   
-	 & =  
-	\underbrace{\lim_{s\to 0} \frac{1}{s}
-		\bigintssss_{-1}^{1}
-		\Big(
-		s\,y\,v^\prime  
-		+ s\,v\,y^\prime
-		+ s^2\,v\,v^\prime
-		\Big)
-		\,dx}_{:=\mathcal{A}}                   \notag \\
-	% 
-	 & \qquad\qquad\qquad\qquad
-	+
-	\underbrace{\lim_{s\to 0} \frac{1}{s}
-		\bigintssss_{-1}^{1}
-		\Big(
-		\exp{\Big((y+s\,v)^{\prime 2}\Big)}
-		- \exp{\Big(y^{\prime 2}\Big)}
-		\Big)\,dx}_{:=\mathcal{B}}
-	% %-----------------------------------------------------   
-	%  & = \mathcal{A} + \mathcal{B}.
-\end{align}
-
-Hence, it leads to
-\begin{align}
-	\label{eq:sumAB}
-	\therefore\quad
-	\boxed{
-		\delta F(y;v) = \mathcal{A} + \mathcal{B}.
-	}
-\end{align}
-
-Next, we consider part $\mathcal{A}$, as follows
-\begin{align}
-	\mathcal{A}
-	 & = 
-	\lim_{s\to 0} \frac{1}{s}
-	\bigintssss_{-1}^{1}
-	\Big(
-	s\,y\,v^\prime  
-	+ s\,v\,y^\prime
-	+ s^2\,v\,v^\prime
-	\Big)
-	\,dx          
-	%------------------------
-	= 
-	\lim_{s\to 0}
-	\bigintssss_{-1}^{1}
-	\Big(
-	y\,v^\prime  
-	+ v\,y^\prime
-	+ s\,v\,v^\prime
-	\Big)
-	\,dx                      \notag \\
-	%------------------------
-	 & = 
-	\lim_{s\to 0}
-	\bigintssss_{-1}^{1}
-	\Big(
-	y\,v^\prime  
-	+ v\,y^\prime
-	\Big)
-	\,dx
-	+
-	\lim_{s\to 0}
-	\bigintssss_{-1}^{1}
-	(s\,v\,v^\prime)
-	\,dx                      \notag \\
-	%------------------------
-	 & = 
-	\lim_{s\to 0}
-	\bigintssss_{-1}^{1}
-	\Big(
-	y\,v^\prime  
-	+ v\,y^\prime
-	\Big)
-	\,dx
-	+
-	\underbrace{\lim_{s\to 0}
-		\left(
-		s
-		\bigintssss_{-1}^{1}
-		(v\,v^\prime)
-		\,dx
-		\right)}_{=0}             \notag \\
-	%------------------------
-	 & = 
-	\lim_{s\to 0}
-	\bigintssss_{-1}^{1}
-	\Big(
-	y(x)\,v^\prime(x)
-	+ v(x)\,y^\prime(x)
-	\Big)
-	\,dx          
-	\label{eq:xgoesback}             \\
-	%------------------------
-	 & = 
-	\lim_{s\to 0}
-	\bigintssss_{-1}^{1}
-	\Big(y(x)\,v(x)\Big)^\prime
-	\,dx
-	%------------------------
-	= 
-	\bigintssss_{-1}^{1}
-	\frac{d}{dx}
-	\Big(y(x)\,v(x)\Big)
-	\,dx                \notag       \\
-	%------------------------
-	 & = 
-	\bigintssss_{-1}^{1}
-	\frac{d}{dx}
-	\Big(y(x)\,v(x)\Big)
-	\,dx
-	%------------------------
-	= 
-	\Big(y(x)\,v(x)\Big)\Bigg|_{x=-1}^{x=1}
-	= y(1)\,v(1) - y(-1)\,v(-1),
-\end{align}
-where $(x)$ has returned back 
-in \eqref{eq:xgoesback} again
-in order to get ready to compute the
-follow-up integral.
-Therefore, solution to $\mathcal{A}$ yields
-\begin{align}
-	\label{eq:solutiontoA}
-	\therefore\quad
-	\boxed{
-		\mathcal{A} = y(1)\,v(1) - y(-1)\,v(-1).
-	}
-\end{align}
-
-Besides, the computation of part $\mathcal{B}$ goes as follows
-\begin{align}
-	\mathcal{B}
-	 & =
-	\lim_{s\to 0} \frac{1}{s}
-	\bigintssss_{-1}^{1}
-	\Big(
-	\exp{\Big((y+s\,v)^{\prime 2}\Big)}
-	- \exp{\big(y^{\prime 2}\big)}
-	\Big)\,dx  \notag \\
-	%--------------------------------------
-	 & =
-	\lim_{s\to 0} \frac{1}{s}
-	\bigintssss_{-1}^{1}
-	\Big(
-	\exp{
-		\big(
-		y^{\prime 2}
-		+ 2\,s\,y^{\prime}\,v^{\prime}
-		+ s^2\,v^{\prime 2}
-		\big)}
-	- \exp{\big(y^{\prime 2}\big)}
-	\Big)\,dx  \notag \\
-	%--------------------------------------
-	 & =
-	\lim_{s\to 0} \frac{1}{s}
-	\bigintssss_{-1}^{1}
-	\Big(
-	\exp{\big(y^{\prime 2} \big)}
-	\exp{\big(
-		2\,s\,y^{\prime}\,v^{\prime}
-		+ s^2\,v^{\prime 2}
-		\big)}
-	- \exp{\big(y^{\prime 2}\big)}
-	\Big)\,dx  \notag \\
-	%--------------------------------------
-	 & =
-	\lim_{s\to 0} \frac{1}{s}
-	\bigintssss_{-1}^{1}
-	\Bigg(
-	\exp{\big(y^{\prime 2} \big)}
-	\Big(
-		\exp{\big(
-			2\,s\,y^{\prime}\,v^{\prime}
-			+ s^2\,v^{\prime 2}
-			\big)}
-		- 1
-		\Big)
-	\Bigg)\,dx \notag \\
-	%--------------------------------------
-	 & =
-	\bigintssss_{-1}^{1}
-	\Bigg(
-	\exp{\big(y^{\prime 2} \big)}
-	\underbrace{\lim_{s\to 0}
-		\frac{
-			\exp{\big(
-				2\,s\,y^{\prime}\,v^{\prime}
-				+ s^2\,v^{\prime 2}
-				\big)}
-			- 1}{s}}_{:=\mathcal{C}}
-	\Bigg)\,dx ,
-	\label{eq:Cexpression}
-\end{align}
-where a further result of $\mathcal{C}$ in 
-\eqref{eq:Cexpression} is computed by using l'Hôspital's rule, 
-as follows 
-\begin{align}
-	\mathcal{C}
-	 & =
-	\lim_{s\to 0}
-	\frac{
-		\exp{\big(
-			2\,s\,y^{\prime}\,v^{\prime}
-			+ s^2\,v^{\prime 2}
-			\big)}
-		- 1}{s}                            \notag \\
-	%------------------------
-	 & =
-	\lim_{s\to 0}
-	\Big(
+	\Big)^2\,dx
+	\right) \notag                                      \\
+	 & =  \lim_{t\to 0} \frac{1}{2t}
 	\left(
-	2\,y^{\prime}\,v^{\prime}
-	+ 2\,s\,v^{\prime 2}
-	\right)
-	\exp{\big(
-		2\,s\,y^{\prime}\,v^{\prime}
-		+ s^2\,v^{\prime 2}
-		\big)}
-	\Big)                              \notag \\
-	%------------------------
-	 & = 2\,y^{\prime}\,v^{\prime} \notag     \\
-	 & = 2\,y^{\prime}(x)\,v^{\prime}(x).
-	\label{eq:Cresult}
+	\bigintssss_{-1}^{1}
+	\Big(
+	x \,
+	(y^\prime(x)+t\,v^\prime(x))
+	\Big)^2\,dx
+	-
+	\bigintssss_{-1}^{1}
+	\Big(
+	x \, y^\prime(x)
+	\Big)^2\,dx
+	\right)\notag                                       \\
+	 & =  \lim_{t\to 0} \frac{1}{2t}
+	\left(
+	\bigintssss_{-1}^{1}
+	x^2 \,
+	\Big(y^\prime(x)+t\,v^\prime(x)\Big)^2
+	\,dx
+	-
+	\bigintssss_{-1}^{1}
+	x^2 \, (y^\prime(x))^2\,dx
+	\right)\notag                                       \\
+	 & =  \lim_{t\to 0} \frac{1}{2t}
+	\!
+	\bigintssss_{-1}^{1}
+	\!\!
+	x^2 \,
+	\Big(
+	(y^\prime(x))^2 
+	+ 2\,y^\prime(x)\,t\,v^\prime(x)
+	+ t^2\,(v^\prime(x))^2
+	\Big)
+	\,dx
+	-\!\!
+	\bigintssss_{-1}^{1}
+	\!\!
+	x^2 \, (y^\prime(x))^2\,dx\notag                    \\
+	 & =  \lim_{t\to 0} \frac{1}{2t}
+	\bigintssss_{-1}^{1}
+	\!\!
+	\Big(
+	\cancel{x^2\,(y^\prime(x))^2}
+	+ 2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
+	+ x^2\,t^2\,(v^\prime(x))^2
+	- \cancel{x^2\,(y^\prime(x))^2}
+	\Big)
+	\,dx
+	\notag                                              \\
+	 & =  \lim_{t\to 0} \frac{1}{2t}
+	\bigintssss_{-1}^{1}
+	\Big(
+	2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
+	+ x^2\,t^2\,(v^\prime(x))^2
+	\Big)
+	\,dx
+	\label{eq:reducedform}
 \end{align}
-Substitution of 
-\eqref{eq:Cresult} into 
-\eqref{eq:Cexpression}
-leads to 
+Next, the expression in \eqref{eq:reducedform} is computed further,
+by first computing terms within the integrand going with $t$
+and then splitting into two terms going with the limit, as follows
 \begin{align}
-	\label{eq:finalsolB}
-	\therefore\quad
-	\boxed{
-	\mathcal{B} = 
-	2\bigintssss_{-1}^{1}
-	\exp{\left(y^{\prime 2}(x)\right)}
-	\,y^{\prime}(x)\,v^{\prime}(x)\,dx.
-	}
-\end{align}
-Finally, by inserting 
-\eqref{eq:solutiontoA}
-and
-\eqref{eq:finalsolB}
-into
-\eqref{eq:sumAB}
-the final result yields
-\begin{align}
-	\therefore\quad\boxed{
 	\delta F(y;v)
-	=
-	y(1)\,v(1) - y(-1)\,v(-1)
+	 & \stackrel{\eqref{eq:reducedform}}{=}
+	\lim_{t\to 0} \frac{1}{2t}
+	\bigintssss_{-1}^{1}
+	\Big(
+	2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
+	+ x^2\,t^2\,(v^\prime(x))^2
+	\Big)
+	\,dx\notag                              \\
+	 & =
+	\lim_{t\to 0}
+	\bigintssss_{-1}^{1}
+	\frac{2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
+		+ x^2\,t^2\,(v^\prime(x))^2}{2t}
+	\,dx\notag                              \\
+	 & =
+	\lim_{t\to 0}
+	\bigintssss_{-1}^{1}
+	\Big(
+	x^2\,y^\prime(x)\,v^\prime(x)
+	+ \frac{1}{2}x^2\,t\,(v^\prime(x))^2
+	\Big)
+	\,dx\notag                              \\
+	 & =
+	\lim_{t\to 0}
+	\bigintssss_{-1}^{1}
+	x^2\,y^\prime(x)\,v^\prime(x)
+	\,dx
+	+ 
+	\lim_{t\to 0}
+	\frac{1}{2}
+	\bigintssss_{-1}^{1}
+	x^2\,t\,(v^\prime(x))^2
+	\,dx \notag                             \\
+	 & =
+	\bigintssss_{-1}^{1}
+	x^2\,y^\prime(x)\,v^\prime(x)
+	\,dx
 	+
-	2\bigintssss_{-1}^{1}
-	\,y^{\prime}(x)\,v^{\prime}(x)
-	\exp{\left(y^{\prime 2}(x)\right)}
-	\,dx.
-	}
+	\underbrace{\lim_{t\to 0}
+		\frac{t}{2}
+		\bigintssss_{-1}^{1}
+		x^2\,(v^\prime(x))^2
+		\,dx}_{=0}.
+	\label{eq:reducedform2}
+\end{align}
+Note in passing that the term $t$ can be brought out of the integral 
+arising in \eqref{eq:reducedform2}
+because $t$ is just a constant for this integral. 
+It is also worthy to note that bringing a limit from outside 
+to inside an integral is critical as the final result is not always the same.
+Herein, for the limit showing in \eqref{eq:reducedform2}
+we have been not doing so, but rather bringing the $t$ out of the integral.
+Finally, the first variation of functional $F$ is processed further as follows
+\begin{align}
+	\delta F(y;v)
+	\stackrel{\eqref{eq:reducedform2}}{=}
+	\bigintssss_{-1}^{1}
+	x^2\,y^\prime(x)\,v^\prime(x)
+	\,dx
 \end{align}
 
-\newpage
-%------------------------------------------------------------------------------
-\section{Step-by-step with A4-SRU00}
-\begin{exampleboxed}
-	Examine the following initial value problem (IVP)
-	\begin{align}
-		\label{eq:givenODE3rdorder}
-		y^{\prime\prime\prime}(t)+y^{\prime}(t)=t\,y(t),
-	\end{align}
-	with initial conditions (IC) given as follows
-	\begin{align}
-		\label{eq:ICfromODE}
-		y(0)=0,\quad y^{\prime}(0)=1,\quad y^{\prime\prime}(0)=2.
-	\end{align}
-	\begin{enumerate}[i)]
-		\item Transform the above third order
-		      ordinary differential equation (ODE) 
-		      to a system of first order ODEs.
-		\item Solve the system i) numerically by using explicit Euler method with 2 steps.
-	\end{enumerate}
-\end{exampleboxed}
+% Let us now forget the argument $(x)$
+% in \eqref{eq:first1} and \eqref{eq:first2}
+% for a while, i.e. by dropping it temporarily, 
+% just for a sake of a better overview. 
+% Then, the new expression without $(x)$
+% will take the form
+% \begin{align}
+% 	\delta F(y;v)
+% 	 & :=  \lim_{t\to 0}\frac{F(y+s\,v)-F(y)}{t} \notag \\
+% 	 & =  \lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	(y+s\,v) \left(y+s\,v\right)^\prime
+% 	+ \exp{\Big((y+s\,v)^{\prime 2}\Big)}
+% 	\Big)\,dx \notag                                    \\
+% 	% 
+% 	 & \qquad\qquad\qquad\qquad\qquad\qquad
+% 	-\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,y' + \exp{\Big(y^{\prime 2}\Big)}
+% 	\Big)\,dx                            
+% 	\label{eq:first22}
+% \end{align}
+% which leads to further analysis, as follows
+% \begin{align}
+% 	\delta F(y;v)
+% 	 & \stackrel{\eqref{eq:first22}}{:=}
+% 	\lim_{t\to 0}\frac{F(y+s\,v)-F(y)}{t}   \notag \\
+% 	%  & =  \lim_{t\to 0} \frac{1}{t}
+% 	% \bigintssss_{-1}^{1}
+% 	% \Big(
+% 	% (y+s\,v) \left(y+s\,v\right)^\prime
+% 	% + \exp{\Big((y+s\,v)^{\prime 2}\Big)}
+% 	% \Big)\,dx
+% 	% \label{eq:first123}                          \\
+% 	% % 
+% 	%  & \qquad\qquad\qquad\qquad\qquad\qquad
+% 	% -\lim_{t\to 0} \frac{1}{t}
+% 	% \bigintssss_{-1}^{1}
+% 	% \Big(
+% 	% y\,y' + \exp{\Big(y^{\prime 2}\Big)}
+% 	% \Big)\,dx                            
+% 	% \label{eq:first223}                          \\
+% 	%-----------------------------------------------------
+% 	 & =  \lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	(y+s\,v) (y^\prime+s\,v^\prime)
+% 	+ \exp{\Big((y+s\,v)^{\prime 2}\Big)}
+% 	\Big)\,dx                               \notag \\
+% 	% 
+% 	 & \qquad\qquad\qquad\qquad\qquad\qquad
+% 	-\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,y' + \exp{\Big(y^{\prime 2}\Big)}
+% 	\Big)\,dx                               \notag \\     
+% 	%-----------------------------------------------------   
+% 	 & =  \lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,y^\prime 
+% 	+ s\,y\,v^\prime  
+% 	+ s\,v\,y^\prime
+% 	+ s^2\,v\,v^\prime
+% 	+ \exp{\Big((y+s\,v)^{\prime 2}\Big)}
+% 	\Big)\,dx                               \notag \\
+% 	% 
+% 	 & \qquad\qquad\qquad\qquad\qquad\qquad
+% 	-\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,y' + \exp{\Big(y^{\prime 2}\Big)}
+% 	\Big)\,dx                               \notag \\ 
+% 	%-----------------------------------------------------   
+% 	 & =  \lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,y^\prime 
+% 	+ s\,y\,v^\prime  
+% 	+ s\,v\,y^\prime
+% 	+ s^2\,v\,v^\prime
+% 	- y\,y^\prime
+% 	\Big)\,dx                               \notag \\
+% 	% 
+% 	 & \qquad\qquad\qquad\qquad
+% 	+\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	\exp{\Big((y+s\,v)^{\prime 2}\Big)}
+% 	- \exp{\Big(y^{\prime 2}\Big)}
+% 	\Big)\,dx                               \notag \\ 
+% 	%-----------------------------------------------------   
+% 	 & =  
+% 	\underbrace{\lim_{t\to 0} \frac{1}{t}
+% 		\bigintssss_{-1}^{1}
+% 		\Big(
+% 		s\,y\,v^\prime  
+% 		+ s\,v\,y^\prime
+% 		+ s^2\,v\,v^\prime
+% 		\Big)
+% 		\,dx}_{:=\mathcal{A}}                   \notag \\
+% 	% 
+% 	 & \qquad\qquad\qquad\qquad
+% 	+
+% 	\underbrace{\lim_{t\to 0} \frac{1}{t}
+% 		\bigintssss_{-1}^{1}
+% 		\Big(
+% 		\exp{\Big((y+s\,v)^{\prime 2}\Big)}
+% 		- \exp{\Big(y^{\prime 2}\Big)}
+% 		\Big)\,dx}_{:=\mathcal{B}}
+% 	% %-----------------------------------------------------   
+% 	%  & = \mathcal{A} + \mathcal{B}.
+% \end{align}
 
-Approach:
-\begin{enumerate}[i)]
-	\item We need to transform the third order ODE
-	      given in $\eqref{eq:givenODE3rdorder}$
-	      into a system of first order ODEs.
-	      \begin{questionboxed} 
-		      But.. how many ODEs shall we need in total 
-		      for this system of first order ODEs?\\ 
-		      \textbf{Ans}: 3.
-	      \end{questionboxed}
-	      \begin{observationboxed}
-		      Since the highest order of derivative in 
-		      $\eqref{eq:givenODE3rdorder}$ is 3, 
-		      i.e. as we can see there are three $'$ from $y'''(t)$,
-		      the given ODE is called third order ODE.
-		      Besides, the lowest order in 
-		      $\eqref{eq:givenODE3rdorder}$ is 0, 
-		      i.e. as we can see from $y(t)$.
-		      Therefore, we shall need
-		      a system of \textbf{three} first order ODEs
-		      for the given third order ODE in 
-		      $\eqref{eq:givenODE3rdorder}$.
-	      \end{observationboxed}
-	      \begin{questionboxed} 
-		      Which variable from $\eqref{eq:givenODE3rdorder}$
-		      shall we need to take and define,
-		      so that we are able to transform 
-		      $\eqref{eq:givenODE3rdorder}$
-		      into a system of first order ODEs
-		      corresponding to 
-		      the given initial conditions given in 
-		      \eqref{eq:ICfromODE}, 
-		      e.g. is it ideal to define $y'''(t) := u_{3}(t)$?\\
-		      \textbf{Ans}: $y(t)$, $y'(t)$ and $y''(t)$; 
-		      and it is not ideal to go with 
-		      $y'''(t) := u_{3}(t)$.
-	      \end{questionboxed}
-	      \begin{observationboxed}
-		      The three initial conditions given
-		      $y(0)$, $y'(0)$ and $y''(0)$, 
-		      as shown in \eqref{eq:ICfromODE},
-		      give rise to the fact that 
-		      we shall need to define three new variables
-		      for $y(t)$, $y'(t)$ and $y''(t)$.
-		      This choice is ideal for the ODE with 
-		      the given ICs
-		      because we will be able to apply
-		      these ICs directly for the new system of
-		      three ODEs.
-	      \end{observationboxed}
+% Hence, it leads to
+% \begin{align}
+% 	\label{eq:sumAB}
+% 	\therefore\quad
+% 	\boxed{
+% 		\delta F(y;v) = \mathcal{A} + \mathcal{B}.
+% 	}
+% \end{align}
+
+% Next, we consider part $\mathcal{A}$, as follows
+% \begin{align}
+% 	\mathcal{A}
+% 	 & = 
+% 	\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	s\,y\,v^\prime  
+% 	+ s\,v\,y^\prime
+% 	+ s^2\,v\,v^\prime
+% 	\Big)
+% 	\,dx          
+% 	%------------------------
+% 	= 
+% 	\lim_{t\to 0}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,v^\prime  
+% 	+ v\,y^\prime
+% 	+ s\,v\,v^\prime
+% 	\Big)
+% 	\,dx                      \notag \\
+% 	%------------------------
+% 	 & = 
+% 	\lim_{t\to 0}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,v^\prime  
+% 	+ v\,y^\prime
+% 	\Big)
+% 	\,dx
+% 	+
+% 	\lim_{t\to 0}
+% 	\bigintssss_{-1}^{1}
+% 	(s\,v\,v^\prime)
+% 	\,dx                      \notag \\
+% 	%------------------------
+% 	 & = 
+% 	\lim_{t\to 0}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,v^\prime  
+% 	+ v\,y^\prime
+% 	\Big)
+% 	\,dx
+% 	+
+% 	\underbrace{\lim_{t\to 0}
+% 		\left(
+% 		s
+% 		\bigintssss_{-1}^{1}
+% 		(v\,v^\prime)
+% 		\,dx
+% 		\right)}_{=0}             \notag \\
+% 	%------------------------
+% 	 & = 
+% 	\lim_{t\to 0}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y(x)\,v^\prime(x)
+% 	+ v(x)\,y^\prime(x)
+% 	\Big)
+% 	\,dx          
+% 	\label{eq:xgoesback}             \\
+% 	%------------------------
+% 	 & = 
+% 	\lim_{t\to 0}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(y(x)\,v(x)\Big)^\prime
+% 	\,dx
+% 	%------------------------
+% 	= 
+% 	\bigintssss_{-1}^{1}
+% 	\frac{d}{dx}
+% 	\Big(y(x)\,v(x)\Big)
+% 	\,dx                \notag       \\
+% 	%------------------------
+% 	 & = 
+% 	\bigintssss_{-1}^{1}
+% 	\frac{d}{dx}
+% 	\Big(y(x)\,v(x)\Big)
+% 	\,dx
+% 	%------------------------
+% 	= 
+% 	\Big(y(x)\,v(x)\Big)\Bigg|_{x=-1}^{x=1}
+% 	= y(1)\,v(1) - y(-1)\,v(-1),
+% \end{align}
+% where $(x)$ has returned back 
+% in \eqref{eq:xgoesback} again
+% in order to get ready to compute the
+% follow-up integral.
+% Therefore, solution to $\mathcal{A}$ yields
+% \begin{align}
+% 	\label{eq:solutiontoA}
+% 	\therefore\quad
+% 	\boxed{
+% 		\mathcal{A} = y(1)\,v(1) - y(-1)\,v(-1).
+% 	}
+% \end{align}
+
+% Besides, the computation of part $\mathcal{B}$ goes as follows
+% \begin{align}
+% 	\mathcal{B}
+% 	 & =
+% 	\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	\exp{\Big((y+s\,v)^{\prime 2}\Big)}
+% 	- \exp{\big(y^{\prime 2}\big)}
+% 	\Big)\,dx  \notag \\
+% 	%--------------------------------------
+% 	 & =
+% 	\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	\exp{
+% 		\big(
+% 		y^{\prime 2}
+% 		+ 2\,s\,y^{\prime}\,v^{\prime}
+% 		+ s^2\,v^{\prime 2}
+% 		\big)}
+% 	- \exp{\big(y^{\prime 2}\big)}
+% 	\Big)\,dx  \notag \\
+% 	%--------------------------------------
+% 	 & =
+% 	\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	\exp{\big(y^{\prime 2} \big)}
+% 	\exp{\big(
+% 		2\,s\,y^{\prime}\,v^{\prime}
+% 		+ s^2\,v^{\prime 2}
+% 		\big)}
+% 	- \exp{\big(y^{\prime 2}\big)}
+% 	\Big)\,dx  \notag \\
+% 	%--------------------------------------
+% 	 & =
+% 	\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Bigg(
+% 	\exp{\big(y^{\prime 2} \big)}
+% 	\Big(
+% 		\exp{\big(
+% 			2\,s\,y^{\prime}\,v^{\prime}
+% 			+ s^2\,v^{\prime 2}
+% 			\big)}
+% 		- 1
+% 		\Big)
+% 	\Bigg)\,dx \notag \\
+% 	%--------------------------------------
+% 	 & =
+% 	\bigintssss_{-1}^{1}
+% 	\Bigg(
+% 	\exp{\big(y^{\prime 2} \big)}
+% 	\underbrace{\lim_{t\to 0}
+% 		\frac{
+% 			\exp{\big(
+% 				2\,s\,y^{\prime}\,v^{\prime}
+% 				+ s^2\,v^{\prime 2}
+% 				\big)}
+% 			- 1}{t}}_{:=\mathcal{C}}
+% 	\Bigg)\,dx ,
+% 	\label{eq:Cexpression}
+% \end{align}
+% where a further result of $\mathcal{C}$ in 
+% \eqref{eq:Cexpression} is computed by using l'Hôspital's rule, 
+% as follows 
+% \begin{align}
+% 	\mathcal{C}
+% 	 & =
+% 	\lim_{t\to 0}
+% 	\frac{
+% 		\exp{\big(
+% 			2\,s\,y^{\prime}\,v^{\prime}
+% 			+ s^2\,v^{\prime 2}
+% 			\big)}
+% 		- 1}{t}                            \notag \\
+% 	%------------------------
+% 	 & =
+% 	\lim_{t\to 0}
+% 	\Big(
+% 	\left(
+% 	2\,y^{\prime}\,v^{\prime}
+% 	+ 2\,s\,v^{\prime 2}
+% 	\right)
+% 	\exp{\big(
+% 		2\,s\,y^{\prime}\,v^{\prime}
+% 		+ s^2\,v^{\prime 2}
+% 		\big)}
+% 	\Big)                              \notag \\
+% 	%------------------------
+% 	 & = 2\,y^{\prime}\,v^{\prime} \notag     \\
+% 	 & = 2\,y^{\prime}(x)\,v^{\prime}(x).
+% 	\label{eq:Cresult}
+% \end{align}
+% Substitution of 
+% \eqref{eq:Cresult} into 
+% \eqref{eq:Cexpression}
+% leads to 
+% \begin{align}
+% 	\label{eq:finalsolB}
+% 	\therefore\quad
+% 	\boxed{
+% 	\mathcal{B} = 
+% 	2\bigintssss_{-1}^{1}
+% 	\exp{\left(y^{\prime 2}(x)\right)}
+% 	\,y^{\prime}(x)\,v^{\prime}(x)\,dx.
+% 	}
+% \end{align}
+% Finally, by inserting 
+% \eqref{eq:solutiontoA}
+% and
+% \eqref{eq:finalsolB}
+% into
+% \eqref{eq:sumAB}
+% the final result yields
+% \begin{align}
+% 	\therefore\quad\boxed{
+% 	\delta F(y;v)
+% 	=
+% 	y(1)\,v(1) - y(-1)\,v(-1)
+% 	+
+% 	2\bigintssss_{-1}^{1}
+% 	\,y^{\prime}(x)\,v^{\prime}(x)
+% 	\exp{\left(y^{\prime 2}(x)\right)}
+% 	\,dx.
+% 	}
+% \end{align}
+
+% \newpage
+% %------------------------------------------------------------------------------
+% \section{Step-by-step with A4-SRU00}
+% \begin{exampleboxed}
+% 	Examine the following initial value problem (IVP)
+% 	\begin{align}
+% 		\label{eq:givenODE3rdorder}
+% 		y^{\prime\prime\prime}(t)+y^{\prime}(t)=t\,y(t),
+% 	\end{align}
+% 	with initial conditions (IC) given as follows
+% 	\begin{align}
+% 		\label{eq:ICfromODE}
+% 		y(0)=0,\quad y^{\prime}(0)=1,\quad y^{\prime\prime}(0)=2.
+% 	\end{align}
+% 	\begin{enumerate}[i)]
+% 		\item Transform the above third order
+% 		      ordinary differential equation (ODE) 
+% 		      to a system of first order ODEs.
+% 		\item Solve the system i) numerically by using explicit Euler method with 2 steps.
+% 	\end{enumerate}
+% \end{exampleboxed}
+
+% Approach:
+% \begin{enumerate}[i)]
+% 	\item We need to transform the third order ODE
+% 	      given in $\eqref{eq:givenODE3rdorder}$
+% 	      into a system of first order ODEs.
+% 	      \begin{questionboxed} 
+% 		      But.. how many ODEs shall we need in total 
+% 		      for this system of first order ODEs?\\ 
+% 		      \textbf{Ans}: 3.
+% 	      \end{questionboxed}
+% 	      \begin{observationboxed}
+% 		      Since the highest order of derivative in 
+% 		      $\eqref{eq:givenODE3rdorder}$ is 3, 
+% 		      i.e. as we can see there are three $'$ from $y'''(t)$,
+% 		      the given ODE is called third order ODE.
+% 		      Besides, the lowest order in 
+% 		      $\eqref{eq:givenODE3rdorder}$ is 0, 
+% 		      i.e. as we can see from $y(t)$.
+% 		      Therefore, we shall need
+% 		      a system of \textbf{three} first order ODEs
+% 		      for the given third order ODE in 
+% 		      $\eqref{eq:givenODE3rdorder}$.
+% 	      \end{observationboxed}
+% 	      \begin{questionboxed} 
+% 		      Which variable from $\eqref{eq:givenODE3rdorder}$
+% 		      shall we need to take and define,
+% 		      so that we are able to transform 
+% 		      $\eqref{eq:givenODE3rdorder}$
+% 		      into a system of first order ODEs
+% 		      corresponding to 
+% 		      the given initial conditions given in 
+% 		      \eqref{eq:ICfromODE}, 
+% 		      e.g. is it ideal to define $y'''(t) := u_{3}(t)$?\\
+% 		      \textbf{Ans}: $y(t)$, $y'(t)$ and $y''(t)$; 
+% 		      and it is not ideal to go with 
+% 		      $y'''(t) := u_{3}(t)$.
+% 	      \end{questionboxed}
+% 	      \begin{observationboxed}
+% 		      The three initial conditions given
+% 		      $y(0)$, $y'(0)$ and $y''(0)$, 
+% 		      as shown in \eqref{eq:ICfromODE},
+% 		      give rise to the fact that 
+% 		      we shall need to define three new variables
+% 		      for $y(t)$, $y'(t)$ and $y''(t)$.
+% 		      This choice is ideal for the ODE with 
+% 		      the given ICs
+% 		      because we will be able to apply
+% 		      these ICs directly for the new system of
+% 		      three ODEs.
+% 	      \end{observationboxed}
 	      
-	      Therefore, we shall need three first order ODEs 
-	      for the new system. Besides, 
-	      the transformation is done by setting 
-	      new variables for $y(t)$, $y'(t)$ and $y''(t)$.
+% 	      Therefore, we shall need three first order ODEs 
+% 	      for the new system. Besides, 
+% 	      the transformation is done by setting 
+% 	      new variables for $y(t)$, $y'(t)$ and $y''(t)$.
 	      
-	      Transformation: We now need to set
-	      $y(t)$, $y'(t)$ and $y''(t)$
-	      to new variables, 
-	      let's say $u_0(t)$, $u_1(t)$, and $u_2(t)$,
-	      respectively, 
-	      as follows
-	      \begin{align}
-		      y(t)                & := u_0(t),  
-		      \label{eq:newvariablesu0}          \\
-		      y^{\prime}(t)       & := u_1(t),  
-		      \label{eq:newvariablesu1}          \\
-		      y^{\prime\prime}(t) & := u_2(t). 
-		      \label{eq:newvariablesu2}
-	      \end{align}
+% 	      Transformation: We now need to set
+% 	      $y(t)$, $y'(t)$ and $y''(t)$
+% 	      to new variables, 
+% 	      let's say $u_0(t)$, $u_1(t)$, and $u_2(t)$,
+% 	      respectively, 
+% 	      as follows
+% 	      \begin{align}
+% 		      y(t)                & := u_0(t),  
+% 		      \label{eq:newvariablesu0}          \\
+% 		      y^{\prime}(t)       & := u_1(t),  
+% 		      \label{eq:newvariablesu1}          \\
+% 		      y^{\prime\prime}(t) & := u_2(t). 
+% 		      \label{eq:newvariablesu2}
+% 	      \end{align}
 	      
-	      Then, by taking the derivative of 
-	      the new variable $u_0(t)$, $u_1(t)$ and $u_2(t)$,
-	      as newly defined in
-	      \eqref{eq:newvariablesu0},
-	      \eqref{eq:newvariablesu1} and
-	      \eqref{eq:newvariablesu2},
-	      we obtain the following relations
-	      \begin{align}
-		      \boxed{
-			      \begin{aligned}
-				      u_0^{\prime}(t) 
-				       & \stackrel{\eqref{eq:newvariablesu0}}{=}
-				      y'(t)  
-				      \stackrel{\eqref{eq:newvariablesu1}}{=}
-				      u_1(t),                                    \\
-				      u_1^{\prime}(t) 
-				       & \stackrel{\eqref{eq:newvariablesu1}}{=}
-				      y''(t)  
-				      \stackrel{\eqref{eq:newvariablesu2}}{=}
-				      u_2(t),                                    \\
-				      u_2^{\prime}(t) 
-				       & 
-				      \stackrel{\eqref{eq:newvariablesu2}}{=}
-				      y'''(t)
-				      \stackrel{\eqref{eq:givenODE3rdorder}}{=}
-				      t\,y(t)-y'(t)
-				      \stackrel{
-					      \stackrel
-					      {\mbox{\scriptsize $\eqref{eq:givenODE3rdorder}$}}
-					      {\eqref{eq:givenODE3rdorder}}
-				      }{=}
-				      t\,u_0(t)-u_1(t),
-			      \end{aligned}
-		      }
-	      \end{align}
-	      which is summarized, 
-	      together with keeping in mind about 
-	      the order of the index $i$ from 
-	      $u_{i}(t)|_{i=0,1,2}$, 
-	      as follows 
-	      \begin{align}
-		      \begin{array}{ccccc}
-			      u'_{0}(t) & = &             & u_{1}(t)  &          \\
-			      u'_{1}(t) & = &             &           & u_{2}(t) \\
-			      u'_{2}(t) & = & t\,u_{0}(t) & -u_{1}(t) & 
-		      \end{array}
-	      \end{align}
-	      which gives rise to the following system 
-	      \begin{align}
-		      \begin{array}{ccccc}
-			      u'_{0}(t) & = & 0\,u_{0}(t) & 1\,u_{1}(t)  & 0\,u_{2}(t) \\
-			      u'_{1}(t) & = & 0\,u_{0}(t) & 0\,u_{1}(t)  & 1\,u_{2}(t) \\
-			      u'_{2}(t) & = & t\,u_{0}(t) & -1\,u_{1}(t) & 0\,u_{2}(t)
-		      \end{array}
-	      \end{align}
-	      from where we can write the system in form of 
-	      \begin{align}
-		      \Bu' = A\Bu	
-	      \end{align}
-	      as follows
-	      \begin{align}
-		      \label{eq:newsystem}
-		      \boxed{
-			      \begin{aligned}
-				      \underbrace{
-				      \begin{pmatrix} u_{0}(t)\\u_{1}(t)\\u_{2}(t) \end{pmatrix}^{\prime}
-				      }_{:=\Bu^{\prime}}
-				      =
-				      \underbrace{
-					      \begin{pmatrix}
-						      0 & 1 & 0 \\ 0 & 0 & 1 \\ t & -1 & 0
-					      \end{pmatrix}
-				      }_{:=A}
-				      \underbrace{
-					      \begin{pmatrix} u_{0}(t)\\u_{1}(t)\\u_{2}(t) \end{pmatrix}
-				      }_{:=\Bu}
-			      \end{aligned}
-		      }
-	      \end{align}
-	      where the relation between $A$ and $\Bu$ in $A\Bu$
-	      is matrix-vector multiplication. Besides,
-	      by substituting 
-	      \eqref{eq:newvariablesu0}
-	      \eqref{eq:newvariablesu1}
-	      and 
-	      \eqref{eq:newvariablesu2}
-	      into 
-	      \eqref{eq:ICfromODE}, respectively,
-	      we obtain the initial conditions 
-	      for the new system in 
-	      \eqref{eq:newsystem}
-	      \begin{align}
-		      \boxed{
-			      \begin{aligned}
-				      u_0(0)=0, \\ 
-				      u_1(0)=1, \\ 
-				      u_2(0)=2,
-			      \end{aligned}
-		      }
-	      \end{align}
-	      which form an equivalent system of three first-order ODEs.
-	      \newpage
-	\item We need to solve the
-	      system of first order ODEs obtained in i)
-	      numerically by using explicit Euler method.
-	      \begin{summaryboxed}
-		      Given the system of first order ODEs as follows
-		      \begin{align}
-			      \label{eq:newBuprime}
-			      \Bu'(t) = A\Bu(t)
-		      \end{align}
-		      where the vector $\Bu$ is defined as 
-		      $\Bu := (u_{0},\, u_{1},\, u_{2})^{\top}$,
-		      and the matrix $A$ is
-		      \begin{align}
-			      A =
-			      \begin{pmatrix}
-				      0 & 1 & 0 \\ 0 & 0 & 1 \\ t & -1 & 0
-			      \end{pmatrix}
-		      \end{align}
-		      with initial conditions 
-		      \begin{align}
-			      u_0(0)=0,\quad u_1(0)=1,\quad u_2(0)=2.
-		      \end{align}
-		      Solve this system numerically 
-		      by using the explicit Euler method.
-	      \end{summaryboxed}
+% 	      Then, by taking the derivative of 
+% 	      the new variable $u_0(t)$, $u_1(t)$ and $u_2(t)$,
+% 	      as newly defined in
+% 	      \eqref{eq:newvariablesu0},
+% 	      \eqref{eq:newvariablesu1} and
+% 	      \eqref{eq:newvariablesu2},
+% 	      we obtain the following relations
+% 	      \begin{align}
+% 		      \boxed{
+% 			      \begin{aligned}
+% 				      u_0^{\prime}(t) 
+% 				       & \stackrel{\eqref{eq:newvariablesu0}}{=}
+% 				      y'(t)  
+% 				      \stackrel{\eqref{eq:newvariablesu1}}{=}
+% 				      u_1(t),                                    \\
+% 				      u_1^{\prime}(t) 
+% 				       & \stackrel{\eqref{eq:newvariablesu1}}{=}
+% 				      y''(t)  
+% 				      \stackrel{\eqref{eq:newvariablesu2}}{=}
+% 				      u_2(t),                                    \\
+% 				      u_2^{\prime}(t) 
+% 				       & 
+% 				      \stackrel{\eqref{eq:newvariablesu2}}{=}
+% 				      y'''(t)
+% 				      \stackrel{\eqref{eq:givenODE3rdorder}}{=}
+% 				      t\,y(t)-y'(t)
+% 				      \stackrel{
+% 					      \stackrel
+% 					      {\mbox{\scriptsize $\eqref{eq:givenODE3rdorder}$}}
+% 					      {\eqref{eq:givenODE3rdorder}}
+% 				      }{=}
+% 				      t\,u_0(t)-u_1(t),
+% 			      \end{aligned}
+% 		      }
+% 	      \end{align}
+% 	      which is summarized, 
+% 	      together with keeping in mind about 
+% 	      the order of the index $i$ from 
+% 	      $u_{i}(t)|_{i=0,1,2}$, 
+% 	      as follows 
+% 	      \begin{align}
+% 		      \begin{array}{ccccc}
+% 			      u'_{0}(t) & = &             & u_{1}(t)  &          \\
+% 			      u'_{1}(t) & = &             &           & u_{2}(t) \\
+% 			      u'_{2}(t) & = & t\,u_{0}(t) & -u_{1}(t) & 
+% 		      \end{array}
+% 	      \end{align}
+% 	      which gives rise to the following system 
+% 	      \begin{align}
+% 		      \begin{array}{ccccc}
+% 			      u'_{0}(t) & = & 0\,u_{0}(t) & 1\,u_{1}(t)  & 0\,u_{2}(t) \\
+% 			      u'_{1}(t) & = & 0\,u_{0}(t) & 0\,u_{1}(t)  & 1\,u_{2}(t) \\
+% 			      u'_{2}(t) & = & t\,u_{0}(t) & -1\,u_{1}(t) & 0\,u_{2}(t)
+% 		      \end{array}
+% 	      \end{align}
+% 	      from where we can write the system in form of 
+% 	      \begin{align}
+% 		      \Bu' = A\Bu	
+% 	      \end{align}
+% 	      as follows
+% 	      \begin{align}
+% 		      \label{eq:newsystem}
+% 		      \boxed{
+% 			      \begin{aligned}
+% 				      \underbrace{
+% 				      \begin{pmatrix} u_{0}(t)\\u_{1}(t)\\u_{2}(t) \end{pmatrix}^{\prime}
+% 				      }_{:=\Bu^{\prime}}
+% 				      =
+% 				      \underbrace{
+% 					      \begin{pmatrix}
+% 						      0 & 1 & 0 \\ 0 & 0 & 1 \\ t & -1 & 0
+% 					      \end{pmatrix}
+% 				      }_{:=A}
+% 				      \underbrace{
+% 					      \begin{pmatrix} u_{0}(t)\\u_{1}(t)\\u_{2}(t) \end{pmatrix}
+% 				      }_{:=\Bu}
+% 			      \end{aligned}
+% 		      }
+% 	      \end{align}
+% 	      where the relation between $A$ and $\Bu$ in $A\Bu$
+% 	      is matrix-vector multiplication. Besides,
+% 	      by substituting 
+% 	      \eqref{eq:newvariablesu0}
+% 	      \eqref{eq:newvariablesu1}
+% 	      and 
+% 	      \eqref{eq:newvariablesu2}
+% 	      into 
+% 	      \eqref{eq:ICfromODE}, respectively,
+% 	      we obtain the initial conditions 
+% 	      for the new system in 
+% 	      \eqref{eq:newsystem}
+% 	      \begin{align}
+% 		      \boxed{
+% 			      \begin{aligned}
+% 				      u_0(0)=0, \\ 
+% 				      u_1(0)=1, \\ 
+% 				      u_2(0)=2,
+% 			      \end{aligned}
+% 		      }
+% 	      \end{align}
+% 	      which form an equivalent system of three first-order ODEs.
+% 	      \newpage
+% 	\item We need to solve the
+% 	      system of first order ODEs obtained in i)
+% 	      numerically by using explicit Euler method.
+% 	      \begin{summaryboxed}
+% 		      Given the system of first order ODEs as follows
+% 		      \begin{align}
+% 			      \label{eq:newBuprime}
+% 			      \Bu'(t) = A\Bu(t)
+% 		      \end{align}
+% 		      where the vector $\Bu$ is defined as 
+% 		      $\Bu := (u_{0},\, u_{1},\, u_{2})^{\top}$,
+% 		      and the matrix $A$ is
+% 		      \begin{align}
+% 			      A =
+% 			      \begin{pmatrix}
+% 				      0 & 1 & 0 \\ 0 & 0 & 1 \\ t & -1 & 0
+% 			      \end{pmatrix}
+% 		      \end{align}
+% 		      with initial conditions 
+% 		      \begin{align}
+% 			      u_0(0)=0,\quad u_1(0)=1,\quad u_2(0)=2.
+% 		      \end{align}
+% 		      Solve this system numerically 
+% 		      by using the explicit Euler method.
+% 	      \end{summaryboxed}
 	      
-	      Approach:
-	      We need to approximate $\Bu'(t)$ arising in 
-	      \eqref{eq:newBuprime} by some numerical schemes, 
-	      e.g. explicit Euler method.
-	      %   \begin{questionboxed} 
-	      %       But.. how does the explicit Euler formula look like? 
-	      %       And how can it be derived exactly?\\
-	      %       Ans: Exploit the derivation in 
-	      %       \Cref{eq:observationboxedtaylor}.
-	      %   \end{questionboxed}
-	      \begin{observationboxed}
-		      \label{eq:observationboxedtaylor}
-		      We consider Taylor expansion 
-		      for $\Bu(t)$ around point $t=t_{0}$
-		      \begin{align}
-			      \label{eq:Taylorforut}
-			      \Bu(t)
-			      = \Bu(t_{0}) + \Bu'(t_{0})(t-t_{0}) 
-			      + \mathcal{O}((t-t_{0})^2),
-		      \end{align}
-		      which, for the sake of convergence, 
-		      requires $h:=t-t_{0}$ to be small.
-		      Since $h:=t-t_{0}$, we equally have 
-		      $t=h+t_{0}$. Substitution
-		      of $h:=t-t_{0}$ and $t=t_{0}+h$
-		      to \eqref{eq:Taylorforut}
-		      leads to the following expression
-		      \begin{align}
-			      \label{eq:Taylorforutnew}
-			      \Bu(t_{0}+h)
-			      = \Bu(t_{0}) + h\Bu'(t_{0})
-			      + \mathcal{O}(h^2),
-		      \end{align}
-		      which is the new expression of Taylor expansion 
-		      in terms of point $t_{0}$,
-		      around which the function $\Bu(t)$
-		      is approximated by the Taylor expansion,
-		      instead of the classical expression 
-		      in terms of the variable $t$
-		      as seen in \eqref{eq:Taylorforut}.
-		      Since point $t_{0}$, 
-		      although it implied a fixed point,
-		      arising in \eqref{eq:Taylorforutnew}
-		      can be chosen arbitrarily, 
-		      we can, therefore, substitute it for $t$, 
-		      as follows
-		      \begin{align}
-			      \label{eq:Taylorforutnewnozero}
-			      \Bu(t+h)
-			      = \Bu(t) + h\Bu'(t)
-			      + \mathcal{O}(h^2),
-		      \end{align}
-		      Now, the expression \eqref{eq:Taylorforutnew}
-		      gives rise to a useful expression
-		      to approximate $\Bu'(t)$ numerically, as follows
-		      \begin{align}
-			      \label{eq:Taylorforutnewnozerofinal}
-			      \therefore\quad
-			      \boxed{
-				      \Bu'(t) 
-				      \approx \frac{\Bu(t+h) - \Bu(t)}{h}.
-			      }
-		      \end{align}
-	      \end{observationboxed}
-	      %   The ODE in \eqref{eq:newBuprime} 
-	      %   has a general form 
-	      %   \begin{align}
-	      % 	\Bu'(t) = f(t,\Bu(t))
-	      %   \end{align}
-	      %   Definition:
-	      %   \begin{align}
-	      %       \Bu(t+h) & : = \Bu_{j+1} \\
-	      %       \Bu(t)   & : = \Bu_{j}
-	      %   \end{align}
-	      Substitution of 
-	      \eqref{eq:Taylorforutnewnozerofinal}
-	      into \eqref{eq:newBuprime} yields
-	      \begin{align}
-		      \frac{\Bu(t+h) - \Bu(t)}{h}
-		      = A\Bu(t)
-	      \end{align}
-	      which leads to the formula of explicit Euler method 
-	      \begin{align}
-		      \label{eq:Eulerformulaformu}
-		      \boxed{
-			      \Bu^{(j+1)} = \Bu^{(j)} + h\,A\Bu^{(j)},
-		      }
-	      \end{align}
-	      where $\Bu^{(j)}$ is the numerical solution by
-	      Euler method after $j$ steps,
-	      and components of $\Bu^{(j)}$ is known as 
-	      \begin{align}
-		      \Bu^{(j)}
-		      = 
-		      \begin{pmatrix} 
-			      u_0 \\u_1 \\u_2
-		      \end{pmatrix}^{(j)},
-	      \end{align}
-	      which, together with 
-	      \eqref{eq:Eulerformulaformu},
-	      leads to the following expressions
-	      \begin{align}
-		      \therefore\quad
-		      \boxed{
-			      \begin{aligned}
-				      \Bu^{(0)} & =
-				      \begin{pmatrix} 
-					      u_0^{(0)} \\u_1^{(0)} \\u_2^{(0)}
-				      \end{pmatrix}
-				      =
-				      \begin{pmatrix}
-					      0 \\1\\2
-				      \end{pmatrix},              \\
-				      \phantom{a}                              \\
-				      %------------------------------
-				      \Bu^{(1)} & =
-				      \begin{pmatrix}
-					      u_0^{(0)} \\u_1^{(0)} \\u_2^{(0)}
-				      \end{pmatrix}
-				      +h
-				      \underbrace{
-					      \begin{pmatrix}
-						      0 & 1 & 0 \\ 0 & 0 & 1 \\ t & -1 & 0
-					      \end{pmatrix}
-				      }_{=A}
-				      \begin{pmatrix}
-					      u_0^{(0)} \\u_1^{(0)} \\u_2^{(0)}
-				      \end{pmatrix}
-				      \\
-				                & =
-				      \begin{pmatrix}
-					      0 \\1\\2
-				      \end{pmatrix}
-				      +h\begin{pmatrix}
-					      1 \\2\\0-1
-				      \end{pmatrix}
-				      \\
-				                & =\begin{pmatrix}
-					      h \\1+2h\\2-h
-				      \end{pmatrix}, \\
-				      \phantom{a}                              \\
-				      %------------------------------
-				      \Bu^{(2)} & =
-				      \begin{pmatrix}
-					      u_0^{(1)} \\u_1^{(1)} \\u_2^{(1)}
-				      \end{pmatrix}
-				      +h
-				      \underbrace{
-					      \begin{pmatrix}
-						      0 & 1 & 0 \\ 0 & 0 & 1 \\ t & -1 & 0
-					      \end{pmatrix}
-				      }_{=A}
-				      \begin{pmatrix}
-					      u_0^{(1)} \\u_1^{(1)} \\u_2^{(1)}
-				      \end{pmatrix}
-				      \\
-				                & =
-				      \begin{pmatrix}
-					      h \\1+2h\\2-h
-				      \end{pmatrix}
-				      +h\begin{pmatrix}
-					      1+2h \\2-h\\h\cdot h-(1+2h)
-				      \end{pmatrix}             \\
-				                & 
-				      =\begin{pmatrix}
-					      2h(1+h) \\1+4h-h^2\\2-2h-2h^2+h^3
-				      \end{pmatrix}.
-			      \end{aligned}
-		      }
-	      \end{align}
-\end{enumerate}
+% 	      Approach:
+% 	      We need to approximate $\Bu'(t)$ arising in 
+% 	      \eqref{eq:newBuprime} by some numerical schemes, 
+% 	      e.g. explicit Euler method.
+% 	      %   \begin{questionboxed} 
+% 	      %       But.. how does the explicit Euler formula look like? 
+% 	      %       And how can it be derived exactly?\\
+% 	      %       Ans: Exploit the derivation in 
+% 	      %       \Cref{eq:observationboxedtaylor}.
+% 	      %   \end{questionboxed}
+% 	      \begin{observationboxed}
+% 		      \label{eq:observationboxedtaylor}
+% 		      We consider Taylor expansion 
+% 		      for $\Bu(t)$ around point $t=t_{0}$
+% 		      \begin{align}
+% 			      \label{eq:Taylorforut}
+% 			      \Bu(t)
+% 			      = \Bu(t_{0}) + \Bu'(t_{0})(t-t_{0}) 
+% 			      + \mathcal{O}((t-t_{0})^2),
+% 		      \end{align}
+% 		      which, for the sake of convergence, 
+% 		      requires $h:=t-t_{0}$ to be small.
+% 		      Since $h:=t-t_{0}$, we equally have 
+% 		      $t=h+t_{0}$. Substitution
+% 		      of $h:=t-t_{0}$ and $t=t_{0}+h$
+% 		      to \eqref{eq:Taylorforut}
+% 		      leads to the following expression
+% 		      \begin{align}
+% 			      \label{eq:Taylorforutnew}
+% 			      \Bu(t_{0}+h)
+% 			      = \Bu(t_{0}) + h\Bu'(t_{0})
+% 			      + \mathcal{O}(h^2),
+% 		      \end{align}
+% 		      which is the new expression of Taylor expansion 
+% 		      in terms of point $t_{0}$,
+% 		      around which the function $\Bu(t)$
+% 		      is approximated by the Taylor expansion,
+% 		      instead of the classical expression 
+% 		      in terms of the variable $t$
+% 		      as seen in \eqref{eq:Taylorforut}.
+% 		      Since point $t_{0}$, 
+% 		      although it implied a fixed point,
+% 		      arising in \eqref{eq:Taylorforutnew}
+% 		      can be chosen arbitrarily, 
+% 		      we can, therefore, substitute it for $t$, 
+% 		      as follows
+% 		      \begin{align}
+% 			      \label{eq:Taylorforutnewnozero}
+% 			      \Bu(t+h)
+% 			      = \Bu(t) + h\Bu'(t)
+% 			      + \mathcal{O}(h^2),
+% 		      \end{align}
+% 		      Now, the expression \eqref{eq:Taylorforutnew}
+% 		      gives rise to a useful expression
+% 		      to approximate $\Bu'(t)$ numerically, as follows
+% 		      \begin{align}
+% 			      \label{eq:Taylorforutnewnozerofinal}
+% 			      \therefore\quad
+% 			      \boxed{
+% 				      \Bu'(t) 
+% 				      \approx \frac{\Bu(t+h) - \Bu(t)}{h}.
+% 			      }
+% 		      \end{align}
+% 	      \end{observationboxed}
+% 	      %   The ODE in \eqref{eq:newBuprime} 
+% 	      %   has a general form 
+% 	      %   \begin{align}
+% 	      % 	\Bu'(t) = f(t,\Bu(t))
+% 	      %   \end{align}
+% 	      %   Definition:
+% 	      %   \begin{align}
+% 	      %       \Bu(t+h) & : = \Bu_{j+1} \\
+% 	      %       \Bu(t)   & : = \Bu_{j}
+% 	      %   \end{align}
+% 	      Substitution of 
+% 	      \eqref{eq:Taylorforutnewnozerofinal}
+% 	      into \eqref{eq:newBuprime} yields
+% 	      \begin{align}
+% 		      \frac{\Bu(t+h) - \Bu(t)}{h}
+% 		      = A\Bu(t)
+% 	      \end{align}
+% 	      which leads to the formula of explicit Euler method 
+% 	      \begin{align}
+% 		      \label{eq:Eulerformulaformu}
+% 		      \boxed{
+% 			      \Bu^{(j+1)} = \Bu^{(j)} + h\,A\Bu^{(j)},
+% 		      }
+% 	      \end{align}
+% 	      where $\Bu^{(j)}$ is the numerical solution by
+% 	      Euler method after $j$ steps,
+% 	      and components of $\Bu^{(j)}$ is known as 
+% 	      \begin{align}
+% 		      \Bu^{(j)}
+% 		      = 
+% 		      \begin{pmatrix} 
+% 			      u_0 \\u_1 \\u_2
+% 		      \end{pmatrix}^{(j)},
+% 	      \end{align}
+% 	      which, together with 
+% 	      \eqref{eq:Eulerformulaformu},
+% 	      leads to the following expressions
+% 	      \begin{align}
+% 		      \therefore\quad
+% 		      \boxed{
+% 			      \begin{aligned}
+% 				      \Bu^{(0)} & =
+% 				      \begin{pmatrix} 
+% 					      u_0^{(0)} \\u_1^{(0)} \\u_2^{(0)}
+% 				      \end{pmatrix}
+% 				      =
+% 				      \begin{pmatrix}
+% 					      0 \\1\\2
+% 				      \end{pmatrix},              \\
+% 				      \phantom{a}                              \\
+% 				      %------------------------------
+% 				      \Bu^{(1)} & =
+% 				      \begin{pmatrix}
+% 					      u_0^{(0)} \\u_1^{(0)} \\u_2^{(0)}
+% 				      \end{pmatrix}
+% 				      +h
+% 				      \underbrace{
+% 					      \begin{pmatrix}
+% 						      0 & 1 & 0 \\ 0 & 0 & 1 \\ t & -1 & 0
+% 					      \end{pmatrix}
+% 				      }_{=A}
+% 				      \begin{pmatrix}
+% 					      u_0^{(0)} \\u_1^{(0)} \\u_2^{(0)}
+% 				      \end{pmatrix}
+% 				      \\
+% 				                & =
+% 				      \begin{pmatrix}
+% 					      0 \\1\\2
+% 				      \end{pmatrix}
+% 				      +h\begin{pmatrix}
+% 					      1 \\2\\0-1
+% 				      \end{pmatrix}
+% 				      \\
+% 				                & =\begin{pmatrix}
+% 					      h \\1+2h\\2-h
+% 				      \end{pmatrix}, \\
+% 				      \phantom{a}                              \\
+% 				      %------------------------------
+% 				      \Bu^{(2)} & =
+% 				      \begin{pmatrix}
+% 					      u_0^{(1)} \\u_1^{(1)} \\u_2^{(1)}
+% 				      \end{pmatrix}
+% 				      +h
+% 				      \underbrace{
+% 					      \begin{pmatrix}
+% 						      0 & 1 & 0 \\ 0 & 0 & 1 \\ t & -1 & 0
+% 					      \end{pmatrix}
+% 				      }_{=A}
+% 				      \begin{pmatrix}
+% 					      u_0^{(1)} \\u_1^{(1)} \\u_2^{(1)}
+% 				      \end{pmatrix}
+% 				      \\
+% 				                & =
+% 				      \begin{pmatrix}
+% 					      h \\1+2h\\2-h
+% 				      \end{pmatrix}
+% 				      +h\begin{pmatrix}
+% 					      1+2h \\2-h\\h\cdot h-(1+2h)
+% 				      \end{pmatrix}             \\
+% 				                & 
+% 				      =\begin{pmatrix}
+% 					      2h(1+h) \\1+4h-h^2\\2-2h-2h^2+h^3
+% 				      \end{pmatrix}.
+% 			      \end{aligned}
+% 		      }
+% 	      \end{align}
+% \end{enumerate}
 % \newpage
 % \begin{align}
 % 	\delta F(y;v)
-% 	 & :=  \lim_{s\to 0}\frac{F(y+sv)-F(y)}{s} \\
-% 	 & =  \lim_{s\to 0} \frac{1}{s}
+% 	 & :=  \lim_{t\to 0}\frac{F(y+sv)-F(y)}{t} \\
+% 	 & =  \lim_{t\to 0} \frac{1}{t}
 % 	\int_{-1}^{1}
 % 	\Big(
 % 	\left(y+sv\right)(x) \left(y+sv\right)^\prime(x)
@@ -860,34 +982,34 @@ Approach:
 % 	\Big)\,dx                                  \\
 % 	% 
 % 	 & \qquad\qquad\qquad\qquad\qquad\qquad
-% 	-\lim_{s\to 0} \frac{1}{s}
+% 	-\lim_{t\to 0} \frac{1}{t}
 % 	\int_{-1}^{1}
 % 	\Big(
 % 	y(x)y'(x) + \exp{y^{\prime 2}(x)}
 % 	\Big)\,dx                                  \\
 % 	% 
-% 	 & =  \lim_{s\to 0} \frac{1}{s}
+% 	 & =  \lim_{t\to 0} \frac{1}{t}
 % 	\int_{-1}^{1}
 % 	\Big(
 % 	y(x)y'(x) + sy(x)v'(x) + sv(x)y'(x) + s^2v(x)v'(x) - y(x)y'(x)
 % 	\Big)\,dx                                  \\
 % 	% 
 % 	 & \qquad\qquad\qquad\qquad\qquad\qquad
-% 	-\lim_{s\to 0} \frac{1}{s}
+% 	-\lim_{t\to 0} \frac{1}{t}
 % 	\int_{-1}^{1}
 % 	\Big(
 % 	\exp{y^{\prime 2}(x)}
 % 	- \exp{(y+sv)^{\prime 2}(x)}
 % 	\Big)\,dx                                  \\
 % 	% 
-% 	%  & =  \lim_{s\to 0}
+% 	%  & =  \lim_{t\to 0}
 % 	% \int_{-1}^{1}
 % 	% \Big(
 % 	% y(x)\,v'(x) + v(x)\,y'(x) + s\,v(x)\,v'(x)
 % 	% \Big)\,dx                                                    \\
 % 	%
 % 	%  & \qquad\qquad\qquad\qquad\qquad\qquad
-% 	% -\lim_{s\to 0} \frac{1}{s}
+% 	% -\lim_{t\to 0} \frac{1}{t}
 % 	% \int_{-1}^{1}
 % 	% \Big(
 % 	% \exp{y^{\prime 2}(x)}
@@ -902,7 +1024,7 @@ Approach:
 % 	\,dx                                       \\
 % 	% 
 % 	 & \qquad\qquad\qquad\qquad\qquad\qquad
-% 	+\lim_{s\to 0} \frac{1}{s}
+% 	+\lim_{t\to 0} \frac{1}{t}
 % 	\int_{-1}^{1}
 % 	\Big(
 % 	\exp{\big(y(x)+s\,v(x)\big)^{\prime 2}}-\exp{y(x)^{\prime 2}}
@@ -918,13 +1040,13 @@ Approach:
 % 	 & \qquad\qquad\qquad
 % 	+ \int_{-1}^1
 % 	\exp{y^{\prime 2}(x)}
-% 	\lim_{s\to 0}
+% 	\lim_{t\to 0}
 % 	\underbrace{
 % 		\left(
 % 		\frac{
 % 			\exp{\Big( 2 y^\prime(x)\,v^\prime(x)\,s
 % 				+ v^{\prime 2}(x)\,s^2\Big)}-1
-% 		}{s}
+% 		}{t}
 % 		\right)
 % 	}
 % 	_{\text{l'Hospital}}
@@ -937,7 +1059,7 @@ Approach:
 % 	 & \
 % 	+ \int_{-1}^1
 % 	\exp{y^{\prime 2}(x)}
-% 	\lim_{s\to 0}
+% 	\lim_{t\to 0}
 % 	\left(
 % 	\left(
 % 	2 y^\prime(x)\,v^\prime(x) + v^{\prime 2}(x)\,s
