@@ -86,6 +86,7 @@ which may be approximated by a linear multistep method, taking the general form
 	on the RHS of \eqref{eq:multistepform}. This linear m-step method 
 	uses the information from the previous m steps to compute the value for the next step. 
 	In details, let us examine the formula \eqref{eq:multistepform}
+	which is written again as follows
 	\begin{align}
 		\label{eq:multistepformexamine}
 		\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) = h\sum_{l=0}^{m}\beta_l\,f(t_j+lh,x(t_j+lh)),
@@ -122,13 +123,50 @@ which may be approximated by a linear multistep method, taking the general form
 		+ \beta_{m-1}\,f(t_j+(m-1)h,x(t_j+(m-1)h)) 
 		\notag    \\
 		 & \quad 
-		+ \beta_{m}\,\textcolor{Bittersweet}{f(t_j+mh,x(t_j+mh))}.
+		+ \beta_{m}\,\textcolor{ForestGreen}{f(t_j+mh,x(t_j+mh))}.
 	\end{align}
 	The insertion of \eqref{eq:LHSterm} and \eqref{eq:RHSterm}
 	into \eqref{eq:multistepformexamine} leads to
 	\begin{align}
-		d
+		\label{eq:assembling}
+		 & \alpha_0\,x{(t_j)} 
+		+ \alpha_1\,x{(t_j+h)}  
+		+ \alpha_2\,x{(t_j+2h)} 
+		\notag                             \\
+		 & + \dots
+		\notag                             \\
+		 & + \alpha_{m-1}\,x{(t_j+(m-1)h)}
+		+ \alpha_m\,\textcolor{Bittersweet}{x{(t_j+mh)}}
+		\notag                             \\
+		 & = 
+		\notag                             \\
+		 & \beta_0\,f(t_j,x(t_j)) 
+		+ \beta_1\,f(t_j+h,x(t_j+h))
+		+ \beta_2\,f(t_j+2h,x(t_j+2h))
+		\notag                             \\
+		 & 
+		+ \dots + 
+		\notag                             \\
+		 & 
+		+ \beta_{m-1}\,f(t_j+(m-1)h,x(t_j+(m-1)h)) 
+		+ \beta_{m}\,\textcolor{ForestGreen}{f(t_j+mh,x(t_j+mh))},
 	\end{align}
+	which tells us the fact that the value $\textcolor{Bittersweet}{x(t_j+mh)}$
+	is approximated 
+	by using all information from previous steps, based on
+	\begin{enumerate}
+		\item $x(t_j)$, $x{(t_j+h)}$, $\dots$, $x{(t_j+(m-1)h)}$.
+		\item $f(t_j,x(t_j))$, $f(t_j+h,x(t_j+h))$, $\dots$, $f(t_j+mh,x(t_j+mh))$.
+		\item Coefficients $\alpha_l$ and $\beta_l$.
+	\end{enumerate}
+\end{observationboxed}
+\begin{observationboxed}
+	The apprearance of the green term $\textcolor{ForestGreen}{f(t_j+mh,x(t_j+mh))}$
+	arising in \eqref{eq:assembling} plays a significant role, meaning that
+	\begin{enumerate}
+		\item $\beta_m = 0$: the green term is switched off, and the scheme becomes \textbf{explicit}.
+		\item $\beta_m \neq 0$:  the green term is switched on, and the scheme becomes \textbf{implicit}.
+	\end{enumerate}
 \end{observationboxed}
 %------------------------------------------------------------------------------
 \newpage
