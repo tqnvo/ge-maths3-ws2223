@@ -33,10 +33,13 @@ Mathe III $\cdot$ SRU01 $\cdot$ Response to questions $\cdot$ WS22/23
 	$\beta_{l} \in \mathbb{R}$ where $l=0,1,\dots,m$, 
 	satisfying the following system of equations 
 	\begin{align}
-		\sum_{l=0}^{m}a_{l}                                                                                                   & = 0, \\
+		\sum_{l=0}^{m}a_{l}                                                                                                   & = 0, 
+		\label{eq:alphal}
+		\\
 		\sum_{l=0}^{m}(l^{\textcolor{NavyBlue}{q}}\alpha_{l}-\textcolor{NavyBlue}{q}\,l^{\textcolor{NavyBlue}{q}-1}\beta_{l}) & = 0,
 		\quad\text{for}\quad
 		\textcolor{NavyBlue}{q} = 1,2,3,\dots, \textcolor{red}{p}.
+		\label{eq:betal}
 	\end{align}
 	Then the linear m-step method has the consistency order of $\textcolor{red}{p}$.
 \end{exampleboxed}
@@ -55,14 +58,17 @@ which may be approximated by a linear multistep method, taking the general form
 	}
 \end{align}
 \begin{observationboxed}
-	There are 6 symbols arising in \eqref{eq:multistepform} to be aware of
+	There are 6 symbols arising in 
+	\eqref{eq:alphal},
+	\eqref{eq:betal},
+	\eqref{eq:multistepform} to be aware of
 	\begin{enumerate}
 		\item $m$ is the total number of steps used in the multistep method.
-		\item $\alpha \in \mathbb{R}$ is the coefficient, arising in the linear combination of $x(t_j+lh)$
-		\item $\beta \in \mathbb{R}$ is the coefficient, arising in the linear combination of $f(t_j+lh,x(t_j+lh))$.
+		\item $\alpha \in \mathbb{R}$ is the coefficient for the linear combination of $x(t_j+lh)$
+		\item $\beta \in \mathbb{R}$ is the coefficient for the linear combination of $f(t_j+lh,x(t_j+lh))$.
 		\item $p$ is the consistency order.
-		\item $l$ is the dummy running index, from $0$ to $m$.
-		\item $q$ is the dummy running index, from $1$ to $p$.
+		\item $l$ is the dummy index, running from $0$ to $m$.
+		\item $q$ is the dummy index, running from $1$ to $p$.
 	\end{enumerate}
 \end{observationboxed}
 \newpage
