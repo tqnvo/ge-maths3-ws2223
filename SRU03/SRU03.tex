@@ -10,7 +10,7 @@
 \makeatletter
 \renewcommand{\@oddfoot}{\hfil 
 % Aachen, November $04^{th}$, 2021 \hspace{300pt} 
-Mathe III $\cdot$ SRU01 $\cdot$ Response to questions $\cdot$ WS22/23 
+Mathe III $\cdot$ SRU03 $\cdot$ Response to questions $\cdot$ WS22/23 
 \hspace{280pt} 
 \thepage/\pageref{LastPage}\hfil}
 \makeatother
@@ -166,6 +166,17 @@ which may be approximated by a linear multistep method, taking the general form
 	\begin{enumerate}
 		\item $\beta_m = 0$: the green term is switched off, and the scheme becomes \textbf{explicit}.
 		\item $\beta_m \neq 0$:  the green term is switched on, and the scheme becomes \textbf{implicit}.
+	\end{enumerate}
+\end{observationboxed}
+\begin{observationboxed}
+	Specific choices of $\alpha_l$ and $\beta_l$ leads to some familiar methods.
+	Especially, when $m=1$ the linear m-step method becomes single-step method,
+	or one-step method. If so, according to \eqref{eq:multistepform}
+	there will be 4 coefficients $(\alpha_0,\alpha_1,\beta_0,\beta_1)$
+	to be defined. For example:
+	\begin{enumerate}
+		\item $(\alpha_0,\alpha_1,\beta_0,\beta_1) = (-1,1,1,0)$ we obtain explicit Euler.
+		\item $(\alpha_0,\alpha_1,\beta_0,\beta_1) = (-1,1,0,1)$ we obtain implicit Euler.
 	\end{enumerate}
 \end{observationboxed}
 %------------------------------------------------------------------------------
