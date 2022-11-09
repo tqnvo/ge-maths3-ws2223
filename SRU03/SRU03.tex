@@ -179,6 +179,64 @@ which may be approximated by a linear multistep method, taking the general form
 		\item $(\alpha_0,\alpha_1,\beta_0,\beta_1) = (-1,1,0,1)$ we obtain implicit Euler.
 	\end{enumerate}
 \end{observationboxed}
+When the time $t$ is considered at a specific discretized time point $t=t_j+lh$, the ODE in \eqref{eq:thisistheODE} yields 
+\begin{align}
+	\label{eq:newtimepointtj}
+	x'(t_j+lh) = f(t_j+lh,x(t_j+lh)),
+\end{align}
+Substitution of \eqref{eq:newtimepointtj} into \eqref{eq:multistepform} leads to 
+\begin{align}
+	\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) = h\sum_{l=0}^{m}\beta_l\,x'(t_j+lh),
+\end{align}
+which, by group the summation sign together, leads equally to
+\begin{align}
+	\sum_{l=0}^{{m}}\left( \alpha_l\,x(t_j+lh) - h\,\beta_l\,x'(t_j+lh) \right) = 0.
+\end{align}
+Then, the order of consistency is figured out by taking advantage of using Taylor's expansion for 
+$x(t_j+lh)$ and $x'(t_j+lh)$. By using 
+\eqref{eq:taylorderivativeno} and
+\eqref{eq:taylorderivative} in
+\Cref{eq:Taylorniceform} we obtain 
+\begin{align}
+	x(t_j+lh)  & = 
+	\\
+	x'(t_j+lh) & =
+\end{align}
+\newpage
+\begin{observationboxed}
+	\label{eq:Taylorniceform}
+	Taylor's expansion of function $x(t)$ around point $a$ reads 
+	\begin{align}
+		\label{eq:Taylororiginal}
+		x(t) 
+		 & = x(a) 
+		+ \frac{x'(a)(t-a)}{1!} + \frac{x''(a)(t-a)^2}{2!} + \dots + \frac{x^{(n)}(a)(t-a)^n}{n!}\notag                 \\
+		 & \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad 
+		+ \mathcal{O}((t-a)^{n+1})                                                                               \notag \\
+		 & = \sum_{j=0}^{n} \frac{x^{(n)}(a)(t-a)^{n}}{n!} + \mathcal{O}((t-a)^{n+1}).
+	\end{align}
+	Then, by setting $h:= t-a$ we obtain $t=a+h$; hence, the \eqref{eq:Taylororiginal} becomes
+	\begin{align}
+		\label{eq:taylorderivativeno}
+		x(a+h) 
+		 & = x(a) 
+		+ \frac{x'(a)h}{1!} + \frac{x''(a)h^2}{2!} + \dots + \frac{x^{(n)}(a)h^n}{n!}
+		+ \mathcal{O}(h^{n+1})                                                 \notag \\
+		 & = \sum_{j=0}^{n} \frac{x^{(n)}(a)h^{n}}{n!} + \mathcal{O}(h^{n+1}),
+	\end{align}
+	which gives rise to 
+	\begin{align}
+		\label{eq:taylorderivative}
+		x'(a+h) 
+		 & = x'(a) 
+		+ \frac{x''(a)h}{1!} + \frac{x'''(a)h^2}{2!} + \dots + \frac{x^{(n+1)}(a)h^n}{n!}
+		+ \mathcal{O}(h^{n+1})                                                 \notag \\
+		 & = \sum_{j=0}^{n} \frac{x^{(n+1)}(a)h^{n}}{n!} + \mathcal{O}(h^{n+1}),
+	\end{align}
+\end{observationboxed}
+\begin{align}
+	x(t_j+lh) = x(t_j)
+\end{align}
 %------------------------------------------------------------------------------
 \newpage
 \section{Step-by-step with A4-SRU03}
