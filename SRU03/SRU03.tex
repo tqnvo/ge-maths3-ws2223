@@ -15,7 +15,6 @@ Mathe III $\cdot$ SRU01 $\cdot$ Response to questions $\cdot$ WS22/23
 \thepage/\pageref{LastPage}\hfil}
 \makeatother
 %------------------------------------------------------------------------------
-
 \begin{document}
 \begin{center}
 	\section*{Self-exercise - SRU03\\ Response to questions}
@@ -28,8 +27,105 @@ Mathe III $\cdot$ SRU01 $\cdot$ Response to questions $\cdot$ WS22/23
 \end{center}
 %------------------------------------------------------------------------------
 \section{Step-by-step with A3-SRU03}
-
+\begin{exampleboxed}
+	Let the linear m-step method be given by coefficients 
+	$\alpha_{l} \in \mathbb{R}$ and 
+	$\beta_{l} \in \mathbb{R}$ where $l=0,1,\dots,m$, 
+	satisfying the following system of equations 
+	\begin{align}
+		\sum_{l=0}^{m}a_{l}                                                                                                   & = 0, \\
+		\sum_{l=0}^{m}(l^{\textcolor{NavyBlue}{q}}\alpha_{l}-\textcolor{NavyBlue}{q}\,l^{\textcolor{NavyBlue}{q}-1}\beta_{l}) & = 0,
+		\quad\text{for}\quad
+		\textcolor{NavyBlue}{q} = 1,2,3,\dots, \textcolor{red}{p}.
+	\end{align}
+	Then the linear m-step method has the consistency order of $\textcolor{red}{p}$.
+\end{exampleboxed}
+Consider the following ordinary differential equation (ODE) taking the form
+\begin{align}
+	\label{eq:thisistheODE}
+	x'(t) =  f(t,x(t)),
+	\quad\text{with}\quad
+	x(t_0)=x_0,
+\end{align}
+which may be approximated by a linear multistep method, taking the general form
+\begin{align}
+	\label{eq:multistepform}
+	\boxed{
+	\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) = h\sum_{l=0}^{m}\beta_l\,f(t_j+lh,x(t_j+lh)).
+	}
+\end{align}
+\begin{observationboxed}
+	There are 6 symbols arising in \eqref{eq:multistepform} to be aware of
+	\begin{enumerate}
+		\item $m$ is the total number of steps used in the multistep method.
+		\item $\alpha \in \mathbb{R}$ is the coefficient, arising in the linear combination of $x(t_j+lh)$
+		\item $\beta \in \mathbb{R}$ is the coefficient, arising in the linear combination of $f(t_j+lh,x(t_j+lh))$.
+		\item $p$ is the consistency order.
+		\item $l$ is the dummy running index, from $0$ to $m$.
+		\item $q$ is the dummy running index, from $1$ to $p$.
+	\end{enumerate}
+\end{observationboxed}
+\newpage
+\begin{observationboxed}
+	The multistep method arising in 
+	\eqref{eq:multistepform}
+	is a \textbf{linear} multistep method, or specifically 
+	\textbf{linear} m-step method.
+	The term \textbf{linear} coming along with m-step method,
+	i.e. linear m-step method, emphasizes the fact that
+	there is actually a \textbf{linear combination} of the term $x(t_j+lh)$ with coefficients $\alpha_l$
+	on the LHS of \eqref{eq:multistepform}, and 
+	a \textbf{linear combination} of the term $f(t_j+lh,x(t_j+lh))$
+	with coefficients $\beta_l$
+	on the RHS of \eqref{eq:multistepform}. This linear m-step method 
+	uses the information from the previous m steps to compute the value for the next step. 
+	In details, let us examine the formula \eqref{eq:multistepform}
+	\begin{align}
+		\label{eq:multistepformexamine}
+		\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) = h\sum_{l=0}^{m}\beta_l\,f(t_j+lh,x(t_j+lh)),
+	\end{align}
+	whose LHS is written in its entirety as follows
+	\begin{align}
+		\label{eq:LHSterm}
+		\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) 
+		 & = 
+		\alpha_0\,x{(t_j)} 
+		+ \alpha_1\,x{(t_j+h)} 
+		+ \alpha_2\,x{(t_j+2h)}
+		+ \dots \notag \\
+		 & 
+		+ \dots
+		+ \alpha_{m-1}\,x{(t_j+(m-1)h)} 
+		+ \alpha_m\,\textcolor{Bittersweet}{x{(t_j+mh)}},
+	\end{align}
+	whereas the RHS of \eqref{eq:multistepformexamine} has its expansion as follows
+	\begin{align}
+		\label{eq:RHSterm}
+		\sum_{l=0}^{m}\beta_l\,f(t_j+lh,x(t_j+lh))
+		 & =  
+		\beta_0\,f(t_j,x(t_j)) 
+		+ \beta_1\,f(t_j+h,x(t_j+h))
+		\notag    \\
+		 & \quad 
+		+ \beta_2\,f(t_j+2h,x(t_j+2h))
+		\notag    \\
+		 & \quad 
+		+ \dots + 
+		\notag    \\
+		 & \quad 
+		+ \beta_{m-1}\,f(t_j+(m-1)h,x(t_j+(m-1)h)) 
+		\notag    \\
+		 & \quad 
+		+ \beta_{m}\,\textcolor{Bittersweet}{f(t_j+mh,x(t_j+mh))}.
+	\end{align}
+	The insertion of \eqref{eq:LHSterm} and \eqref{eq:RHSterm}
+	into \eqref{eq:multistepformexamine} leads to
+	\begin{align}
+		d
+	\end{align}
+\end{observationboxed}
 %------------------------------------------------------------------------------
+\newpage
 \section{Step-by-step with A4-SRU03}
 \begin{exampleboxed}
 	Examine the consistency order of the following explicit numerical scheme 
@@ -49,14 +145,19 @@ The exact solution at time $t+h$ is obtained by Taylor series expansion as
 \end{align*}
 with
 \begin{align*}
-	y^\prime         & = f\big(t,y\big)                               \\
-	y^{\prime\prime} & = \frac{\mathrm{d}}{\mathrm{d}t}f\big(t,y\big)
+	y^\prime         
+	 & = f\big(t,y\big)                               \\
+	y^{\prime\prime}
+	 & = \frac{\mathrm{d}}{\mathrm{d}t}f\big(t,y\big)
 	= f_t\big(t,y(t)\big) + f_y\big(t,y(t)\big) y^\prime(t)
 	= f_t\big(t,y(t)\big) + f_y\big(t,y(t)\big) f\big(t,y(t)\big).
 \end{align*}
 Thus
 \begin{align*}
-	y(t+h) & = y^j + h\, f(t,y^j) + \frac{h^2}{2}\Big(f_t(t,y^j) + f_y(t,y^j)\,f(t,y^j)\Big)+\mathcal{O}(h^3)
+	y(t+h) = 
+	y^j 
+	+ h\, f(t,y^j) 
+	+ \frac{h^2}{2}\Big(f_t(t,y^j) + f_y(t,y^j)\,f(t,y^j)\Big)+\mathcal{O}(h^3)
 \end{align*}
 The approximation can be written as
 \begin{align*}
