@@ -201,7 +201,7 @@ $x(t_j+lh)$ and $x'(t_j+lh)$. By using
 	x(t_j+lh)  & = \sum_{n=0}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}),
 	\label{eq:taylorsubderno}
 	\\
-	x'(t_j+lh) & = \sum_{n=0}^{r} \frac{x^{(n+1)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{r+1}),
+	x'(t_j+lh) & = \sum_{n=0}^{r} \frac{x^{(n+1)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{r}),
 	\label{eq:taylorsubder}
 \end{align}
 where, according to 
@@ -211,27 +211,37 @@ where, according to
 the following two substitutions have been performed
 for 
 \eqref{eq:taylorsubderno} and 
-\eqref{eq:taylorsubder}, meaning that
+\eqref{eq:taylorsubder}
 \begin{align}
 	a & \rightarrow t_j, \\
-	h & \rightarrow lh. 
+	h & \rightarrow lh, 
 \end{align}
+which means that $a$ is replaced by $t_j$ while $h$ is by $lh$.
 Furthermore, expression \eqref{eq:taylorsubderno} can be split into two main parts, 
 where the first part is going with 
-index $n=0$, and the second part with $n\geq 1$, as follows
+index $n=0$, and the second part with $n \in [1,q]$, as follows
 \begin{align}
 	x(t_j+lh) 
-	 & = \sum_{n=0}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}) \notag                                     \\
-	 & = \frac{x^{(0)}(t_j)\,(lh)^{0}}{0!} + \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}) \notag \\
+	 & = \sum_{n=0}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}) \notag     \\
+	 & = \frac{x^{(0)}(t_j)\,(lh)^{0}}{0!}
+	+ \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
+	+ \mathcal{O}((lh)^{q+1}) \notag                                                           \\
 	 & = x(t_j) + \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}). 
 \end{align}
 Besides, shifting index starting from $n=0$ to $n=1$ for expression \eqref{eq:taylorsubder} yields
 \begin{align}
+	\label{eq:xprime1}
 	x'(t_j+lh) 
-	 & = \sum_{n=0}^{r} \frac{x^{(n+1)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{r+1}) \notag           \\
-	 & = \sum_{n=1}^{r+1} \frac{x^{(n)}(t_j)\,(lh)^{n-1}}{(n-1)!} + \mathcal{O}((lh)^{r+1}) \notag     \\
-	 & = \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,(lh)^{n-1}}{n!} + \mathcal{O}((lh)^{r+1}) \notag      \\
-	 & = \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} + \mathcal{O}((lh)^{r+1}) \notag \\
+	 & = \sum_{n=0}^{r} \frac{x^{(n+1)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{r}) \notag \\
+	 & = \sum_{n=1}^{r+1} \frac{x^{(n)}(t_j)\,(lh)^{n-1}}{(n-1)!} + \mathcal{O}((lh)^{r})
+\end{align}
+which means that every element within the summation sign going with $(n+1)$ becomes $n$, and 
+element going with $n$ will become $(n-1)$.
+\begin{align}
+	\label{eq:xprime2}
+	x'(t_j+lh) 
+	 & = \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,(lh)^{n-1}}{n!} + \mathcal{O}((lh)^{r}) \notag      \\
+	 & = \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} + \mathcal{O}((lh)^{r}) \notag \\
 \end{align}
 \newpage
 \begin{observationboxed}
