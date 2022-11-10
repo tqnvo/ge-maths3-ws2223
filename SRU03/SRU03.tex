@@ -239,13 +239,13 @@ which reads
 	x(t_j+lh) = x(t_j) + \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}).
 	}
 \end{align}
-Besides, let the index in expression \eqref{eq:taylorsubder} 
+Besides, let the index in expression \eqref{eq:taylorsubder}
 be starting from $n=1$, instead of $n=0$, we then obtain
 \begin{align}
 	\label{eq:xprime1}
 	x'(t_j+lh) 
-	 & = \sum_{n=0}^{r} \frac{x^{(n+1)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{r}) \notag \\
-	 & = \sum_{n=1}^{r+1} \frac{x^{(n)}(t_j)\,(lh)^{n-1}}{(n-1)!} + \mathcal{O}((lh)^{r}),
+	 & = \sum_{n=0}^{r-1} \frac{x^{(n)}(t_j)\,(lh)^{n-1}}{(n-1)!} + \mathcal{O}((lh)^{r}) \notag \\
+	 & = \sum_{n=1}^{r} \frac{x^{(n)}(t_j)\,(lh)^{n-1}}{(n-1)!} + \mathcal{O}((lh)^{r}),
 \end{align}
 which means that every element within the summation sign going with $(n+1)$ becomes $n$, and 
 element going with $n$ will become $(n-1)$. Further expressions of 
@@ -367,9 +367,22 @@ which leads to
 		 & = x'(t) 
 		+ \frac{x''(t)\,h}{1!} + \frac{x'''(t)\,h^2}{2!} + \dots + \frac{x^{(p)}(t)\,h^{p-1}}{(p-1)!}
 		+ \mathcal{O}(h^{p})
-		\notag                                                                         \\
-		 & = \sum_{n=0}^{p-1} \frac{x^{(n)}(t)\,h^{n-1}}{(n-1)!} + \mathcal{O}(h^{p}).
+		\notag                                                                     \\
+		 & = \sum_{n=0}^{p-1} \frac{x^{(n+1)}(t)\,h^{n}}{n!} + \mathcal{O}(h^{p}).
 	\end{align}
+	Note in passing that 
+	the only difference between
+	\eqref{eq:taylorderivative}
+	and 
+	\eqref{eq:taylorderivative2}
+	is the order $p$, i.e. 
+	we expand till $p$ in 
+	\eqref{eq:taylorderivative},
+	but only till $(p-1)$
+	in \eqref{eq:taylorderivative2}.
+	It turns out that the expression 
+	\eqref{eq:taylorderivative2}
+	helps our analysis in this exercise become more succinct.
 \end{observationboxed}
 \begin{align}
 	x(t_j+lh) = x(t_j)
