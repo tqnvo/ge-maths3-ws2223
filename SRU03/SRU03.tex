@@ -238,10 +238,10 @@ Besides, shifting index starting from $i=0$ to $i=1$ for expression \eqref{eq:ta
 		\label{eq:Taylororiginal}
 		x(t) 
 		 & = x(a) 
-		+ \frac{x'(a)(t-a)}{1!} + \frac{x''(a)(t-a)^2}{2!} + \dots + \frac{x^{(n)}(a)(t-a)^n}{n!}\notag                 \\
+		+ \frac{x'(a)(t-a)}{1!} + \frac{x''(a)(t-a)^2}{2!} + \dots + \frac{x^{(p)}(a)(t-a)^p}{p!}\notag                 \\
 		 & \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad 
-		+ \mathcal{O}((t-a)^{n+1})                                                                               \notag \\
-		 & = \sum_{j=0}^{n} \frac{x^{(n)}(a)(t-a)^{n}}{n!} + \mathcal{O}((t-a)^{n+1}).
+		+ \mathcal{O}((t-a)^{p+1})                                                                               \notag \\
+		 & = \sum_{n=0}^{p} \frac{x^{(n)}(a)(t-a)^{n}}{n!} + \mathcal{O}((t-a)^{p+1}).
 	\end{align}
 	Then, by setting $h:= t-a$ we obtain $t=a+h$; hence, the \eqref{eq:Taylororiginal} becomes
 	\begin{align}
