@@ -216,19 +216,22 @@ for
 	a & \rightarrow t_j, \\
 	h & \rightarrow lh. 
 \end{align}
-Furthermore, expression \eqref{eq:taylorsubderno} can be split into two main parts, where the first part going with 
-index $n=0$ and the second part going with $n\geq 1$, as follows
+Furthermore, expression \eqref{eq:taylorsubderno} can be split into two main parts, 
+where the first part is going with 
+index $n=0$, and the second part with $n\geq 1$, as follows
 \begin{align}
 	x(t_j+lh) 
 	 & = \sum_{n=0}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}) \notag                                     \\
 	 & = \frac{x^{(0)}(t_j)\,(lh)^{0}}{0!} + \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}) \notag \\
 	 & = x(t_j) + \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}). 
 \end{align}
-Besides, shifting index starting from $i=0$ to $i=1$ for expression \eqref{eq:taylorsubder} yields
+Besides, shifting index starting from $n=0$ to $n=1$ for expression \eqref{eq:taylorsubder} yields
 \begin{align}
 	x'(t_j+lh) 
-	 & = \sum_{n=0}^{r} \frac{x^{(n+1)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{r+1}) \notag \\
-	 & = \sum_{n=1}^{r+1} \frac{x^{(n)}(t_j)\,(lh)^{n-1}}{(n-1)!} + \mathcal{O}((lh)^{r+}) 
+	 & = \sum_{n=0}^{r} \frac{x^{(n+1)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{r+1}) \notag           \\
+	 & = \sum_{n=1}^{r+1} \frac{x^{(n)}(t_j)\,(lh)^{n-1}}{(n-1)!} + \mathcal{O}((lh)^{r+1}) \notag     \\
+	 & = \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,(lh)^{n-1}}{n!} + \mathcal{O}((lh)^{r+1}) \notag      \\
+	 & = \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} + \mathcal{O}((lh)^{r+1}) \notag \\
 \end{align}
 \newpage
 \begin{observationboxed}
@@ -238,7 +241,7 @@ Besides, shifting index starting from $i=0$ to $i=1$ for expression \eqref{eq:ta
 		\label{eq:Taylororiginal}
 		x(t) 
 		 & = x(a) 
-		+ \frac{x'(a)\,(t-a)}{1!} + \frac{x''(a)\,(t-a)^2}{2!} + \dots + \frac{x^{(p)}(a)\,(t-a)^p}{p!}\notag                 \\
+		+ \frac{x'(a)\,(t-a)}{1!} + \frac{x''(a)\,(t-a)^2}{2!} + \dots + \frac{x^{(p)}(a)\,(t-a)^p}{p!}\notag           \\
 		 & \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad 
 		+ \mathcal{O}((t-a)^{p+1})                                                                               \notag \\
 		 & = \sum_{n=0}^{p} \frac{x^{(n)}(a)\,(t-a)^{n}}{n!} + \mathcal{O}((t-a)^{p+1}).
@@ -250,16 +253,25 @@ Besides, shifting index starting from $i=0$ to $i=1$ for expression \eqref{eq:ta
 		 & = x(a) 
 		+ \frac{x'(a)\,h}{1!} + \frac{x''(a)\,h^2}{2!} + \dots + \frac{x^{(p)}(a)\,h^p}{p!}
 		+ \mathcal{O}(h^{p+1})                                                 \notag \\
-		 & = \sum_{n=0}^{p} \frac{x^{(n)}(a)\,h^{n}}{n!} + \mathcal{O}(h^{p+1}),
+		 & = \sum_{n=0}^{p} \frac{x^{(n)}(a)\,h^{n}}{n!} + \mathcal{O}(h^{p+1}).
 	\end{align}
-	which gives rise to 
+	Since the point $a$ can be chosen arbitrarily, we can set it as a variable $t$, yielding
+	\begin{align}
+		\label{eq:taylorderivativenot}
+		x(t+h) 
+		 & = x(t) 
+		+ \frac{x'(t)\,h}{1!} + \frac{x''(t)\,h^2}{2!} + \dots + \frac{x^{(p)}(t)\,h^p}{p!}
+		+ \mathcal{O}(h^{p+1})                                                 \notag \\
+		 & = \sum_{n=0}^{p} \frac{x^{(n)}(t)\,h^{n}}{n!} + \mathcal{O}(h^{p+1}),
+	\end{align}
+	which, by taking derivative w.r.t. $t$ on both sides of \eqref{eq:taylorderivativenot}, gives rise to
 	\begin{align}
 		\label{eq:taylorderivative}
-		x'(a+h) 
-		 & = x'(a) 
-		+ \frac{x''(a)\,h}{1!} + \frac{x'''(a)\,h^2}{2!} + \dots + \frac{x^{(p+1)}(a)\,h^p}{p!}
-		+ \mathcal{O}(h^{p+1})                                                 \notag \\
-		 & = \sum_{n=0}^{p} \frac{x^{(n+1)}(a)\,h^{n}}{n!} + \mathcal{O}(h^{p+1}),
+		x'(t+h) 
+		 & = x'(t) 
+		+ \frac{x''(t)\,h}{1!} + \frac{x'''(t)\,h^2}{2!} + \dots + \frac{x^{(p+1)}(t)\,h^p}{p!}
+		+ \mathcal{O}(h^{p})                                                 \notag \\
+		 & = \sum_{n=0}^{p} \frac{x^{(n+1)}(t)\,h^{n}}{n!} + \mathcal{O}(h^{p}).
 	\end{align}
 \end{observationboxed}
 \begin{align}
