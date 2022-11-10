@@ -284,42 +284,70 @@ we obtain the following relation
 where the dummy indices $q$ and $r$ have been switched to $p$
 in order to match our analysis for the given problem, leading to
 \begin{align}
+	\label{eq:myconclusion}
 	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j)
 	+ 
-	\sum_{l=0}^{{m}} \Bigg( \alpha_l\sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} \Bigg)
+	\sum_{l=0}^{{m}} \Bigg( \alpha_l\sum_{n=1}^{p} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} \Bigg)
 	+ 
-	\sum_{l=0}^{{m}}\alpha_l\,\underbrace{\mathcal{O}((lh)^{q+1})}_{\mathcal{O}(h^{q+1})}
+	\sum_{l=0}^{{m}}\alpha_l\,\underbrace{\mathcal{O}((lh)^{p+1})}_{\mathcal{O}(h^{p+1})}
 	\notag                                                     \\ 
 	 & \qquad 
-	- \sum_{l=0}^{{m}} \Bigg( h\,\beta_l \sum_{n=1}^{r} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h}  \Bigg)
-	- \sum_{l=0}^{{m}} \beta_l\,\underbrace{h\,\mathcal{O}((lh)^{r})}_{\mathcal{O}(h^{r+1})}
+	- \sum_{l=0}^{{m}} \Bigg( h\,\beta_l \sum_{n=1}^{p} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h}  \Bigg)
+	- \sum_{l=0}^{{m}} \beta_l\,\underbrace{h\,\mathcal{O}((lh)^{p})}_{\mathcal{O}(h^{p+1})}
 	= 0,
 	\notag                                                     \\
 	\Leftrightarrow
 	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j) 
 	+ \sum_{l=0}^{{m}}
 	\Bigg(
-	\alpha_l\sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
-	- h\,\beta_l \sum_{n=1}^{r} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} 
+	\alpha_l\sum_{n=1}^{p} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
+	- h\,\beta_l \sum_{n=1}^{p} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} 
 	\Bigg) \notag                                              \\
 	 & \qquad\qquad\qquad\qquad\qquad\qquad
 	+ \sum_{l=0}^{{m}}
 	\Bigg(
-	\underbrace{\alpha_l\,\mathcal{O}(h^{q+1}) - \beta_l\,\mathcal{O}(h^{r})}_{\gamma_l\mathcal{O}(h^{q+1})}
+	\underbrace{\alpha_l\,\mathcal{O}(h^{p+1}) - \beta_l\,\mathcal{O}(h^{p+1})}_{\gamma_l\,\mathcal{O}(h^{p+1})}
 	\Bigg) = 0
 	\notag                                                     \\
 	\Leftrightarrow
 	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j) 
 	+ \sum_{l=0}^{{m}}
 	\Bigg(
-	\alpha_l\sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,l^{n}h^{n}}{n!}
-	- \beta_l \sum_{n=1}^{r} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!} 
+	\alpha_l\sum_{n=1}^{p} \frac{x^{(n)}(t_j)\,l^{n}h^{n}}{n!}
+	- \beta_l \sum_{n=1}^{p} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!} 
 	\Bigg) \notag                                              \\
 	 & \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad 
 	+ \sum_{l=0}^{{m}}
-	\gamma_l\,\mathcal{O}(h^{q+1}) = 0
+	\gamma_l\,\mathcal{O}(h^{p+1}) = 0
+	\notag                                                     \\
+	\Leftrightarrow
+	 & 
+	\textcolor{NavyBlue}{\sum_{l=0}^{{m}}\alpha_l}\,x(t_j)
+	+ \sum_{n=1}^{p}
+	\Bigg(
+	\frac{x^{(n)}(t_j)\,h^{n}}{n!}
+	\textcolor{NavyBlue}{\sum_{l=0}^{{m}} \Big( \alpha_l\,l^{n}  - \beta_l\,n\,l^{n-1} \Big)}
+	\Bigg)
+	+ \sum_{l=0}^{{m}}
+	\gamma_l\,\textcolor{red}{\mathcal{O}(h^{p+1})} = 0
 	\notag                                                     \\
 \end{align}
+Finally, the expression in \eqref{eq:myconclusion}
+leads us to the fact that the 
+linear m-step method has the consistency order of $p$, according to 
+the red term in \eqref{eq:myconclusion},
+when the blue terms in \eqref{eq:myconclusion} vanish, 
+meaning that 
+\begin{align}
+	\therefore\quad\boxed{
+		\begin{aligned}
+			\sum_{l=0}^{{m}}\alpha_l                                            & = 0, \\
+			\sum_{l=0}^{{m}} \Big( \alpha_l\,l^{n}  - \beta_l\,n\,l^{n-1} \Big) & = 0,
+			\quad\text{for}\quad n=1,2,3,\dots,p.
+		\end{aligned}
+	}
+\end{align}
+where $p$ is the order of consistency.
 \newpage
 \begin{observationboxed}
 	\label{eq:Taylorniceform}
@@ -385,9 +413,6 @@ in order to match our analysis for the given problem, leading to
 	\eqref{eq:taylorderivative2}
 	helps our analysis in this exercise become more succinct.
 \end{observationboxed}
-\begin{align}
-	x(t_j+lh) = x(t_j)
-\end{align}
 %------------------------------------------------------------------------------
 % \begin{align}
 % 	\label{eq:variationformular}
