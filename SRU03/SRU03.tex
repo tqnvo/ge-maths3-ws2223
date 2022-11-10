@@ -161,7 +161,7 @@ which may be approximated by a linear multistep method, taking the general form
 	\end{enumerate}
 \end{observationboxed}
 \begin{observationboxed}
-	The apprearance of the green term $\textcolor{ForestGreen}{f(t_j+mh,x(t_j+mh))}$
+	The appearance of the green term $\textcolor{ForestGreen}{f(t_j+mh,x(t_j+mh))}$
 	arising in \eqref{eq:assembling} plays a significant role, meaning that
 	\begin{enumerate}
 		\item $\beta_m = 0$: the green term is switched off, and the scheme becomes \textbf{explicit}.
@@ -190,7 +190,10 @@ Substitution of \eqref{eq:newtimepointtj} into \eqref{eq:multistepform} leads to
 \end{align}
 which, by group the summation sign together, leads equally to
 \begin{align}
+	\label{eq:myform}
+	\therefore\quad\boxed{
 	\sum_{l=0}^{{m}}\left( \alpha_l\,x(t_j+lh) - h\,\beta_l\,x'(t_j+lh) \right) = 0.
+	}
 \end{align}
 Then, the order of consistency is figured out by taking advantage of using Taylor's expansion for 
 $x(t_j+lh)$ and $x'(t_j+lh)$. By using 
@@ -222,26 +225,45 @@ where the first part is going with
 index $n=0$, and the second part with $n \in [1,q]$, as follows
 \begin{align}
 	x(t_j+lh) 
-	 & = \sum_{n=0}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}) \notag     \\
+	 & = \sum_{n=0}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}) \notag    \\
 	 & = \frac{x^{(0)}(t_j)\,(lh)^{0}}{0!}
 	+ \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
-	+ \mathcal{O}((lh)^{q+1}) \notag                                                           \\
-	 & = x(t_j) + \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}). 
+	+ \mathcal{O}((lh)^{q+1}) \notag                                                          \\
+	 & = x(t_j) + \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}),
+\end{align}
+which reads 
+\begin{align}
+	\label{eq:use1}
+	\therefore\quad\boxed{
+	x(t_j+lh) = x(t_j) + \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}).
+	}
 \end{align}
 Besides, shifting index starting from $n=0$ to $n=1$ for expression \eqref{eq:taylorsubder} yields
 \begin{align}
 	\label{eq:xprime1}
 	x'(t_j+lh) 
 	 & = \sum_{n=0}^{r} \frac{x^{(n+1)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{r}) \notag \\
-	 & = \sum_{n=1}^{r+1} \frac{x^{(n)}(t_j)\,(lh)^{n-1}}{(n-1)!} + \mathcal{O}((lh)^{r})
+	 & = \sum_{n=1}^{r+1} \frac{x^{(n)}(t_j)\,(lh)^{n-1}}{(n-1)!} + \mathcal{O}((lh)^{r}),
 \end{align}
 which means that every element within the summation sign going with $(n+1)$ becomes $n$, and 
-element going with $n$ will become $(n-1)$.
+element going with $n$ will become $(n-1)$. Further expressions of 
+\eqref{eq:xprime1} lead to
 \begin{align}
 	\label{eq:xprime2}
 	x'(t_j+lh) 
-	 & = \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,(lh)^{n-1}}{n!} + \mathcal{O}((lh)^{r}) \notag      \\
-	 & = \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} + \mathcal{O}((lh)^{r}) \notag \\
+	 & = \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,(lh)^{n-1}}{n!} + \mathcal{O}((lh)^{r}) \notag \\
+	 & = \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} + \mathcal{O}((lh)^{r}),
+\end{align}
+which reads 
+\begin{align}
+	\label{eq:use2}
+	\therefore\quad\boxed{
+	x'(t_j+lh)  = \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} + \mathcal{O}((lh)^{r}).
+	}
+\end{align}
+Next, substitution of \eqref{eq:use1} and \eqref{eq:use2} into \eqref{eq:myform}
+\begin{align}
+	d
 \end{align}
 \newpage
 \begin{observationboxed}
