@@ -286,26 +286,36 @@ which leads to
 	\sum_{l=0}^{{m}}\alpha_l\sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
 	+ 
 	\sum_{l=0}^{{m}}\alpha_l\,\underbrace{\mathcal{O}((lh)^{q+1})}_{\mathcal{O}(h^{q+1})}
-	\notag                               \\ 
+	\notag                                              \\ 
 	 & \qquad\qquad\qquad\qquad 
 	- \sum_{l=0}^{{m}} h\,\beta_l \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} 
 	- \sum_{l=0}^{{m}} \beta_l\,\underbrace{h\,\mathcal{O}((lh)^{r})}_{\mathcal{O}(h^{r+1})}
 	= 0,
-	\notag                               \\
+	\notag                                              \\
 	\Leftrightarrow
 	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j) 
 	+ \sum_{l=0}^{{m}}
 	\Bigg(
 	\alpha_l\sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
 	- h\,\beta_l \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} 
-	\Bigg) \notag                        \\
-	 & \qquad\qquad\qquad\qquad 
-	 + \sum_{l=0}^{{m}}
-	 \Bigg(
-		\alpha_l\,\underbrace{\mathcal{O}((lh)^{q+1})}_{\mathcal{O}(h^{q+1})}
-		- 
-		\beta_l\,\underbrace{h\,\mathcal{O}((lh)^{r})}_{\mathcal{O}(h^{r+1})}
-	 \Bigg)
+	\Bigg) \notag                                       \\
+	 & \qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad 
+	+ \sum_{l=0}^{{m}}
+	\Bigg(
+	\underbrace{\alpha_l\,\mathcal{O}(h^{q+1}) - \beta_l\,\mathcal{O}(h^{r+1})}_{\gamma_l\mathcal{O}(h^{q+1})}
+	\Bigg) = 0
+	\notag                                              \\
+	\Leftrightarrow
+	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j) 
+	+ \sum_{l=0}^{{m}}
+	\Bigg(
+	\alpha_l\sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,l^{n}h^{n}}{n!}
+	- \beta_l \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!} 
+	\Bigg) \notag                                       \\
+	 & \qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad 
+	+ \sum_{l=0}^{{m}}
+	\gamma_l\,\mathcal{O}(h^{q+1}) = 0
+	\notag                                              \\
 \end{align}
 \newpage
 \begin{observationboxed}
