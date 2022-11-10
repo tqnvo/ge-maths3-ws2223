@@ -196,20 +196,21 @@ which, by group the summation sign together, leads equally to
 	}
 \end{align}
 Then, the order of consistency is figured out by taking advantage of using Taylor's expansion for 
-$x(t_j+lh)$ and $x'(t_j+lh)$. By using 
+$x(t_j+lh)$ and $x'(t_j+lh)$. 
+By using 
 \eqref{eq:taylorderivativeno} and
-\eqref{eq:taylorderivative} in
+\eqref{eq:taylorderivative2} in
 \Cref{eq:Taylorniceform} we obtain 
 \begin{align}
 	x(t_j+lh)  & = \sum_{n=0}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}),
 	\label{eq:taylorsubderno}
 	\\
-	x'(t_j+lh) & = \sum_{n=0}^{r} \frac{x^{(n+1)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{r}),
+	x'(t_j+lh) & = \sum_{n=0}^{r-1} \frac{x^{(n)}(t_j)\,(lh)^{n-1}}{(n-1)!} + \mathcal{O}((lh)^{r}),
 	\label{eq:taylorsubder}
 \end{align}
 where, according to 
 \eqref{eq:taylorderivativeno} and
-\eqref{eq:taylorderivative} in
+\eqref{eq:taylorderivative2} in
 \Cref{eq:Taylorniceform},
 the following two substitutions have been performed
 for 
@@ -238,7 +239,8 @@ which reads
 	x(t_j+lh) = x(t_j) + \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}).
 	}
 \end{align}
-Besides, shifting index starting from $n=0$ to $n=1$ for expression \eqref{eq:taylorsubder} yields
+Besides, let the index in expression \eqref{eq:taylorsubder} 
+be starting from $n=1$, instead of $n=0$, we then obtain
 \begin{align}
 	\label{eq:xprime1}
 	x'(t_j+lh) 
@@ -286,36 +288,36 @@ which leads to
 	\sum_{l=0}^{{m}}\alpha_l\sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
 	+ 
 	\sum_{l=0}^{{m}}\alpha_l\,\underbrace{\mathcal{O}((lh)^{q+1})}_{\mathcal{O}(h^{q+1})}
-	\notag                                              \\ 
+	\notag                                                                 \\ 
 	 & \qquad\qquad\qquad\qquad 
 	- \sum_{l=0}^{{m}} h\,\beta_l \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} 
 	- \sum_{l=0}^{{m}} \beta_l\,\underbrace{h\,\mathcal{O}((lh)^{r})}_{\mathcal{O}(h^{r+1})}
 	= 0,
-	\notag                                              \\
+	\notag                                                                 \\
 	\Leftrightarrow
 	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j) 
 	+ \sum_{l=0}^{{m}}
 	\Bigg(
 	\alpha_l\sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
 	- h\,\beta_l \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} 
-	\Bigg) \notag                                       \\
+	\Bigg) \notag                                                          \\
 	 & \qquad\qquad\qquad\qquad\qquad\qquad\qquad\quad 
 	+ \sum_{l=0}^{{m}}
 	\Bigg(
 	\underbrace{\alpha_l\,\mathcal{O}(h^{q+1}) - \beta_l\,\mathcal{O}(h^{r+1})}_{\gamma_l\mathcal{O}(h^{q+1})}
 	\Bigg) = 0
-	\notag                                              \\
+	\notag                                                                 \\
 	\Leftrightarrow
 	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j) 
 	+ \sum_{l=0}^{{m}}
 	\Bigg(
 	\alpha_l\sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,l^{n}h^{n}}{n!}
 	- \beta_l \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!} 
-	\Bigg) \notag                                       \\
+	\Bigg) \notag                                                          \\
 	 & \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad 
 	+ \sum_{l=0}^{{m}}
 	\gamma_l\,\mathcal{O}(h^{q+1}) = 0
-	\notag                                              \\
+	\notag                                                                 \\
 \end{align}
 \newpage
 \begin{observationboxed}
@@ -354,11 +356,20 @@ which leads to
 		x'(t+h) 
 		 & = x'(t) 
 		+ \frac{x''(t)\,h}{1!} + \frac{x'''(t)\,h^2}{2!} + \dots + \frac{x^{(p+1)}(t)\,h^p}{p!}
-		+ \mathcal{O}(h^{p})                                                 \notag \\
-		 & = \sum_{n=0}^{p} \frac{x^{(n+1)}(t)\,h^{n}}{n!} + \mathcal{O}(h^{p}).
+		+ \mathcal{O}(h^{p+1})
+		\notag                                                                     \\
+		 & = \sum_{n=0}^{p} \frac{x^{(n+1)}(t)\,h^{n}}{n!} + \mathcal{O}(h^{p+1}),
 	\end{align}
-	Note in passing that the high order term in \eqref{eq:taylorderivative} is reduced now only $p$
-	due to the derivative action.
+	which can also be written as follows 
+	\begin{align}
+		\label{eq:taylorderivative2}
+		x'(t+h) 
+		 & = x'(t) 
+		+ \frac{x''(t)\,h}{1!} + \frac{x'''(t)\,h^2}{2!} + \dots + \frac{x^{(p)}(t)\,h^{p-1}}{(p-1)!}
+		+ \mathcal{O}(h^{p})
+		\notag                                                                         \\
+		 & = \sum_{n=0}^{p-1} \frac{x^{(n)}(t)\,h^{n-1}}{(n-1)!} + \mathcal{O}(h^{p}).
+	\end{align}
 \end{observationboxed}
 \begin{align}
 	x(t_j+lh) = x(t_j)
