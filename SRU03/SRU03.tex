@@ -261,9 +261,51 @@ which reads
 	x'(t_j+lh)  = \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} + \mathcal{O}((lh)^{r}).
 	}
 \end{align}
-Next, substitution of \eqref{eq:use1} and \eqref{eq:use2} into \eqref{eq:myform}
+Next, by substituting \eqref{eq:use1} and \eqref{eq:use2} into \eqref{eq:myform}
+we obtain the following relation
 \begin{align}
-	d
+	\sum_{l=0}^{{m}}
+	\Bigg( 
+	\alpha_l\,x(t_j)
+	+ \alpha_l\sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
+	 & + 
+	\alpha_l\,\mathcal{O}((lh)^{q+1}) 
+	\notag \\
+	 & 
+	- h\,\beta_l
+	\sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} 
+	- h\,\beta_l\, 
+	\mathcal{O}((lh)^{r})
+	\Bigg) 
+	= 0,
+\end{align}
+which leads to 
+\begin{align}
+	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j)
+	+ 
+	\sum_{l=0}^{{m}}\alpha_l\sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
+	+ 
+	\sum_{l=0}^{{m}}\alpha_l\,\underbrace{\mathcal{O}((lh)^{q+1})}_{\mathcal{O}(h^{q+1})}
+	\notag                               \\ 
+	 & \qquad\qquad\qquad\qquad 
+	- \sum_{l=0}^{{m}} h\,\beta_l \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} 
+	- \sum_{l=0}^{{m}} \beta_l\,\underbrace{h\,\mathcal{O}((lh)^{r})}_{\mathcal{O}(h^{r+1})}
+	= 0,
+	\notag                               \\
+	\Leftrightarrow
+	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j) 
+	+ \sum_{l=0}^{{m}}
+	\Bigg(
+	\alpha_l\sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
+	- h\,\beta_l \sum_{n=1}^{r+1} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} 
+	\Bigg) \notag                        \\
+	 & \qquad\qquad\qquad\qquad 
+	 + \sum_{l=0}^{{m}}
+	 \Bigg(
+		\alpha_l\,\underbrace{\mathcal{O}((lh)^{q+1})}_{\mathcal{O}(h^{q+1})}
+		- 
+		\beta_l\,\underbrace{h\,\mathcal{O}((lh)^{r})}_{\mathcal{O}(h^{r+1})}
+	 \Bigg)
 \end{align}
 \newpage
 \begin{observationboxed}
