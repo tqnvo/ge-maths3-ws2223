@@ -28,16 +28,41 @@ Mathe III $\cdot$ SRU05 $\cdot$ Response to questions $\cdot$ WS22/23
 %------------------------------------------------------------------------------
 \section{Hint for A1-HA05}
 \begin{exampleboxed}
-	Given the set $A \in \mathbb{R}^2$ as follows
-	\inputfig{floats/setAinR2}{setAinR2}
+	Given the set $\mathcal{M} \in \mathbb{R}^2$ bounded by three points
+	$A$, $B$, and $C$, as shown in \Cref{setAinR2}.
+	\begin{enumerate}
+	\item Examine the integral of a function $f(x,y)$ over set $\mathcal{M}$.
+	\item Compute the area of $\mathcal{M}$ by setting $f(x,y)=1$.
+	\end{enumerate}
 \end{exampleboxed}
-
-Equation of a line through two points is given by 
-\begin{align}
-	y - y_{A} = 
-\end{align}
-where $x_A$ and $y_A$ are the coordinate of point $A$, and 
-$x_B$ and $y_B$ are the coordinate of point $B$.
+\inputfig{floats/setAinR2}{setAinR2}
+\newpage
+\begin{recallboxed}
+	Equation of a line $(l)$ in general reads 
+	\begin{align}
+		(l):\quad y  = a\,x + b,
+	\end{align}
+	where $a$ is the slope of the line, and $b$ is the point where the line $(l)$ crosses over 
+	the vertical line of the axis. Hence, when this line $(l)$
+	going through point $P(x_P,y_P)$ and point $Q(x_Q,y_Q)$, 
+	it leads to the following two relations
+	\begin{align}
+		y_P & = a\,x_P + b, \\
+		y_Q & = a\,x_Q + b,
+	\end{align}
+	which leads to the slope $a$ and vertical point $b$ as follows
+	\begin{align}
+		a & = \frac{y_P-y_Q}{x_P-x_Q},              \\
+		b & = \frac{-y_P\,x_Q + y_Q\,x_P}{x_P-x_Q}.
+	\end{align}
+	Finally, equation of a line $(l)$ passing through 
+	point $P(x_P,y_P)$ and point $Q(x_Q,y_Q)$ in general takes the form
+	\begin{align}
+		\therefore\quad\boxed{
+			y = \frac{y_P-y_Q}{x_P-x_Q}\,x + \frac{-y_P\,x_Q + y_Q\,x_P}{x_P-x_Q}.
+		}
+	\end{align}
+\end{recallboxed}
 % Consider the following ordinary differential equation (ODE) taking the form
 % \begin{align}
 % 	\label{eq:thisistheODE}
