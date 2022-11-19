@@ -36,10 +36,14 @@ Mathe III $\cdot$ SRU05 $\cdot$ Response to questions $\cdot$ WS22/23
 	\end{enumerate}
 \end{exampleboxed}
 \inputfig{floats/setAinR2}{setAinR2}
-We will consider two scenarios
-as depicted in \Cref{setAinR2_Ax} and \Cref{setAinR2_Ay}.
-\inputfig{floats/setAinR2_Ax}{setAinR2_Ax}
-\inputfig{floats/setAinR2_Ay}{setAinR2_Ay}
+Approach:\\
+We will look at the \Cref{setAinR2} and consider it in two scenarios as follows
+\begin{enumerate}
+	\item Scenario 1: \Cref{setAinR2_Ax}
+	\item Scenario 2: \Cref{setAinR2_Ay}
+\end{enumerate}
+which we will see later on that the two approaches will actually lead to the same solution,
+thanks to Fubini's theorem \cite{FubiniWiki}.
 \newpage
 \begin{recallboxed}
 	Equation of a line $(l)$ in general reads 
@@ -62,11 +66,28 @@ as depicted in \Cref{setAinR2_Ax} and \Cref{setAinR2_Ay}.
 	Finally, equation of a line $(l)$ passing through 
 	point $P(x_P,y_P)$ and point $Q(x_Q,y_Q)$ in general takes the form
 	\begin{align}
+		\label{eq:lineeqn}
 		\therefore\quad\boxed{
 			y = \frac{y_P-y_Q}{x_P-x_Q}\,x + \frac{-y_P\,x_Q + y_Q\,x_P}{x_P-x_Q}.
 		}
 	\end{align}
 \end{recallboxed}
+By taking advantage of the formula \eqref{eq:lineeqn}
+we are ready to obtain the following three line functions for 
+$(AB)$, $(AC)$, and $(BC)$ as follows
+\begin{align}
+	(AB): y & = -x + 3,                     \\
+	(AC): y & = \frac{1}{2}x + \frac{3}{2}, \\
+	(BC): y & = 2\,x - 3, 
+\end{align}
+\clearpage
+\begin{enumerate}
+	\item Scenario 1: \Cref{setAinR2_Ax}
+	      \inputfig{floats/setAinR2_Ax}{setAinR2_Ax}
+	      \clearpage
+	\item Scenario 2: \Cref{setAinR2_Ay}
+	      \inputfig{floats/setAinR2_Ay}{setAinR2_Ay}
+\end{enumerate}
 % Consider the following ordinary differential equation (ODE) taking the form
 % \begin{align}
 % 	\label{eq:thisistheODE}
@@ -2541,5 +2562,6 @@ as depicted in \Cref{setAinR2_Ax} and \Cref{setAinR2_Ay}.
 
 
 % % \inputfig{floats/multistructures}{multistructures}
-
+\bibliographystyle{acm}
+\bibliography{literature.bib}
 \end{document}
