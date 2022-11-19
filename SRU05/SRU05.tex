@@ -39,8 +39,8 @@ Mathe III $\cdot$ SRU05 $\cdot$ Response to questions $\cdot$ WS22/23
 Approach:\\
 We will look at the \Cref{setAinR2} and consider it in two scenarios as follows
 \begin{enumerate}
-	\item Scenario 1: \Cref{setAinR2_Ax}
-	\item Scenario 2: \Cref{setAinR2_Ay}
+	\item Scenario 1: \Cref{setAinR2_Ax},
+	\item Scenario 2: \Cref{setAinR2_Ay},
 \end{enumerate}
 which we will see later on that the two approaches will actually lead to the same solution,
 thanks to Fubini's theorem \cite{FubiniWiki}.
@@ -76,14 +76,32 @@ By taking advantage of the formula \eqref{eq:lineeqn}
 we are ready to obtain the following three line functions for 
 $(AB)$, $(AC)$, and $(BC)$ as follows
 \begin{align}
-	(AB): y & = -x + 3,                     \\
-	(AC): y & = \frac{1}{2}x + \frac{3}{2}, \\
-	(BC): y & = 2\,x - 3, 
+	(AB):\quad y & = -x + 3,                     \\
+	(AC):\quad y & = \frac{1}{2}x + \frac{3}{2}, \\
+	(BC):\quad y & = 2\,x - 3,
+\end{align}
+which we, alternatively, we can also write those expressions in terms of $x$, as follows
+\begin{align}
+	(AB):\quad x & = -y + 3,                     \\
+	(AC):\quad x & = 2\,y - 3,                   \\
+	(BC):\quad x & = \frac{1}{2}y + \frac{3}{2},
 \end{align}
 \clearpage
 \begin{enumerate}
-	\item Scenario 1: \Cref{setAinR2_Ax}
+	\item Scenario 1: \Cref{setAinR2_Ax}\\
 	      \inputfig{floats/setAinR2_Ax}{setAinR2_Ax}
+		  Followed by the $\mathcal{M}_x$ split we obtain the set $\mathcal{M}_{1}$
+		  \begin{align}
+			\mathcal{M}_{1} = 
+			\Big\{ y \in \mathbb{R} \, \Big| \, -x+3 \leq y \leq \frac{1}{2}x + \frac{3}{2} \Big\},
+		  \end{align}
+		  which is due to the fact that while following the $y$-axis we first come across 
+		  the line $(AB)$ and then the line $(AC)$. Similarly, 
+		  the set $\mathcal{M}_{2}$ is obtained as follows
+		  \begin{align}
+			\mathcal{M}_{2} = 
+			\Big\{ y \in \mathbb{R} \, \Big| \, 2x-3 \leq y \leq \frac{1}{2}x + \frac{3}{2} \Big\},
+		  \end{align}
 	      \clearpage
 	\item Scenario 2: \Cref{setAinR2_Ay}
 	      \inputfig{floats/setAinR2_Ay}{setAinR2_Ay}
