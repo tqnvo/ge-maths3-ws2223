@@ -84,23 +84,28 @@ which we, alternatively, we can also write those expressions in terms of $x$, as
 \begin{align}
 	(AB):\quad x & = -y + 3,                     \\
 	(AC):\quad x & = 2\,y - 3,                   \\
-	(BC):\quad x & = \frac{1}{2}y + \frac{3}{2},
+	(BC):\quad x & = \frac{1}{2}y + \frac{3}{2}.
 \end{align}
+Note in passing that we have used point $A(1,2)$, $B(2,1)$, and $C(3,3)$.
 \clearpage
 \begin{enumerate}
 	\item Scenario 1: \Cref{setAinR2_Ax}\\
 	      \inputfig{floats/setAinR2_Ax}{setAinR2_Ax}
-		  Followed by the $\mathcal{M}_x$ split we obtain the set $\mathcal{M}_{1}$
+	      Followed by the $\mathcal{M}_x$ split we obtain the set $\mathcal{M}_{1}$
+	      \begin{align}
+		      \mathcal{M}_{1} = 
+		      \Big\{ y \in \mathbb{R} \, \Big| \, -x+3 \leq y \leq \frac{1}{2}x + \frac{3}{2} \Big\},
+	      \end{align}
+	      which is due to the fact that while following the $y$-axis we first come across 
+	      the line $(AB)$ and then the line $(AC)$. Similarly, 
+	      the set $\mathcal{M}_{2}$ is obtained as follows
+	      \begin{align}
+		      \mathcal{M}_{2} = 
+		      \Big\{ y \in \mathbb{R} \, \Big| \, 2x-3 \leq y \leq \frac{1}{2}x + \frac{3}{2} \Big\}.
+	      \end{align}
+		  Therefore, we obtain 
 		  \begin{align}
-			\mathcal{M}_{1} = 
-			\Big\{ y \in \mathbb{R} \, \Big| \, -x+3 \leq y \leq \frac{1}{2}x + \frac{3}{2} \Big\},
-		  \end{align}
-		  which is due to the fact that while following the $y$-axis we first come across 
-		  the line $(AB)$ and then the line $(AC)$. Similarly, 
-		  the set $\mathcal{M}_{2}$ is obtained as follows
-		  \begin{align}
-			\mathcal{M}_{2} = 
-			\Big\{ y \in \mathbb{R} \, \Big| \, 2x-3 \leq y \leq \frac{1}{2}x + \frac{3}{2} \Big\},
+			\bigintsss_{\mathcal{M}}f(x,y)\,d\lambda_{2}
 		  \end{align}
 	      \clearpage
 	\item Scenario 2: \Cref{setAinR2_Ay}
