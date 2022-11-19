@@ -10,7 +10,7 @@
 \makeatletter
 \renewcommand{\@oddfoot}{\hfil 
 % Aachen, November $04^{th}$, 2021 \hspace{300pt} 
-Mathe III $\cdot$ SRU04 $\cdot$ Response to questions $\cdot$ WS22/23 
+Mathe III $\cdot$ SRU05 $\cdot$ Response to questions $\cdot$ WS22/23 
 \hspace{120pt} 
 \thepage/\pageref{LastPage}\hfil}
 \makeatother
@@ -28,391 +28,386 @@ Mathe III $\cdot$ SRU04 $\cdot$ Response to questions $\cdot$ WS22/23
 %------------------------------------------------------------------------------
 \section{Hint for A1-HA05}
 \begin{exampleboxed}
-	Let the linear m-step method be given by coefficients 
-	$\alpha_{l} \in \mathbb{R}$ and 
-	$\beta_{l} \in \mathbb{R}$ where $l=0,1,\dots,m$, 
-	satisfying the following system of equations 
-	\begin{align}
-		\sum_{l=0}^{m}a_{l}                                                                                                   & = 0, 
-		\label{eq:alphal}
-		\\
-		\sum_{l=0}^{m}(l^{\textcolor{NavyBlue}{q}}\alpha_{l}-\textcolor{NavyBlue}{q}\,l^{\textcolor{NavyBlue}{q}-1}\beta_{l}) & = 0,
-		\quad\text{for}\quad
-		\textcolor{NavyBlue}{q} = 1,2,3,\dots, \textcolor{red}{p}.
-		\label{eq:betal}
-	\end{align}
-	Then the linear m-step method has the consistency order of $\textcolor{red}{p}$.
+	Given the set $A \in \mathbb{R}^2$ as follows
+	s
 \end{exampleboxed}
-Consider the following ordinary differential equation (ODE) taking the form
+
+Equation of a line through two points is given by 
 \begin{align}
-	\label{eq:thisistheODE}
-	x'(t) =  f(t,x(t)),
-	\quad\text{with}\quad
-	x(t_0)=x_0,
+	y - y_{A} = 
 \end{align}
-which may be approximated by a linear multistep method, taking the general form
-\begin{align}
-	\label{eq:multistepform}
-	\boxed{
-	\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) = h\sum_{l=0}^{m}\beta_l\,f(t_j+lh,x(t_j+lh)).
-	}
-\end{align}
-\begin{observationboxed}
-	There are 6 symbols arising in 
-	\eqref{eq:alphal},
-	\eqref{eq:betal},
-	\eqref{eq:multistepform} to be aware of
-	\begin{enumerate}
-		\item $m$ is the total number of steps used in the multistep method.
-		\item $\alpha \in \mathbb{R}$ is the coefficient for the linear combination of $x(t_j+lh)$
-		\item $\beta \in \mathbb{R}$ is the coefficient for the linear combination of $f(t_j+lh,x(t_j+lh))$.
-		\item $p$ is the consistency order.
-		\item $l$ is the dummy index, running from $0$ to $m$.
-		\item $q$ is the dummy index, running from $1$ to $p$.
-	\end{enumerate}
-\end{observationboxed}
-\newpage
-\begin{observationboxed}
-	The multistep method arising in 
-	\eqref{eq:multistepform}
-	is a \textbf{linear} multistep method, or specifically 
-	\textbf{linear} m-step method.
-	The term \textbf{linear} coming along with m-step method,
-	i.e. linear m-step method, emphasizes the fact that
-	there is actually a \textbf{linear combination} of the terms $x(t_j+lh)$ with coefficients $\alpha_l$
-	on the LHS of \eqref{eq:multistepform}, and 
-	a \textbf{linear combination} of the terms $f(t_j+lh,x(t_j+lh))$
-	with coefficients $\beta_l$
-	on the RHS of \eqref{eq:multistepform}. This linear m-step method 
-	uses the information from the previous m steps to compute the value for the next step. 
-	In details, let us examine the formula \eqref{eq:multistepform}
-	which is written again as follows
-	\begin{align}
-		\label{eq:multistepformexamine}
-		\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) = h\sum_{l=0}^{m}\beta_l\,f(t_j+lh,x(t_j+lh)),
-	\end{align}
-	whose LHS is written in its entirety as follows
-	\begin{align}
-		\label{eq:LHSterm}
-		\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) 
-		 & = 
-		\alpha_0\,x{(t_j)} 
-		+ \alpha_1\,x{(t_j+h)} 
-		+ \alpha_2\,x{(t_j+2h)}
-		+ \dots \notag \\
-		 & 
-		+ \dots
-		+ \alpha_{m-1}\,x{(t_j+(m-1)h)} 
-		+ \alpha_m\,\textcolor{Bittersweet}{x{(t_j+mh)}},
-	\end{align}
-	whereas the RHS of \eqref{eq:multistepformexamine} has its expansion as follows
-	\begin{align}
-		\label{eq:RHSterm}
-		\sum_{l=0}^{m}\beta_l\,f(t_j+lh,x(t_j+lh))
-		 & =  
-		\beta_0\,f(t_j,x(t_j)) 
-		+ \beta_1\,f(t_j+h,x(t_j+h))
-		\notag    \\
-		 & \quad 
-		+ \beta_2\,f(t_j+2h,x(t_j+2h))
-		\notag    \\
-		 & \quad 
-		+ \dots + 
-		\notag    \\
-		 & \quad 
-		+ \beta_{m-1}\,f(t_j+(m-1)h,x(t_j+(m-1)h)) 
-		\notag    \\
-		 & \quad 
-		+ \beta_{m}\,\textcolor{ForestGreen}{f(t_j+mh,x(t_j+mh))}.
-	\end{align}
-	The insertion of \eqref{eq:LHSterm} and \eqref{eq:RHSterm}
-	into \eqref{eq:multistepformexamine} leads to
-	\begin{align}
-		\label{eq:assembling}
-		 & \alpha_0\,x{(t_j)} 
-		+ \alpha_1\,x{(t_j+h)}  
-		+ \alpha_2\,x{(t_j+2h)} 
-		\notag                             \\
-		 & + \dots
-		\notag                             \\
-		 & + \alpha_{m-1}\,x{(t_j+(m-1)h)}
-		+ \alpha_m\,\textcolor{Bittersweet}{x{(t_j+mh)}}
-		\notag                             \\
-		 & = 
-		\notag                             \\
-		 & \beta_0\,f(t_j,x(t_j)) 
-		+ \beta_1\,f(t_j+h,x(t_j+h))
-		+ \beta_2\,f(t_j+2h,x(t_j+2h))
-		\notag                             \\
-		 & 
-		+ \dots + 
-		\notag                             \\
-		 & 
-		+ \beta_{m-1}\,f(t_j+(m-1)h,x(t_j+(m-1)h)) 
-		+ \beta_{m}\,\textcolor{ForestGreen}{f(t_j+mh,x(t_j+mh))},
-	\end{align}
-	which tells us the fact that the value $\textcolor{Bittersweet}{x(t_j+mh)}$
-	is approximated 
-	by using all information from previous steps, based on
-	\begin{enumerate}
-		\item $x(t_j)$, $x{(t_j+h)}$, $\dots$, $x{(t_j+(m-1)h)}$.
-		\item $f(t_j,x(t_j))$, $f(t_j+h,x(t_j+h))$, $\dots$, $f(t_j+mh,x(t_j+mh))$.
-		\item Coefficients $\alpha_l$ and $\beta_l$.
-	\end{enumerate}
-\end{observationboxed}
-\begin{observationboxed}
-	The appearance of the green term $\textcolor{ForestGreen}{f(t_j+mh,x(t_j+mh))}$
-	arising in \eqref{eq:assembling} plays a significant role, meaning that
-	\begin{enumerate}
-		\item $\beta_m = 0$: the green term is switched off, and the scheme becomes \textbf{explicit}.
-		\item $\beta_m \neq 0$:  the green term is switched on, and the scheme becomes \textbf{implicit}.
-	\end{enumerate}
-\end{observationboxed}
-\begin{observationboxed}
-	Specific choices of $\alpha_l$ and $\beta_l$ leads to some familiar methods.
-	Especially, when $m=1$ the linear m-step method becomes single-step method,
-	or one-step method. If so, according to \eqref{eq:multistepform}
-	there will be 4 coefficients $(\alpha_0,\alpha_1,\beta_0,\beta_1)$
-	to be defined. For example:
-	\begin{enumerate}
-		\item $(\alpha_0,\alpha_1,\beta_0,\beta_1) = (-1,1,1,0)$ we obtain explicit Euler.
-		\item $(\alpha_0,\alpha_1,\beta_0,\beta_1) = (-1,1,0,1)$ we obtain implicit Euler.
-	\end{enumerate}
-\end{observationboxed}
-When the time $t$ is considered at a specific discretized time point $t=t_j+lh$, the ODE in \eqref{eq:thisistheODE} yields 
-\begin{align}
-	\label{eq:newtimepointtj}
-	x'(t_j+lh) = f(t_j+lh,x(t_j+lh)),
-\end{align}
-Substitution of \eqref{eq:newtimepointtj} into \eqref{eq:multistepform} leads to 
-\begin{align}
-	\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) = h\sum_{l=0}^{m}\beta_l\,x'(t_j+lh),
-\end{align}
-which, by group the summation sign together, leads equally to
-\begin{align}
-	\label{eq:myform}
-	\therefore\quad\boxed{
-	\sum_{l=0}^{{m}}\left( \alpha_l\,x(t_j+lh) - h\,\beta_l\,x'(t_j+lh) \right) = 0.
-	}
-\end{align}
-Then, the order of consistency is figured out by taking advantage of using Taylor's expansion for 
-$x(t_j+lh)$ and $x'(t_j+lh)$. 
-By using 
-\eqref{eq:taylorderivativeno} and
-\eqref{eq:taylorderivative2} in
-\Cref{eq:Taylorniceform} we obtain 
-\begin{align}
-	x(t_j+lh)  & = \sum_{n=0}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}),
-	\label{eq:taylorsubderno}
-	\\
-	x'(t_j+lh) & = \sum_{n=0}^{r-1} \frac{x^{(n+1)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{r}),
-	\label{eq:taylorsubder}
-\end{align}
-where, according to 
-\eqref{eq:taylorderivativeno} and
-\eqref{eq:taylorderivative2} in
-\Cref{eq:Taylorniceform},
-the following two substitutions have been performed
-for 
-\eqref{eq:taylorsubderno} and 
-\eqref{eq:taylorsubder}
-\begin{align}
-	a & \rightarrow t_j, \\
-	h & \rightarrow lh, 
-\end{align}
-which means that $a$ is replaced by $t_j$ while $h$ is by $lh$.
-Furthermore, expression \eqref{eq:taylorsubderno} can be split into two main parts, 
-where the first part is going with 
-index $n=0$, and the second part with $n \in [1,q]$, as follows
-\begin{align}
-	x(t_j+lh) 
-	 & = \sum_{n=0}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}) \notag    \\
-	 & = \frac{x^{(0)}(t_j)\,(lh)^{0}}{0!}
-	+ \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
-	+ \mathcal{O}((lh)^{q+1}) \notag                                                          \\
-	 & = x(t_j) + \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}),
-\end{align}
-which reads 
-\begin{align}
-	\label{eq:use1}
-	\therefore\quad\boxed{
-	x(t_j+lh) = x(t_j) + \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}).
-	}
-\end{align}
-Besides, let the index in expression \eqref{eq:taylorsubder}
-be starting from $n=1$, instead of $n=0$, we then obtain
-\begin{align}
-	\label{eq:xprime1}
-	x'(t_j+lh) 
-	 & = \sum_{n=0}^{r-1} \frac{x^{(n+1)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{r}) \notag \\
-	 & = \sum_{n=1}^{r} \frac{x^{(n)}(t_j)\,(lh)^{n-1}}{(n-1)!} + \mathcal{O}((lh)^{r}),
-\end{align}
-which means that every element within the summation sign going with $(n+1)$ becomes $n$, and 
-element going with $n$ will become $(n-1)$. Further expressions of 
-\eqref{eq:xprime1} lead to
-\begin{align}
-	\label{eq:xprime2}
-	x'(t_j+lh) 
-	 & = \sum_{n=1}^{r} \frac{n\,x^{(n)}(t_j)\,(lh)^{n-1}}{n!} + \mathcal{O}((lh)^{r}) \notag \\
-	 & = \sum_{n=1}^{r} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} + \mathcal{O}((lh)^{r}),
-\end{align}
-which reads 
-\begin{align}
-	\label{eq:use2}
-	\therefore\quad\boxed{
-	x'(t_j+lh)  = \sum_{n=1}^{r} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} + \mathcal{O}((lh)^{r}).
-	}
-\end{align}
-Next, by substituting \eqref{eq:use1} and \eqref{eq:use2} into \eqref{eq:myform}
-we obtain the following relation
-\begin{align}
-	\sum_{l=0}^{{m}}
-	\Bigg( 
-	\alpha_l\,x(t_j)
-	 & + \alpha_l\sum_{n=1}^{p} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
-	+ 
-	\alpha_l\,\mathcal{O}((lh)^{p+1}) 
-	\notag                                                        \\
-	 & 
-	- h\,\beta_l
-	\sum_{n=1}^{p} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} 
-	- h\,\beta_l\, 
-	\mathcal{O}((lh)^{p})
-	\Bigg) 
-	= 0,
-\end{align}
-where the dummy indices $q$ and $r$ have been switched to $p$
-in order to match our analysis for the given problem, leading to
-\begin{align}
-	\label{eq:myconclusion}
-	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j)
-	+ 
-	\sum_{l=0}^{{m}} \Bigg( \alpha_l\sum_{n=1}^{p} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} \Bigg)
-	+ 
-	\sum_{l=0}^{{m}}\alpha_l\,\underbrace{\mathcal{O}((lh)^{p+1})}_{\mathcal{O}(h^{p+1})}
-	\notag                                                     \\ 
-	 & \qquad 
-	- \sum_{l=0}^{{m}} \Bigg( h\,\beta_l \sum_{n=1}^{p} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h}  \Bigg)
-	- \sum_{l=0}^{{m}} \beta_l\,\underbrace{h\,\mathcal{O}((lh)^{p})}_{\mathcal{O}(h^{p+1})}
-	= 0,
-	\notag                                                     \\
-	\Leftrightarrow
-	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j) 
-	+ \sum_{l=0}^{{m}}
-	\Bigg(
-	\alpha_l\sum_{n=1}^{p} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
-	- h\,\beta_l \sum_{n=1}^{p} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} 
-	\Bigg) \notag                                              \\
-	 & \qquad\qquad\qquad\qquad\qquad\qquad
-	+ \sum_{l=0}^{{m}}
-	\Bigg(
-	\underbrace{\alpha_l\,\mathcal{O}(h^{p+1}) - \beta_l\,\mathcal{O}(h^{p+1})}_{\gamma_l\,\mathcal{O}(h^{p+1})}
-	\Bigg) = 0
-	\notag                                                     \\
-	\Leftrightarrow
-	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j) 
-	+ \sum_{l=0}^{{m}}
-	\Bigg(
-	\alpha_l\sum_{n=1}^{p} \frac{x^{(n)}(t_j)\,l^{n}h^{n}}{n!}
-	- \beta_l \sum_{n=1}^{p} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!} 
-	\Bigg) \notag                                              \\
-	 & \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad 
-	+ \sum_{l=0}^{{m}}
-	\gamma_l\,\mathcal{O}(h^{p+1}) = 0
-	\notag                                                     \\
-	\Leftrightarrow
-	 & 
-	\textcolor{NavyBlue}{\sum_{l=0}^{{m}}\alpha_l}\,x(t_j)
-	+ \sum_{n=1}^{p}
-	\Bigg(
-	\frac{x^{(n)}(t_j)\,h^{n}}{n!}
-	\textcolor{NavyBlue}{\sum_{l=0}^{{m}} \Big( \alpha_l\,l^{n}  - \beta_l\,n\,l^{n-1} \Big)}
-	\Bigg)
-	+ \sum_{l=0}^{{m}}
-	\gamma_l\,\textcolor{red}{\mathcal{O}(h^{p+1})} = 0
-	\notag                                                     \\
-\end{align}
-Finally, the expression in \eqref{eq:myconclusion}
-leads us to the fact that the 
-linear m-step method has the consistency order of $p$, according to 
-the red term in \eqref{eq:myconclusion},
-when the blue terms in \eqref{eq:myconclusion} vanish, 
-meaning that 
-\begin{align}
-	\therefore\quad\boxed{
-		\begin{aligned}
-			\sum_{l=0}^{{m}}\alpha_l                                            & = 0, \\
-			\sum_{l=0}^{{m}} \Big( \alpha_l\,l^{n}  - \beta_l\,n\,l^{n-1} \Big) & = 0,
-			\quad\text{for}\quad n=1,2,3,\dots,p.
-		\end{aligned}
-	}
-\end{align}
-where $p$ is the order of consistency.
-\newpage
-\begin{observationboxed}
-	\label{eq:Taylorniceform}
-	Taylor's expansion of function $x(t)$ around point $a$ reads 
-	\begin{align}
-		\label{eq:Taylororiginal}
-		x(t) 
-		 & = x(a) 
-		+ \frac{x'(a)\,(t-a)}{1!} + \frac{x''(a)\,(t-a)^2}{2!} + \dots + \frac{x^{(p)}(a)\,(t-a)^p}{p!}\notag           \\
-		 & \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad 
-		+ \mathcal{O}((t-a)^{p+1})                                                                               \notag \\
-		 & = \sum_{n=0}^{p} \frac{x^{(n)}(a)\,(t-a)^{n}}{n!} + \mathcal{O}((t-a)^{p+1}).
-	\end{align}
-	Then, by setting $h:= t-a$ we obtain $t=a+h$; hence, the \eqref{eq:Taylororiginal} becomes
-	\begin{align}
-		\label{eq:taylorderivativeno}
-		x(a+h) 
-		 & = x(a) 
-		+ \frac{x'(a)\,h}{1!} + \frac{x''(a)\,h^2}{2!} + \dots + \frac{x^{(p)}(a)\,h^p}{p!}
-		+ \mathcal{O}(h^{p+1})                                                 \notag \\
-		 & = \sum_{n=0}^{p} \frac{x^{(n)}(a)\,h^{n}}{n!} + \mathcal{O}(h^{p+1}).
-	\end{align}
-	Since the point $a$ can be chosen arbitrarily, we can set it as a variable $t$, yielding
-	\begin{align}
-		\label{eq:taylorderivativenot}
-		x(t+h) 
-		 & = x(t) 
-		+ \frac{x'(t)\,h}{1!} + \frac{x''(t)\,h^2}{2!} + \dots + \frac{x^{(p)}(t)\,h^p}{p!}
-		+ \mathcal{O}(h^{p+1})                                                 \notag \\
-		 & = \sum_{n=0}^{p} \frac{x^{(n)}(t)\,h^{n}}{n!} + \mathcal{O}(h^{p+1}),
-	\end{align}
-	which, by taking derivative w.r.t. variable $t$ on both sides of \eqref{eq:taylorderivativenot}, gives rise to
-	\begin{align}
-		\label{eq:taylorderivative}
-		x'(t+h) 
-		 & = x'(t) 
-		+ \frac{x''(t)\,h}{1!} + \frac{x'''(t)\,h^2}{2!} + \dots + \frac{x^{(p+1)}(t)\,h^p}{p!}
-		+ \mathcal{O}(h^{p+1})
-		\notag                                                                     \\
-		 & = \sum_{n=0}^{p} \frac{x^{(n+1)}(t)\,h^{n}}{n!} + \mathcal{O}(h^{p+1}),
-	\end{align}
-	which can also be written as follows 
-	\begin{align}
-		\label{eq:taylorderivative2}
-		x'(t+h) 
-		 & = x'(t) 
-		+ \frac{x''(t)\,h}{1!} + \frac{x'''(t)\,h^2}{2!} + \dots + \frac{x^{(p)}(t)\,h^{p-1}}{(p-1)!}
-		+ \mathcal{O}(h^{p})
-		\notag                                                                     \\
-		 & = \sum_{n=0}^{p-1} \frac{x^{(n+1)}(t)\,h^{n}}{n!} + \mathcal{O}(h^{p}).
-	\end{align}
-	Note in passing that 
-	the only difference between
-	\eqref{eq:taylorderivative}
-	and 
-	\eqref{eq:taylorderivative2}
-	is the order $p$, i.e. 
-	we expand till $p$ in 
-	\eqref{eq:taylorderivative},
-	but only till $(p-1)$
-	in \eqref{eq:taylorderivative2}.
-	It turns out that the expression 
-	\eqref{eq:taylorderivative2}
-	helps our analysis in this exercise become more succinct.
-\end{observationboxed}
+where $x_A$ and $y_A$ are the coordinate of point $A$, and 
+$x_B$ and $y_B$ are the coordinate of point $B$.
+% Consider the following ordinary differential equation (ODE) taking the form
+% \begin{align}
+% 	\label{eq:thisistheODE}
+% 	x'(t) =  f(t,x(t)),
+% 	\quad\text{with}\quad
+% 	x(t_0)=x_0,
+% \end{align}
+% which may be approximated by a linear multistep method, taking the general form
+% \begin{align}
+% 	\label{eq:multistepform}
+% 	\boxed{
+% 	\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) = h\sum_{l=0}^{m}\beta_l\,f(t_j+lh,x(t_j+lh)).
+% 	}
+% \end{align}
+% \begin{observationboxed}
+% 	There are 6 symbols arising in 
+% 	\eqref{eq:alphal},
+% 	\eqref{eq:betal},
+% 	\eqref{eq:multistepform} to be aware of
+% 	\begin{enumerate}
+% 		\item $m$ is the total number of steps used in the multistep method.
+% 		\item $\alpha \in \mathbb{R}$ is the coefficient for the linear combination of $x(t_j+lh)$
+% 		\item $\beta \in \mathbb{R}$ is the coefficient for the linear combination of $f(t_j+lh,x(t_j+lh))$.
+% 		\item $p$ is the consistency order.
+% 		\item $l$ is the dummy index, running from $0$ to $m$.
+% 		\item $q$ is the dummy index, running from $1$ to $p$.
+% 	\end{enumerate}
+% \end{observationboxed}
+% \newpage
+% \begin{observationboxed}
+% 	The multistep method arising in 
+% 	\eqref{eq:multistepform}
+% 	is a \textbf{linear} multistep method, or specifically 
+% 	\textbf{linear} m-step method.
+% 	The term \textbf{linear} coming along with m-step method,
+% 	i.e. linear m-step method, emphasizes the fact that
+% 	there is actually a \textbf{linear combination} of the terms $x(t_j+lh)$ with coefficients $\alpha_l$
+% 	on the LHS of \eqref{eq:multistepform}, and 
+% 	a \textbf{linear combination} of the terms $f(t_j+lh,x(t_j+lh))$
+% 	with coefficients $\beta_l$
+% 	on the RHS of \eqref{eq:multistepform}. This linear m-step method 
+% 	uses the information from the previous m steps to compute the value for the next step. 
+% 	In details, let us examine the formula \eqref{eq:multistepform}
+% 	which is written again as follows
+% 	\begin{align}
+% 		\label{eq:multistepformexamine}
+% 		\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) = h\sum_{l=0}^{m}\beta_l\,f(t_j+lh,x(t_j+lh)),
+% 	\end{align}
+% 	whose LHS is written in its entirety as follows
+% 	\begin{align}
+% 		\label{eq:LHSterm}
+% 		\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) 
+% 		 & = 
+% 		\alpha_0\,x{(t_j)} 
+% 		+ \alpha_1\,x{(t_j+h)} 
+% 		+ \alpha_2\,x{(t_j+2h)}
+% 		+ \dots \notag \\
+% 		 & 
+% 		+ \dots
+% 		+ \alpha_{m-1}\,x{(t_j+(m-1)h)} 
+% 		+ \alpha_m\,\textcolor{Bittersweet}{x{(t_j+mh)}},
+% 	\end{align}
+% 	whereas the RHS of \eqref{eq:multistepformexamine} has its expansion as follows
+% 	\begin{align}
+% 		\label{eq:RHSterm}
+% 		\sum_{l=0}^{m}\beta_l\,f(t_j+lh,x(t_j+lh))
+% 		 & =  
+% 		\beta_0\,f(t_j,x(t_j)) 
+% 		+ \beta_1\,f(t_j+h,x(t_j+h))
+% 		\notag    \\
+% 		 & \quad 
+% 		+ \beta_2\,f(t_j+2h,x(t_j+2h))
+% 		\notag    \\
+% 		 & \quad 
+% 		+ \dots + 
+% 		\notag    \\
+% 		 & \quad 
+% 		+ \beta_{m-1}\,f(t_j+(m-1)h,x(t_j+(m-1)h)) 
+% 		\notag    \\
+% 		 & \quad 
+% 		+ \beta_{m}\,\textcolor{ForestGreen}{f(t_j+mh,x(t_j+mh))}.
+% 	\end{align}
+% 	The insertion of \eqref{eq:LHSterm} and \eqref{eq:RHSterm}
+% 	into \eqref{eq:multistepformexamine} leads to
+% 	\begin{align}
+% 		\label{eq:assembling}
+% 		 & \alpha_0\,x{(t_j)} 
+% 		+ \alpha_1\,x{(t_j+h)}  
+% 		+ \alpha_2\,x{(t_j+2h)} 
+% 		\notag                             \\
+% 		 & + \dots
+% 		\notag                             \\
+% 		 & + \alpha_{m-1}\,x{(t_j+(m-1)h)}
+% 		+ \alpha_m\,\textcolor{Bittersweet}{x{(t_j+mh)}}
+% 		\notag                             \\
+% 		 & = 
+% 		\notag                             \\
+% 		 & \beta_0\,f(t_j,x(t_j)) 
+% 		+ \beta_1\,f(t_j+h,x(t_j+h))
+% 		+ \beta_2\,f(t_j+2h,x(t_j+2h))
+% 		\notag                             \\
+% 		 & 
+% 		+ \dots + 
+% 		\notag                             \\
+% 		 & 
+% 		+ \beta_{m-1}\,f(t_j+(m-1)h,x(t_j+(m-1)h)) 
+% 		+ \beta_{m}\,\textcolor{ForestGreen}{f(t_j+mh,x(t_j+mh))},
+% 	\end{align}
+% 	which tells us the fact that the value $\textcolor{Bittersweet}{x(t_j+mh)}$
+% 	is approximated 
+% 	by using all information from previous steps, based on
+% 	\begin{enumerate}
+% 		\item $x(t_j)$, $x{(t_j+h)}$, $\dots$, $x{(t_j+(m-1)h)}$.
+% 		\item $f(t_j,x(t_j))$, $f(t_j+h,x(t_j+h))$, $\dots$, $f(t_j+mh,x(t_j+mh))$.
+% 		\item Coefficients $\alpha_l$ and $\beta_l$.
+% 	\end{enumerate}
+% \end{observationboxed}
+% \begin{observationboxed}
+% 	The appearance of the green term $\textcolor{ForestGreen}{f(t_j+mh,x(t_j+mh))}$
+% 	arising in \eqref{eq:assembling} plays a significant role, meaning that
+% 	\begin{enumerate}
+% 		\item $\beta_m = 0$: the green term is switched off, and the scheme becomes \textbf{explicit}.
+% 		\item $\beta_m \neq 0$:  the green term is switched on, and the scheme becomes \textbf{implicit}.
+% 	\end{enumerate}
+% \end{observationboxed}
+% \begin{observationboxed}
+% 	Specific choices of $\alpha_l$ and $\beta_l$ leads to some familiar methods.
+% 	Especially, when $m=1$ the linear m-step method becomes single-step method,
+% 	or one-step method. If so, according to \eqref{eq:multistepform}
+% 	there will be 4 coefficients $(\alpha_0,\alpha_1,\beta_0,\beta_1)$
+% 	to be defined. For example:
+% 	\begin{enumerate}
+% 		\item $(\alpha_0,\alpha_1,\beta_0,\beta_1) = (-1,1,1,0)$ we obtain explicit Euler.
+% 		\item $(\alpha_0,\alpha_1,\beta_0,\beta_1) = (-1,1,0,1)$ we obtain implicit Euler.
+% 	\end{enumerate}
+% \end{observationboxed}
+% When the time $t$ is considered at a specific discretized time point $t=t_j+lh$, the ODE in \eqref{eq:thisistheODE} yields 
+% \begin{align}
+% 	\label{eq:newtimepointtj}
+% 	x'(t_j+lh) = f(t_j+lh,x(t_j+lh)),
+% \end{align}
+% Substitution of \eqref{eq:newtimepointtj} into \eqref{eq:multistepform} leads to 
+% \begin{align}
+% 	\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) = h\sum_{l=0}^{m}\beta_l\,x'(t_j+lh),
+% \end{align}
+% which, by group the summation sign together, leads equally to
+% \begin{align}
+% 	\label{eq:myform}
+% 	\therefore\quad\boxed{
+% 	\sum_{l=0}^{{m}}\left( \alpha_l\,x(t_j+lh) - h\,\beta_l\,x'(t_j+lh) \right) = 0.
+% 	}
+% \end{align}
+% Then, the order of consistency is figured out by taking advantage of using Taylor's expansion for 
+% $x(t_j+lh)$ and $x'(t_j+lh)$. 
+% By using 
+% \eqref{eq:taylorderivativeno} and
+% \eqref{eq:taylorderivative2} in
+% \Cref{eq:Taylorniceform} we obtain 
+% \begin{align}
+% 	x(t_j+lh)  & = \sum_{n=0}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}),
+% 	\label{eq:taylorsubderno}
+% 	\\
+% 	x'(t_j+lh) & = \sum_{n=0}^{r-1} \frac{x^{(n+1)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{r}),
+% 	\label{eq:taylorsubder}
+% \end{align}
+% where, according to 
+% \eqref{eq:taylorderivativeno} and
+% \eqref{eq:taylorderivative2} in
+% \Cref{eq:Taylorniceform},
+% the following two substitutions have been performed
+% for 
+% \eqref{eq:taylorsubderno} and 
+% \eqref{eq:taylorsubder}
+% \begin{align}
+% 	a & \rightarrow t_j, \\
+% 	h & \rightarrow lh, 
+% \end{align}
+% which means that $a$ is replaced by $t_j$ while $h$ is by $lh$.
+% Furthermore, expression \eqref{eq:taylorsubderno} can be split into two main parts, 
+% where the first part is going with 
+% index $n=0$, and the second part with $n \in [1,q]$, as follows
+% \begin{align}
+% 	x(t_j+lh) 
+% 	 & = \sum_{n=0}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}) \notag    \\
+% 	 & = \frac{x^{(0)}(t_j)\,(lh)^{0}}{0!}
+% 	+ \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
+% 	+ \mathcal{O}((lh)^{q+1}) \notag                                                          \\
+% 	 & = x(t_j) + \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}),
+% \end{align}
+% which reads 
+% \begin{align}
+% 	\label{eq:use1}
+% 	\therefore\quad\boxed{
+% 	x(t_j+lh) = x(t_j) + \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}).
+% 	}
+% \end{align}
+% Besides, let the index in expression \eqref{eq:taylorsubder}
+% be starting from $n=1$, instead of $n=0$, we then obtain
+% \begin{align}
+% 	\label{eq:xprime1}
+% 	x'(t_j+lh) 
+% 	 & = \sum_{n=0}^{r-1} \frac{x^{(n+1)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{r}) \notag \\
+% 	 & = \sum_{n=1}^{r} \frac{x^{(n)}(t_j)\,(lh)^{n-1}}{(n-1)!} + \mathcal{O}((lh)^{r}),
+% \end{align}
+% which means that every element within the summation sign going with $(n+1)$ becomes $n$, and 
+% element going with $n$ will become $(n-1)$. Further expressions of 
+% \eqref{eq:xprime1} lead to
+% \begin{align}
+% 	\label{eq:xprime2}
+% 	x'(t_j+lh) 
+% 	 & = \sum_{n=1}^{r} \frac{n\,x^{(n)}(t_j)\,(lh)^{n-1}}{n!} + \mathcal{O}((lh)^{r}) \notag \\
+% 	 & = \sum_{n=1}^{r} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} + \mathcal{O}((lh)^{r}),
+% \end{align}
+% which reads 
+% \begin{align}
+% 	\label{eq:use2}
+% 	\therefore\quad\boxed{
+% 	x'(t_j+lh)  = \sum_{n=1}^{r} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} + \mathcal{O}((lh)^{r}).
+% 	}
+% \end{align}
+% Next, by substituting \eqref{eq:use1} and \eqref{eq:use2} into \eqref{eq:myform}
+% we obtain the following relation
+% \begin{align}
+% 	\sum_{l=0}^{{m}}
+% 	\Bigg( 
+% 	\alpha_l\,x(t_j)
+% 	 & + \alpha_l\sum_{n=1}^{p} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
+% 	+ 
+% 	\alpha_l\,\mathcal{O}((lh)^{p+1}) 
+% 	\notag                                                        \\
+% 	 & 
+% 	- h\,\beta_l
+% 	\sum_{n=1}^{p} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} 
+% 	- h\,\beta_l\, 
+% 	\mathcal{O}((lh)^{p})
+% 	\Bigg) 
+% 	= 0,
+% \end{align}
+% where the dummy indices $q$ and $r$ have been switched to $p$
+% in order to match our analysis for the given problem, leading to
+% \begin{align}
+% 	\label{eq:myconclusion}
+% 	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j)
+% 	+ 
+% 	\sum_{l=0}^{{m}} \Bigg( \alpha_l\sum_{n=1}^{p} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} \Bigg)
+% 	+ 
+% 	\sum_{l=0}^{{m}}\alpha_l\,\underbrace{\mathcal{O}((lh)^{p+1})}_{\mathcal{O}(h^{p+1})}
+% 	\notag                                                     \\ 
+% 	 & \qquad 
+% 	- \sum_{l=0}^{{m}} \Bigg( h\,\beta_l \sum_{n=1}^{p} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h}  \Bigg)
+% 	- \sum_{l=0}^{{m}} \beta_l\,\underbrace{h\,\mathcal{O}((lh)^{p})}_{\mathcal{O}(h^{p+1})}
+% 	= 0,
+% 	\notag                                                     \\
+% 	\Leftrightarrow
+% 	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j) 
+% 	+ \sum_{l=0}^{{m}}
+% 	\Bigg(
+% 	\alpha_l\sum_{n=1}^{p} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
+% 	- h\,\beta_l \sum_{n=1}^{p} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} 
+% 	\Bigg) \notag                                              \\
+% 	 & \qquad\qquad\qquad\qquad\qquad\qquad
+% 	+ \sum_{l=0}^{{m}}
+% 	\Bigg(
+% 	\underbrace{\alpha_l\,\mathcal{O}(h^{p+1}) - \beta_l\,\mathcal{O}(h^{p+1})}_{\gamma_l\,\mathcal{O}(h^{p+1})}
+% 	\Bigg) = 0
+% 	\notag                                                     \\
+% 	\Leftrightarrow
+% 	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j) 
+% 	+ \sum_{l=0}^{{m}}
+% 	\Bigg(
+% 	\alpha_l\sum_{n=1}^{p} \frac{x^{(n)}(t_j)\,l^{n}h^{n}}{n!}
+% 	- \beta_l \sum_{n=1}^{p} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!} 
+% 	\Bigg) \notag                                              \\
+% 	 & \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad 
+% 	+ \sum_{l=0}^{{m}}
+% 	\gamma_l\,\mathcal{O}(h^{p+1}) = 0
+% 	\notag                                                     \\
+% 	\Leftrightarrow
+% 	 & 
+% 	\textcolor{NavyBlue}{\sum_{l=0}^{{m}}\alpha_l}\,x(t_j)
+% 	+ \sum_{n=1}^{p}
+% 	\Bigg(
+% 	\frac{x^{(n)}(t_j)\,h^{n}}{n!}
+% 	\textcolor{NavyBlue}{\sum_{l=0}^{{m}} \Big( \alpha_l\,l^{n}  - \beta_l\,n\,l^{n-1} \Big)}
+% 	\Bigg)
+% 	+ \sum_{l=0}^{{m}}
+% 	\gamma_l\,\textcolor{red}{\mathcal{O}(h^{p+1})} = 0
+% 	\notag                                                     \\
+% \end{align}
+% Finally, the expression in \eqref{eq:myconclusion}
+% leads us to the fact that the 
+% linear m-step method has the consistency order of $p$, according to 
+% the red term in \eqref{eq:myconclusion},
+% when the blue terms in \eqref{eq:myconclusion} vanish, 
+% meaning that 
+% \begin{align}
+% 	\therefore\quad\boxed{
+% 		\begin{aligned}
+% 			\sum_{l=0}^{{m}}\alpha_l                                            & = 0, \\
+% 			\sum_{l=0}^{{m}} \Big( \alpha_l\,l^{n}  - \beta_l\,n\,l^{n-1} \Big) & = 0,
+% 			\quad\text{for}\quad n=1,2,3,\dots,p.
+% 		\end{aligned}
+% 	}
+% \end{align}
+% where $p$ is the order of consistency.
+% \newpage
+% \begin{observationboxed}
+% 	\label{eq:Taylorniceform}
+% 	Taylor's expansion of function $x(t)$ around point $a$ reads 
+% 	\begin{align}
+% 		\label{eq:Taylororiginal}
+% 		x(t) 
+% 		 & = x(a) 
+% 		+ \frac{x'(a)\,(t-a)}{1!} + \frac{x''(a)\,(t-a)^2}{2!} + \dots + \frac{x^{(p)}(a)\,(t-a)^p}{p!}\notag           \\
+% 		 & \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad 
+% 		+ \mathcal{O}((t-a)^{p+1})                                                                               \notag \\
+% 		 & = \sum_{n=0}^{p} \frac{x^{(n)}(a)\,(t-a)^{n}}{n!} + \mathcal{O}((t-a)^{p+1}).
+% 	\end{align}
+% 	Then, by setting $h:= t-a$ we obtain $t=a+h$; hence, the \eqref{eq:Taylororiginal} becomes
+% 	\begin{align}
+% 		\label{eq:taylorderivativeno}
+% 		x(a+h) 
+% 		 & = x(a) 
+% 		+ \frac{x'(a)\,h}{1!} + \frac{x''(a)\,h^2}{2!} + \dots + \frac{x^{(p)}(a)\,h^p}{p!}
+% 		+ \mathcal{O}(h^{p+1})                                                 \notag \\
+% 		 & = \sum_{n=0}^{p} \frac{x^{(n)}(a)\,h^{n}}{n!} + \mathcal{O}(h^{p+1}).
+% 	\end{align}
+% 	Since the point $a$ can be chosen arbitrarily, we can set it as a variable $t$, yielding
+% 	\begin{align}
+% 		\label{eq:taylorderivativenot}
+% 		x(t+h) 
+% 		 & = x(t) 
+% 		+ \frac{x'(t)\,h}{1!} + \frac{x''(t)\,h^2}{2!} + \dots + \frac{x^{(p)}(t)\,h^p}{p!}
+% 		+ \mathcal{O}(h^{p+1})                                                 \notag \\
+% 		 & = \sum_{n=0}^{p} \frac{x^{(n)}(t)\,h^{n}}{n!} + \mathcal{O}(h^{p+1}),
+% 	\end{align}
+% 	which, by taking derivative w.r.t. variable $t$ on both sides of \eqref{eq:taylorderivativenot}, gives rise to
+% 	\begin{align}
+% 		\label{eq:taylorderivative}
+% 		x'(t+h) 
+% 		 & = x'(t) 
+% 		+ \frac{x''(t)\,h}{1!} + \frac{x'''(t)\,h^2}{2!} + \dots + \frac{x^{(p+1)}(t)\,h^p}{p!}
+% 		+ \mathcal{O}(h^{p+1})
+% 		\notag                                                                     \\
+% 		 & = \sum_{n=0}^{p} \frac{x^{(n+1)}(t)\,h^{n}}{n!} + \mathcal{O}(h^{p+1}),
+% 	\end{align}
+% 	which can also be written as follows 
+% 	\begin{align}
+% 		\label{eq:taylorderivative2}
+% 		x'(t+h) 
+% 		 & = x'(t) 
+% 		+ \frac{x''(t)\,h}{1!} + \frac{x'''(t)\,h^2}{2!} + \dots + \frac{x^{(p)}(t)\,h^{p-1}}{(p-1)!}
+% 		+ \mathcal{O}(h^{p})
+% 		\notag                                                                     \\
+% 		 & = \sum_{n=0}^{p-1} \frac{x^{(n+1)}(t)\,h^{n}}{n!} + \mathcal{O}(h^{p}).
+% 	\end{align}
+% 	Note in passing that 
+% 	the only difference between
+% 	\eqref{eq:taylorderivative}
+% 	and 
+% 	\eqref{eq:taylorderivative2}
+% 	is the order $p$, i.e. 
+% 	we expand till $p$ in 
+% 	\eqref{eq:taylorderivative},
+% 	but only till $(p-1)$
+% 	in \eqref{eq:taylorderivative2}.
+% 	It turns out that the expression 
+% 	\eqref{eq:taylorderivative2}
+% 	helps our analysis in this exercise become more succinct.
+% \end{observationboxed}
 %------------------------------------------------------------------------------
 % \begin{align}
 % 	\label{eq:variationformular}
