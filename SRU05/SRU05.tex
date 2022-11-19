@@ -103,10 +103,20 @@ Note in passing that we have used point $A(1,2)$, $B(2,1)$, and $C(3,3)$.
 		      \mathcal{M}_{2} = 
 		      \Big\{ y \in \mathbb{R} \, \Big| \, 2x-3 \leq y \leq \frac{1}{2}x + \frac{3}{2} \Big\}.
 	      \end{align}
-		  Therefore, we obtain 
-		  \begin{align}
-			\bigintsss_{\mathcal{M}}f(x,y)\,d\lambda_{2}
-		  \end{align}
+	      Therefore, we obtain 
+	      \begin{align}
+		      \bigintsss_{\mathcal{M}}f(x,y)\,d\lambda_{2} 
+			  &= \bigintsss_{\mathcal{M}_1}f(x,y)\,d\lambda_{2} 
+			  + \bigintsss_{\mathcal{M}_2}f(x,y)\,d\lambda_{2}  
+			  \notag \\
+			  &= \bigintsss_{\mathbb{R}} 
+			  ( \bigintsss_{(\mathcal{M}_1)_x} f(x,y)\,dy )\,dx
+			  + \bigintsss_{\mathbb{R}}
+			  ( \bigintsss_{(\mathcal{M}_2)_x} f(x,y)\,dy )\,dx
+			  \notag \\
+			  &= \bigintsss_{1=x_A}^{2=x_B} ( \bigintsss_{-x+3}^{x/2+3/2} f(x,y)\,dy ) \,dx
+			  + \bigintsss_{1=x_A}^{2=x_B} ( \bigintsss_{-x+3}^{x/2+3/2} f(x,y)\,dy ) \,dx
+	      \end{align}
 	      \clearpage
 	\item Scenario 2: \Cref{setAinR2_Ay}
 	      \inputfig{floats/setAinR2_Ay}{setAinR2_Ay}
