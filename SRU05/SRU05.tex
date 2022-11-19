@@ -76,22 +76,34 @@ By taking advantage of the formula \eqref{eq:lineeqn}
 we are ready to obtain the following three line functions for 
 $(AB)$, $(AC)$, and $(BC)$ as follows
 \begin{align}
-	(AB):\quad y & = -x + 3,                     \\
-	(AC):\quad y & = \frac{1}{2}x + \frac{3}{2}, \\
-	(BC):\quad y & = 2\,x - 3,
+	\label{eq:box1}
+	\boxed{
+		\begin{aligned}
+			(AB):\quad y & = -x + 3,                     \\
+			(AC):\quad y & = \frac{1}{2}x + \frac{3}{2}, \\
+			(BC):\quad y & = 2\,x - 3,
+		\end{aligned}
+	}
 \end{align}
 which we, alternatively, we can also write those expressions in terms of $x$, as follows
 \begin{align}
-	(AB):\quad x & = -y + 3,                     \\
-	(AC):\quad x & = 2\,y - 3,                   \\
-	(BC):\quad x & = \frac{1}{2}y + \frac{3}{2}.
+	\label{eq:box2}
+	\boxed{
+		\begin{aligned}
+			(AB):\quad x & = -y + 3,                     \\
+			(AC):\quad x & = 2\,y - 3,                   \\
+			(BC):\quad x & = \frac{1}{2}y + \frac{3}{2}.
+		\end{aligned}
+	}
 \end{align}
 Note in passing that we have used point $A(1,2)$, $B(2,1)$, and $C(3,3)$.
 \clearpage
 \begin{enumerate}
 	\item Scenario 1: \Cref{setAinR2_Ax}\\
 	      \inputfig{floats/setAinR2_Ax}{setAinR2_Ax}
-	      Followed by the $\mathcal{M}_x$ split we obtain the set $\mathcal{M}_{1}$
+	      
+	      By following the $\mathcal{M}_x$ split and using the box \eqref{eq:box1}
+	      we obtain the set $\mathcal{M}_{1}$
 	      \begin{align}
 		      \mathcal{M}_{1} = 
 		      \Big\{ y \in \mathbb{R} \, \Big| \, -x+3 \leq y \leq \frac{1}{2}x + \frac{3}{2} \Big\},
@@ -101,25 +113,62 @@ Note in passing that we have used point $A(1,2)$, $B(2,1)$, and $C(3,3)$.
 	      the set $\mathcal{M}_{2}$ is obtained as follows
 	      \begin{align}
 		      \mathcal{M}_{2} = 
-		      \Big\{ y \in \mathbb{R} \, \Big| \, 2x-3 \leq y \leq \frac{1}{2}x + \frac{3}{2} \Big\}.
+		      \Big\{ y \in \mathbb{R} \, \Big| \, 2x-3 \leq y \leq \frac{1}{2}x + \frac{3}{2} \Big\},
 	      \end{align}
+	      which, again, is due the fact that we first face to the line $(BC)$ and then $(AC)$
+	      while following the $y$-axis.
 	      Therefore, we obtain 
 	      \begin{align}
-		      \bigintsss_{\mathcal{M}}f(x,y)\,d\lambda_{2} 
-			  &= \bigintsss_{\mathcal{M}_1}f(x,y)\,d\lambda_{2} 
-			  + \bigintsss_{\mathcal{M}_2}f(x,y)\,d\lambda_{2}  
-			  \notag \\
-			  &= \bigintsss_{\mathbb{R}} 
-			  ( \bigintsss_{(\mathcal{M}_1)_x} f(x,y)\,dy )\,dx
-			  + \bigintsss_{\mathbb{R}}
-			  ( \bigintsss_{(\mathcal{M}_2)_x} f(x,y)\,dy )\,dx
-			  \notag \\
-			  &= \bigintsss_{1=x_A}^{2=x_B} ( \bigintsss_{-x+3}^{x/2+3/2} f(x,y)\,dy ) \,dx
-			  + \bigintsss_{1=x_A}^{2=x_B} ( \bigintsss_{-x+3}^{x/2+3/2} f(x,y)\,dy ) \,dx
+		      \bigintsss_{\mathcal{M}}f(x,y)\,d\lambda_{2}
+		       & = \bigintsss_{\mathcal{M}_1}f(x,y)\,d\lambda_{2}
+		      + \bigintsss_{\mathcal{M}_2}f(x,y)\,d\lambda_{2}
+		      \notag                                                                                 \\
+		       & = \bigintsss_{\mathbb{R}} 
+		      ( \bigintsss_{(\mathcal{M}_1)_x} f(x,y)\,dy )\,dx
+		      + \bigintsss_{\mathbb{R}}
+		      ( \bigintsss_{(\mathcal{M}_2)_x} f(x,y)\,dy )\,dx
+		      \notag                                                                                 \\
+		       & = \bigintsss_{1=x_A}^{2=x_B} ( \bigintsss_{-x+3}^{x/2+3/2} f(x,y)\,dy ) \,dx \notag \\
+		       & \qquad\qquad\qquad
+		      + \bigintsss_{2=x_B}^{3=x_C} ( \bigintsss_{2x-3}^{x/2+3/2} f(x,y)\,dy ) \,dx
 	      \end{align}
+	      which will results in $3/2$ when $f(x,y)=1$.
 	      \clearpage
-	\item Scenario 2: \Cref{setAinR2_Ay}
+	      %----------------------------------------
+	\item Scenario 2: \Cref{setAinR2_Ay}\\
 	      \inputfig{floats/setAinR2_Ay}{setAinR2_Ay}
+	      
+	      By following the $\mathcal{M}_y$ split and using the box \eqref{eq:box2}
+	      we obtain the set $\mathcal{M}_{3}$
+	      \begin{align}
+		      \mathcal{M}_{3} = 
+		      \Big\{ x \in \mathbb{R} \, \Big| \, -y+3 \leq x \leq \frac{1}{2}y + \frac{3}{2} \Big\},
+	      \end{align}
+	      which is due to the fact that while following the $x$-axis we first come across 
+	      the line $(AB)$ and then the line $(BC)$. Similarly, 
+	      the set $\mathcal{M}_{4}$ is obtained as follows
+	      \begin{align}
+		      \mathcal{M}_{4} = 
+		      \Big\{ x \in \mathbb{R} \, \Big| \, 2y-3 \leq x \leq \frac{1}{2}y + \frac{3}{2} \Big\},
+	      \end{align}
+	      which, again, is due the fact that we first face to the line $(AC)$ and then $(BC)$
+	      while following the $x$-axis.
+	      Therefore, we obtain 
+	      \begin{align}
+		      \bigintsss_{\mathcal{M}}f(x,y)\,d\lambda_{2}
+		       & = \bigintsss_{\mathcal{M}_3}f(x,y)\,d\lambda_{2}
+		      + \bigintsss_{\mathcal{M}_4}f(x,y)\,d\lambda_{2}
+		      \notag                                                                                 \\
+		       & = \bigintsss_{\mathbb{R}} 
+		      ( \bigintsss_{(\mathcal{M}_3)_y} f(x,y)\,dx )\,dy
+		      + \bigintsss_{\mathbb{R}}
+		      ( \bigintsss_{(\mathcal{M}_4)_y} f(x,y)\,dx )\,dy
+		      \notag                                                                                 \\
+		       & = \bigintsss_{1=y_B}^{2=y_A} ( \bigintsss_{-y+3}^{y/2+3/2} f(x,y)\,dx ) \,dy \notag \\
+		       & \qquad\qquad\qquad
+		      + \bigintsss_{2=y_A}^{3=y_C} ( \bigintsss_{2y-3}^{y/2+3/2} f(x,y)\,dx ) \,dy
+	      \end{align}
+	      which will results in $3/2$ when $f(x,y)=1$.
 \end{enumerate}
 % Consider the following ordinary differential equation (ODE) taking the form
 % \begin{align}
