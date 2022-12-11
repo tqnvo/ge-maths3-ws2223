@@ -11,13 +11,13 @@
 \renewcommand{\@oddfoot}{\hfil 
 % Aachen, November $04^{th}$, 2021 \hspace{300pt} 
 Mathe III $\cdot$ GUE08 $\cdot$ WS22/23 
-\hspace{250pt} 
+\hspace{220pt} 
 \thepage/\pageref{LastPage}\hfil}
 \makeatother
 %------------------------------------------------------------------------------
 \begin{document}
 \begin{center}
-	\section*{Global exercises - GUE08 \\ Mathe III $\cdot$ Globalübung}
+	\section*{Global exercise - GUE08}
 \end{center}
 \begin{center}
 	Tuan Vo
@@ -25,25 +25,232 @@ Mathe III $\cdot$ GUE08 $\cdot$ WS22/23
 \begin{center}
 	$08^{\text{th}}$ December, 2022
 \end{center}
+Content covered:
+\begin{itemize}
+	\item[\checkmark] Numerics:
+	      \begin{enumerate}
+		      \item Review: QR decomposition by using
+		            \begin{enumerate}
+			            \item Givens-Rotation
+			            \item Householder-Reflection
+		            \end{enumerate}
+		      \item QR algorithm to find all eigenvalues of a matrix $A$.
+	      \end{enumerate}
+	\item[\checkmark] Analysis: Application of Hölder's inequality to approximate integral
+\end{itemize}
 %------------------------------------------------------------------------------
-\section{Topics}
-% \section{Step-by-step with A3-SRU03}
+\section{Numerics: Review of QR decomposition}
+d
+\clearpage
+%------------------------------------------------------------------------------
+\section{Numerics: QR-algorithm}
+\begin{observationboxed}[\textbf{QR-algorithm} vs. \textbf{QR-decomposition}]
+	QR-algorithm (as seen in Maths III) is not QR-decomposition (as seen in Maths II). 
+	QR-algorithm (Maths III) is an algorithm used to find 
+	\textbf{all} eigenvalues of a matrix $A$ \textbf{numerically}. Meanwhile, 
+	QR-decomposition is a technique in linear algebra used to decompose 
+	a matrix $A$ into an orthogonal matrix $Q$ and a right upper triangular matrix $R$.
+	Nevertheless, we will still need QR-decomposition for QR-algorithm.
+\end{observationboxed}
+d
+\clearpage
+\clearpage
+%------------------------------------------------------------------------------
+\section{Analysis: Application of Hölder's inequality}
+\begin{exampleboxed}
+	Examine the following integral
+	\begin{align*}
+		\bigintsss_{\Omega} (x + 2)^{-3/5} \exp{(-2x/3)} \, dx
+	\end{align*}
+\end{exampleboxed}
+Approach:
+
+% Die Ungleichung gilt für alle Paare $p,q\in[1,\infty]$ mit $\tfrac{1}{p} + \tfrac{1}{q} = 1$.
+% Hierbei setzt man~$\tfrac{1}{\infty} := 0$.
+
+% Wir setzen $u(x) := (x+2)^{-\tfrac{3}{5}}$ und $v(x) := e^{-\tfrac{2}{3}x}$. Dann gilt
+% $u\in L^6$:
+% \begin{equation*}
+% 	\Vert u\Vert_{L^6(\Omega)}^6 = \int_{0}^{\infty} (x+2)^{-\frac{3\cdot 6}{5}}\,{\mathrm d}x
+% 	= -\left.\frac{5}{13}(x+2)^{-\frac{13}{5}}\right|_{x=0}^{x=\infty} = \frac{5}{13}\cdot 2^{-\frac{13}{5}} < \infty.    
+% \end{equation*}
+
+% $\tfrac{1}{6}+\tfrac{1}{q} = 1\iff q = \tfrac{6}{5}$. Dann gilt $v\in L^q(\Omega)$:
+% \end{enumerate}
+% \begin{equation*}
+% 	\Vert v\Vert_{L^{\frac{6}{5}}(\Omega)}^{\tfrac{6}{5}}
+% 	= \int_{0}^{\infty} e^{-\frac{2}{3}\cdot\frac{6}{5}\cdot x}\,{\mathrm d}x
+% 	= -\left.\frac{5}{4}e^{-\frac{4}{5}x}\right|_{x=0}^{x=\infty} = \frac{5}{4} < \infty.    
+% \end{equation*}
+
+% Insgesamt erhalten wir:
+% \begin{equation*}
+% 	\int_{\Omega} \frac{1}{\sqrt[5]{(x + 2)^{3}}} e^{-\frac{2}{3} x}\,{\mathrm d}x
+% 	=   \Vert uv\Vert_{L^1(\Omega)}
+% 	\leq \Vert u\Vert_{L^p(\Omega)}\Vert v\Vert_{L^q(\Omega)} < \infty.
+% \end{equation*}
+\clearpage
+%------------------------------------------------------------------------------
+\section{Numerics: QR algorithm}
+\begin{exampleboxed}
+	Examine the consistency error of the following problem
+	\begin{align*}
+		u''(x) - u'(x) + u(x) = 2x -1 -x^2
+	\end{align*}
+	with the Neumann and Dirichlet BC are given, respectively, as follows
+	\begin{align*}
+		u'(0) = 0, \quad u(1) = 0.
+	\end{align*}
+	The exact solution is known, i.e. $u(x) = 1-x^2$.
+\end{exampleboxed}
+Approach:
+\clearpage
+%------------------------------------------------------------------------------
+% \section{Hint for A1-HA05}
 % \begin{exampleboxed}
-% 	Let the linear m-step method be given by coefficients 
-% 	$\alpha_{l} \in \mathbb{R}$ and 
-% 	$\beta_{l} \in \mathbb{R}$ where $l=0,1,\dots,m$, 
-% 	satisfying the following system of equations 
-% 	\begin{align}
-% 		\sum_{l=0}^{m}a_{l}                                                                                                   & = 0, 
-% 		\label{eq:alphal}
-% 		\\
-% 		\sum_{l=0}^{m}(l^{\textcolor{NavyBlue}{q}}\alpha_{l}-\textcolor{NavyBlue}{q}\,l^{\textcolor{NavyBlue}{q}-1}\beta_{l}) & = 0,
-% 		\quad\text{for}\quad
-% 		\textcolor{NavyBlue}{q} = 1,2,3,\dots, \textcolor{red}{p}.
-% 		\label{eq:betal}
-% 	\end{align}
-% 	Then the linear m-step method has the consistency order of $\textcolor{red}{p}$.
+% 	Given the set $\mathcal{M} \in \mathbb{R}^2$ bounded by three points
+% 	$A$, $B$, and $C$, as shown in \Cref{setAinR2}.
+% 	\begin{enumerate}
+% 		\item Examine the integral of a function $f(x,y)$ over set $\mathcal{M}$.
+% 		\item Compute the area of $\mathcal{M}$ by setting $f(x,y)=1$.
+% 	\end{enumerate}
 % \end{exampleboxed}
+% \inputfig{floats/setAinR2}{setAinR2}
+% Approach:\\
+% We will look at the \Cref{setAinR2} and consider it in two scenarios as follows
+% \begin{enumerate}
+% 	\item Scenario 1: \Cref{setAinR2_Ax},
+% 	\item Scenario 2: \Cref{setAinR2_Ay},
+% \end{enumerate}
+% which we will see later on that the two approaches will actually lead to the same solution,
+% thanks to Fubini's theorem \cite{FubiniWiki}.
+% \newpage
+% \begin{recallboxed}
+% 	Equation of a line $(l)$ in general reads 
+% 	\begin{align}
+% 		(l):\quad y  = a\,x + b,
+% 	\end{align}
+% 	where $a$ is the slope of the line, and $b$ is the point where the line $(l)$ crosses over 
+% 	the vertical line of the axis. Hence, when this line $(l)$
+% 	going through point $P(x_P,y_P)$ and point $Q(x_Q,y_Q)$, 
+% 	it leads to the following two relations
+% 	\begin{align}
+% 		y_P & = a\,x_P + b, \\
+% 		y_Q & = a\,x_Q + b,
+% 	\end{align}
+% 	which leads to the slope $a$ and vertical point $b$ as follows
+% 	\begin{align}
+% 		a & = \frac{y_P-y_Q}{x_P-x_Q},              \\
+% 		b & = \frac{-y_P\,x_Q + y_Q\,x_P}{x_P-x_Q}.
+% 	\end{align}
+% 	Finally, equation of a line $(l)$ passing through 
+% 	point $P(x_P,y_P)$ and point $Q(x_Q,y_Q)$ in general takes the form
+% 	\begin{align}
+% 		\label{eq:lineeqn}
+% 		\therefore\quad\boxed{
+% 			y = \frac{y_P-y_Q}{x_P-x_Q}\,x + \frac{-y_P\,x_Q + y_Q\,x_P}{x_P-x_Q}.
+% 		}
+% 	\end{align}
+% \end{recallboxed}
+% By taking advantage of the formula \eqref{eq:lineeqn}
+% we are ready to obtain the following three line functions for 
+% $(AB)$, $(AC)$, and $(BC)$ as follows
+% \begin{align}
+% 	\label{eq:box1}
+% 	\boxed{
+% 		\begin{aligned}
+% 			(AB):\quad y & = -x + 3,                     \\
+% 			(AC):\quad y & = \frac{1}{2}x + \frac{3}{2}, \\
+% 			(BC):\quad y & = 2\,x - 3,
+% 		\end{aligned}
+% 	}
+% \end{align}
+% which we, alternatively, we can also write those expressions in terms of $x$, as follows
+% \begin{align}
+% 	\label{eq:box2}
+% 	\boxed{
+% 		\begin{aligned}
+% 			(AB):\quad x & = -y + 3,                     \\
+% 			(AC):\quad x & = 2\,y - 3,                   \\
+% 			(BC):\quad x & = \frac{1}{2}y + \frac{3}{2}.
+% 		\end{aligned}
+% 	}
+% \end{align}
+% Note in passing that we have used point $A(1,2)$, $B(2,1)$, and $C(3,3)$.
+% \clearpage
+% \begin{enumerate}
+% 	\item Scenario 1: \Cref{setAinR2_Ax}\\
+% 	      \inputfig{floats/setAinR2_Ax}{setAinR2_Ax}
+
+% 	      By following the $\mathcal{M}_x$ split and using the box \eqref{eq:box1}
+% 	      we obtain the set $\mathcal{M}_{1}$
+% 	      \begin{align}
+% 		      \mathcal{M}_{1} = 
+% 		      \Big\{ y \in \mathbb{R} \, \Big| \, -x+3 \leq y \leq \frac{1}{2}x + \frac{3}{2} \Big\},
+% 	      \end{align}
+% 	      which is due to the fact that while following the $y$-axis we first come across 
+% 	      the line $(AB)$ and then the line $(AC)$. Similarly, 
+% 	      the set $\mathcal{M}_{2}$ is obtained as follows
+% 	      \begin{align}
+% 		      \mathcal{M}_{2} = 
+% 		      \Big\{ y \in \mathbb{R} \, \Big| \, 2x-3 \leq y \leq \frac{1}{2}x + \frac{3}{2} \Big\},
+% 	      \end{align}
+% 	      which, again, is due the fact that we first face to the line $(BC)$ and then $(AC)$
+% 	      while following the $y$-axis.
+% 	      Therefore, we obtain 
+% 	      \begin{align}
+% 		      \bigintsss_{\mathcal{M}}f(x,y)\,d\lambda_{2}
+% 		       & = \bigintsss_{\mathcal{M}_1}f(x,y)\,d\lambda_{2}
+% 		      + \bigintsss_{\mathcal{M}_2}f(x,y)\,d\lambda_{2}
+% 		      \notag                                                                                 \\
+% 		       & = \bigintsss_{\mathbb{R}} 
+% 		      ( \bigintsss_{(\mathcal{M}_1)_x} f(x,y)\,dy )\,dx
+% 		      + \bigintsss_{\mathbb{R}}
+% 		      ( \bigintsss_{(\mathcal{M}_2)_x} f(x,y)\,dy )\,dx
+% 		      \notag                                                                                 \\
+% 		       & = \bigintsss_{1=x_A}^{2=x_B} ( \bigintsss_{-x+3}^{x/2+3/2} f(x,y)\,dy ) \,dx \notag \\
+% 		       & \qquad\qquad\qquad
+% 		      + \bigintsss_{2=x_B}^{3=x_C} ( \bigintsss_{2x-3}^{x/2+3/2} f(x,y)\,dy ) \,dx
+% 	      \end{align}
+% 	      which will results in $3/2$ when $f(x,y)=1$.
+% 	      \clearpage
+% 	      %----------------------------------------
+% 	\item Scenario 2: \Cref{setAinR2_Ay}\\
+% 	      \inputfig{floats/setAinR2_Ay}{setAinR2_Ay}
+
+% 	      By following the $\mathcal{M}_y$ split and using the box \eqref{eq:box2}
+% 	      we obtain the set $\mathcal{M}_{3}$
+% 	      \begin{align}
+% 		      \mathcal{M}_{3} = 
+% 		      \Big\{ x \in \mathbb{R} \, \Big| \, -y+3 \leq x \leq \frac{1}{2}y + \frac{3}{2} \Big\},
+% 	      \end{align}
+% 	      which is due to the fact that while following the $x$-axis we first come across 
+% 	      the line $(AB)$ and then the line $(BC)$. Similarly, 
+% 	      the set $\mathcal{M}_{4}$ is obtained as follows
+% 	      \begin{align}
+% 		      \mathcal{M}_{4} = 
+% 		      \Big\{ x \in \mathbb{R} \, \Big| \, 2y-3 \leq x \leq \frac{1}{2}y + \frac{3}{2} \Big\},
+% 	      \end{align}
+% 	      which, again, is due the fact that we first face to the line $(AC)$ and then $(BC)$
+% 	      while following the $x$-axis.
+% 	      Therefore, we obtain 
+% 	      \begin{align}
+% 		      \bigintsss_{\mathcal{M}}f(x,y)\,d\lambda_{2}
+% 		       & = \bigintsss_{\mathcal{M}_3}f(x,y)\,d\lambda_{2}
+% 		      + \bigintsss_{\mathcal{M}_4}f(x,y)\,d\lambda_{2}
+% 		      \notag                                                                                 \\
+% 		       & = \bigintsss_{\mathbb{R}} 
+% 		      ( \bigintsss_{(\mathcal{M}_3)_y} f(x,y)\,dx )\,dy
+% 		      + \bigintsss_{\mathbb{R}}
+% 		      ( \bigintsss_{(\mathcal{M}_4)_y} f(x,y)\,dx )\,dy
+% 		      \notag                                                                                 \\
+% 		       & = \bigintsss_{1=y_B}^{2=y_A} ( \bigintsss_{-y+3}^{y/2+3/2} f(x,y)\,dx ) \,dy \notag \\
+% 		       & \qquad\qquad\qquad
+% 		      + \bigintsss_{2=y_A}^{3=y_C} ( \bigintsss_{2y-3}^{y/2+3/2} f(x,y)\,dx ) \,dy
+% 	      \end{align}
+% 	      which will results in $3/2$ when $f(x,y)=1$.
+% \end{enumerate}
+
 % Consider the following ordinary differential equation (ODE) taking the form
 % \begin{align}
 % 	\label{eq:thisistheODE}
@@ -2518,5 +2725,6 @@ Mathe III $\cdot$ GUE08 $\cdot$ WS22/23
 
 
 % % \inputfig{floats/multistructures}{multistructures}
-
+\bibliographystyle{acm}
+% \bibliography{literature.bib}
 \end{document}
