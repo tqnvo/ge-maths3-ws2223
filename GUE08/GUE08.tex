@@ -29,7 +29,7 @@ Content covered:
 \begin{itemize}
 	\item[\checkmark] Numerics:
 	      \begin{enumerate}
-		      \item Review: QR decomposition by using
+		      \item Review: QR-decomposition by using
 		            \begin{enumerate}
 			            \item Givens-Rotation
 			            \item Householder-Reflection
@@ -39,8 +39,22 @@ Content covered:
 	\item[\checkmark] Analysis: Application of Hölder's inequality to approximate integral
 \end{itemize}
 %------------------------------------------------------------------------------
-\section{Numerics: Review of QR decomposition}
-d
+\section{Numerics: Review of QR-decomposition}
+There are two main methods used to decompose a matrix into an orthogonal matrix $Q$
+and a right upper triangular matrix $R$
+\begin{enumerate}
+	\item Givens-Rotation: ideally for \textbf{sparse} matrices
+	      \begin{enumerate}
+		      \item Detect those non-zero entries standing below the diagonal
+		      \item Apply an orthogonal matrix so-called Givens-Rotation to \textbf{clean up} those non-zero entries.
+		      \item This method works ideally for those sparse matrices.
+	      \end{enumerate}
+	\item Householder-Reflection: ideally for \textbf{dense} matrices
+	      \begin{enumerate}
+		      \item This method works ideally for dense matrices.
+		      \item This method can work well with parallel implementation.
+	      \end{enumerate}
+\end{enumerate}
 \clearpage
 %------------------------------------------------------------------------------
 \section{Numerics: QR-algorithm}
@@ -57,6 +71,11 @@ d
 \clearpage
 %------------------------------------------------------------------------------
 \section{Analysis: Application of Hölder's inequality}
+\begin{observationboxed}
+	Sometimes we would like to estimate whether an integral, from complicated to very complicated, 
+	is bounded or not, without actually compute it. 
+	The Hölder's inequality is an ideally mathematical tool for such situation.
+\end{observationboxed}
 \begin{exampleboxed}
 	Examine the following integral
 	\begin{align*}
@@ -89,22 +108,6 @@ Approach:
 % 	=   \Vert uv\Vert_{L^1(\Omega)}
 % 	\leq \Vert u\Vert_{L^p(\Omega)}\Vert v\Vert_{L^q(\Omega)} < \infty.
 % \end{equation*}
-\clearpage
-%------------------------------------------------------------------------------
-\section{Numerics: QR algorithm}
-\begin{exampleboxed}
-	Examine the consistency error of the following problem
-	\begin{align*}
-		u''(x) - u'(x) + u(x) = 2x -1 -x^2
-	\end{align*}
-	with the Neumann and Dirichlet BC are given, respectively, as follows
-	\begin{align*}
-		u'(0) = 0, \quad u(1) = 0.
-	\end{align*}
-	The exact solution is known, i.e. $u(x) = 1-x^2$.
-\end{exampleboxed}
-Approach:
-\clearpage
 %------------------------------------------------------------------------------
 % \section{Hint for A1-HA05}
 % \begin{exampleboxed}
