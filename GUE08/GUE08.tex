@@ -43,20 +43,130 @@ Content covered:
 There are two main methods used to decompose a matrix into an orthogonal matrix $Q$
 and a right upper triangular matrix $R$
 \begin{enumerate}
-	\item Givens-Rotation: ideally for \textbf{sparse} matrices
-	      \begin{enumerate}
-		      \item Detect those non-zero entries standing below the diagonal
-		      \item Apply an orthogonal matrix so-called Givens-Rotation to \textbf{clean up} those non-zero entries.
-		      \item This method works ideally for those sparse matrices.
-	      \end{enumerate}
+	\item Givens-Rotation: ideally for \textbf{sparse} matrices.\\
+	      $\rightarrow$ Detect non-zero entries standing below the diagonal,\\ 
+	      $\rightarrow$ Clean them up by applying the corresponding Givens-Rotation matrix. 
 	\item Householder-Reflection: ideally for \textbf{dense} matrices
-	      \begin{enumerate}
-		      \item This method works ideally for dense matrices.
-		      \item This method can work well with parallel implementation.
-	      \end{enumerate}
 \end{enumerate}
-\clearpage
 %------------------------------------------------------------------------------
+\subsection{Step-by-step with Givens-Rotation}
+\begin{exampleboxed}
+	Examine the following matrix $A$ given as follows
+	\begin{align}
+		A = \begin{pmatrix} 5 &1 &2 \\ 1 &-1 &0 \\ 0 &0 &6 \end{pmatrix}_{3\times 3}.
+	\end{align}
+\end{exampleboxed}
+The only entry to be cleaned up is $A_{21}$. Therefore, the Givens-Rotation matrix is 
+\begin{align}
+	G_{21} = \begin{pmatrix}  c &-s &0 \\ s &c &0 \\ 0 &0 &1 \end{pmatrix}_{3\times 3}
+	\quad
+	\text{where}
+	\quad
+	\begin{cases}
+		r = \sqrt{a^2+b^2} = \sqrt{A_{11}^2 + A_{21}^2} = \sqrt{26}, \\
+		c =  a/r = 5/\sqrt{26},                                      \\
+		s = -b/r = -1/\sqrt{26},                                     \\
+	\end{cases}
+\end{align}
+Then, applying $G_{21}$ onto $A$ from the left leads to 
+\begin{align}
+	G_{21}A = 
+	\begin{pmatrix}  c &-s &0 \\ s &c &0 \\ 0 &0 &1 \end{pmatrix}
+	\begin{pmatrix} 5 &1 &2 \\ 1 &-1 &0 \\ 0 &0 &6 \end{pmatrix}
+	= \begin{pmatrix} \sqrt{26} &4/\sqrt{26} &10/\sqrt{26} \\ 0 &-6/\sqrt{26} &-2/\sqrt{26} \\ 0 &0 &6 \end{pmatrix}
+\end{align}
+which has already a form of a right upper triangular matrix $R$. Therefore, we obtain
+\begin{align}
+	G_{21}A = R,
+\end{align}
+which, equally, leads to 
+\begin{align}
+	G_{21}A = R 
+	\Leftrightarrow
+	G_{21}^{-1}G_{21}A = G_{21}^{-1}R
+	\Leftrightarrow
+	A = G_{21}^{-1}R
+	\Leftrightarrow
+	A = G_{21}^{\top}R.
+\end{align}
+Note in passing that $G_{21}^{-1} = G_{21}^{\top}$ in the previous step is due to the fact 
+that the matrix $G_{21}$ itself is orthogonal. 
+By assigning $Q:=G_{21}^{\top}$ we arrive at QR-decomposition
+\begin{align*}
+	\therefore\quad\boxed{
+		A = G_{21}^{\top}R = QR.
+	}
+\end{align*}
+%------------------------------------------------------------------------------
+\begin{exampleboxed}
+	Examine the following matrix $A$ given as follows
+	\begin{align}
+		A = \begin{pmatrix} 5 &1 &2 \\ 0 &-1 &0 \\ 1 &0 &6 \end{pmatrix}_{3\times 3}.
+	\end{align}
+\end{exampleboxed}
+The only entry to be cleaned up is $A_{31}$. Therefore, the Givens-Rotation matrix is 
+\begin{align}
+	G_{31} = \begin{pmatrix}  c &0 &-s \\ 0 &1 &0 \\ s &0 &c \end{pmatrix}_{3\times 3}
+	\quad
+	\text{where}
+	\quad
+	\begin{cases}
+		r = \sqrt{a^2+b^2} = \sqrt{A_{11}^2 + A_{31}^2} = \sqrt{26}, \\
+		c =  a/r = 5/\sqrt{26},                                      \\
+		s = -b/r = -1/\sqrt{26},                                     \\
+	\end{cases}
+\end{align}
+Then, applying $G_{31}$ onto $A$ from the left leads to 
+\begin{align}
+	G_{31}A = 
+	\begin{pmatrix}  c &0 &-s \\ 0 &1 &0 \\ s &0 &c \end{pmatrix}
+	\begin{pmatrix} 5 &1 &2 \\ 0 &-1 &0 \\ 1 &0 &6 \end{pmatrix}
+	= \begin{pmatrix} \sqrt{26} &5/\sqrt{26} &16/\sqrt{26} \\ 0 &-1 &0 \\ 0 &-1/\sqrt{26} &28/\sqrt{26} \end{pmatrix}=:B,
+\end{align}
+which is not yet in forms of a right upper triangular matrix $R$.
+Herein, we still need to perform one more Givens-Rotation
+on the later matrix to clean up the entry $B_{32}$. 
+The second Givens-Rotation takes the form
+\begin{align}
+	G_{32} = \begin{pmatrix}  1 &0 &0 \\ 0 &c &-s \\ 0 &s &c \end{pmatrix}_{3\times 3}
+	\quad
+	\text{where}
+	\quad
+	\begin{cases}
+		r_2 = \sqrt{a^2+b^2} = \sqrt{B_{11}^2 + B_{31}^2} = \sqrt{26}, \\
+		c_2 =  a_2/r_2 = 5/\sqrt{26},                                      \\
+		s_2 = -b_2/r_2 = -1/\sqrt{26},                                     \\
+	\end{cases}
+\end{align}
+Next, applying $G_{32}$ onto $B=G_{31}A$ leads to 
+\begin{align}
+	G_{32}B =  
+	\begin{pmatrix}  1 &0 &0 \\ 0 &c &-s \\ 0 &s &c \end{pmatrix}
+	\begin{pmatrix} \sqrt{26} &5/\sqrt{26} &16/\sqrt{26} \\ 0 &-1 &0 \\ 0 &-1/\sqrt{26} &28/\sqrt{26} \end{pmatrix}
+	=
+	\begin{pmatrix} \sqrt{26} &5/\sqrt{26} &16/\sqrt{26} \\ 0 &-1 &0 \\ 0 &-1/\sqrt{26} &28/\sqrt{26} \end{pmatrix}
+\end{align}
+which, equally, leads to 
+\begin{align}
+	G_{31}A = R 
+	\Leftrightarrow
+	G_{31}^{-1}G_{31}A = G_{31}^{-1}R
+	\Leftrightarrow
+	A = G_{31}^{-1}R
+	\Leftrightarrow
+	A = G_{31}^{\top}R.
+\end{align}
+Note in passing that $G_{31}^{-1} = G_{31}^{\top}$ in the previous step is due to the fact 
+that the matrix $G_{31}$ itself is orthogonal. 
+By assigning $Q:=G_{31}^{\top}$ we arrive at QR-decomposition
+\begin{align*}
+	\therefore\quad\boxed{
+		A = G_{31}^{\top}R = QR.
+	}
+\end{align*}
+
+%------------------------------------------------------------------------------
+\clearpage
 \section{Numerics: QR-algorithm}
 \begin{observationboxed}[\textbf{QR-algorithm} vs. \textbf{QR-decomposition}]
 	QR-algorithm (as seen in Maths III) is not QR-decomposition (as seen in Maths II). 
