@@ -287,9 +287,8 @@ Given $f(x) \in L^6(\Omega)$, then we can compute
 \begin{align}
 	% \Vert f(x) \Vert_{L^6(\Omega)}
 	\norm[2]{f(x)}_{L^6(\Omega)}^{6}
-	 & 
-	= \bigintsss_{0}^{\infty} |f(x)|^6 \,dx  \notag           
-	= \bigintsss_{0}^{\infty} (x+2)^{-3\cdot 6/5}\,dx  \notag \\
+	 & = \bigintsss_{0}^{\infty} |f(x)|^6 \,dx  \notag           \\    
+	 & = \bigintsss_{0}^{\infty} (x+2)^{-3\cdot 6/5}\,dx  \notag \\
 	 & 
 	= -\left. \frac{5}{13}(x+2)^{-13/5}\right|_{x=0}^{x=\infty}        
 	= \frac{5}{13}\cdot 2^{-13/5} < \infty.    
@@ -315,8 +314,8 @@ which leads to $g(x)\in L^q(\Omega)$:
 	 & = 
 	\bigintsss_{0}^{\infty}
 	|g(x)|^{6/5} \,dx
-	\notag                                                                      
-	= 
+	\notag                                                                                                           \\
+	 & = 
 	\bigintsss_{0}^{\infty}
 	\exp{ \left(-\frac{2}{3}\cdot\frac{6}{5}\cdot x \right)} \,dx                                             \notag \\
 	 & = -\left.\frac{5}{4} \exp{\left( -\frac{4}{5}x \right)}\right|_{x=0}^{x=\infty} 
@@ -325,20 +324,27 @@ which leads to $g(x)\in L^q(\Omega)$:
 Therefore, we obtain
 \begin{align}
 	\therefore\quad\boxed{
-		\norm[2]{g(x)}_{L^{6/5}(\Omega)}^{6/5} = \frac{5}{4} < \infty.   
+	\norm[2]{g(x)}_{L^{6/5}(\Omega)}^{6/5} = \frac{5}{4} < \infty.   
 	}
 \end{align}
 Finally, we can estimate the integral by using the Hölder's inequality
-\begin{equation*}
+\begin{equation}
 	\therefore\quad\boxed{
-		\bigintsss_{\Omega}
-		\frac{\exp{(-2x/3)}}{\sqrt[5]{(x + 2)^{3}}} \,dx
-		=   \norm[2]{f(x)\,g(x)}_{L^1(\Omega)}
-		\leq 
-		\norm[2]{f(x)}_{L^p(\Omega)}
-		\norm[2]{g(x)}_{L^q(\Omega)} < \infty.
+		\begin{aligned}
+			\bigintsss_{\Omega}
+			\frac{\exp{(-2x/3)}}{\sqrt[5]{(x + 2)^{3}}} \,dx
+			=   \norm[2]{f(x)\,g(x)}_{L^1(\Omega)}
+			 & \leq
+			\norm[2]{f(x)}_{L^p(\Omega)}
+			\norm[2]{g(x)}_{L^q(\Omega)}                          \\
+			 & = \norm[2]{f(x)}_{L^6(\Omega)}
+			\norm[2]{g(x)}_{L^{6/5}(\Omega)}                      \\
+			 & = \left( \frac{5\cdot 2^{-13/5}}{13} \right)^{1/6}
+			\left( \frac{5}{4} \right)^{5/6} \\
+			& < \infty.
+		\end{aligned}
 	}
-\end{equation*}
+\end{equation}
 
 %------------------------------------------------------------------------------
 % \section{Hint for A1-HA05}
