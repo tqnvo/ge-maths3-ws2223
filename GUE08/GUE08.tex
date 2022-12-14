@@ -265,44 +265,51 @@ Then, we would like to apply matrix $P$ on $\bm{z}$ such a way that
 the resulting vector $\bm{Pz}$ is not streching and laying along $\bm{e_1}$ axis.
 The following relation holds
 \begin{align}
-	Pz = z + v
+	\label{eq:Pzv}
+	\boxed{
+		Pz = z + v
+	}
 \end{align}
-but we also have
+Next, we shall need to find an expression of $v$ w.r.t. $z$. 
+Hence, we will consider the angle between $v$ and $z$ as follows
+% but we also have
+% \begin{align}
+% 	\norm[1]{Pz} = \norm[1]{z}
+% \end{align}
+% hence, the vector $Pz$ should take the form
+% \begin{align}
+% 	Pz = \norm[1]{z} e_{1}
+% \end{align}
+% Substitution
+% \begin{align}
+% 	\norm[1]{z} e_{1} = z + v
+% \end{align}
+% which leads to 
+% \begin{align}
+% 	v = \norm[1]{z} e_{1} - z
+% \end{align}
 \begin{align}
-	\norm[1]{Pz} = \norm[1]{z}
-\end{align}
-hence, the vector $Pz$ should take the form
-\begin{align}
-	Pz = \norm[1]{z} e_{1}
-\end{align}
-Substitution
-\begin{align}
-	\norm[1]{z} e_{1} = z + v
-\end{align}
-which leads to 
-\begin{align}
-	v = \norm[1]{z} e_{1} - z
-\end{align}
-Besides
-\begin{align}
+	\label{eq:zv}
 	-z \cdot v = \norm[1]{z}\norm[1]{v}\cos{(\alpha)}
 	\Rightarrow 
-	\cos{(\alpha)} = \frac{-z \cdot v}{\norm[1]{z}\norm[1]{v}}
+	\cos{(\alpha)} = \frac{-z \cdot v}{\norm[1]{z}\norm[1]{v}}.
 \end{align}
-Moreover
+Besides, the following relation also holds
 \begin{align}
+	\label{eq:cosa}
 	\cos{(\alpha)} = \frac{\norm[1]{w}}{\norm[1]{z}}
 	\Rightarrow
-	\norm[1]{w} = \norm[1]{z} \cos{(\alpha)}
+	\norm[1]{w} = \norm[1]{z} \cos{(\alpha)}.
 \end{align}
-Substitution
+Substitution of \eqref{eq:zv} into \eqref{eq:cosa} yields
 \begin{align}
 	\norm[1]{w}
 	= \norm[1]{z} \frac{-z \cdot v}{\norm[1]{z}\norm[1]{v}}
-	= \frac{-z \cdot v}{\norm[1]{v}}
+	= \frac{-z \cdot v}{\norm[1]{v}},
 \end{align}
-lead to 
+which further leads to 
 \begin{align}
+	\label{eq:vexplicit}
 	v 
 	= 2w 
 	= 2 \norm[1]{w} \frac{w}{\norm[1]{w}}
@@ -311,14 +318,14 @@ lead to
 	 & = 2 \frac{-v \cdot z}{\norm[1]{v}} \frac{v}{\norm[1]{v}}  \\
 	 & = 2 \frac{v}{\norm[1]{v}} \frac{-v \cdot z}{\norm[1]{v}}  \\
 	 & = -2 \frac{v}{\norm[1]{v}} \frac{v^{\top} z}{\norm[1]{v}} \\
-	 & = -2 \frac{vv^{\top} z}{\norm[1]{v}^2}
+	 & = -2 \frac{vv^{\top} z}{\norm[1]{v}^2}.
 \end{align}
-Substitution
+Finally, substitution \eqref{eq:vexplicit} into \eqref{eq:Pzv} results in
 \begin{align}
 	Pz = z -2 \frac{vv^{\top} z}{\norm[1]{v}^2}
-	= Iz -2 \frac{vv^{\top} z}{\norm[1]{v}^2}
-	= Iz -2 \frac{vv^{\top}}{\norm[1]{v}^2}z
-	= \left( I -2 \frac{vv^{\top}}{\norm[1]{v}^2} \right)z
+	 & = Iz -2 \frac{vv^{\top} z}{\norm[1]{v}^2} \\
+	 & = Iz -2 \frac{vv^{\top}}{\norm[1]{v}^2}z  \\
+	& = \left( I -2 \frac{vv^{\top}}{\norm[1]{v}^2} \right)z
 \end{align}
 Therefore, the Householder-Reflection matrix takes the form
 \begin{align}
