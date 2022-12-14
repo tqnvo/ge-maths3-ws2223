@@ -128,36 +128,34 @@ Herein, we still need to perform one more Givens-Rotation
 on the later matrix to clean up the entry $B_{32}$. 
 The second Givens-Rotation takes the form
 \begin{align}
-	G_{32} = \begin{pmatrix}  1 &0 &0 \\ 0 &c &-s \\ 0 &s &c \end{pmatrix}_{3\times 3}
+	G_{32} = \begin{pmatrix}  1 &0 &0 \\ 0 &c_2 &-s_2 \\ 0 &s_2 &c_2 \end{pmatrix}_{3\times 3}
 	\quad
 	\text{where}
 	\quad
 	\begin{cases}
-		r_2 = \sqrt{a^2+b^2} = \sqrt{B_{11}^2 + B_{31}^2} = \sqrt{26}, \\
-		c_2 =  a_2/r_2 = 5/\sqrt{26},                                      \\
-		s_2 = -b_2/r_2 = -1/\sqrt{26},                                     \\
+		r_2 = \sqrt{a_2^2+b_2^2} = \sqrt{B_{11}^2 + B_{31}^2} = 9/\sqrt{78}, \\
+		c_2 =  a_2/r_2 = -\sqrt{78}/9,                                       \\
+		s_2 = -b_2/r_2 = \sqrt{3}/9,                                         \\
 	\end{cases}
 \end{align}
 Next, applying $G_{32}$ onto $B=G_{31}A$ leads to 
 \begin{align}
 	G_{32}B =  
-	\begin{pmatrix}  1 &0 &0 \\ 0 &c &-s \\ 0 &s &c \end{pmatrix}
+	\begin{pmatrix}  1 &0 &0 \\ 0 &c_2 &-s_2 \\ 0 &s_2 &c_2 \end{pmatrix}
 	\begin{pmatrix} \sqrt{26} &5/\sqrt{26} &16/\sqrt{26} \\ 0 &-1 &0 \\ 0 &-1/\sqrt{26} &28/\sqrt{26} \end{pmatrix}
 	=
-	\begin{pmatrix} \sqrt{26} &5/\sqrt{26} &16/\sqrt{26} \\ 0 &-1 &0 \\ 0 &-1/\sqrt{26} &28/\sqrt{26} \end{pmatrix}
+	\begin{pmatrix} \sqrt{26} &5/\sqrt{26} &16/\sqrt{26} \\ 0 &3\sqrt{3}/\sqrt{26} &-28\sqrt{3}/(9\sqrt{26}) \\ 0 &0 &-28\sqrt{3}/9 \end{pmatrix}
 \end{align}
-which, equally, leads to 
+which now has a form of a right upper triangular matrix $R$. Therefore, we obtain
 \begin{align}
-	G_{31}A = R 
+	G_{32}B = R 
 	\Leftrightarrow
-	G_{31}^{-1}G_{31}A = G_{31}^{-1}R
+	G_{32}G_{31}A = R 
 	\Leftrightarrow
-	A = G_{31}^{-1}R
+	A = G_{31}^{-1}G_{32}^{-1}R
 	\Leftrightarrow
-	A = G_{31}^{\top}R.
+	A = G_{31}^{\top}G_{32}^{\top}R.
 \end{align}
-Note in passing that $G_{31}^{-1} = G_{31}^{\top}$ in the previous step is due to the fact 
-that the matrix $G_{31}$ itself is orthogonal. 
 By assigning $Q:=G_{31}^{\top}$ we arrive at QR-decomposition
 \begin{align*}
 	\therefore\quad\boxed{
