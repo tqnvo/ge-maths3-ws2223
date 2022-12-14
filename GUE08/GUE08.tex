@@ -256,6 +256,76 @@ The Givens-Rotation matrix $G_{32}$ takes the form
 
 Let us consider the first column of matrix $A$
 \inputfig{floats/householder_matrixA}{householder_matrixA}
+
+\clearpage
+\inputfig{floats/householder_projection}{householder_projection}
+
+Vector $\bm{z}$ is known. 
+Then, we would like to apply matrix $P$ on $\bm{z}$ such a way that 
+the resulting vector $\bm{Pz}$ is not streching and laying along $\bm{e_1}$ axis.
+The following relation holds
+\begin{align}
+	Pz = z + v
+\end{align}
+but we also have
+\begin{align}
+	\norm[1]{Pz} = \norm[1]{z}
+\end{align}
+hence, the vector $Pz$ should take the form
+\begin{align}
+	Pz = \norm[1]{z} e_{1}
+\end{align}
+Substitution
+\begin{align}
+	\norm[1]{z} e_{1} = z + v
+\end{align}
+which leads to 
+\begin{align}
+	v = \norm[1]{z} e_{1} - z
+\end{align}
+Besides
+\begin{align}
+	-z \cdot v = \norm[1]{z}\norm[1]{v}\cos{(\alpha)}
+	\Rightarrow 
+	\cos{(\alpha)} = \frac{-z \cdot v}{\norm[1]{z}\norm[1]{v}}
+\end{align}
+Moreover
+\begin{align}
+	\cos{(\alpha)} = \frac{\norm[1]{w}}{\norm[1]{z}}
+	\Rightarrow
+	\norm[1]{w} = \norm[1]{z} \cos{(\alpha)}
+\end{align}
+Substitution
+\begin{align}
+	\norm[1]{w}
+	= \norm[1]{z} \frac{-z \cdot v}{\norm[1]{z}\norm[1]{v}}
+	= \frac{-z \cdot v}{\norm[1]{v}}
+\end{align}
+lead to 
+\begin{align}
+	v 
+	= 2w 
+	= 2 \norm[1]{w} \frac{w}{\norm[1]{w}}
+	 & = 2 \norm[1]{w} \frac{v}{\norm[1]{v}}                     \\
+	 & = 2 \frac{-z \cdot v}{\norm[1]{v}} \frac{v}{\norm[1]{v}}  \\ 
+	 & = 2 \frac{-v \cdot z}{\norm[1]{v}} \frac{v}{\norm[1]{v}}  \\
+	 & = 2 \frac{v}{\norm[1]{v}} \frac{-v \cdot z}{\norm[1]{v}}  \\
+	 & = -2 \frac{v}{\norm[1]{v}} \frac{v^{\top} z}{\norm[1]{v}} \\
+	 & = -2 \frac{vv^{\top} z}{\norm[1]{v}^2}
+\end{align}
+Substitution
+\begin{align}
+	Pz = z -2 \frac{vv^{\top} z}{\norm[1]{v}^2}
+	= Iz -2 \frac{vv^{\top} z}{\norm[1]{v}^2}
+	= Iz -2 \frac{vv^{\top}}{\norm[1]{v}^2}z
+	= \left( I -2 \frac{vv^{\top}}{\norm[1]{v}^2} \right)z
+\end{align}
+Therefore, the Householder-Reflection matrix takes the form
+\begin{align}
+	\therefore\quad\boxed{
+		P:=	I -2 \frac{vv^{\top}}{\norm[1]{v}^2}
+	}
+\end{align}
 %------------------------------------------------------------------------------ hhex1
 \clearpage
 \begin{exampleboxed}
