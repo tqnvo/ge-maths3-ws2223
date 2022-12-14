@@ -49,6 +49,7 @@ and a right upper triangular matrix $R$
 	\item Householder-Reflection: ideally for \textbf{dense} matrices
 \end{enumerate}
 %------------------------------------------------------------------------------
+\clearpage
 \subsection{Step-by-step with Givens-Rotation}
 \begin{exampleboxed}
 	Examine the following matrix $A$ given as follows
@@ -98,6 +99,7 @@ By assigning $Q:=G_{21}^{\top}$ we arrive at QR-decomposition
 	}
 \end{align*}
 %------------------------------------------------------------------------------
+\clearpage
 \begin{exampleboxed}
 	Examine the following matrix $A$ given as follows
 	\begin{align}
@@ -143,7 +145,10 @@ Next, applying $G_{32}$ onto $B=G_{31}A$ leads to
 	G_{32}B =  
 	\begin{pmatrix}  1 &0 &0 \\ 0 &c_2 &-s_2 \\ 0 &s_2 &c_2 \end{pmatrix}
 	\begin{pmatrix} \sqrt{26} &5/\sqrt{26} &16/\sqrt{26} \\ 0 &-1 &0 \\ 0 &-1/\sqrt{26} &28/\sqrt{26} \end{pmatrix}
-	=
+\end{align}
+which yields
+\begin{align}
+	G_{32}B =  
 	\begin{pmatrix} \sqrt{26} &5/\sqrt{26} &16/\sqrt{26} \\ 0 &3\sqrt{3}/\sqrt{26} &-28\sqrt{3}/(9\sqrt{26}) \\ 0 &0 &-28\sqrt{3}/9 \end{pmatrix}
 \end{align}
 which now has a form of a right upper triangular matrix $R$. Therefore, we obtain
@@ -156,10 +161,10 @@ which now has a form of a right upper triangular matrix $R$. Therefore, we obtai
 	\Leftrightarrow
 	A = G_{31}^{\top}G_{32}^{\top}R.
 \end{align}
-By assigning $Q:=G_{31}^{\top}$ we arrive at QR-decomposition
+By assigning $Q:=G_{31}^{\top}G_{32}^{\top}$ we arrive at QR-decomposition
 \begin{align*}
 	\therefore\quad\boxed{
-		A = G_{31}^{\top}R = QR.
+	A = G_{31}^{\top}G_{32}^{\top}R = QR.
 	}
 \end{align*}
 
