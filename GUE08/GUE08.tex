@@ -273,9 +273,11 @@ The Givens-Rotation matrix $G_{32}$ takes the form
 		\bigintsss_{\Omega} (x + 2)^{-3/5} \exp{(-2x/3)} \, dx
 	\end{align*}
 \end{exampleboxed}
+\begin{observationboxed}
+	The given integral is complicated to compute, but it would be easier if we may split 
+	the exponential term away from the polynomial term.
+\end{observationboxed}
 Approach:
-% Die Ungleichung gilt für alle Paare $p,q\in[1,\infty]$ mit $\tfrac{1}{p} + \tfrac{1}{q} = 1$.
-% Hierbei setzt man~$\tfrac{1}{\infty} := 0$.
 Setting 
 \begin{align}
 	f(x) & := (x+2)^{-3/5}  \\
@@ -283,16 +285,19 @@ Setting
 \end{align}
 Given $f(x) \in L^6(\Omega)$, then we can compute
 \begin{align}
-	\Vert f(x) \Vert_{L^6(\Omega)}
-	 & = \left( \bigintsss_{0}^{\infty} |f(x)|^6 \,dx \right)^{1/6} \notag           \\
-	 & = \left( \bigintsss_{0}^{\infty} (x+2)^{-3\cdot 6/5}\,dx \right)^{1/6} \notag \\
-	 & = -\left. \frac{5}{13}(x+2)^{-13/5}\right|_{x=0}^{x=\infty}        
+	% \Vert f(x) \Vert_{L^6(\Omega)}
+	\norm[2]{f(x)}_{L^6(\Omega)}^{6}
+	 & 
+	= \bigintsss_{0}^{\infty} |f(x)|^6 \,dx  \notag           
+	= \bigintsss_{0}^{\infty} (x+2)^{-3\cdot 6/5}\,dx  \notag \\
+	 & 
+	= -\left. \frac{5}{13}(x+2)^{-13/5}\right|_{x=0}^{x=\infty}        
 	= \frac{5}{13}\cdot 2^{-13/5} < \infty.    
 \end{align}
 Therefore, we obtain
 \begin{align}
 	\therefore\quad\boxed{
-		\Vert f(x) \Vert_{L^6(\Omega)} = \frac{5}{13}\cdot 2^{-13/5} < \infty.
+		\norm[2]{f(x)}_{L^6(\Omega)}^{6} = \frac{5}{13}\cdot 2^{-13/5} < \infty.
 	}
 \end{align}
 % \begin{equation*}
@@ -301,20 +306,32 @@ Therefore, we obtain
 % \end{equation*}
 Besides, the following relation hold for Hölder's inequality
 \begin{align}
-	\tfrac{1}{6}+\tfrac{1}{q} = 1 \Leftrightarrow q = \tfrac{6}{5}
+	\frac{1}{6} + \frac{1}{q} = 1 \Leftrightarrow q = \frac{6}{5}
 \end{align}
 which leads to $g(x)\in L^q(\Omega)$:
+\begin{align}
+	\norm[2]{g(x)}_{L^{6/5}(\Omega)}^{6/5}
+	% \Vert g(x) \Vert_{L^{6/5}(\Omega)}^{6/5}
+	 & = 
+	\bigintsss_{0}^{\infty}
+	|g(x)|^{6/5} \,dx
+	\notag                                                                      
+	= 
+	\bigintsss_{0}^{\infty}
+	\exp{ \left(-\frac{2}{3}\cdot\frac{6}{5}\cdot x \right)} \,dx                                             \notag \\
+	 & = -\left.\frac{5}{4} \exp{\left( -\frac{4}{5}x \right)}\right|_{x=0}^{x=\infty} 
+	= \frac{5}{4} < \infty.    
+\end{align}
+Finally, we can estimate the integral by using the Hölder's inequality
 \begin{equation*}
-	\Vert g(x) \Vert_{L^{6/5}(\Omega)}^{6/5}
-	= \int_{0}^{\infty} e^{-\frac{2}{3}\cdot\frac{6}{5}\cdot x}\,{\mathrm d}x
-	= -\left.\frac{5}{4}e^{-\frac{4}{5}x}\right|_{x=0}^{x=\infty} = \frac{5}{4} < \infty.    
-\end{equation*}
-
-Insgesamt erhalten wir:
-\begin{equation*}
-	\int_{\Omega} \frac{1}{\sqrt[5]{(x + 2)^{3}}} e^{-\frac{2}{3} x}\,{\mathrm d}x
-	=   \Vert uv\Vert_{L^1(\Omega)}
-	\leq \Vert u\Vert_{L^p(\Omega)}\Vert v\Vert_{L^q(\Omega)} < \infty.
+	\therefore\quad\boxed{
+		\bigintsss_{\Omega}
+		\frac{\exp{(-2x/3)}}{\sqrt[5]{(x + 2)^{3}}} \,dx
+		=   \norm[2]{f(x)\,g(x)}_{L^1(\Omega)}
+		\leq 
+		\norm[2]{f(x)}_{L^p(\Omega)}
+		\norm[2]{g(x)}_{L^q(\Omega)} < \infty.
+	}
 \end{equation*}
 
 %------------------------------------------------------------------------------
