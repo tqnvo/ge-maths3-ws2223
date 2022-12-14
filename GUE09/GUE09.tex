@@ -1,0 +1,3189 @@
+\documentclass[12pt]{article}
+\usepackage{anysize}
+\usepackage[ngerman,english]{babel}
+\marginsize{3.5cm}{2.5cm}{1cm}{2cm}
+
+\input{packages_styles.tex}
+%Page numbering in style 1/3...
+\usepackage{lastpage}  
+\usepackage{hyperref}
+\makeatletter
+\renewcommand{\@oddfoot}{\hfil 
+% Aachen, November $04^{th}$, 2021 \hspace{300pt} 
+Mathe III $\cdot$ GUE09 $\cdot$ WS22/23 
+\hspace{220pt} 
+\thepage/\pageref{LastPage}\hfil}
+\makeatother
+%------------------------------------------------------------------------------
+\begin{document}
+\begin{center}
+	\section*{Global exercise - GUE09}
+\end{center}
+\begin{center}
+	Tuan Vo
+\end{center}
+\begin{center}
+	$15^{\text{th}}$ December, 2022
+\end{center}
+Content covered:
+\begin{itemize}
+	\item[\checkmark] Demo programming exercise 03 (PRU02)
+	%       \begin{enumerate}
+	% 	      \item Review: QR-decomposition by using
+	% 	            \begin{enumerate}
+	% 		            \item Givens-Rotation
+	% 		            \item Householder-Reflection
+	% 	            \end{enumerate}
+	% 	      \item QR algorithm to find all eigenvalues of a matrix $A$.
+	%       \end{enumerate}
+	% \item[\checkmark] Analysis: Application of Hölder's inequality to approximate integral
+\end{itemize}
+% %------------------------------------------------------------------------------
+% \section{Numerics: Review of QR-decomposition}
+% There are two main methods used to decompose a matrix into an orthogonal matrix $Q$
+% and a right upper triangular matrix $R$
+% \begin{enumerate}
+% 	\item Givens-Rotation: ideally for \textbf{sparse} matrices.\\
+% 	      $\rightarrow$ Detect non-zero entries standing below the diagonal,\\ 
+% 	      $\rightarrow$ Clean them up by applying the corresponding Givens-Rotation matrix. 
+% 	\item Householder-Reflection: ideally for \textbf{dense} matrices
+% \end{enumerate}
+
+% %------------------------------------------------------------------------------ ex1
+% \clearpage
+% \subsection{Step-by-step with Givens-Rotation}
+% \begin{exampleboxed}
+% 	Examine the following matrix $A$ given as follows
+% 	\begin{align}
+% 		A = \begin{pmatrix} 5 &1 &2 \\ 0 &-1 &0 \\ 0 &1 &6 \end{pmatrix}_{3\times 3}.
+% 	\end{align}
+% \end{exampleboxed}
+% The only entry to be cleaned up is $A_{32}$. Therefore, the Givens-Rotation matrix is 
+% \begin{align}
+% 	G_{32} = \begin{pmatrix}  1 &0 &0 \\ 0 &c &-s \\ 0 &s &c \end{pmatrix}_{3\times 3}
+% 	\quad
+% 	\text{where}
+% 	\quad
+% 	\begin{cases}
+% 		r = \sqrt{a^2+b^2} = \sqrt{A_{22}^2 + A_{32}^2} = \sqrt{2}, \\
+% 		c =  a/r = -1/\sqrt{2},                                     \\
+% 		s = -b/r = -1/\sqrt{2},                                     \\
+% 	\end{cases}
+% \end{align}
+% \inputfig{floats/matrixA32}{matrixA32}
+
+% Then, applying $G_{32}$ onto $A$ from the left leads to 
+% \begin{align}
+% 	G_{32}A = 
+% 	\begin{pmatrix}  1 &0 &0 \\ 0 &c &-s \\ 0 &s &c \end{pmatrix}
+% 	\begin{pmatrix} 5 &1 &2 \\ 0 &-1 &0 \\ 0 &1 &6 \end{pmatrix}
+% 	= \begin{pmatrix} 5 &1 &2 \\ 0 &\sqrt{2} &6/\sqrt{2} \\ 0 &0 &-6/\sqrt{2} \end{pmatrix}=:B,
+% \end{align}
+% which has already a form of a right upper triangular matrix $R$. Therefore, we obtain
+% \begin{align}
+% 	G_{32}A = R,
+% \end{align}
+% which, equally, leads to 
+% \begin{align}
+% 	G_{32}A = R 
+% 	\Leftrightarrow
+% 	G_{32}^{-1}G_{32}A = G_{32}^{-1}R
+% 	\Leftrightarrow
+% 	A = G_{32}^{-1}R
+% 	\Leftrightarrow
+% 	A = G_{32}^{\top}R.
+% \end{align}
+% Note in passing that $G_{32}^{-1} = G_{32}^{\top}$ in the previous step is due to the fact 
+% that the matrix $G_{32}$ itself is orthogonal. 
+% By assigning $Q:=G_{32}^{\top}$ we arrive at QR-decomposition
+% \begin{align*}
+% 	\therefore\quad\boxed{
+% 		A = G_{32}^{\top}R = QR.
+% 	}
+% \end{align*}
+
+% %------------------------------------------------------------------------------ ex2
+% \clearpage
+% \begin{exampleboxed}
+% 	Examine the following matrix $A$ given as follows
+% 	\begin{align}
+% 		A = \begin{pmatrix} 5 &1 &2 \\ 1 &-1 &0 \\ 0 &0 &6 \end{pmatrix}_{3\times 3}.
+% 	\end{align}
+% \end{exampleboxed}
+% The only entry to be cleaned up is $A_{21}$. Therefore, the Givens-Rotation matrix is 
+% \begin{align}
+% 	G_{21} = \begin{pmatrix}  c &-s &0 \\ s &c &0 \\ 0 &0 &1 \end{pmatrix}_{3\times 3}
+% 	\quad
+% 	\text{where}
+% 	\quad
+% 	\begin{cases}
+% 		r = \sqrt{a^2+b^2} = \sqrt{A_{11}^2 + A_{21}^2} = \sqrt{26}, \\
+% 		c =  a/r = 5/\sqrt{26},                                      \\
+% 		s = -b/r = -1/\sqrt{26},                                     \\
+% 	\end{cases}
+% \end{align}
+% \inputfig{floats/matrixA21}{matrixA21}
+
+% Then, applying $G_{21}$ onto $A$ from the left leads to 
+% \begin{align}
+% 	G_{21}A = 
+% 	\begin{pmatrix}  c &-s &0 \\ s &c &0 \\ 0 &0 &1 \end{pmatrix}
+% 	\begin{pmatrix} 5 &1 &2 \\ 1 &-1 &0 \\ 0 &0 &6 \end{pmatrix}
+% 	= \begin{pmatrix} \sqrt{26} &4/\sqrt{26} &10/\sqrt{26} \\ 0 &-6/\sqrt{26} &-2/\sqrt{26} \\ 0 &0 &6 \end{pmatrix}
+% \end{align}
+% which has already a form of a right upper triangular matrix $R$. Therefore, we obtain
+% \begin{align}
+% 	G_{21}A = R,
+% \end{align}
+% which, equally, leads to 
+% \begin{align}
+% 	G_{21}A = R 
+% 	\Leftrightarrow
+% 	G_{21}^{-1}G_{21}A = G_{21}^{-1}R
+% 	\Leftrightarrow
+% 	A = G_{21}^{-1}R
+% 	\Leftrightarrow
+% 	A = G_{21}^{\top}R.
+% \end{align}
+% Note in passing that $G_{21}^{-1} = G_{21}^{\top}$ in the previous step is due to the fact 
+% that the matrix $G_{21}$ itself is orthogonal. 
+% By assigning $Q:=G_{21}^{\top}$ we arrive at QR-decomposition
+% \begin{align*}
+% 	\therefore\quad\boxed{
+% 		A = G_{21}^{\top}R = QR.
+% 	}
+% \end{align*}
+
+% %------------------------------------------------------------------------------ ex3
+% \clearpage
+% \begin{exampleboxed}
+% 	Examine the following matrix $A$ given as follows
+% 	\begin{align}
+% 		A = \begin{pmatrix} 5 &1 &2 \\ 0 &-1 &0 \\ 1 &0 &6 \end{pmatrix}_{3\times 3}.
+% 	\end{align}
+% \end{exampleboxed}
+% The only entry to be cleaned up is $A_{31}$. Therefore, the Givens-Rotation matrix is 
+% \begin{align}
+% 	G_{31} = \begin{pmatrix}  c &0 &-s \\ 0 &1 &0 \\ s &0 &c \end{pmatrix}_{3\times 3}
+% 	\quad
+% 	\text{where}
+% 	\quad
+% 	\begin{cases}
+% 		r = \sqrt{a^2+b^2} = \sqrt{A_{11}^2 + A_{31}^2} = \sqrt{26}, \\
+% 		c =  a/r = 5/\sqrt{26},                                      \\
+% 		s = -b/r = -1/\sqrt{26},                                     \\
+% 	\end{cases}
+% \end{align}
+% Then, applying $G_{31}$ onto $A$ from the left leads to 
+% \begin{align}
+% 	G_{31}A = 
+% 	\begin{pmatrix}  c &0 &-s \\ 0 &1 &0 \\ s &0 &c \end{pmatrix}
+% 	\begin{pmatrix} 5 &1 &2 \\ 0 &-1 &0 \\ 1 &0 &6 \end{pmatrix}
+% 	= \begin{pmatrix} \sqrt{26} &5/\sqrt{26} &16/\sqrt{26} \\ 0 &-1 &0 \\ 0 &-1/\sqrt{26} &28/\sqrt{26} \end{pmatrix}=:B,
+% \end{align}
+% which is not yet in forms of a right upper triangular matrix $R$.
+% Herein, we still need to perform one more Givens-Rotation
+% on the later matrix to clean up the entry $B_{32}$. 
+% The second Givens-Rotation takes the form
+% \begin{align}
+% 	G_{32} = \begin{pmatrix}  1 &0 &0 \\ 0 &c_2 &-s_2 \\ 0 &s_2 &c_2 \end{pmatrix}_{3\times 3}
+% 	\quad
+% 	\text{where}
+% 	\quad
+% 	\begin{cases}
+% 		r_2 = \sqrt{a_2^2+b_2^2} = \sqrt{B_{11}^2 + B_{31}^2} = 9/\sqrt{78}, \\
+% 		c_2 =  a_2/r_2 = -\sqrt{78}/9,                                       \\
+% 		s_2 = -b_2/r_2 = \sqrt{3}/9,                                         \\
+% 	\end{cases}
+% \end{align}
+% Next, applying $G_{32}$ onto $B=G_{31}A$ leads to 
+% \begin{align}
+% 	G_{32}B =  
+% 	\begin{pmatrix}  1 &0 &0 \\ 0 &c_2 &-s_2 \\ 0 &s_2 &c_2 \end{pmatrix}
+% 	\begin{pmatrix} \sqrt{26} &5/\sqrt{26} &16/\sqrt{26} \\ 0 &-1 &0 \\ 0 &-1/\sqrt{26} &28/\sqrt{26} \end{pmatrix}
+% \end{align}
+% which yields
+% \begin{align}
+% 	G_{32}B =  
+% 	\begin{pmatrix} \sqrt{26} &5/\sqrt{26} &16/\sqrt{26} \\ 0 &3\sqrt{3}/\sqrt{26} &-28\sqrt{3}/(9\sqrt{26}) \\ 0 &0 &-28\sqrt{3}/9 \end{pmatrix}
+% \end{align}
+% which now has a form of a right upper triangular matrix $R$. Therefore, we obtain
+% \begin{align}
+% 	G_{32}B = R 
+% 	\Leftrightarrow
+% 	G_{32}G_{31}A = R 
+% 	\Leftrightarrow
+% 	A = G_{31}^{-1}G_{32}^{-1}R
+% 	\Leftrightarrow
+% 	A = G_{31}^{\top}G_{32}^{\top}R.
+% \end{align}
+% By assigning $Q:=G_{31}^{\top}G_{32}^{\top}$ we arrive at QR-decomposition
+% \begin{align*}
+% 	\therefore\quad\boxed{
+% 	A = G_{31}^{\top}G_{32}^{\top}R = QR.
+% 	}
+% \end{align*}
+
+% %------------------------------------------------------------------------------ ex4
+% \clearpage
+% \begin{exampleboxed}
+% 	Examine the following matrix $A$ given as follows
+% 	\begin{align}
+% 		A = \begin{pmatrix} 5 &1 &2 \\ 1 &-1 &0 \\ 1 &1 &6 \end{pmatrix}_{3\times 3}.
+% 	\end{align}
+% \end{exampleboxed}
+% \inputfig{floats/matrixA213132}{matrixA213132}
+% The Givens-Rotation matrix $G_{21}$ takes the form
+% \begin{align}
+% 	G_{21} = 
+% 	\begin{pmatrix}  c &-s &0 \\ s &c &0 \\ 0 &0 &1 \end{pmatrix}
+% \end{align}
+% The Givens-Rotation matrix $G_{31}$ takes the form
+% \begin{align}
+% 	G_{31} = 
+% 	\begin{pmatrix}  c &0 &-s \\ 0 &1 &0 \\ s &0 &c \end{pmatrix}
+% \end{align}
+% The Givens-Rotation matrix $G_{32}$ takes the form
+% \begin{align}
+% 	G_{32} = 
+% 	\begin{pmatrix}  1 &0 &0 \\ 0 &c &-s \\ 0 &s &c \end{pmatrix}
+% \end{align}
+
+% %------------------------------------------------------------------------------ hh
+% \clearpage
+% \subsection{Step-by-step with Householder-Reflection}
+% \inputfig{floats/householder}{householder}
+
+% Let us consider the first column of matrix $A$
+% \inputfig{floats/householder_matrixA}{householder_matrixA}
+
+% \clearpage
+% \inputfig{floats/householder_projection}{householder_projection}
+
+% Vector $\bm{z}$ is known. 
+% Then, we would like to apply matrix $P$ on $\bm{z}$ such a way that 
+% the resulting vector $\bm{Pz}$ is not streching and laying along $\bm{e_1}$ axis.
+% The following relation holds
+% \begin{align}
+% 	\label{eq:Pzv}
+% 	\boxed{
+% 		Pz = z + v
+% 	}
+% \end{align}
+% but we also have
+% \begin{align}
+% 	\norm[1]{Pz} = \norm[1]{z}
+% \end{align}
+% hence, the vector $Pz$ should take the form
+% \begin{align}
+% 	Pz = \norm[1]{z} e_{1}
+% \end{align}
+% Substitution
+% \begin{align}
+% 	\norm[1]{z} e_{1} = z + v
+% \end{align}
+% which leads to 
+% \begin{align}
+% 	\label{eq:vonly}
+% 	\boxed{
+% 		v = \norm[1]{z} e_{1} - z
+% 	}
+% \end{align}
+% Next, we shall need to find a multiplicative expression of $v$ w.r.t. $z$. 
+% Hence, we will consider the angle between $v$ and $z$ as follows
+% \begin{align}
+% 	\label{eq:zv}
+% 	-z \cdot v = \norm[1]{z}\norm[1]{v}\cos{(\alpha)}
+% 	\Rightarrow 
+% 	\cos{(\alpha)} = \frac{-z \cdot v}{\norm[1]{z}\norm[1]{v}}.
+% \end{align}
+% Besides, the following relation also holds
+% \begin{align}
+% 	\label{eq:cosa}
+% 	\cos{(\alpha)} = \frac{\norm[1]{w}}{\norm[1]{z}}
+% 	\Rightarrow
+% 	\norm[1]{w} = \norm[1]{z} \cos{(\alpha)}.
+% \end{align}
+% Substitution of \eqref{eq:zv} into \eqref{eq:cosa} yields
+% \begin{align}
+% 	\norm[1]{w}
+% 	= \norm[1]{z} \frac{-z \cdot v}{\norm[1]{z}\norm[1]{v}}
+% 	= \frac{-z \cdot v}{\norm[1]{v}},
+% \end{align}
+% which further leads to 
+% \begin{align}
+% 	\label{eq:vexplicit}
+% 	v 
+% 	= 2w 
+% 	= 2 \norm[1]{w} \frac{w}{\norm[1]{w}}
+% 	 & = 2 \norm[1]{w} \frac{v}{\norm[1]{v}}                     \\
+% 	 & = 2 \frac{-z \cdot v}{\norm[1]{v}} \frac{v}{\norm[1]{v}}  \\ 
+% 	 & = 2 \frac{-v \cdot z}{\norm[1]{v}} \frac{v}{\norm[1]{v}}  \\
+% 	 & = 2 \frac{v}{\norm[1]{v}} \frac{-v \cdot z}{\norm[1]{v}}  \\
+% 	 & = -2 \frac{v}{\norm[1]{v}} \frac{v^{\top} z}{\norm[1]{v}} \\
+% 	 & = -2 \frac{vv^{\top} z}{\norm[1]{v}^2}.
+% \end{align}
+% Finally, substitution \eqref{eq:vexplicit} into \eqref{eq:Pzv} results in
+% \begin{align}
+% 	Pz = z -2 \frac{vv^{\top} z}{\norm[1]{v}^2}
+% 	 & = Iz -2 \frac{vv^{\top} z}{\norm[1]{v}^2}          \\
+% 	 & = Iz -2 \frac{vv^{\top}}{\norm[1]{v}^2}z           \\
+% 	 & = \left( I -2 \frac{vv^{\top}}{v^{\top}v} \right)z
+% \end{align}
+% Therefore, the Householder-Reflection matrix takes the form
+% \begin{align}
+% 	\therefore\quad\boxed{
+% 		P:=	I -2 \frac{vv^{\top}}{v^{\top}v},
+% 	}
+% \end{align}
+% which can be narrated that applying the Householder-Reflection matrix $P$
+% onto any vector $z$ from the left, one obtain 
+% reflected image of vector $z$ over a hyperplane.
+% %------------------------------------------------------------------------------ hhex1
+% \clearpage
+% \begin{exampleboxed}
+% 	Examine the following matrix $A$ given as follows
+% 	\begin{align}
+% 		A = \begin{pmatrix} 5 &1 &2 \\ 1 &-1 &0 \\ 1 &1 &6 \end{pmatrix}_{3\times 3}.
+% 	\end{align}
+% \end{exampleboxed}
+% Based on \eqref{eq:vonly} we obtain 
+% \begin{align}
+% 	v 
+% 	= \norm[1]{z}e_1 - z 
+% 	= \sqrt{5^2+1^2+1^2}
+% 	\begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}
+% 	- 
+% 	\begin{pmatrix} 5 \\ 1 \\ 1 \end{pmatrix}
+% 	=
+% 	\begin{pmatrix} \sqrt{27}-5 \\ -1 \\ -1 \end{pmatrix}
+% \end{align}
+% Hence, the components $vv^{\top}$ and $v^{\top}v$ are computed as follows
+% \begin{align}
+% 	vv^{\top} = 
+% 	\begin{pmatrix} \sqrt{27}-5 \\ -1 \\ -1 \end{pmatrix}
+% 	\begin{pmatrix} \sqrt{27}-5 & -1 & -1 \end{pmatrix}
+% 	=
+% 	\cdots
+% \end{align}
+% Besides, 
+% \begin{align}
+% 	v^{\top}v = 
+% 	\begin{pmatrix} \sqrt{27}-5 & -1 & -1 \end{pmatrix}
+% 	\begin{pmatrix} \sqrt{27}-5 \\ -1 \\ -1 \end{pmatrix}
+% 	= 54-10\sqrt{27}
+% \end{align}
+% which leads to 
+% \begin{align}
+% 	P_1 = I -2 \frac{vv^{\top}}{v^{\top}v} = \cdots = 
+% \end{align}
+% Therefore, we obtain 
+% \begin{align}
+% 	\boxed{
+% 		P_1A 
+% 		= \cdots 
+% 		= \begin{pmatrix} 5.1962 & 0.9623 & 3.0792 \\ 0 &-0.8075 & -5.5019 \\ 0 &1.1925 &0.4981 \end{pmatrix}
+% 	}
+% \end{align}
+% Since the matrix $P_1A$ is not yet in forms of a right upper triangular matrix,
+% we will need to perform another Householder-Reflection, as follows 
+% \begin{align}
+% 	v_2 
+% 	= \norm[1]{z_2}e_1 - z_2 
+% 	= \sqrt{0.8075^2 + 1.1925^2}
+% 	\begin{pmatrix} 1 \\ 0  \end{pmatrix}
+% 	- 
+% 	\begin{pmatrix} -0.8075 \\ 1.1925 \end{pmatrix}
+% 	=
+% 	\begin{pmatrix} 2.2477 \\ -1.1925  \end{pmatrix}
+% \end{align}
+% Similarly
+% \begin{align}
+% 	v_2v_2^{\top} =	
+% 	\begin{pmatrix} 2.2477 \\ -1.1925  \end{pmatrix}
+% 	\begin{pmatrix} 2.2477 & -1.1925  \end{pmatrix}
+% 	= \dots 
+% \end{align}
+% \begin{align}
+% 	v_2^{\top}v_2 =	
+% 	\begin{pmatrix} 2.2477 & -1.1925  \end{pmatrix}
+% 	\begin{pmatrix} 2.2477 \\ -1.1925  \end{pmatrix}
+% 	= 6.4742
+% \end{align}
+% which leads to 
+% \begin{align}
+% 	P_2 = I -2 \frac{v_2v_2^{\top}}{v_2^{\top}v_2} = \cdots = 
+% \end{align}
+% Therefore, we obtain
+% \begin{align}
+% 	\therefore\quad
+% 	\boxed{
+% 		P_2(P_1A) 
+% 		= \cdots 
+% 		= \begin{pmatrix} 27 & 7.8947 & 12.2397 \\ 0 &1.4402 & 3.4975 \\ 0 &0 &-4.2762 \end{pmatrix}
+% 	}
+% \end{align}
+% %------------------------------------------------------------------------------
+% \clearpage
+% \section{Numerics: QR-algorithm}
+% \begin{observationboxed}[\textbf{QR-algorithm} vs. \textbf{QR-decomposition}]
+% 	QR-algorithm (as seen in Maths III) is not QR-decomposition (as seen in Maths II). 
+% 	QR-algorithm (Maths III) is an algorithm used to find 
+% 	\textbf{all} eigenvalues of a matrix $A$ \textbf{numerically}. Meanwhile, 
+% 	QR-decomposition is a technique in linear algebra used to decompose 
+% 	a matrix $A$ into an orthogonal matrix $Q$ and a right upper triangular matrix $R$.
+% 	Nevertheless, we will still need QR-decomposition for QR-algorithm.
+% \end{observationboxed}
+% \begin{mdframed}
+% 	\begin{enumerate}
+% 		\item $A_0 := A$,
+% 		\item Perform QR-decomposition $A_0 = Q_0R_0$
+% 		\item Next step: $A_1 = R_0Q_0$
+% 	\end{enumerate}
+% \end{mdframed}
+% \begin{align*}
+% 	\boxed{
+% 		\text{Be aware that the position of Q and R is switched at step 3!}
+% 	}
+% \end{align*}
+
+% \clearpage
+% %------------------------------------------------------------------------------
+% \section{Analysis: Application of Hölder's inequality}
+% \begin{observationboxed}
+% 	Sometimes we would like to estimate whether an integral, from complicated to very complicated, 
+% 	is bounded at a certain value or not, without actually compute it. 
+% 	The Hölder's inequality is a useful mathematical tool for such situation.
+% \end{observationboxed}
+% \begin{exampleboxed}
+% 	Estimate the value of the following integral
+% 	\begin{align*}
+% 		\bigintsss_{\Omega} (x + 2)^{-3/5} \exp{(-2x/3)} \, dx
+% 	\end{align*}
+% \end{exampleboxed}
+% \begin{observationboxed}
+% 	The given integral is complicated to compute, but it would be easier if we may split 
+% 	the exponential term away from the polynomial term.
+% \end{observationboxed}
+% Approach:
+% Setting 
+% \begin{align}
+% 	f(x) & := (x+2)^{-3/5}  \\
+% 	g(x) & := \exp{(-2x/3)}
+% \end{align}
+% Given $f(x) \in L^6(\Omega)$, then we can compute
+% \begin{align}
+% 	% \Vert f(x) \Vert_{L^6(\Omega)}
+% 	\norm[2]{f(x)}_{L^6(\Omega)}^{6}
+% 	 & = \bigintsss_{0}^{\infty} |f(x)|^6 \,dx  \notag           \\    
+% 	 & = \bigintsss_{0}^{\infty} (x+2)^{-3\cdot 6/5}\,dx  \notag \\
+% 	 & 
+% 	= -\left. \frac{5}{13}(x+2)^{-13/5}\right|_{x=0}^{x=\infty}        
+% 	= \frac{5}{13}\cdot 2^{-13/5} < \infty.    
+% \end{align}
+% Therefore, we obtain
+% \begin{align}
+% 	\therefore\quad\boxed{
+% 		\norm[2]{f(x)}_{L^6(\Omega)}^{6} = \frac{5}{13}\cdot 2^{-13/5} < \infty.
+% 	}
+% \end{align}
+% % \begin{equation*}
+% % 	\Vert u\Vert_{L^6(\Omega)}^6 = \int_{0}^{\infty} (x+2)^{-\frac{3\cdot 6}{5}}\,{\mathrm d}x
+% % 	= -\left.\frac{5}{13}(x+2)^{-\frac{13}{5}}\right|_{x=0}^{x=\infty} = \frac{5}{13}\cdot 2^{-\frac{13}{5}} < \infty.    
+% % \end{equation*}
+% Besides, the following relation hold for Hölder's inequality
+% \begin{align}
+% 	\frac{1}{6} + \frac{1}{q} = 1 \Leftrightarrow q = \frac{6}{5}
+% \end{align}
+% which leads to $g(x)\in L^q(\Omega)$:
+% \begin{align}
+% 	\norm[2]{g(x)}_{L^{6/5}(\Omega)}^{6/5}
+% 	% \Vert g(x) \Vert_{L^{6/5}(\Omega)}^{6/5}
+% 	 & = 
+% 	\bigintsss_{0}^{\infty}
+% 	|g(x)|^{6/5} \,dx
+% 	\notag                                                                                                           \\
+% 	 & = 
+% 	\bigintsss_{0}^{\infty}
+% 	\exp{ \left(-\frac{2}{3}\cdot\frac{6}{5}\cdot x \right)} \,dx                                             \notag \\
+% 	 & = -\left.\frac{5}{4} \exp{\left( -\frac{4}{5}x \right)}\right|_{x=0}^{x=\infty} 
+% 	= \frac{5}{4} < \infty.    
+% \end{align}
+% Therefore, we obtain
+% \begin{align}
+% 	\therefore\quad\boxed{
+% 	\norm[2]{g(x)}_{L^{6/5}(\Omega)}^{6/5} = \frac{5}{4} < \infty.   
+% 	}
+% \end{align}
+% Finally, we can estimate the integral by using the Hölder's inequality
+% \begin{equation}
+% 	\therefore\quad\boxed{
+% 		\begin{aligned}
+% 			\bigintsss_{\Omega}
+% 			\frac{\exp{(-2x/3)}}{\sqrt[5]{(x + 2)^{3}}} \,dx
+% 			=   \norm[2]{f(x)\,g(x)}_{L^1(\Omega)}
+% 			 & \leq
+% 			\norm[2]{f(x)}_{L^p(\Omega)}
+% 			\norm[2]{g(x)}_{L^q(\Omega)}                          \\
+% 			 & = \norm[2]{f(x)}_{L^6(\Omega)}
+% 			\norm[2]{g(x)}_{L^{6/5}(\Omega)}                      \\
+% 			 & = \left( \frac{5\cdot 2^{-13/5}}{13} \right)^{1/6}
+% 			\left( \frac{5}{4} \right)^{5/6}                      \\
+% 			 & < \infty.
+% 		\end{aligned}
+% 	}
+% \end{equation}
+
+% %------------------------------------------------------------------------------
+% % \clearpage
+% \begin{exampleboxed}
+% 	Estimate the value of the following integral
+% 	\begin{align}
+% 		\bigintsss_{\Omega} \underbrace{\exp{(-2x/3)}}_{f(x)} \underbrace{(x + 2)^{-4/3}}_{g(x)} \, dx
+% 	\end{align}
+% \end{exampleboxed}
+% Similarly, we estimate the value of the integral for $p=3/2$ and $q=3$
+% as follows
+% \begin{align}
+% 	\bigintsss_{\Omega} \frac{\exp{(-2x/3)}}{\sqrt[3]{(x + 2)^{4}}} \, dx
+% 	 & \leq
+% 	\underbrace{\left(\bigintsss_{0}^{\infty}\left(\exp{(-2x/3)}\right)^{3/2}dx\right)^{2/3}}_
+% 	{\|f(x)\|_{L^{3/2}(\Omega)}}
+% 	\underbrace{\left(\bigintsss_{0}^{\infty} \left((x + 2)^{-4/3}\right)^{3} dx\right)^{1/3}}
+% 	_{\|g(x)\|_{L^{3}(\Omega)}} \notag \\
+% 	 & =
+% 	1^{2/3}\cdot
+% 	\left(\frac{1}{24}\right)^{1/3}
+% 	= \frac{1}{\sqrt[3]{24}}.
+% \end{align}
+% Therefore, the integral is easily estimated 
+% \begin{align}
+% 	\therefore\quad\boxed{
+% 		\bigintsss_{\Omega} \frac{\exp{(-2x/3)}}{\sqrt[3]{(x + 2)^{4}}} \, dx
+% 		\leq
+% 		\frac{1}{\sqrt[3]{24}}.
+% 	}
+% \end{align}
+%------------------------------------------------------------------------------
+% \section{Hint for A1-HA05}
+% \begin{exampleboxed}
+% 	Given the set $\mathcal{M} \in \mathbb{R}^2$ bounded by three points
+% 	$A$, $B$, and $C$, as shown in \Cref{setAinR2}.
+% 	\begin{enumerate}
+% 		\item Examine the integral of a function $f(x,y)$ over set $\mathcal{M}$.
+% 		\item Compute the area of $\mathcal{M}$ by setting $f(x,y)=1$.
+% 	\end{enumerate}
+% \end{exampleboxed}
+% \inputfig{floats/setAinR2}{setAinR2}
+% Approach:\\
+% We will look at the \Cref{setAinR2} and consider it in two scenarios as follows
+% \begin{enumerate}
+% 	\item Scenario 1: \Cref{setAinR2_Ax},
+% 	\item Scenario 2: \Cref{setAinR2_Ay},
+% \end{enumerate}
+% which we will see later on that the two approaches will actually lead to the same solution,
+% thanks to Fubini's theorem \cite{FubiniWiki}.
+% \newpage
+% \begin{recallboxed}
+% 	Equation of a line $(l)$ in general reads 
+% 	\begin{align}
+% 		(l):\quad y  = a\,x + b,
+% 	\end{align}
+% 	where $a$ is the slope of the line, and $b$ is the point where the line $(l)$ crosses over 
+% 	the vertical line of the axis. Hence, when this line $(l)$
+% 	going through point $P(x_P,y_P)$ and point $Q(x_Q,y_Q)$, 
+% 	it leads to the following two relations
+% 	\begin{align}
+% 		y_P & = a\,x_P + b, \\
+% 		y_Q & = a\,x_Q + b,
+% 	\end{align}
+% 	which leads to the slope $a$ and vertical point $b$ as follows
+% 	\begin{align}
+% 		a & = \frac{y_P-y_Q}{x_P-x_Q},              \\
+% 		b & = \frac{-y_P\,x_Q + y_Q\,x_P}{x_P-x_Q}.
+% 	\end{align}
+% 	Finally, equation of a line $(l)$ passing through 
+% 	point $P(x_P,y_P)$ and point $Q(x_Q,y_Q)$ in general takes the form
+% 	\begin{align}
+% 		\label{eq:lineeqn}
+% 		\therefore\quad\boxed{
+% 			y = \frac{y_P-y_Q}{x_P-x_Q}\,x + \frac{-y_P\,x_Q + y_Q\,x_P}{x_P-x_Q}.
+% 		}
+% 	\end{align}
+% \end{recallboxed}
+% By taking advantage of the formula \eqref{eq:lineeqn}
+% we are ready to obtain the following three line functions for 
+% $(AB)$, $(AC)$, and $(BC)$ as follows
+% \begin{align}
+% 	\label{eq:box1}
+% 	\boxed{
+% 		\begin{aligned}
+% 			(AB):\quad y & = -x + 3,                     \\
+% 			(AC):\quad y & = \frac{1}{2}x + \frac{3}{2}, \\
+% 			(BC):\quad y & = 2\,x - 3,
+% 		\end{aligned}
+% 	}
+% \end{align}
+% which we, alternatively, we can also write those expressions in terms of $x$, as follows
+% \begin{align}
+% 	\label{eq:box2}
+% 	\boxed{
+% 		\begin{aligned}
+% 			(AB):\quad x & = -y + 3,                     \\
+% 			(AC):\quad x & = 2\,y - 3,                   \\
+% 			(BC):\quad x & = \frac{1}{2}y + \frac{3}{2}.
+% 		\end{aligned}
+% 	}
+% \end{align}
+% Note in passing that we have used point $A(1,2)$, $B(2,1)$, and $C(3,3)$.
+% \clearpage
+% \begin{enumerate}
+% 	\item Scenario 1: \Cref{setAinR2_Ax}\\
+% 	      \inputfig{floats/setAinR2_Ax}{setAinR2_Ax}
+
+% 	      By following the $\mathcal{M}_x$ split and using the box \eqref{eq:box1}
+% 	      we obtain the set $\mathcal{M}_{1}$
+% 	      \begin{align}
+% 		      \mathcal{M}_{1} = 
+% 		      \Big\{ y \in \mathbb{R} \, \Big| \, -x+3 \leq y \leq \frac{1}{2}x + \frac{3}{2} \Big\},
+% 	      \end{align}
+% 	      which is due to the fact that while following the $y$-axis we first come across 
+% 	      the line $(AB)$ and then the line $(AC)$. Similarly, 
+% 	      the set $\mathcal{M}_{2}$ is obtained as follows
+% 	      \begin{align}
+% 		      \mathcal{M}_{2} = 
+% 		      \Big\{ y \in \mathbb{R} \, \Big| \, 2x-3 \leq y \leq \frac{1}{2}x + \frac{3}{2} \Big\},
+% 	      \end{align}
+% 	      which, again, is due the fact that we first face to the line $(BC)$ and then $(AC)$
+% 	      while following the $y$-axis.
+% 	      Therefore, we obtain 
+% 	      \begin{align}
+% 		      \bigintsss_{\mathcal{M}}f(x,y)\,d\lambda_{2}
+% 		       & = \bigintsss_{\mathcal{M}_1}f(x,y)\,d\lambda_{2}
+% 		      + \bigintsss_{\mathcal{M}_2}f(x,y)\,d\lambda_{2}
+% 		      \notag                                                                                 \\
+% 		       & = \bigintsss_{\mathbb{R}} 
+% 		      ( \bigintsss_{(\mathcal{M}_1)_x} f(x,y)\,dy )\,dx
+% 		      + \bigintsss_{\mathbb{R}}
+% 		      ( \bigintsss_{(\mathcal{M}_2)_x} f(x,y)\,dy )\,dx
+% 		      \notag                                                                                 \\
+% 		       & = \bigintsss_{1=x_A}^{2=x_B} ( \bigintsss_{-x+3}^{x/2+3/2} f(x,y)\,dy ) \,dx \notag \\
+% 		       & \qquad\qquad\qquad
+% 		      + \bigintsss_{2=x_B}^{3=x_C} ( \bigintsss_{2x-3}^{x/2+3/2} f(x,y)\,dy ) \,dx
+% 	      \end{align}
+% 	      which will results in $3/2$ when $f(x,y)=1$.
+% 	      \clearpage
+% 	      %----------------------------------------
+% 	\item Scenario 2: \Cref{setAinR2_Ay}\\
+% 	      \inputfig{floats/setAinR2_Ay}{setAinR2_Ay}
+
+% 	      By following the $\mathcal{M}_y$ split and using the box \eqref{eq:box2}
+% 	      we obtain the set $\mathcal{M}_{3}$
+% 	      \begin{align}
+% 		      \mathcal{M}_{3} = 
+% 		      \Big\{ x \in \mathbb{R} \, \Big| \, -y+3 \leq x \leq \frac{1}{2}y + \frac{3}{2} \Big\},
+% 	      \end{align}
+% 	      which is due to the fact that while following the $x$-axis we first come across 
+% 	      the line $(AB)$ and then the line $(BC)$. Similarly, 
+% 	      the set $\mathcal{M}_{4}$ is obtained as follows
+% 	      \begin{align}
+% 		      \mathcal{M}_{4} = 
+% 		      \Big\{ x \in \mathbb{R} \, \Big| \, 2y-3 \leq x \leq \frac{1}{2}y + \frac{3}{2} \Big\},
+% 	      \end{align}
+% 	      which, again, is due the fact that we first face to the line $(AC)$ and then $(BC)$
+% 	      while following the $x$-axis.
+% 	      Therefore, we obtain 
+% 	      \begin{align}
+% 		      \bigintsss_{\mathcal{M}}f(x,y)\,d\lambda_{2}
+% 		       & = \bigintsss_{\mathcal{M}_3}f(x,y)\,d\lambda_{2}
+% 		      + \bigintsss_{\mathcal{M}_4}f(x,y)\,d\lambda_{2}
+% 		      \notag                                                                                 \\
+% 		       & = \bigintsss_{\mathbb{R}} 
+% 		      ( \bigintsss_{(\mathcal{M}_3)_y} f(x,y)\,dx )\,dy
+% 		      + \bigintsss_{\mathbb{R}}
+% 		      ( \bigintsss_{(\mathcal{M}_4)_y} f(x,y)\,dx )\,dy
+% 		      \notag                                                                                 \\
+% 		       & = \bigintsss_{1=y_B}^{2=y_A} ( \bigintsss_{-y+3}^{y/2+3/2} f(x,y)\,dx ) \,dy \notag \\
+% 		       & \qquad\qquad\qquad
+% 		      + \bigintsss_{2=y_A}^{3=y_C} ( \bigintsss_{2y-3}^{y/2+3/2} f(x,y)\,dx ) \,dy
+% 	      \end{align}
+% 	      which will results in $3/2$ when $f(x,y)=1$.
+% \end{enumerate}
+
+% Consider the following ordinary differential equation (ODE) taking the form
+% \begin{align}
+% 	\label{eq:thisistheODE}
+% 	x'(t) =  f(t,x(t)),
+% 	\quad\text{with}\quad
+% 	x(t_0)=x_0,
+% \end{align}
+% which may be approximated by a linear multistep method, taking the general form
+% \begin{align}
+% 	\label{eq:multistepform}
+% 	\boxed{
+% 	\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) = h\sum_{l=0}^{m}\beta_l\,f(t_j+lh,x(t_j+lh)).
+% 	}
+% \end{align}
+% \begin{observationboxed}
+% 	There are 6 symbols arising in 
+% 	\eqref{eq:alphal},
+% 	\eqref{eq:betal},
+% 	\eqref{eq:multistepform} to be aware of
+% 	\begin{enumerate}
+% 		\item $m$ is the total number of steps used in the multistep method.
+% 		\item $\alpha \in \mathbb{R}$ is the coefficient for the linear combination of $x(t_j+lh)$
+% 		\item $\beta \in \mathbb{R}$ is the coefficient for the linear combination of $f(t_j+lh,x(t_j+lh))$.
+% 		\item $p$ is the consistency order.
+% 		\item $l$ is the dummy index, running from $0$ to $m$.
+% 		\item $q$ is the dummy index, running from $1$ to $p$.
+% 	\end{enumerate}
+% \end{observationboxed}
+% \newpage
+% \begin{observationboxed}
+% 	The multistep method arising in 
+% 	\eqref{eq:multistepform}
+% 	is a \textbf{linear} multistep method, or specifically 
+% 	\textbf{linear} m-step method.
+% 	The term \textbf{linear} coming along with m-step method,
+% 	i.e. linear m-step method, emphasizes the fact that
+% 	there is actually a \textbf{linear combination} of the terms $x(t_j+lh)$ with coefficients $\alpha_l$
+% 	on the LHS of \eqref{eq:multistepform}, and 
+% 	a \textbf{linear combination} of the terms $f(t_j+lh,x(t_j+lh))$
+% 	with coefficients $\beta_l$
+% 	on the RHS of \eqref{eq:multistepform}. This linear m-step method 
+% 	uses the information from the previous m steps to compute the value for the next step. 
+% 	In details, let us examine the formula \eqref{eq:multistepform}
+% 	which is written again as follows
+% 	\begin{align}
+% 		\label{eq:multistepformexamine}
+% 		\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) = h\sum_{l=0}^{m}\beta_l\,f(t_j+lh,x(t_j+lh)),
+% 	\end{align}
+% 	whose LHS is written in its entirety as follows
+% 	\begin{align}
+% 		\label{eq:LHSterm}
+% 		\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) 
+% 		 & = 
+% 		\alpha_0\,x{(t_j)} 
+% 		+ \alpha_1\,x{(t_j+h)} 
+% 		+ \alpha_2\,x{(t_j+2h)}
+% 		+ \dots \notag \\
+% 		 & 
+% 		+ \dots
+% 		+ \alpha_{m-1}\,x{(t_j+(m-1)h)} 
+% 		+ \alpha_m\,\textcolor{Bittersweet}{x{(t_j+mh)}},
+% 	\end{align}
+% 	whereas the RHS of \eqref{eq:multistepformexamine} has its expansion as follows
+% 	\begin{align}
+% 		\label{eq:RHSterm}
+% 		\sum_{l=0}^{m}\beta_l\,f(t_j+lh,x(t_j+lh))
+% 		 & =  
+% 		\beta_0\,f(t_j,x(t_j)) 
+% 		+ \beta_1\,f(t_j+h,x(t_j+h))
+% 		\notag    \\
+% 		 & \quad 
+% 		+ \beta_2\,f(t_j+2h,x(t_j+2h))
+% 		\notag    \\
+% 		 & \quad 
+% 		+ \dots + 
+% 		\notag    \\
+% 		 & \quad 
+% 		+ \beta_{m-1}\,f(t_j+(m-1)h,x(t_j+(m-1)h)) 
+% 		\notag    \\
+% 		 & \quad 
+% 		+ \beta_{m}\,\textcolor{ForestGreen}{f(t_j+mh,x(t_j+mh))}.
+% 	\end{align}
+% 	The insertion of \eqref{eq:LHSterm} and \eqref{eq:RHSterm}
+% 	into \eqref{eq:multistepformexamine} leads to
+% 	\begin{align}
+% 		\label{eq:assembling}
+% 		 & \alpha_0\,x{(t_j)} 
+% 		+ \alpha_1\,x{(t_j+h)}  
+% 		+ \alpha_2\,x{(t_j+2h)} 
+% 		\notag                             \\
+% 		 & + \dots
+% 		\notag                             \\
+% 		 & + \alpha_{m-1}\,x{(t_j+(m-1)h)}
+% 		+ \alpha_m\,\textcolor{Bittersweet}{x{(t_j+mh)}}
+% 		\notag                             \\
+% 		 & = 
+% 		\notag                             \\
+% 		 & \beta_0\,f(t_j,x(t_j)) 
+% 		+ \beta_1\,f(t_j+h,x(t_j+h))
+% 		+ \beta_2\,f(t_j+2h,x(t_j+2h))
+% 		\notag                             \\
+% 		 & 
+% 		+ \dots + 
+% 		\notag                             \\
+% 		 & 
+% 		+ \beta_{m-1}\,f(t_j+(m-1)h,x(t_j+(m-1)h)) 
+% 		+ \beta_{m}\,\textcolor{ForestGreen}{f(t_j+mh,x(t_j+mh))},
+% 	\end{align}
+% 	which tells us the fact that the value $\textcolor{Bittersweet}{x(t_j+mh)}$
+% 	is approximated 
+% 	by using all information from previous steps, based on
+% 	\begin{enumerate}
+% 		\item $x(t_j)$, $x{(t_j+h)}$, $\dots$, $x{(t_j+(m-1)h)}$.
+% 		\item $f(t_j,x(t_j))$, $f(t_j+h,x(t_j+h))$, $\dots$, $f(t_j+mh,x(t_j+mh))$.
+% 		\item Coefficients $\alpha_l$ and $\beta_l$.
+% 	\end{enumerate}
+% \end{observationboxed}
+% \begin{observationboxed}
+% 	The appearance of the green term $\textcolor{ForestGreen}{f(t_j+mh,x(t_j+mh))}$
+% 	arising in \eqref{eq:assembling} plays a significant role, meaning that
+% 	\begin{enumerate}
+% 		\item $\beta_m = 0$: the green term is switched off, and the scheme becomes \textbf{explicit}.
+% 		\item $\beta_m \neq 0$:  the green term is switched on, and the scheme becomes \textbf{implicit}.
+% 	\end{enumerate}
+% \end{observationboxed}
+% \begin{observationboxed}
+% 	Specific choices of $\alpha_l$ and $\beta_l$ leads to some familiar methods.
+% 	Especially, when $m=1$ the linear m-step method becomes single-step method,
+% 	or one-step method. If so, according to \eqref{eq:multistepform}
+% 	there will be 4 coefficients $(\alpha_0,\alpha_1,\beta_0,\beta_1)$
+% 	to be defined. For example:
+% 	\begin{enumerate}
+% 		\item $(\alpha_0,\alpha_1,\beta_0,\beta_1) = (-1,1,1,0)$ we obtain explicit Euler.
+% 		\item $(\alpha_0,\alpha_1,\beta_0,\beta_1) = (-1,1,0,1)$ we obtain implicit Euler.
+% 	\end{enumerate}
+% \end{observationboxed}
+% When the time $t$ is considered at a specific discretized time point $t=t_j+lh$, the ODE in \eqref{eq:thisistheODE} yields 
+% \begin{align}
+% 	\label{eq:newtimepointtj}
+% 	x'(t_j+lh) = f(t_j+lh,x(t_j+lh)),
+% \end{align}
+% Substitution of \eqref{eq:newtimepointtj} into \eqref{eq:multistepform} leads to 
+% \begin{align}
+% 	\sum_{l=0}^{{m}}\alpha_l\,x(t_j+lh) = h\sum_{l=0}^{m}\beta_l\,x'(t_j+lh),
+% \end{align}
+% which, by group the summation sign together, leads equally to
+% \begin{align}
+% 	\label{eq:myform}
+% 	\therefore\quad\boxed{
+% 	\sum_{l=0}^{{m}}\left( \alpha_l\,x(t_j+lh) - h\,\beta_l\,x'(t_j+lh) \right) = 0.
+% 	}
+% \end{align}
+% Then, the order of consistency is figured out by taking advantage of using Taylor's expansion for 
+% $x(t_j+lh)$ and $x'(t_j+lh)$. 
+% By using 
+% \eqref{eq:taylorderivativeno} and
+% \eqref{eq:taylorderivative2} in
+% \Cref{eq:Taylorniceform} we obtain 
+% \begin{align}
+% 	x(t_j+lh)  & = \sum_{n=0}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}),
+% 	\label{eq:taylorsubderno}
+% 	\\
+% 	x'(t_j+lh) & = \sum_{n=0}^{r-1} \frac{x^{(n+1)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{r}),
+% 	\label{eq:taylorsubder}
+% \end{align}
+% where, according to 
+% \eqref{eq:taylorderivativeno} and
+% \eqref{eq:taylorderivative2} in
+% \Cref{eq:Taylorniceform},
+% the following two substitutions have been performed
+% for 
+% \eqref{eq:taylorsubderno} and 
+% \eqref{eq:taylorsubder}
+% \begin{align}
+% 	a & \rightarrow t_j, \\
+% 	h & \rightarrow lh, 
+% \end{align}
+% which means that $a$ is replaced by $t_j$ while $h$ is by $lh$.
+% Furthermore, expression \eqref{eq:taylorsubderno} can be split into two main parts, 
+% where the first part is going with 
+% index $n=0$, and the second part with $n \in [1,q]$, as follows
+% \begin{align}
+% 	x(t_j+lh) 
+% 	 & = \sum_{n=0}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}) \notag    \\
+% 	 & = \frac{x^{(0)}(t_j)\,(lh)^{0}}{0!}
+% 	+ \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
+% 	+ \mathcal{O}((lh)^{q+1}) \notag                                                          \\
+% 	 & = x(t_j) + \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}),
+% \end{align}
+% which reads 
+% \begin{align}
+% 	\label{eq:use1}
+% 	\therefore\quad\boxed{
+% 	x(t_j+lh) = x(t_j) + \sum_{n=1}^{q} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{q+1}).
+% 	}
+% \end{align}
+% Besides, let the index in expression \eqref{eq:taylorsubder}
+% be starting from $n=1$, instead of $n=0$, we then obtain
+% \begin{align}
+% 	\label{eq:xprime1}
+% 	x'(t_j+lh) 
+% 	 & = \sum_{n=0}^{r-1} \frac{x^{(n+1)}(t_j)\,(lh)^{n}}{n!} + \mathcal{O}((lh)^{r}) \notag \\
+% 	 & = \sum_{n=1}^{r} \frac{x^{(n)}(t_j)\,(lh)^{n-1}}{(n-1)!} + \mathcal{O}((lh)^{r}),
+% \end{align}
+% which means that every element within the summation sign going with $(n+1)$ becomes $n$, and 
+% element going with $n$ will become $(n-1)$. Further expressions of 
+% \eqref{eq:xprime1} lead to
+% \begin{align}
+% 	\label{eq:xprime2}
+% 	x'(t_j+lh) 
+% 	 & = \sum_{n=1}^{r} \frac{n\,x^{(n)}(t_j)\,(lh)^{n-1}}{n!} + \mathcal{O}((lh)^{r}) \notag \\
+% 	 & = \sum_{n=1}^{r} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} + \mathcal{O}((lh)^{r}),
+% \end{align}
+% which reads 
+% \begin{align}
+% 	\label{eq:use2}
+% 	\therefore\quad\boxed{
+% 	x'(t_j+lh)  = \sum_{n=1}^{r} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} + \mathcal{O}((lh)^{r}).
+% 	}
+% \end{align}
+% Next, by substituting \eqref{eq:use1} and \eqref{eq:use2} into \eqref{eq:myform}
+% we obtain the following relation
+% \begin{align}
+% 	\sum_{l=0}^{{m}}
+% 	\Bigg( 
+% 	\alpha_l\,x(t_j)
+% 	 & + \alpha_l\sum_{n=1}^{p} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
+% 	+ 
+% 	\alpha_l\,\mathcal{O}((lh)^{p+1}) 
+% 	\notag                                                        \\
+% 	 & 
+% 	- h\,\beta_l
+% 	\sum_{n=1}^{p} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} 
+% 	- h\,\beta_l\, 
+% 	\mathcal{O}((lh)^{p})
+% 	\Bigg) 
+% 	= 0,
+% \end{align}
+% where the dummy indices $q$ and $r$ have been switched to $p$
+% in order to match our analysis for the given problem, leading to
+% \begin{align}
+% 	\label{eq:myconclusion}
+% 	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j)
+% 	+ 
+% 	\sum_{l=0}^{{m}} \Bigg( \alpha_l\sum_{n=1}^{p} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!} \Bigg)
+% 	+ 
+% 	\sum_{l=0}^{{m}}\alpha_l\,\underbrace{\mathcal{O}((lh)^{p+1})}_{\mathcal{O}(h^{p+1})}
+% 	\notag                                                     \\ 
+% 	 & \qquad 
+% 	- \sum_{l=0}^{{m}} \Bigg( h\,\beta_l \sum_{n=1}^{p} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h}  \Bigg)
+% 	- \sum_{l=0}^{{m}} \beta_l\,\underbrace{h\,\mathcal{O}((lh)^{p})}_{\mathcal{O}(h^{p+1})}
+% 	= 0,
+% 	\notag                                                     \\
+% 	\Leftrightarrow
+% 	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j) 
+% 	+ \sum_{l=0}^{{m}}
+% 	\Bigg(
+% 	\alpha_l\sum_{n=1}^{p} \frac{x^{(n)}(t_j)\,(lh)^{n}}{n!}
+% 	- h\,\beta_l \sum_{n=1}^{p} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!\,h} 
+% 	\Bigg) \notag                                              \\
+% 	 & \qquad\qquad\qquad\qquad\qquad\qquad
+% 	+ \sum_{l=0}^{{m}}
+% 	\Bigg(
+% 	\underbrace{\alpha_l\,\mathcal{O}(h^{p+1}) - \beta_l\,\mathcal{O}(h^{p+1})}_{\gamma_l\,\mathcal{O}(h^{p+1})}
+% 	\Bigg) = 0
+% 	\notag                                                     \\
+% 	\Leftrightarrow
+% 	 & \sum_{l=0}^{{m}}\alpha_l\,x(t_j) 
+% 	+ \sum_{l=0}^{{m}}
+% 	\Bigg(
+% 	\alpha_l\sum_{n=1}^{p} \frac{x^{(n)}(t_j)\,l^{n}h^{n}}{n!}
+% 	- \beta_l \sum_{n=1}^{p} \frac{n\,x^{(n)}(t_j)\,l^{n-1}h^{n}}{n!} 
+% 	\Bigg) \notag                                              \\
+% 	 & \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad 
+% 	+ \sum_{l=0}^{{m}}
+% 	\gamma_l\,\mathcal{O}(h^{p+1}) = 0
+% 	\notag                                                     \\
+% 	\Leftrightarrow
+% 	 & 
+% 	\textcolor{NavyBlue}{\sum_{l=0}^{{m}}\alpha_l}\,x(t_j)
+% 	+ \sum_{n=1}^{p}
+% 	\Bigg(
+% 	\frac{x^{(n)}(t_j)\,h^{n}}{n!}
+% 	\textcolor{NavyBlue}{\sum_{l=0}^{{m}} \Big( \alpha_l\,l^{n}  - \beta_l\,n\,l^{n-1} \Big)}
+% 	\Bigg)
+% 	+ \sum_{l=0}^{{m}}
+% 	\gamma_l\,\textcolor{red}{\mathcal{O}(h^{p+1})} = 0
+% 	\notag                                                     \\
+% \end{align}
+% Finally, the expression in \eqref{eq:myconclusion}
+% leads us to the fact that the 
+% linear m-step method has the consistency order of $p$, according to 
+% the red term in \eqref{eq:myconclusion},
+% when the blue terms in \eqref{eq:myconclusion} vanish, 
+% meaning that 
+% \begin{align}
+% 	\therefore\quad\boxed{
+% 		\begin{aligned}
+% 			\sum_{l=0}^{{m}}\alpha_l                                            & = 0, \\
+% 			\sum_{l=0}^{{m}} \Big( \alpha_l\,l^{n}  - \beta_l\,n\,l^{n-1} \Big) & = 0,
+% 			\quad\text{for}\quad n=1,2,3,\dots,p.
+% 		\end{aligned}
+% 	}
+% \end{align}
+% where $p$ is the order of consistency.
+% \newpage
+% \begin{observationboxed}
+% 	\label{eq:Taylorniceform}
+% 	Taylor's expansion of function $x(t)$ around point $a$ reads 
+% 	\begin{align}
+% 		\label{eq:Taylororiginal}
+% 		x(t) 
+% 		 & = x(a) 
+% 		+ \frac{x'(a)\,(t-a)}{1!} + \frac{x''(a)\,(t-a)^2}{2!} + \dots + \frac{x^{(p)}(a)\,(t-a)^p}{p!}\notag           \\
+% 		 & \quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad\quad 
+% 		+ \mathcal{O}((t-a)^{p+1})                                                                               \notag \\
+% 		 & = \sum_{n=0}^{p} \frac{x^{(n)}(a)\,(t-a)^{n}}{n!} + \mathcal{O}((t-a)^{p+1}).
+% 	\end{align}
+% 	Then, by setting $h:= t-a$ we obtain $t=a+h$; hence, the \eqref{eq:Taylororiginal} becomes
+% 	\begin{align}
+% 		\label{eq:taylorderivativeno}
+% 		x(a+h) 
+% 		 & = x(a) 
+% 		+ \frac{x'(a)\,h}{1!} + \frac{x''(a)\,h^2}{2!} + \dots + \frac{x^{(p)}(a)\,h^p}{p!}
+% 		+ \mathcal{O}(h^{p+1})                                                 \notag \\
+% 		 & = \sum_{n=0}^{p} \frac{x^{(n)}(a)\,h^{n}}{n!} + \mathcal{O}(h^{p+1}).
+% 	\end{align}
+% 	Since the point $a$ can be chosen arbitrarily, we can set it as a variable $t$, yielding
+% 	\begin{align}
+% 		\label{eq:taylorderivativenot}
+% 		x(t+h) 
+% 		 & = x(t) 
+% 		+ \frac{x'(t)\,h}{1!} + \frac{x''(t)\,h^2}{2!} + \dots + \frac{x^{(p)}(t)\,h^p}{p!}
+% 		+ \mathcal{O}(h^{p+1})                                                 \notag \\
+% 		 & = \sum_{n=0}^{p} \frac{x^{(n)}(t)\,h^{n}}{n!} + \mathcal{O}(h^{p+1}),
+% 	\end{align}
+% 	which, by taking derivative w.r.t. variable $t$ on both sides of \eqref{eq:taylorderivativenot}, gives rise to
+% 	\begin{align}
+% 		\label{eq:taylorderivative}
+% 		x'(t+h) 
+% 		 & = x'(t) 
+% 		+ \frac{x''(t)\,h}{1!} + \frac{x'''(t)\,h^2}{2!} + \dots + \frac{x^{(p+1)}(t)\,h^p}{p!}
+% 		+ \mathcal{O}(h^{p+1})
+% 		\notag                                                                     \\
+% 		 & = \sum_{n=0}^{p} \frac{x^{(n+1)}(t)\,h^{n}}{n!} + \mathcal{O}(h^{p+1}),
+% 	\end{align}
+% 	which can also be written as follows 
+% 	\begin{align}
+% 		\label{eq:taylorderivative2}
+% 		x'(t+h) 
+% 		 & = x'(t) 
+% 		+ \frac{x''(t)\,h}{1!} + \frac{x'''(t)\,h^2}{2!} + \dots + \frac{x^{(p)}(t)\,h^{p-1}}{(p-1)!}
+% 		+ \mathcal{O}(h^{p})
+% 		\notag                                                                     \\
+% 		 & = \sum_{n=0}^{p-1} \frac{x^{(n+1)}(t)\,h^{n}}{n!} + \mathcal{O}(h^{p}).
+% 	\end{align}
+% 	Note in passing that 
+% 	the only difference between
+% 	\eqref{eq:taylorderivative}
+% 	and 
+% 	\eqref{eq:taylorderivative2}
+% 	is the order $p$, i.e. 
+% 	we expand till $p$ in 
+% 	\eqref{eq:taylorderivative},
+% 	but only till $(p-1)$
+% 	in \eqref{eq:taylorderivative2}.
+% 	It turns out that the expression 
+% 	\eqref{eq:taylorderivative2}
+% 	helps our analysis in this exercise become more succinct.
+% \end{observationboxed}
+%------------------------------------------------------------------------------
+% \begin{align}
+% 	\label{eq:variationformular}
+% 	\boxed{
+% 		\delta F(y;v) := \lim_{t\to 0}\frac{F(y+tv)-F(y)}{t}.
+% 	}
+% \end{align}
+
+% In order to find the variation of the functional $F$,
+% which fulfills 
+% \eqref{eq:functionalexample}
+% and 
+% \eqref{eq:conditiony},
+% in $v$ direction satisfying
+% \eqref{eq:conditiony}, 
+% we need to compute the limit, by definiton,
+% as shown in \eqref{eq:variationformular}.
+% First, we shall write down the corresponding term 
+% for $F(y+t\,v)$ based on
+% the functional $F(y)$ given in
+% \eqref{eq:functionalexample}, which means
+% \begin{align}
+% 	\label{eq:termextra}
+% 	F(y+t\,v)
+% 	= 
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x \,
+% 	(y+t\,v)^\prime(x)
+% 	\Big)^2\,dx,
+% \end{align}
+% then by substituting both \eqref{eq:termextra}
+% and \eqref{eq:functionalexample}
+% into \eqref{eq:variationformular}
+% we obtain 
+% \begin{align}
+% 	\delta F(y;v)
+% 	 & :=  \lim_{t\to 0}\frac{F(y+t\,v)-F(y)}{t} \notag \\
+% 	 & =  \lim_{t\to 0} \frac{1}{t}
+% 	\left(
+% 	\frac{1}{2}
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x \,
+% 	(y+t\,v)^\prime(x)
+% 	\Big)^2\,dx
+% 	-
+% 	\frac{1}{2}
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x \, y^\prime(x)
+% 	\Big)^2\,dx
+% 	\right)\notag                                       \\
+% 	 & =  \lim_{t\to 0} \frac{1}{2t}
+% 	\left(
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x \,
+% 	(y(x)+t\,v(x))^\prime
+% 	\Big)^2\,dx
+% 	-
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x \, y^\prime(x)
+% 	\Big)^2\,dx
+% 	\right), 
+% \end{align}
+% where we will now compute those terms within the parenthesis, as follows
+% \begin{align}
+% 	\delta F(y;v)
+% 	 & =  \lim_{t\to 0} \frac{1}{2t}
+% 	\left(
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x \,
+% 	(y^\prime(x)+t\,v^\prime(x))
+% 	\Big)^2\,dx
+% 	-
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x \, y^\prime(x)
+% 	\Big)^2\,dx
+% 	\right)\notag                    \\
+% 	 & =  \lim_{t\to 0} \frac{1}{2t}
+% 	\left(
+% 	\bigintsss_{-1}^{1}
+% 	x^2 \,
+% 	\Big(y^\prime(x)+t\,v^\prime(x)\Big)^2
+% 	\,dx
+% 	-
+% 	\bigintsss_{-1}^{1}
+% 	x^2 \, (y^\prime(x))^2\,dx
+% 	\right)\notag                    \\
+% 	 & =  \lim_{t\to 0} \frac{1}{2t}
+% 	\!
+% 	\bigintsss_{-1}^{1}
+% 	\!\!\!\!
+% 	x^2 \,
+% 	\Big(
+% 	(y^\prime(x))^2 
+% 	+ 2\,y^\prime(x)\,t\,v^\prime(x)
+% 	+ t^2\,(v^\prime(x))^2
+% 	\Big)
+% 	\,dx
+% 	-\!\!\!
+% 	\bigintsss_{-1}^{1}
+% 	\!\!\!\!
+% 	x^2 \, (y^\prime(x))^2\,dx\notag \\
+% 	 & =  \lim_{t\to 0} \frac{1}{2t}
+% 	\bigintsss_{-1}^{1}
+% 	\!\!\!\!
+% 	\Big(
+% 	\cancel{x^2\,(y^\prime(x))^2}
+% 	+ 2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
+% 	+ x^2\,t^2\,(v^\prime(x))^2
+% 	- \cancel{x^2\,(y^\prime(x))^2}
+% 	\Big)
+% 	\,dx
+% 	\notag                           \\
+% 	 & =  \lim_{t\to 0} \frac{1}{2t}
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
+% 	+ x^2\,t^2\,(v^\prime(x))^2
+% 	\Big)
+% 	\,dx.
+% 	\label{eq:reducedform}
+% \end{align}
+
+% Next, the expression in \eqref{eq:reducedform} is computed further,
+% by first computing terms within the integrand going with $t$
+% and then splitting into two terms going with the limit, as follows
+% \begin{align}
+% 	\delta F(y;v)
+% 	 & \stackrel{\eqref{eq:reducedform}}{=}
+% 	\lim_{t\to 0} \frac{1}{2t}
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
+% 	+ x^2\,t^2\,(v^\prime(x))^2
+% 	\Big)
+% 	\,dx\notag                              \\
+% 	 & =
+% 	\lim_{t\to 0}
+% 	\bigintsss_{-1}^{1}
+% 	\frac{2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
+% 		+ x^2\,t^2\,(v^\prime(x))^2}{2t}
+% 	\,dx\notag                              \\
+% 	 & =
+% 	\lim_{t\to 0}
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x^2\,y^\prime(x)\,v^\prime(x)
+% 	+ \frac{1}{2}x^2\,t\,(v^\prime(x))^2
+% 	\Big)
+% 	\,dx\notag                              \\
+% 	 & =
+% 	\lim_{t\to 0}
+% 	\bigintsss_{-1}^{1}
+% 	x^2\,y^\prime(x)\,v^\prime(x)
+% 	\,dx
+% 	+ 
+% 	\lim_{t\to 0}
+% 	\frac{1}{2}
+% 	\bigintsss_{-1}^{1}
+% 	x^2\,t\,(v^\prime(x))^2
+% 	\,dx \notag                             \\
+% 	 & =
+% 	\bigintsss_{-1}^{1}
+% 	x^2\,y^\prime(x)\,v^\prime(x)
+% 	\,dx
+% 	+
+% 	\underbrace{\lim_{t\to 0}
+% 		\frac{t}{2}
+% 		\bigintsss_{-1}^{1}
+% 		x^2\,(v^\prime(x))^2
+% 		\,dx}_{=0}.
+% 	\label{eq:reducedform2}
+% \end{align}
+% Note in passing that the term $t$ can be brought out of the integral 
+% arising in \eqref{eq:reducedform2}
+% because $t$ is just a constant for this integral. 
+% It is also worthy to note that bringing a limit from outside 
+% to inside an integral is critical as the final result is not always the same.
+% Herein, for the limit showing in \eqref{eq:reducedform2}
+% we have been not doing so, but rather bringing the $t$ out of the integral.
+% Finally, the first variation of functional $F$ is processed further as follows
+% \begin{align}
+% 	\label{eq:reducedform3}
+% 	\delta F(y;v)
+% 	\stackrel{\eqref{eq:reducedform2}}{=}
+% 	\bigintsss_{-1}^{1}
+% 	x^2\,y^\prime(x)\,v^\prime(x)
+% 	\,dx.
+% \end{align}
+% We will compute \eqref{eq:reducedform3}
+% by taking into consideration the \textbf{integration by parts}, as follows 
+% \begin{align}
+% 	\label{eq:integrationbyparts}
+% 	\boxed{
+% 		\bigintsss a'b =  ab - \bigintsss ab'
+% 	}
+% \end{align}
+% where we will assign
+% \begin{align}
+% 	\label{eq:assignedab}
+% 	\begin{cases}
+% 		a := v(x), \\
+% 		b := x^2\,y'(x),
+% 	\end{cases}
+% \end{align}
+% which leads to 
+% \begin{align}
+% 	\delta F(y;v)
+% 	 & \stackrel{\eqref{eq:reducedform3}}{=}
+% 	\bigintsss_{-1}^{1}
+% 	\underbrace{v^\prime(x)}_{a'}
+% 	\underbrace{x^2\,y^\prime(x)}_{b}
+% 	\,dx\notag                               \\
+% 	 & 
+% 	\stackrel{
+% 		\stackrel{\mbox{\scriptsize$\eqref{eq:assignedab}$}}{\eqref{eq:integrationbyparts}}
+% 	}{=}
+% 	\Big(
+% 	\underbrace{v(x)}_{a}
+% 	\,
+% 	\underbrace{x^2\,y'(x)}_{b}
+% 	\Big)\Bigg|_{x=-1}^{x=1}
+% 	-
+% 	\bigintsss_{-1}^{1}
+% 	\underbrace{v(x)}_{a}
+% 	\underbrace{
+% 		\frac{d(x^2\,y'(x))}{dx}
+% 	}_{b'}\,dx\notag                         \\
+% 	 & =
+% 	\underbrace{v(1)}_{=0}\,
+% 	(1)^2\,
+% 	\underbrace{y'(1)}_{=1}
+% 	- 
+% 	\underbrace{v(-1)}_{=0}\,
+% 	(-1)^2\,
+% 	\underbrace{y'(-1)}_{=1}
+% 	-\bigintsss_{-1}^{1}v(x)\frac{d(x^2\,y'(x))}{dx}\,dx
+% 	\label{eq:somethingtonote}               \\
+% 	 & =
+% 	-\bigintsss_{-1}^{1}v(x)\frac{d(x^2\,y'(x))}{dx}\,dx.
+% \end{align}
+
+% Note in passing that the definition 
+% in \eqref{eq:conditiony}
+% and \eqref{eq:conditionv}
+% yield the following equalities
+% \begin{align}
+% 	y(1)=y(-1)=1, \\
+% 	v(1)=v(-1)=0,
+% \end{align}
+% which we have used in \eqref{eq:somethingtonote}.
+% Therefore, we obtain the final result 
+% \begin{align}
+% 	\therefore\quad\boxed{
+% 		\delta F(y;v)
+% 		=
+% 		-\bigintsss_{-1}^{1}v(x)\frac{d(x^2\,y'(x))}{dx}\,dx,
+% 		\quad
+% 		\forall\, v(x)\in D_{0},\, y(x)\in D. 
+% 	}
+% \end{align}
+% Let us now forget the argument $(x)$
+% in \eqref{eq:first1} and \eqref{eq:first2}
+% for a while, i.e. by dropping it temporarily, 
+% just for a sake of a better overview. 
+% Then, the new expression without $(x)$
+% will take the form
+% \begin{align}
+% 	\delta F(y;v)
+% 	 & :=  \lim_{t\to 0}\frac{F(y+s\,v)-F(y)}{t} \notag \\
+% 	 & =  \lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	(y+s\,v) \left(y+s\,v\right)^\prime
+% 	+ \exp{\Big((y+s\,v)^{\prime 2}\Big)}
+% 	\Big)\,dx \notag                                    \\
+% 	% 
+% 	 & \qquad\qquad\qquad\qquad\qquad\qquad
+% 	-\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,y' + \exp{\Big(y^{\prime 2}\Big)}
+% 	\Big)\,dx                            
+% 	\label{eq:first22}
+% \end{align}
+% which leads to further analysis, as follows
+% \begin{align}
+% 	\delta F(y;v)
+% 	 & \stackrel{\eqref{eq:first22}}{:=}
+% 	\lim_{t\to 0}\frac{F(y+s\,v)-F(y)}{t}   \notag \\
+% 	%  & =  \lim_{t\to 0} \frac{1}{t}
+% 	% \bigintssss_{-1}^{1}
+% 	% \Big(
+% 	% (y+s\,v) \left(y+s\,v\right)^\prime
+% 	% + \exp{\Big((y+s\,v)^{\prime 2}\Big)}
+% 	% \Big)\,dx
+% 	% \label{eq:first123}                          \\
+% 	% % 
+% 	%  & \qquad\qquad\qquad\qquad\qquad\qquad
+% 	% -\lim_{t\to 0} \frac{1}{t}
+% 	% \bigintssss_{-1}^{1}
+% 	% \Big(
+% 	% y\,y' + \exp{\Big(y^{\prime 2}\Big)}
+% 	% \Big)\,dx                            
+% 	% \label{eq:first223}                          \\
+% 	%-----------------------------------------------------
+% 	 & =  \lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	(y+s\,v) (y^\prime+s\,v^\prime)
+% 	+ \exp{\Big((y+s\,v)^{\prime 2}\Big)}
+% 	\Big)\,dx                               \notag \\
+% 	% 
+% 	 & \qquad\qquad\qquad\qquad\qquad\qquad
+% 	-\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,y' + \exp{\Big(y^{\prime 2}\Big)}
+% 	\Big)\,dx                               \notag \\     
+% 	%-----------------------------------------------------   
+% 	 & =  \lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,y^\prime 
+% 	+ s\,y\,v^\prime  
+% 	+ s\,v\,y^\prime
+% 	+ s^2\,v\,v^\prime
+% 	+ \exp{\Big((y+s\,v)^{\prime 2}\Big)}
+% 	\Big)\,dx                               \notag \\
+% 	% 
+% 	 & \qquad\qquad\qquad\qquad\qquad\qquad
+% 	-\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,y' + \exp{\Big(y^{\prime 2}\Big)}
+% 	\Big)\,dx                               \notag \\ 
+% 	%-----------------------------------------------------   
+% 	 & =  \lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,y^\prime 
+% 	+ s\,y\,v^\prime  
+% 	+ s\,v\,y^\prime
+% 	+ s^2\,v\,v^\prime
+% 	- y\,y^\prime
+% 	\Big)\,dx                               \notag \\
+% 	% 
+% 	 & \qquad\qquad\qquad\qquad
+% 	+\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	\exp{\Big((y+s\,v)^{\prime 2}\Big)}
+% 	- \exp{\Big(y^{\prime 2}\Big)}
+% 	\Big)\,dx                               \notag \\ 
+% 	%-----------------------------------------------------   
+% 	 & =  
+% 	\underbrace{\lim_{t\to 0} \frac{1}{t}
+% 		\bigintssss_{-1}^{1}
+% 		\Big(
+% 		s\,y\,v^\prime  
+% 		+ s\,v\,y^\prime
+% 		+ s^2\,v\,v^\prime
+% 		\Big)
+% 		\,dx}_{:=\mathcal{A}}                   \notag \\
+% 	% 
+% 	 & \qquad\qquad\qquad\qquad
+% 	+
+% 	\underbrace{\lim_{t\to 0} \frac{1}{t}
+% 		\bigintssss_{-1}^{1}
+% 		\Big(
+% 		\exp{\Big((y+s\,v)^{\prime 2}\Big)}
+% 		- \exp{\Big(y^{\prime 2}\Big)}
+% 		\Big)\,dx}_{:=\mathcal{B}}
+% 	% %-----------------------------------------------------   
+% 	%  & = \mathcal{A} + \mathcal{B}.
+% \end{align}
+
+% Hence, it leads to
+% \begin{align}
+% 	\label{eq:sumAB}
+% 	\therefore\quad
+% 	\boxed{
+% 		\delta F(y;v) = \mathcal{A} + \mathcal{B}.
+% 	}
+% \end{align}
+
+% Next, we consider part $\mathcal{A}$, as follows
+% \begin{align}
+% 	\mathcal{A}
+% 	 & = 
+% 	\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	s\,y\,v^\prime  
+% 	+ s\,v\,y^\prime
+% 	+ s^2\,v\,v^\prime
+% 	\Big)
+% 	\,dx          
+% 	%------------------------
+% 	= 
+% 	\lim_{t\to 0}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,v^\prime  
+% 	+ v\,y^\prime
+% 	+ s\,v\,v^\prime
+% 	\Big)
+% 	\,dx                      \notag \\
+% 	%------------------------
+% 	 & = 
+% 	\lim_{t\to 0}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,v^\prime  
+% 	+ v\,y^\prime
+% 	\Big)
+% 	\,dx
+% 	+
+% 	\lim_{t\to 0}
+% 	\bigintssss_{-1}^{1}
+% 	(s\,v\,v^\prime)
+% 	\,dx                      \notag \\
+% 	%------------------------
+% 	 & = 
+% 	\lim_{t\to 0}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y\,v^\prime  
+% 	+ v\,y^\prime
+% 	\Big)
+% 	\,dx
+% 	+
+% 	\underbrace{\lim_{t\to 0}
+% 		\left(
+% 		s
+% 		\bigintssss_{-1}^{1}
+% 		(v\,v^\prime)
+% 		\,dx
+% 		\right)}_{=0}             \notag \\
+% 	%------------------------
+% 	 & = 
+% 	\lim_{t\to 0}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	y(x)\,v^\prime(x)
+% 	+ v(x)\,y^\prime(x)
+% 	\Big)
+% 	\,dx          
+% 	\label{eq:xgoesback}             \\
+% 	%------------------------
+% 	 & = 
+% 	\lim_{t\to 0}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(y(x)\,v(x)\Big)^\prime
+% 	\,dx
+% 	%------------------------
+% 	= 
+% 	\bigintssss_{-1}^{1}
+% 	\frac{d}{dx}
+% 	\Big(y(x)\,v(x)\Big)
+% 	\,dx                \notag       \\
+% 	%------------------------
+% 	 & = 
+% 	\bigintssss_{-1}^{1}
+% 	\frac{d}{dx}
+% 	\Big(y(x)\,v(x)\Big)
+% 	\,dx
+% 	%------------------------
+% 	= 
+% 	\Big(y(x)\,v(x)\Big)\Bigg|_{x=-1}^{x=1}
+% 	= y(1)\,v(1) - y(-1)\,v(-1),
+% \end{align}
+% where $(x)$ has returned back 
+% in \eqref{eq:xgoesback} again
+% in order to get ready to compute the
+% follow-up integral.
+% Therefore, solution to $\mathcal{A}$ yields
+% \begin{align}
+% 	\label{eq:solutiontoA}
+% 	\therefore\quad
+% 	\boxed{
+% 		\mathcal{A} = y(1)\,v(1) - y(-1)\,v(-1).
+% 	}
+% \end{align}
+
+% Besides, the computation of part $\mathcal{B}$ goes as follows
+% \begin{align}
+% 	\mathcal{B}
+% 	 & =
+% 	\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	\exp{\Big((y+s\,v)^{\prime 2}\Big)}
+% 	- \exp{\big(y^{\prime 2}\big)}
+% 	\Big)\,dx  \notag \\
+% 	%--------------------------------------
+% 	 & =
+% 	\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	\exp{
+% 		\big(
+% 		y^{\prime 2}
+% 		+ 2\,s\,y^{\prime}\,v^{\prime}
+% 		+ s^2\,v^{\prime 2}
+% 		\big)}
+% 	- \exp{\big(y^{\prime 2}\big)}
+% 	\Big)\,dx  \notag \\
+% 	%--------------------------------------
+% 	 & =
+% 	\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Big(
+% 	\exp{\big(y^{\prime 2} \big)}
+% 	\exp{\big(
+% 		2\,s\,y^{\prime}\,v^{\prime}
+% 		+ s^2\,v^{\prime 2}
+% 		\big)}
+% 	- \exp{\big(y^{\prime 2}\big)}
+% 	\Big)\,dx  \notag \\
+% 	%--------------------------------------
+% 	 & =
+% 	\lim_{t\to 0} \frac{1}{t}
+% 	\bigintssss_{-1}^{1}
+% 	\Bigg(
+% 	\exp{\big(y^{\prime 2} \big)}
+% 	\Big(
+% 		\exp{\big(
+% 			2\,s\,y^{\prime}\,v^{\prime}
+% 			+ s^2\,v^{\prime 2}
+% 			\big)}
+% 		- 1
+% 		\Big)
+% 	\Bigg)\,dx \notag \\
+% 	%--------------------------------------
+% 	 & =
+% 	\bigintssss_{-1}^{1}
+% 	\Bigg(
+% 	\exp{\big(y^{\prime 2} \big)}
+% 	\underbrace{\lim_{t\to 0}
+% 		\frac{
+% 			\exp{\big(
+% 				2\,s\,y^{\prime}\,v^{\prime}
+% 				+ s^2\,v^{\prime 2}
+% 				\big)}
+% 			- 1}{t}}_{:=\mathcal{C}}
+% 	\Bigg)\,dx ,
+% 	\label{eq:Cexpression}
+% \end{align}
+% where a further result of $\mathcal{C}$ in 
+% \eqref{eq:Cexpression} is computed by using l'Hôspital's rule, 
+% as follows 
+% \begin{align}
+% 	\mathcal{C}
+% 	 & =
+% 	\lim_{t\to 0}
+% 	\frac{
+% 		\exp{\big(
+% 			2\,s\,y^{\prime}\,v^{\prime}
+% 			+ s^2\,v^{\prime 2}
+% 			\big)}
+% 		- 1}{t}                            \notag \\
+% 	%------------------------
+% 	 & =
+% 	\lim_{t\to 0}
+% 	\Big(
+% 	\left(
+% 	2\,y^{\prime}\,v^{\prime}
+% 	+ 2\,s\,v^{\prime 2}
+% 	\right)
+% 	\exp{\big(
+% 		2\,s\,y^{\prime}\,v^{\prime}
+% 		+ s^2\,v^{\prime 2}
+% 		\big)}
+% 	\Big)                              \notag \\
+% 	%------------------------
+% 	 & = 2\,y^{\prime}\,v^{\prime} \notag     \\
+% 	 & = 2\,y^{\prime}(x)\,v^{\prime}(x).
+% 	\label{eq:Cresult}
+% \end{align}
+% Substitution of 
+% \eqref{eq:Cresult} into 
+% \eqref{eq:Cexpression}
+% leads to 
+% \begin{align}
+% 	\label{eq:finalsolB}
+% 	\therefore\quad
+% 	\boxed{
+% 	\mathcal{B} = 
+% 	2\bigintssss_{-1}^{1}
+% 	\exp{\left(y^{\prime 2}(x)\right)}
+% 	\,y^{\prime}(x)\,v^{\prime}(x)\,dx.
+% 	}
+% \end{align}
+% Finally, by inserting 
+% \eqref{eq:solutiontoA}
+% and
+% \eqref{eq:finalsolB}
+% into
+% \eqref{eq:sumAB}
+% the final result yields
+% \begin{align}
+% 	\therefore\quad\boxed{
+% 	\delta F(y;v)
+% 	=
+% 	y(1)\,v(1) - y(-1)\,v(-1)
+% 	+
+% 	2\bigintssss_{-1}^{1}
+% 	\,y^{\prime}(x)\,v^{\prime}(x)
+% 	\exp{\left(y^{\prime 2}(x)\right)}
+% 	\,dx.
+% 	}
+% \end{align}
+
+% \newpage
+% %------------------------------------------------------------------------------
+% \section{Step-by-step with A4-SRU00}
+% \begin{exampleboxed}
+% 	Examine the following initial value problem (IVP)
+% 	\begin{align}
+% 		\label{eq:givenODE3rdorder}
+% 		y^{\prime\prime\prime}(t)+y^{\prime}(t)=t\,y(t),
+% 	\end{align}
+% 	with initial conditions (IC) given as follows
+% 	\begin{align}
+% 		\label{eq:ICfromODE}
+% 		y(0)=0,\quad y^{\prime}(0)=1,\quad y^{\prime\prime}(0)=2.
+% 	\end{align}
+% 	\begin{enumerate}[i)]
+% 		\item Transform the above third order
+% 		      ordinary differential equation (ODE) 
+% 		      to a system of first order ODEs.
+% 		\item Solve the system i) numerically by using explicit Euler method with 2 steps.
+% 	\end{enumerate}
+% \end{exampleboxed}
+
+% Approach:
+% \begin{enumerate}[i)]
+% 	\item We need to transform the third order ODE
+% 	      given in $\eqref{eq:givenODE3rdorder}$
+% 	      into a system of first order ODEs.
+% 	      \begin{questionboxed} 
+% 		      But.. how many ODEs shall we need in total 
+% 		      for this system of first order ODEs?\\ 
+% 		      \textbf{Ans}: 3.
+% 	      \end{questionboxed}
+% 	      \begin{observationboxed}
+% 		      Since the highest order of derivative in 
+% 		      $\eqref{eq:givenODE3rdorder}$ is 3, 
+% 		      i.e. as we can see there are three $'$ from $y'''(t)$,
+% 		      the given ODE is called third order ODE.
+% 		      Besides, the lowest order in 
+% 		      $\eqref{eq:givenODE3rdorder}$ is 0, 
+% 		      i.e. as we can see from $y(t)$.
+% 		      Therefore, we shall need
+% 		      a system of \textbf{three} first order ODEs
+% 		      for the given third order ODE in 
+% 		      $\eqref{eq:givenODE3rdorder}$.
+% 	      \end{observationboxed}
+% 	      \begin{questionboxed} 
+% 		      Which variable from $\eqref{eq:givenODE3rdorder}$
+% 		      shall we need to take and define,
+% 		      so that we are able to transform 
+% 		      $\eqref{eq:givenODE3rdorder}$
+% 		      into a system of first order ODEs
+% 		      corresponding to 
+% 		      the given initial conditions given in 
+% 		      \eqref{eq:ICfromODE}, 
+% 		      e.g. is it ideal to define $y'''(t) := u_{3}(t)$?\\
+% 		      \textbf{Ans}: $y(t)$, $y'(t)$ and $y''(t)$; 
+% 		      and it is not ideal to go with 
+% 		      $y'''(t) := u_{3}(t)$.
+% 	      \end{questionboxed}
+% 	      \begin{observationboxed}
+% 		      The three initial conditions given
+% 		      $y(0)$, $y'(0)$ and $y''(0)$, 
+% 		      as shown in \eqref{eq:ICfromODE},
+% 		      give rise to the fact that 
+% 		      we shall need to define three new variables
+% 		      for $y(t)$, $y'(t)$ and $y''(t)$.
+% 		      This choice is ideal for the ODE with 
+% 		      the given ICs
+% 		      because we will be able to apply
+% 		      these ICs directly for the new system of
+% 		      three ODEs.
+% 	      \end{observationboxed}
+
+% 	      Therefore, we shall need three first order ODEs 
+% 	      for the new system. Besides, 
+% 	      the transformation is done by setting 
+% 	      new variables for $y(t)$, $y'(t)$ and $y''(t)$.
+
+% 	      Transformation: We now need to set
+% 	      $y(t)$, $y'(t)$ and $y''(t)$
+% 	      to new variables, 
+% 	      let's say $u_0(t)$, $u_1(t)$, and $u_2(t)$,
+% 	      respectively, 
+% 	      as follows
+% 	      \begin{align}
+% 		      y(t)                & := u_0(t),  
+% 		      \label{eq:newvariablesu0}          \\
+% 		      y^{\prime}(t)       & := u_1(t),  
+% 		      \label{eq:newvariablesu1}          \\
+% 		      y^{\prime\prime}(t) & := u_2(t). 
+% 		      \label{eq:newvariablesu2}
+% 	      \end{align}
+
+% 	      Then, by taking the derivative of 
+% 	      the new variable $u_0(t)$, $u_1(t)$ and $u_2(t)$,
+% 	      as newly defined in
+% 	      \eqref{eq:newvariablesu0},
+% 	      \eqref{eq:newvariablesu1} and
+% 	      \eqref{eq:newvariablesu2},
+% 	      we obtain the following relations
+% 	      \begin{align}
+% 		      \boxed{
+% 			      \begin{aligned}
+% 				      u_0^{\prime}(t) 
+% 				       & \stackrel{\eqref{eq:newvariablesu0}}{=}
+% 				      y'(t)  
+% 				      \stackrel{\eqref{eq:newvariablesu1}}{=}
+% 				      u_1(t),                                    \\
+% 				      u_1^{\prime}(t) 
+% 				       & \stackrel{\eqref{eq:newvariablesu1}}{=}
+% 				      y''(t)  
+% 				      \stackrel{\eqref{eq:newvariablesu2}}{=}
+% 				      u_2(t),                                    \\
+% 				      u_2^{\prime}(t) 
+% 				       & 
+% 				      \stackrel{\eqref{eq:newvariablesu2}}{=}
+% 				      y'''(t)
+% 				      \stackrel{\eqref{eq:givenODE3rdorder}}{=}
+% 				      t\,y(t)-y'(t)
+% 				      \stackrel{
+% 					      \stackrel
+% 					      {\mbox{\scriptsize $\eqref{eq:givenODE3rdorder}$}}
+% 					      {\eqref{eq:givenODE3rdorder}}
+% 				      }{=}
+% 				      t\,u_0(t)-u_1(t),
+% 			      \end{aligned}
+% 		      }
+% 	      \end{align}
+% 	      which is summarized, 
+% 	      together with keeping in mind about 
+% 	      the order of the index $i$ from 
+% 	      $u_{i}(t)|_{i=0,1,2}$, 
+% 	      as follows 
+% 	      \begin{align}
+% 		      \begin{array}{ccccc}
+% 			      u'_{0}(t) & = &             & u_{1}(t)  &          \\
+% 			      u'_{1}(t) & = &             &           & u_{2}(t) \\
+% 			      u'_{2}(t) & = & t\,u_{0}(t) & -u_{1}(t) & 
+% 		      \end{array}
+% 	      \end{align}
+% 	      which gives rise to the following system 
+% 	      \begin{align}
+% 		      \begin{array}{ccccc}
+% 			      u'_{0}(t) & = & 0\,u_{0}(t) & 1\,u_{1}(t)  & 0\,u_{2}(t) \\
+% 			      u'_{1}(t) & = & 0\,u_{0}(t) & 0\,u_{1}(t)  & 1\,u_{2}(t) \\
+% 			      u'_{2}(t) & = & t\,u_{0}(t) & -1\,u_{1}(t) & 0\,u_{2}(t)
+% 		      \end{array}
+% 	      \end{align}
+% 	      from where we can write the system in form of 
+% 	      \begin{align}
+% 		      \Bu' = A\Bu	
+% 	      \end{align}
+% 	      as follows
+% 	      \begin{align}
+% 		      \label{eq:newsystem}
+% 		      \boxed{
+% 			      \begin{aligned}
+% 				      \underbrace{
+% 				      \begin{pmatrix} u_{0}(t)\\u_{1}(t)\\u_{2}(t) \end{pmatrix}^{\prime}
+% 				      }_{:=\Bu^{\prime}}
+% 				      =
+% 				      \underbrace{
+% 					      \begin{pmatrix}
+% 						      0 & 1 & 0 \\ 0 & 0 & 1 \\ t & -1 & 0
+% 					      \end{pmatrix}
+% 				      }_{:=A}
+% 				      \underbrace{
+% 					      \begin{pmatrix} u_{0}(t)\\u_{1}(t)\\u_{2}(t) \end{pmatrix}
+% 				      }_{:=\Bu}
+% 			      \end{aligned}
+% 		      }
+% 	      \end{align}
+% 	      where the relation between $A$ and $\Bu$ in $A\Bu$
+% 	      is matrix-vector multiplication. Besides,
+% 	      by substituting 
+% 	      \eqref{eq:newvariablesu0}
+% 	      \eqref{eq:newvariablesu1}
+% 	      and 
+% 	      \eqref{eq:newvariablesu2}
+% 	      into 
+% 	      \eqref{eq:ICfromODE}, respectively,
+% 	      we obtain the initial conditions 
+% 	      for the new system in 
+% 	      \eqref{eq:newsystem}
+% 	      \begin{align}
+% 		      \boxed{
+% 			      \begin{aligned}
+% 				      u_0(0)=0, \\ 
+% 				      u_1(0)=1, \\ 
+% 				      u_2(0)=2,
+% 			      \end{aligned}
+% 		      }
+% 	      \end{align}
+% 	      which form an equivalent system of three first-order ODEs.
+% 	      \newpage
+% 	\item We need to solve the
+% 	      system of first order ODEs obtained in i)
+% 	      numerically by using explicit Euler method.
+% 	      \begin{summaryboxed}
+% 		      Given the system of first order ODEs as follows
+% 		      \begin{align}
+% 			      \label{eq:newBuprime}
+% 			      \Bu'(t) = A\Bu(t)
+% 		      \end{align}
+% 		      where the vector $\Bu$ is defined as 
+% 		      $\Bu := (u_{0},\, u_{1},\, u_{2})^{\top}$,
+% 		      and the matrix $A$ is
+% 		      \begin{align}
+% 			      A =
+% 			      \begin{pmatrix}
+% 				      0 & 1 & 0 \\ 0 & 0 & 1 \\ t & -1 & 0
+% 			      \end{pmatrix}
+% 		      \end{align}
+% 		      with initial conditions 
+% 		      \begin{align}
+% 			      u_0(0)=0,\quad u_1(0)=1,\quad u_2(0)=2.
+% 		      \end{align}
+% 		      Solve this system numerically 
+% 		      by using the explicit Euler method.
+% 	      \end{summaryboxed}
+
+% 	      Approach:
+% 	      We need to approximate $\Bu'(t)$ arising in 
+% 	      \eqref{eq:newBuprime} by some numerical schemes, 
+% 	      e.g. explicit Euler method.
+% 	      %   \begin{questionboxed} 
+% 	      %       But.. how does the explicit Euler formula look like? 
+% 	      %       And how can it be derived exactly?\\
+% 	      %       Ans: Exploit the derivation in 
+% 	      %       \Cref{eq:observationboxedtaylor}.
+% 	      %   \end{questionboxed}
+% 	      \begin{observationboxed}
+% 		      \label{eq:observationboxedtaylor}
+% 		      We consider Taylor expansion 
+% 		      for $\Bu(t)$ around point $t=t_{0}$
+% 		      \begin{align}
+% 			      \label{eq:Taylorforut}
+% 			      \Bu(t)
+% 			      = \Bu(t_{0}) + \Bu'(t_{0})(t-t_{0}) 
+% 			      + \mathcal{O}((t-t_{0})^2),
+% 		      \end{align}
+% 		      which, for the sake of convergence, 
+% 		      requires $h:=t-t_{0}$ to be small.
+% 		      Since $h:=t-t_{0}$, we equally have 
+% 		      $t=h+t_{0}$. Substitution
+% 		      of $h:=t-t_{0}$ and $t=t_{0}+h$
+% 		      to \eqref{eq:Taylorforut}
+% 		      leads to the following expression
+% 		      \begin{align}
+% 			      \label{eq:Taylorforutnew}
+% 			      \Bu(t_{0}+h)
+% 			      = \Bu(t_{0}) + h\Bu'(t_{0})
+% 			      + \mathcal{O}(h^2),
+% 		      \end{align}
+% 		      which is the new expression of Taylor expansion 
+% 		      in terms of point $t_{0}$,
+% 		      around which the function $\Bu(t)$
+% 		      is approximated by the Taylor expansion,
+% 		      instead of the classical expression 
+% 		      in terms of the variable $t$
+% 		      as seen in \eqref{eq:Taylorforut}.
+% 		      Since point $t_{0}$, 
+% 		      although it implied a fixed point,
+% 		      arising in \eqref{eq:Taylorforutnew}
+% 		      can be chosen arbitrarily, 
+% 		      we can, therefore, substitute it for $t$, 
+% 		      as follows
+% 		      \begin{align}
+% 			      \label{eq:Taylorforutnewnozero}
+% 			      \Bu(t+h)
+% 			      = \Bu(t) + h\Bu'(t)
+% 			      + \mathcal{O}(h^2),
+% 		      \end{align}
+% 		      Now, the expression \eqref{eq:Taylorforutnew}
+% 		      gives rise to a useful expression
+% 		      to approximate $\Bu'(t)$ numerically, as follows
+% 		      \begin{align}
+% 			      \label{eq:Taylorforutnewnozerofinal}
+% 			      \therefore\quad
+% 			      \boxed{
+% 				      \Bu'(t) 
+% 				      \approx \frac{\Bu(t+h) - \Bu(t)}{h}.
+% 			      }
+% 		      \end{align}
+% 	      \end{observationboxed}
+% 	      %   The ODE in \eqref{eq:newBuprime} 
+% 	      %   has a general form 
+% 	      %   \begin{align}
+% 	      % 	\Bu'(t) = f(t,\Bu(t))
+% 	      %   \end{align}
+% 	      %   Definition:
+% 	      %   \begin{align}
+% 	      %       \Bu(t+h) & : = \Bu_{j+1} \\
+% 	      %       \Bu(t)   & : = \Bu_{j}
+% 	      %   \end{align}
+% 	      Substitution of 
+% 	      \eqref{eq:Taylorforutnewnozerofinal}
+% 	      into \eqref{eq:newBuprime} yields
+% 	      \begin{align}
+% 		      \frac{\Bu(t+h) - \Bu(t)}{h}
+% 		      = A\Bu(t)
+% 	      \end{align}
+% 	      which leads to the formula of explicit Euler method 
+% 	      \begin{align}
+% 		      \label{eq:Eulerformulaformu}
+% 		      \boxed{
+% 			      \Bu^{(j+1)} = \Bu^{(j)} + h\,A\Bu^{(j)},
+% 		      }
+% 	      \end{align}
+% 	      where $\Bu^{(j)}$ is the numerical solution by
+% 	      Euler method after $j$ steps,
+% 	      and components of $\Bu^{(j)}$ is known as 
+% 	      \begin{align}
+% 		      \Bu^{(j)}
+% 		      = 
+% 		      \begin{pmatrix} 
+% 			      u_0 \\u_1 \\u_2
+% 		      \end{pmatrix}^{(j)},
+% 	      \end{align}
+% 	      which, together with 
+% 	      \eqref{eq:Eulerformulaformu},
+% 	      leads to the following expressions
+% 	      \begin{align}
+% 		      \therefore\quad
+% 		      \boxed{
+% 			      \begin{aligned}
+% 				      \Bu^{(0)} & =
+% 				      \begin{pmatrix} 
+% 					      u_0^{(0)} \\u_1^{(0)} \\u_2^{(0)}
+% 				      \end{pmatrix}
+% 				      =
+% 				      \begin{pmatrix}
+% 					      0 \\1\\2
+% 				      \end{pmatrix},              \\
+% 				      \phantom{a}                              \\
+% 				      %------------------------------
+% 				      \Bu^{(1)} & =
+% 				      \begin{pmatrix}
+% 					      u_0^{(0)} \\u_1^{(0)} \\u_2^{(0)}
+% 				      \end{pmatrix}
+% 				      +h
+% 				      \underbrace{
+% 					      \begin{pmatrix}
+% 						      0 & 1 & 0 \\ 0 & 0 & 1 \\ t & -1 & 0
+% 					      \end{pmatrix}
+% 				      }_{=A}
+% 				      \begin{pmatrix}
+% 					      u_0^{(0)} \\u_1^{(0)} \\u_2^{(0)}
+% 				      \end{pmatrix}
+% 				      \\
+% 				                & =
+% 				      \begin{pmatrix}
+% 					      0 \\1\\2
+% 				      \end{pmatrix}
+% 				      +h\begin{pmatrix}
+% 					      1 \\2\\0-1
+% 				      \end{pmatrix}
+% 				      \\
+% 				                & =\begin{pmatrix}
+% 					      h \\1+2h\\2-h
+% 				      \end{pmatrix}, \\
+% 				      \phantom{a}                              \\
+% 				      %------------------------------
+% 				      \Bu^{(2)} & =
+% 				      \begin{pmatrix}
+% 					      u_0^{(1)} \\u_1^{(1)} \\u_2^{(1)}
+% 				      \end{pmatrix}
+% 				      +h
+% 				      \underbrace{
+% 					      \begin{pmatrix}
+% 						      0 & 1 & 0 \\ 0 & 0 & 1 \\ t & -1 & 0
+% 					      \end{pmatrix}
+% 				      }_{=A}
+% 				      \begin{pmatrix}
+% 					      u_0^{(1)} \\u_1^{(1)} \\u_2^{(1)}
+% 				      \end{pmatrix}
+% 				      \\
+% 				                & =
+% 				      \begin{pmatrix}
+% 					      h \\1+2h\\2-h
+% 				      \end{pmatrix}
+% 				      +h\begin{pmatrix}
+% 					      1+2h \\2-h\\h\cdot h-(1+2h)
+% 				      \end{pmatrix}             \\
+% 				                & 
+% 				      =\begin{pmatrix}
+% 					      2h(1+h) \\1+4h-h^2\\2-2h-2h^2+h^3
+% 				      \end{pmatrix}.
+% 			      \end{aligned}
+% 		      }
+% 	      \end{align}
+% \end{enumerate}
+% \newpage
+% \begin{align}
+% 	\delta F(y;v)
+% 	 & :=  \lim_{t\to 0}\frac{F(y+sv)-F(y)}{t} \\
+% 	 & =  \lim_{t\to 0} \frac{1}{t}
+% 	\int_{-1}^{1}
+% 	\Big(
+% 	\left(y+sv\right)(x) \left(y+sv\right)^\prime(x)
+% 	+ \exp{(y+sv)^{\prime 2}(x)}
+% 	\Big)\,dx                                  \\
+% 	% 
+% 	 & \qquad\qquad\qquad\qquad\qquad\qquad
+% 	-\lim_{t\to 0} \frac{1}{t}
+% 	\int_{-1}^{1}
+% 	\Big(
+% 	y(x)y'(x) + \exp{y^{\prime 2}(x)}
+% 	\Big)\,dx                                  \\
+% 	% 
+% 	 & =  \lim_{t\to 0} \frac{1}{t}
+% 	\int_{-1}^{1}
+% 	\Big(
+% 	y(x)y'(x) + sy(x)v'(x) + sv(x)y'(x) + s^2v(x)v'(x) - y(x)y'(x)
+% 	\Big)\,dx                                  \\
+% 	% 
+% 	 & \qquad\qquad\qquad\qquad\qquad\qquad
+% 	-\lim_{t\to 0} \frac{1}{t}
+% 	\int_{-1}^{1}
+% 	\Big(
+% 	\exp{y^{\prime 2}(x)}
+% 	- \exp{(y+sv)^{\prime 2}(x)}
+% 	\Big)\,dx                                  \\
+% 	% 
+% 	%  & =  \lim_{t\to 0}
+% 	% \int_{-1}^{1}
+% 	% \Big(
+% 	% y(x)\,v'(x) + v(x)\,y'(x) + s\,v(x)\,v'(x)
+% 	% \Big)\,dx                                                    \\
+% 	%
+% 	%  & \qquad\qquad\qquad\qquad\qquad\qquad
+% 	% -\lim_{t\to 0} \frac{1}{t}
+% 	% \int_{-1}^{1}
+% 	% \Big(
+% 	% \exp{y^{\prime 2}(x)}
+% 	% - \exp{(y+sv)^{\prime 2}(x)}
+% 	% \Big)\,dx                                                    \\
+% 	%
+% 	 & = \lim_{s\rightarrow 0}
+% 	\int_{-1}^1
+% 	\Big(
+% 	y(x)\,v^\prime(x)+y^\prime(x)\,v(x) + s\,v(x)\,v^\prime(x)
+% 	\Big)
+% 	\,dx                                       \\
+% 	% 
+% 	 & \qquad\qquad\qquad\qquad\qquad\qquad
+% 	+\lim_{t\to 0} \frac{1}{t}
+% 	\int_{-1}^{1}
+% 	\Big(
+% 	\exp{\big(y(x)+s\,v(x)\big)^{\prime 2}}-\exp{y(x)^{\prime 2}}
+% 	\Big)
+% 	\,dx                                       \\
+% 	% 
+% 	 & = \int_{-1}^1
+% 	\lim_{s\rightarrow 0}
+% 	\Big(
+% 	y(x)\,v^\prime(x)
+% 	+ y^\prime(x)\,v(x) + s\,v(x)\,v^\prime(x)
+% 	\Big)\,dx                                  \\
+% 	 & \qquad\qquad\qquad
+% 	+ \int_{-1}^1
+% 	\exp{y^{\prime 2}(x)}
+% 	\lim_{t\to 0}
+% 	\underbrace{
+% 		\left(
+% 		\frac{
+% 			\exp{\Big( 2 y^\prime(x)\,v^\prime(x)\,s
+% 				+ v^{\prime 2}(x)\,s^2\Big)}-1
+% 		}{t}
+% 		\right)
+% 	}
+% 	_{\text{l'Hospital}}
+% 	\,dx                                       \\
+% 	 & = \int_{-1}^1
+% 	\Big(
+% 	y(x)\,v^\prime(x)
+% 	+ y^\prime(x)\,v(x)
+% 	\Big)\,dx                                  \\
+% 	 & \
+% 	+ \int_{-1}^1
+% 	\exp{y^{\prime 2}(x)}
+% 	\lim_{t\to 0}
+% 	\left(
+% 	\left(
+% 	2 y^\prime(x)\,v^\prime(x) + v^{\prime 2}(x)\,s
+% 	\right)
+% 	\exp{\Big( 2 y^\prime(x)\,v^\prime(x)\,s
+% 		+ v^{\prime 2}(x)\,s^2\Big)}
+% 	\right)
+% 	\,dx                                       \\
+% 	 & = \int_{-1}^1
+% 	\Big(
+% 	(y\,v)^\prime(x)
+% 	+ 2 y^\prime(x)\,v^\prime(x)\,\exp{y^{\prime 2}(x)}
+% 	\Big)\,dx.
+% 	% = y(1)\,v(1) - y(-1)\,v(-1)
+% 	% + 2 \int_{-1}^1
+% 	% y^\prime(x)\,v^\prime(x)\,\exp{y^{\prime 2}(x)}
+% 	% \,dx.
+% \end{align}
+% Daher
+% \begin{align}
+% 	\therefore\quad\boxed{
+% 		\delta F(y;v)
+% 		= y(1)\,v(1) - y(-1)\,v(-1)
+% 		+ 2 \int_{-1}^1
+% 		y^\prime(x)\,v^\prime(x)\,\exp{y^{\prime 2}(x)} \,dx
+% 	}
+% \end{align}
+
+% %------------------------------------------------------------------------------
+% \section{Numerics: FDM $\cdot$ BC $\cdot$ Derivation of $A_{h}$ $\&$ $b_{h}$}
+% \begin{example}
+% 	Discretization of the following convection-diffusion problem:
+% 	\begin{align}
+% 		-u''(x) -5u'(x) = 3,
+% 		\quad \text{for}\ x\in (0,1)
+% 	\end{align}
+% 	with boundary conditions $u(0)=u(1)=1.$
+% \end{example}
+% \inputfig{floats/discretize}{discretize}
+% Approach:
+% Central method for $u''(x)$ is obtained as follows
+% \begin{align}
+% 	u''(x)=\frac{u(x+h)-2u(x)+u(x-h)}{h^2}+{\cal O}(h^2).
+% \end{align}
+% Forward method for $u'(x)$ is obtained as follows
+% \begin{align}
+% 	u'(x)=\frac{u(x+h) -u(x)}{h} + {\cal O}(h).
+% \end{align}
+% which leads to the system $A_h u_h=b_h$ where $A_h$ and $b_h$ are recognized as follows
+% \begin{align}
+% 	A_h & =\frac{1}{h^2}\left(
+% 	\begin{array}{cccccc}
+% 			2+5h & -1-5h  &        &        &        &       \\
+% 			-1   & 2+5h   & -1-5h  &        &        &       \\ 
+% 			     & \ddots & \ddots & \ddots &        &       \\ 
+% 			     &        & \ddots & \ddots & \ddots &       \\ 
+% 			     &        &        & -1     & 2+5h   & -1-5h \\ 
+% 			     &        &        &        & -1     & 2+5h
+% 		\end{array}\right)
+% 	\in\mathbb{R}^{(n-2)\times (n-2)}, \\
+% 	b_h & = 
+% 	\begin{pmatrix}
+% 		\displaystyle
+% 		3+\frac{1}{h^2} \\ 3\\  \vdots \\ 3 \\
+% 		\displaystyle
+% 		3+\frac{1}{h^2}+\frac{5}{h}
+% 	\end{pmatrix}
+% 	\in\mathbb{R}^{(n-2)}.
+% \end{align}
+
+% %------------------------------------------------------------------------------
+% \newpage
+% \inputfig{floats/discretize}{discretize}
+
+% %------------------------------------------------------------------------------
+% \newpage
+% \inputfig{floats/discretize}{discretize}
+
+% %------------------------------------------------------------------------------
+% \newpage
+% \section{Analysis: Spectral theory $\cdot$ Laplace operator application}
+% \newpage
+% \begin{example}
+% 	Examine the following problem
+% 	\begin{align*}
+% 		\partial_t u(x,t) & =\partial_{xx}u(x,t)+a, &  & x\ \in\ (0,1), t>0, \\
+% 		u(0,t)            & =0,                     &  & t>0,                \\
+% 		u(1,t)            & =0,                     &  & t>0,                \\
+% 		u(x,0)            & = \sin(\pi x),          &  & x\, \in\, (0,1) ,
+% 	\end{align*}
+% 	with constant source term $a\in\mathbb{R}$.
+% 	\begin{enumerate}
+% 		\item Compute the Eigenvalues and the normalized Eigenfunctions from $\partial_{xx}$.
+% 		\item Develop the source term $a\in\mathbb{R}$ in these Eigenfunctions.
+% 		\item Compute the solution of the problem with the Eigenfunction ansatz.
+% 	\end{enumerate}
+% \end{example}
+
+% \newpage
+% (Example 2 cont.)
+
+% \newpage
+% (Example 2 cont.)
+
+% \begin{enumerate}
+% 	\item Die zum Problem geh"orenden Eigenfunktionen und Eigenwerte erf"ullen
+% 	      \begin{align*}
+% 		      \varphi^{\prime\prime}(x)+\lambda\varphi(x) & =0, \quad x\in (0,1) \\
+% 		      \varphi(0)=\varphi(1)                       & =0
+% 	      \end{align*}
+% 	      \begin{align*}
+% 		      \Rightarrow \quad \varphi(x) = C_1\sin(\sqrt{\lambda}x) + C_2 \cos(\sqrt{\lambda}x)
+% 	      \end{align*}
+% 	      Mit den Randbedingungen f"ur $\varphi$ erh"alt man 
+% 	      \begin{align*}
+% 		      0 = \varphi(0) & = C_2 \, \Rightarrow \, C_2 = 0                                                       \\
+% 		      0 = \varphi(1) & = C_1\sin(\sqrt{\lambda}x) \, \Rightarrow \, \lambda_k = (k\pi)^2, \, k\in \mathbb{N}
+% 	      \end{align*}
+% 	      \begin{align*}
+% 		      \Rightarrow \varphi_k(x) = C_1\sin(k\pi x) , \, k \in \mathbb{N}
+% 	      \end{align*}
+% 	      $C_1$ erh"alt man durch Normierung
+% 	      \begin{align*}
+% 		      1 & \stackrel{!}{=} \int_0^1 \varphi_k(x)^2\, dx = C_1^2 \int_0^1 \sin^2(k\pi x) \, dx                \\
+% 		        & = C_1^2 \left[ \left. \frac x 2 - \frac{\sin(2k\pi x)}{4k\pi}\right|^1_0 \right] = C_1^2\frac 1 2 \\
+% 		      \Rightarrow C_1 = \sqrt{2}
+% 	      \end{align*}
+% 	      damit lauten die Eigenwerte und normierten Eigenfunktionen 
+% 	      \begin{align*}
+% 		      \varphi_k(x)               & =\sqrt{2}\sin(k\pi x)                  \\
+% 		      \text{und} \quad \lambda_k & =(k\pi)^2 \text{ f"ur } k\in\mathbb{N}
+% 	      \end{align*}
+
+% 	\item Die Entwicklung des konstanten Quellterms $a(x,t)=a$  in Eigenfunktionen lautet
+% 	      \begin{align*}
+% 		      a & = \sum^{\infty}_{k=1}\beta_k\varphi_k(x)         \\
+% 		        & = \sum^{\infty}_{k=1}\beta_k\sqrt{2}\sin(k\pi x)
+% 	      \end{align*}
+% 	      Die Koeffizienten berechnet man durch
+% 	      \begin{align*}
+% 		      \beta_k & =\int^1_0 a\sqrt{2}\sin(k\pi x)dx                                         \\
+% 		              & = a \sqrt{2} \left[ \left. -\frac{\cos(k \pi x)}{k\pi}\right|^1_0 \right] \\
+% 		              & =\frac{a\sqrt{2}}{k\pi}(1-\cos(k\pi))=\begin{cases}\frac{2a\sqrt{2}}{k\pi} & , k\text{ ungerade} \\
+% 			      0                       & , \text{sonst}
+% 		      \end{cases}
+% 	      \end{align*}
+
+% 	\item F"ur die L"osung $u$ wird der Eigenfunktionen-Ansatz
+% 	      \begin{align*}
+% 		      u(x,t)=\sum^{\infty}_{k=1}\alpha_k(t)\varphi_k(x)
+% 	      \end{align*}
+% 	      gew"ahlt, mit zeitabh"angigen Koeffizienten $\alpha_k(t), \, t>0, k\in \mathbb{N}$. \\
+% 	      Einsetzen der Entwicklungen von $u(x,t)$ und $a$ in die Differentialgleichung liefert
+% 	      \begin{align*}
+% 		                           & (\sum^{\infty}_{k=1}\alpha_k(t)\varphi_k(x))_t=(\sum^{\infty}_{k=1}\alpha_k(t)\varphi_k(x))_{xx}+\sum^{\infty}_{k=1}\beta_k\varphi_k(x) \\
+% 		      \Leftrightarrow\quad & \sum^{\infty}_{k=1}\alpha'_k(t)\varphi_k(x)=-\sum^{\infty}_{k=1}\alpha_k(t)\lambda_k\varphi_k(x)+\sum^{\infty}_{k=1}\beta_k\varphi_k(x) \\
+% 		      \Leftrightarrow\quad & \sum^{\infty}_{k=1}(\alpha'_k(t)+\lambda_k\alpha_k(t)-\beta_k)\varphi_k(x)=0
+% 	      \end{align*}
+% 	      Wir erhalten eine gew"ohnliche Differentialgleichung f"ur die Koeffizienten $\alpha_k(t)$
+% 	      \begin{align*}
+% 		      \alpha'_k(t) & =-\lambda_k\alpha_k(t)+\beta_k
+% 	      \end{align*}
+% 	      mit der allgemeinen L"osung 
+% 	      \begin{align*}
+% 		      \alpha_k(t) & =\frac{\beta_k}{\lambda_k}+C_k e^{-\lambda_k t}.
+% 	      \end{align*}
+% 	      Die Konstante $C_k$ wird durch die Anfangsbedingung f"ur $\alpha_k(0)$ bestimmt. Dazu betrachten wir die Anfangsbedingung f"ur $u$:
+% 	      \begin{align*}
+% 		      u(x,0)=\sum^{\infty}_{k=1}\alpha_k(0)\sqrt{2}\sin(k\pi x)\stackrel{!}{=} \sin(\pi x) \\
+% 		      \Rightarrow \alpha_1(0)\stackrel{!}{=}\frac{1}{\sqrt{2}} \,\text{ und } \, \alpha_k(0) = 0 \ \forall\ k > 1
+% 	      \end{align*}
+% 	      Also gilt f"ur $k=1$
+% 	      \begin{align*}
+% 		      \alpha_1(0)     & = \frac{\beta_1}{\lambda_1}+C_1  \stackrel{!}{=}\frac{1}{\sqrt{2}}                                                            \\
+% 		      \Rightarrow C_1 & =\frac{1}{\sqrt{2}} -\frac{\beta_1}{\lambda_1} = \frac{1}{\sqrt{2}}-\frac{2a\sqrt{2}}{\pi^3} = \frac{\pi^3-4a}{\sqrt{2}\pi^3}
+% 	      \end{align*}
+% 	      und f"ur $k>1$
+% 	      \begin{align*}
+% 		      \alpha_k(0)     & =\frac{\beta_k}{\lambda_k}+C_k\stackrel{!}{=}0           \\
+% 		      \Rightarrow C_k & =-\frac{\beta_k}{\lambda_k} = \begin{cases}-\frac{2a\sqrt{2}}{k^3\pi^3} & , k\text{ ungerade} \\
+% 			      0                            & , \text{sonst}
+% 		      \end{cases}
+% 	      \end{align*}
+% 	      Die L"osung $u$ lautet daher insgesamt 
+% 	      \begin{align*}
+% 		      u(x,t) & =\alpha_1(t)\sqrt{2}\sin(\pi x) + \sum^{\infty}_{k=2}(\frac{\beta_k}{\lambda_k} + C_ke^{-\lambda_k t})\sqrt{2}\sin(k\pi x)                                                                                   \\
+% 		             & = \left(\frac{ 4a}{\pi^3} + (1-\frac{4a}{\pi^3})e^{-\pi^2t}\right)\sin(\pi x) +\sum^{\infty}_{k=2 \atop k\text{ ungerade}} \left( \frac{4a}{k^3\pi^3} - \frac{4a}{k^3\pi^3}e^{-k^2\pi^2t}\right)\sin(k\pi x)
+% 	      \end{align*}
+% \end{enumerate}
+
+% %------------------------------------------------------------------------------
+% \newpage
+% \begin{example}
+% 	Examine the following problem
+% 	\begin{align*}
+% 		\partial_t u(x,t) & =\partial_{xx}u(x,t)+\sin(\pi x), &  & x\ \in\ (0,1), t>0, \\
+% 		u(0,t)            & =0,                               &  & t>0,                \\
+% 		u(1,t)            & =0,                               &  & t>0,                \\
+% 		u(x,0)            & = a,                              &  & x\, \in\, (0,1) ,
+% 	\end{align*}
+% 	with constant IC $a\in\mathbb{R}$.
+% 	\begin{enumerate}
+% 		\item Compute the Eigenvalues and the normalized Eigenfunctions from $\partial_{xx}$.
+% 		\item Develop the IC and source term in these Eigenfunctions.
+% 		\item Compute the solution of the problem with the Eigenfunction ansatz.
+% 	\end{enumerate}
+% \end{example}
+
+% \begin{enumerate}
+% 	\item Die zum Problem geh"orenden Eigenfunktionen und Eigenwerte erf"ullen
+% 	      \begin{align*}
+% 		      \varphi^{\prime\prime}(x)+\lambda\varphi(x) & =0, \quad x\in (0,1) \\
+% 		      \varphi(0)=\varphi(1)                       & =0
+% 	      \end{align*}
+% 	      \begin{align*}
+% 		      \Rightarrow \quad \varphi(x) = C_1\sin(\sqrt{\lambda}x) + C_2 \cos(\sqrt{\lambda}x)
+% 	      \end{align*}
+% 	      Mit den Randbedingungen f"ur $\varphi$ erh"alt man 
+% 	      \begin{align*}
+% 		      0 = \varphi(0) & = C_2 \, \Rightarrow \, C_2 = 0                                                      \\
+% 		      0 = \varphi(1) & = C_1\sin(\sqrt{\lambda}) \, \Rightarrow \, \lambda_k = (k\pi)^2, \, k\in \mathbb{N}
+% 	      \end{align*}
+% 	      \begin{align*}
+% 		      \Rightarrow \varphi_k(x) = C_1\sin(k\pi x) , \, k \in \mathbb{N}
+% 	      \end{align*}
+% 	      $C_1$ erh"alt man durch Normierung
+% 	      \begin{align*}
+% 		      1 & \stackrel{!}{=} \int_0^1 \varphi_k(x)^2\, dx = C_1^2 \int_0^1 \sin^2(k\pi x) \, dx                \\
+% 		        & = C_1^2 \left[ \left. \frac x 2 - \frac{\sin(2k\pi x)}{4k\pi}\right|^1_0 \right] = C_1^2\frac 1 2 \\
+% 		      \Rightarrow C_1 = \sqrt{2}
+% 	      \end{align*}
+% 	      damit lauten die Eigenwerte und normierten Eigenfunktionen 
+% 	      \begin{align*}
+% 		      \varphi_k(x)               & =\sqrt{2}\sin(k\pi x)                  \\
+% 		      \text{und} \quad \lambda_k & =(k\pi)^2 \text{ f"ur } k\in\mathbb{N}
+% 	      \end{align*}
+
+% 	\item Die Entwicklung der konstanten Anfangsbedingung $a(x,t)=a$  in Eigenfunktionen lautet
+% 	      \begin{align*}
+% 		      a & = \sum^{\infty}_{k=1}\beta_k\varphi_k(x)         \\
+% 		        & = \sum^{\infty}_{k=1}\beta_k\sqrt{2}\sin(k\pi x)
+% 	      \end{align*}
+% 	      Die Koeffizienten berechnet man durch
+% 	      \begin{align*}
+% 		      \beta_k & =\int^1_0 a\sqrt{2}\sin(k\pi x)dx                                         \\
+% 		              & = a \sqrt{2} \left[ \left. -\frac{\cos(k \pi x)}{k\pi}\right|^1_0 \right] \\
+% 		              & =\frac{a\sqrt{2}}{k\pi}(1-\cos(k\pi))=\begin{cases}\frac{2a\sqrt{2}}{k\pi} & , k\text{ ungerade} \\
+% 			      0                       & , \text{sonst.}
+% 		      \end{cases}
+% 	      \end{align*}
+% 	      Der Quellterm hat offenbar die Entwicklung
+% 	      \begin{align*}
+% 		                         & \sin(\pi x) = \sum_{k=1}^{\infty}\gamma_k \sqrt{2} \sin(k \pi x) \\
+% 		      \mathrm{mit} \quad & \gamma_k = \begin{cases}\frac{1}{\sqrt{2}} & , k = 1         \\
+% 			      0                  & , \text{sonst.}
+% 		      \end{cases}
+% 	      \end{align*}
+
+% 	\item F"ur die L"osung $u$ wird der Eigenfunktionen-Ansatz
+% 	      \begin{align*}
+% 		      u(x,t)=\sum^{\infty}_{k=1}\alpha_k(t)\varphi_k(x)
+% 	      \end{align*}
+% 	      gew"ahlt, mit zeitabh"angigen Koeffizienten $\alpha_k(t), \, t>0, k\in \mathbb{N}$. \\
+% 	      Einsetzen der Entwicklungen von $u(x,t)$ und $\sin(\pi x)$ in die Differentialgleichung liefert
+% 	      \begin{align*}
+% 		                           & (\sum^{\infty}_{k=1}\alpha_k(t)\varphi_k(x))_t=(\sum^{\infty}_{k=1}\alpha_k(t)\varphi_k(x))_{xx}+\sum^{\infty}_{k=1}\gamma_k\varphi_k(x) \\
+% 		      \Leftrightarrow\quad & \sum^{\infty}_{k=1}\alpha'_k(t)\varphi_k(x)=-\sum^{\infty}_{k=1}\alpha_k(t)\lambda_k\varphi_k(x)+\sum^{\infty}_{k=1}\gamma_k\varphi_k(x) \\
+% 		      \Leftrightarrow\quad & \sum^{\infty}_{k=1}(\alpha'_k(t)+\lambda_k\alpha_k(t)-\gamma_k)\varphi_k(x)=0
+% 	      \end{align*}
+% 	      Wir erhalten eine gew"ohnliche Differentialgleichung f"ur die Koeffizienten $\alpha_k(t)$
+% 	      \begin{align*}
+% 		      \alpha'_k(t) & =-\lambda_k\alpha_k(t)+\gamma_k
+% 	      \end{align*}
+% 	      mit der allgemeinen L"osung 
+% 	      \begin{align*}
+% 		      \alpha_k(t) & =\frac{\gamma_k}{\lambda_k}+C_k e^{-\lambda_k t}.
+% 	      \end{align*}
+% 	      Die Konstante $C_k$ wird durch die Anfangsbedingung f"ur $\alpha_k(0)$ bestimmt. Dazu betrachten wir die Anfangsbedingung f"ur $u$:
+% 	      \begin{align*}
+% 		      u(x,0)=\sum^{\infty}_{k=1}\alpha_k(0)\sqrt{2}\sin(k\pi x)\stackrel{!}{=} a = \sum_{k=0}^{\infty}\frac{2\sqrt{2}a}{(2k+1)\pi}\sqrt{2}\sin((2k+1)\pi x) \\
+% 		      \Rightarrow \alpha_{2j}(0) = 0 \quad \mathrm{und} \quad \alpha_{2j+1}(0) = \frac{2\sqrt{2}a}{(2j+1)\pi} \forall\ j 
+% 	      \end{align*}
+% 	      Also gilt f"ur $j=0$
+% 	      \begin{align*}
+% 		      \alpha_1(0)     & = \frac{\gamma_1}{\lambda_1}+C_1  \stackrel{!}{=}\frac{2\sqrt{2}a}{\pi}                               \\
+% 		      \Rightarrow C_1 & =\frac{2\sqrt{2}a}{\pi} -\frac{\gamma_1}{\lambda_1} = \frac{2\sqrt{2}a}{\pi}-\frac{1}{\pi^2 \sqrt{2}}
+% 	      \end{align*}
+% 	      und f"ur $j>0$
+% 	      \begin{align*}
+% 		      \alpha_{2j}(0)       & =\frac{\gamma_{2j}}{\lambda_{2j}}+C_{2j} = C_{2j} \stackrel{!}{=}0                                    \\
+% 		      \Rightarrow C_{2j}   & =0                                                                                                    \\
+% 		      \alpha_{2j+1}(0)     & =\frac{\gamma_{2j+1}}{\lambda_{2j+1}}+C_{2j+1} = C_{2j+1} \stackrel{!}{=}\frac{2\sqrt{2}a}{(2j+1)\pi} \\
+% 		      \Rightarrow C_{2j+1} & =\frac{2\sqrt{2}a}{(2j+1)\pi}
+% 	      \end{align*}
+% 	      Die L"osung $u$ lautet daher insgesamt 
+% 	      \begin{align*}
+% 		      u(x,t) & =\left(\frac{\gamma_1}{\lambda_1} + \left(\frac{2\sqrt{2}a}{\pi}-\frac{1}{\pi^2 \sqrt{2}}\right)e^{-\lambda_1 t}\right)\sqrt{2}\sin(\pi x) + \sum^{\infty}_{k=2} C_ke^{-\lambda_k t}\sqrt{2}\sin(k\pi x) \\
+% 		             & = \left(\frac{4a}{\pi} - \frac{1}{\pi^2}\right)e^{-\pi^2 t} \sin(\pi x) + \frac{1}{\pi^2} \sin(\pi x)                                                                                                    \\
+% 		             & + \sum_{j=1}^{\infty}\frac{4a}{(2j+1)\pi}e^{-(2j+1)^2 \pi^2 t} \sin((2j+1)\pi x)
+% 	      \end{align*}
+% \end{enumerate}
+
+% %------------------------------------------------------------------------------
+% \newpage
+% \begin{example}
+% 	Examine the following problem
+% 	\begin{align*}
+% 		\partial_{tt} u(x,t) & =   \partial_{xx}u(x,t) + a, &  & x\ \in\ (0,1), t>0, \\
+% 		u(0,t)               & =0,                          &  & t>0,                \\
+% 		u(1,t)               & =0,                          &  & t>0,                \\
+% 		u(x,0)               & = x,                         &  & x\, \in\, (0,1),    \\
+% 		u_t(x,0)             & = 0,                         &  & x\, \in\, (0,1),
+% 	\end{align*}
+% 	with constant source term $a\in\mathbb{R}$.
+% 	\begin{enumerate}
+% 		\item Compute the Eigenvalues and the normalized Eigenfunctions from $\partial_{xx}$.
+% 		\item Develop the IC and source term in these Eigenfunctions.
+% 		\item Compute the solution of the problem with the Eigenfunction ansatz.
+% 	\end{enumerate}
+% \end{example}
+
+% \newpage
+% (Example 4 cont.)
+
+% Die Gleichung $y''(x) = -cy(x) +b$ besitzt die allg. Lösung 
+% 	\begin{align*}
+% 		y(x) = \frac{b}{c} + k_1 \sin(\sqrt{c} x)+ k_2\cos(\sqrt{c} x), \quad k_1,k_2 \in \mathbb{R}
+% 	\end{align*}
+
+% \begin{enumerate}
+% 	\item Die zum Problem geh"orenden Eigenfunktionen und Eigenwerte erf"ullen
+% 	      \begin{align*}
+% 		      \varphi^{\prime\prime}(x)+\lambda\varphi(x) & =0, \quad x\in (0,1) \\
+% 		      \varphi(0)=\varphi(1)                       & =0
+% 	      \end{align*}
+% 	      \begin{align*}
+% 		      \Rightarrow \quad \varphi(x) = C_1\sin(\sqrt{\lambda}x) + C_2 \cos(\sqrt{\lambda}x)
+% 	      \end{align*}
+% 	      Mit den Randbedingungen f"ur $\varphi$ erh"alt man
+% 	      \begin{align*}
+% 		      0 = \varphi(0) & = C_2 \, \Rightarrow \, C_2 = 0                                                       \\
+% 		      0 = \varphi(1) & = C_1\sin(\sqrt{\lambda}x) \, \Rightarrow \, \lambda_k = (k\pi)^2, \, k\in \mathbb{N}
+% 	      \end{align*}
+% 	      \begin{align*}
+% 		      \Rightarrow \varphi_k(x) = C_1\sin(k\pi x) , \, k \in \mathbb{N}
+% 	      \end{align*}
+% 	      $C_1$ is obtained by taking into the consideration of normalization
+% 	      \begin{align*}
+% 		      1 & \stackrel{!}{=} \int_0^1 \varphi_k(x)^2\, dx = C_1^2 \int_0^1 \sin^2(k\pi x) \, dx                \\
+% 		        & = C_1^2 \left[ \left. \frac x 2 - \frac{\sin(2k\pi x)}{4k\pi}\right|^1_0 \right] = C_1^2\frac 1 2 \\
+% 		      \Rightarrow C_1 = \sqrt{2}
+% 	      \end{align*}
+% 	      \reversemarginpar
+% 	      damit lauten die Eigenwerte und normierten Eigenfunktionen
+% 	      \begin{align*}
+% 		      \varphi_k(x)               & =\sqrt{2}\sin(k\pi x)                  \\
+% 		      \text{und} \quad \lambda_k & =(k\pi)^2 \text{ f"ur } k\in\mathbb{N}
+% 	      \end{align*}
+
+% 	\item Die Entwicklung des konstanten Quellterms $a(x,t)=a$  in Eigenfunktionen lautet
+% 	      \begin{align*}
+% 		      a & = \sum^{\infty}_{k=1}\beta_k\varphi_k(x)         \\
+% 		        & = \sum^{\infty}_{k=1}\beta_k\sqrt{2}\sin(k\pi x)
+% 	      \end{align*}
+% 	      Die Koeffizienten berechnet man durch
+% 	      \begin{align*}
+% 		      \beta_k & =\int^1_0 a\sqrt{2}\sin(k\pi x)dx                                         \\
+% 		              & = a \sqrt{2} \left[ \left. -\frac{\cos(k \pi x)}{k\pi}\right|^1_0 \right] \\
+% 		              & =\frac{a\sqrt{2}}{k\pi}(1-\cos(k\pi))=\begin{cases}\frac{2a\sqrt{2}}{k\pi} & , k\text{ ungerade} \\
+% 			      0                       & , \text{sonst}
+% 		      \end{cases}
+% 	      \end{align*}
+% 	      Für die Entwicklung der Anfangsbedingung $u(x,0) = x$ gilt:
+% 	      \begin{align*}
+% 		      x & = \sum^{\infty}_{k=1}\gamma_k\varphi_k(x)         \\
+% 		        & = \sum^{\infty}_{k=1}\gamma_k\sqrt{2}\sin(k\pi x)
+% 	      \end{align*}
+% 	      mit
+% 	      \begin{align*}
+% 		      \gamma_k & = \int_{0}^{1} x \sqrt{2} \sin(k\pi x)dx                                                                               \\
+% 		               & = \sqrt{2} \left[ - x \cos(k \pi x) \frac{1}{k \pi}  \right]_0^1 + \sqrt{2}  \int_0^1 \frac{1}{k \pi} \cos(k \pi x) dx \\
+% 		               & =\frac{\sqrt{2}}{k \pi}  \cos(k \pi)+ \frac{\sqrt{2}}{k \pi} \left[ \frac{1}{k \pi} \sin(k \pi x) \right]_0^1          \\
+% 		            \begin{align}
+% 	\label{eq:variationformular}
+% 	\boxed{
+% 		\delta F(y;v) := \lim_{t\to 0}\frac{F(y+tv)-F(y)}{t}.
+% 	}
+% \end{align}
+
+% In order to find the variation of the functional $F$,
+% which fulfills 
+% \eqref{eq:functionalexample}
+% and 
+% \eqref{eq:conditiony},
+% in $v$ direction satisfying
+% \eqref{eq:conditiony}, 
+% we need to compute the limit, by definiton,
+% as shown in \eqref{eq:variationformular}.
+% First, we shall write down the corresponding term 
+% for $F(y+t\,v)$ based on
+% the functional $F(y)$ given in
+% \eqref{eq:functionalexample}, which means
+% \begin{align}
+% 	\label{eq:termextra}
+% 	F(y+t\,v)
+% 	= 
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x \,
+% 	(y+t\,v)^\prime(x)
+% 	\Big)^2\,dx,
+% \end{align}
+% then by substituting both \eqref{eq:termextra}
+% and \eqref{eq:functionalexample}
+% into \eqref{eq:variationformular}
+% we obtain 
+% \begin{align}
+% 	\delta F(y;v)
+% 	 & :=  \lim_{t\to 0}\frac{F(y+t\,v)-F(y)}{t} \notag \\
+% 	 & =  \lim_{t\to 0} \frac{1}{t}
+% 	\left(
+% 	\frac{1}{2}
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x \,
+% 	(y+t\,v)^\prime(x)
+% 	\Big)^2\,dx
+% 	-
+% 	\frac{1}{2}
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x \, y^\prime(x)
+% 	\Big)^2\,dx
+% 	\right)\notag                                       \\
+% 	 & =  \lim_{t\to 0} \frac{1}{2t}
+% 	\left(
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x \,
+% 	(y(x)+t\,v(x))^\prime
+% 	\Big)^2\,dx
+% 	-
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x \, y^\prime(x)
+% 	\Big)^2\,dx
+% 	\right), 
+% \end{align}
+% where we will now compute those terms within the parenthesis, as follows
+% \begin{align}
+% 	\delta F(y;v)
+% 	 & =  \lim_{t\to 0} \frac{1}{2t}
+% 	\left(
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x \,
+% 	(y^\prime(x)+t\,v^\prime(x))
+% 	\Big)^2\,dx
+% 	-
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x \, y^\prime(x)
+% 	\Big)^2\,dx
+% 	\right)\notag                    \\
+% 	 & =  \lim_{t\to 0} \frac{1}{2t}
+% 	\left(
+% 	\bigintsss_{-1}^{1}
+% 	x^2 \,
+% 	\Big(y^\prime(x)+t\,v^\prime(x)\Big)^2
+% 	\,dx
+% 	-
+% 	\bigintsss_{-1}^{1}
+% 	x^2 \, (y^\prime(x))^2\,dx
+% 	\right)\notag                    \\
+% 	 & =  \lim_{t\to 0} \frac{1}{2t}
+% 	\!
+% 	\bigintsss_{-1}^{1}
+% 	\!\!\!\!
+% 	x^2 \,
+% 	\Big(
+% 	(y^\prime(x))^2 
+% 	+ 2\,y^\prime(x)\,t\,v^\prime(x)
+% 	+ t^2\,(v^\prime(x))^2
+% 	\Big)
+% 	\,dx
+% 	-\!\!\!
+% 	\bigintsss_{-1}^{1}
+% 	\!\!\!\!
+% 	x^2 \, (y^\prime(x))^2\,dx\notag \\
+% 	 & =  \lim_{t\to 0} \frac{1}{2t}
+% 	\bigintsss_{-1}^{1}
+% 	\!\!\!\!
+% 	\Big(
+% 	\cancel{x^2\,(y^\prime(x))^2}
+% 	+ 2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
+% 	+ x^2\,t^2\,(v^\prime(x))^2
+% 	- \cancel{x^2\,(y^\prime(x))^2}
+% 	\Big)
+% 	\,dx
+% 	\notag                           \\
+% 	 & =  \lim_{t\to 0} \frac{1}{2t}
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
+% 	+ x^2\,t^2\,(v^\prime(x))^2
+% 	\Big)
+% 	\,dx.
+% 	\label{eq:reducedform}
+% \end{align}
+
+% Next, the expression in \eqref{eq:reducedform} is computed further,
+% by first computing terms within the integrand going with $t$
+% and then splitting into two terms going with the limit, as follows
+% \begin{align}
+% 	\delta F(y;v)
+% 	 & \stackrel{\eqref{eq:reducedform}}{=}
+% 	\lim_{t\to 0} \frac{1}{2t}
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
+% 	+ x^2\,t^2\,(v^\prime(x))^2
+% 	\Big)
+% 	\,dx\notag                              \\
+% 	 & =
+% 	\lim_{t\to 0}
+% 	\bigintsss_{-1}^{1}
+% 	\frac{2\,x^2\,y^\prime(x)\,t\,v^\prime(x)
+% 		+ x^2\,t^2\,(v^\prime(x))^2}{2t}
+% 	\,dx\notag                              \\
+% 	 & =
+% 	\lim_{t\to 0}
+% 	\bigintsss_{-1}^{1}
+% 	\Big(
+% 	x^2\,y^\prime(x)\,v^\prime(x)
+% 	+ \frac{1}{2}x^2\,t\,(v^\prime(x))^2
+% 	\Big)
+% 	\,dx\notag                              \\
+% 	 & =
+% 	\lim_{t\to 0}
+% 	\bigintsss_{-1}^{1}
+% 	x^2\,y^\prime(x)\,v^\prime(x)
+% 	\,dx
+% 	+ 
+% 	\lim_{t\to 0}
+% 	\frac{1}{2}
+% 	\bigintsss_{-1}^{1}
+% 	x^2\,t\,(v^\prime(x))^2
+% 	\,dx \notag                             \\
+% 	 & =
+% 	\bigintsss_{-1}^{1}
+% 	x^2\,y^\prime(x)\,v^\prime(x)
+% 	\,dx
+% 	+
+% 	\underbrace{\lim_{t\to 0}
+% 		\frac{t}{2}
+% 		\bigintsss_{-1}^{1}
+% 		x^2\,(v^\prime(x))^2
+% 		\,dx}_{=0}.
+% 	\label{eq:reducedform2}
+% \end{align}
+% Note in passing that the term $t$ can be brought out of the integral 
+% arising in \eqref{eq:reducedform2}
+% because $t$ is just a constant for this integral. 
+% It is also worthy to note that bringing a limit from outside 
+% to inside an integral is critical as the final result is not always the same.
+% Herein, for the limit showing in \eqref{eq:reducedform2}
+% we have been not doing so, but rather bringing the $t$ out of the integral.
+% Finally, the first variation of functional $F$ is processed further as follows
+% \begin{align}
+% 	\label{eq:reducedform3}
+% 	\delta F(y;v)
+% 	\stackrel{\eqref{eq:reducedform2}}{=}
+% 	\bigintsss_{-1}^{1}
+% 	x^2\,y^\prime(x)\,v^\prime(x)
+% 	\,dx.
+% \end{align}
+% We will compute \eqref{eq:reducedform3}
+% by taking into consideration the \textbf{integration by parts}, as follows 
+% \begin{align}
+% 	\label{eq:integrationbyparts}
+% 	\boxed{
+% 		\bigintsss a'b =  ab - \bigintsss ab'
+% 	}
+% \end{align}
+% where we will assign
+% \begin{align}
+% 	\label{eq:assignedab}
+% 	\begin{cases}
+% 		a := v(x), \\
+% 		b := x^2\,y'(x),
+% 	\end{cases}
+% \end{align}
+% which leads to 
+% \begin{align}
+% 	\delta F(y;v)
+% 	 & \stackrel{\eqref{eq:reducedform3}}{=}
+% 	\bigintsss_{-1}^{1}
+% 	\underbrace{v^\prime(x)}_{a'}
+% 	\underbrace{x^2\,y^\prime(x)}_{b}
+% 	\,dx\notag                               \\
+% 	 & 
+% 	\stackrel{
+% 		\stackrel{\mbox{\scriptsize$\eqref{eq:assignedab}$}}{\eqref{eq:integrationbyparts}}
+% 	}{=}
+% 	\Big(
+% 	\underbrace{v(x)}_{a}
+% 	\,
+% 	\underbrace{x^2\,y'(x)}_{b}
+% 	\Big)\Bigg|_{x=-1}^{x=1}
+% 	-
+% 	\bigintsss_{-1}^{1}
+% 	\underbrace{v(x)}_{a}
+% 	\underbrace{
+% 		\frac{d(x^2\,y'(x))}{dx}
+% 	}_{b'}\,dx\notag                         \\
+% 	 & =
+% 	\underbrace{v(1)}_{=0}\,
+% 	(1)^2\,
+% 	\underbrace{y'(1)}_{=1}
+% 	- 
+% 	\underbrace{v(-1)}_{=0}\,
+% 	(-1)^2\,
+% 	\underbrace{y'(-1)}_{=1}
+% 	-\bigintsss_{-1}^{1}v(x)\frac{d(x^2\,y'(x))}{dx}\,dx
+% 	\label{eq:somethingtonote}               \\
+% 	 & =
+% 	-\bigintsss_{-1}^{1}v(x)\frac{d(x^2\,y'(x))}{dx}\,dx.
+% \end{align}
+
+% Note in passing that the definition 
+% in \eqref{eq:conditiony}
+% and \eqref{eq:conditionv}
+% yield the following equalities
+% \begin{align}
+% 	y(1)=y(-1)=1, \\
+% 	v(1)=v(-1)=0,
+% \end{align}
+% which we have used in \eqref{eq:somethingtonote}.
+% Therefore, we obtain the final result 
+% \begin{align}
+% 	\therefore\quad\boxed{
+% 		\delta F(y;v)
+% 		=
+% 		-\bigintsss_{-1}^{1}v(x)\frac{d(x^2\,y'(x))}{dx}\,dx,
+% 		\quad
+% 		\forall\, v(x)\in D_{0},\, y(x)\in D. 
+% 	}
+% \end{align}   & = (-1)^k \frac{\sqrt{2}}{k \pi}
+% 	      \end{align*}
+
+% 	\item F"ur die L"osung $u$ wird der Eigenfunktionen-Ansatz
+% 	      \begin{align*}
+% 		      u(x,t)=\sum^{\infty}_{k=1}\alpha_k(t)\varphi_k(x)
+% 	      \end{align*}
+% 	      gew"ahlt, mit zeitabh"angigen Koeffizienten $\alpha_k(t), \, t>0, k\in \mathbb{N}$. \\
+% 	      Einsetzen der Entwicklungen von $u(x,t)$ und $a$ in die Differentialgleichung liefert
+% 	      \begin{align*}
+% 		                           & (\sum^{\infty}_{k=1}\alpha_k(t)\varphi_k(x))_{tt}=  (\sum^{\infty}_{k=1}\alpha_k(t)\varphi_k(x))_{xx}+\sum^{\infty}_{k=1}\beta_k\varphi_k(x) \\
+% 		      \Leftrightarrow\quad & \sum^{\infty}_{k=1}\alpha''_k(t)\varphi_k(x)=-\sum^{\infty}_{k=1}\alpha_k(t)\lambda_k\varphi_k(x)+\sum^{\infty}_{k=1}\beta_k\varphi_k(x)     \\
+% 		      \Leftrightarrow\quad & \sum^{\infty}_{k=1}(\alpha''_k(t)+\lambda_k\alpha_k(t)-\beta_k)\varphi_k(x)=0
+% 	      \end{align*}
+% 	      \normalmarginpar
+% 	      Wir erhalten eine gew"ohnliche Differentialgleichung f"ur die Koeffizienten $\alpha_k(t)$
+% 	      \begin{align*}
+% 		      \alpha''_k(t) & =-\lambda_k\alpha_k(t)+\beta_k
+% 	      \end{align*}
+% 	      mit der allgemeinen L"osung (Hinweis)
+% 	      \begin{align*}
+% 		      \alpha_k(t) & =\frac{\beta_k }{\lambda_k}+ C_{k,1} \sin(\sqrt{\lambda_k} t) + C_{k,2} \cos(\sqrt{\lambda_k} t) .
+% 	      \end{align*}
+% 	      Die Konstanten werden durch die Anfangsbedingungen bestimmt. Dazu gilt zunächst wegen $u_t(x,0) = 0$:
+% 	      \begin{align*}
+% 		      u_t(x,0) = \sum_{k = 1}^{\infty} \alpha'_k(0) \sqrt{2} \sin(k\pi x) \stackrel{!}{=} 0                            \\
+% 		      \Rightarrow \alpha'_k(0) = \sqrt{\lambda_k} C_{k,1} \cos(0) - \sqrt{\lambda_k} C_{k,2} \sin(0) \stackrel{!}{=} 0 \\
+% 		      \Rightarrow C_{k,1} = 0
+% 	      \end{align*}
+% 	      Die Konstante $C_{k,2}$ wird durch die Anfangsbedingung $u(x,0) = x$ bestimmt. Dazu betrachte
+% 	      \begin{align*}
+% 		      u(x,0)=\sum^{\infty}_{k=1}\alpha_k(0)\sqrt{2}\sin(k\pi x)\stackrel{!}{=} \sum^{\infty}_{k=1}\gamma_k\sqrt{2}\sin(k\pi x) \\
+% 		      \Rightarrow \alpha_k(0)\stackrel{!}{=} \gamma_k
+% 	      \end{align*}
+% 	      Also gilt
+% 	      \begin{align*}
+% 		      \alpha_k(0)         & =  \frac{\beta_k}{\lambda_k}+C_{k,2} \stackrel{!}{=} \gamma_k =(-1)^k \frac{\sqrt{2}}{k \pi} \\
+% 		      \Rightarrow C_{k,2} & = \begin{cases} - \frac{2 a \sqrt{2} }{(k \pi)^3} - \frac{\sqrt{2}}{ k \pi}, k \text{ ungerade} \\
+% 			      \frac{\sqrt{2}}{ k \pi},  \text{ sonst}
+% 		      \end{cases}
+% 	      \end{align*}
+% 	      Die L"osung $u$ lautet daher insgesamt
+% 	      \begin{align*}
+% 		      u(x,t) & = \sum_{k=1}^{\infty} \left( \frac{\beta_k }{\lambda_k}+ C_{k,1} \sin(\sqrt{\lambda_k} t) + C_{k,2} \cos(\sqrt{\lambda_k} t) \right) \sqrt{2} \sin(k \pi x)                        \\
+% 		             & = \sum_{k=1 \atop k \text{ gerade}}^{\infty} \left[  \frac{4a }{(k \pi)^3}  +\left( \frac{{2}}{ k \pi} \right)   \cos(k \pi t)  \right]  \sin(k \pi x)                             \\
+% 		             & +  \sum_{k=1 \atop k \text{ ungerade}}^{\infty} \left[  \frac{4a }{(k \pi)^3}  - \left( \frac{{2}a }{(k \pi)^3} + \frac{{2}}{ k \pi} \right) \cos(k \pi t)  \right]  \sin(k \pi x)
+% 	      \end{align*}
+% \end{enumerate}
+
+% \section{Conservation laws - Idea}
+% % Integral form
+% % \begin{equation}
+% % 	\frac{d}{dt}\int_{\Omega}u\,d\Omega 
+% % 	= -\int_{\partial\Omega}f(u)\cdot n\,d\partial\Omega
+% % \end{equation}
+% % Differential form
+% % \begin{equation}
+% % 	u_{t} + \nabla\cdot f(u) = 0 
+% % \end{equation}
+% \emph{Master balance principle}: due to the fact that the mathematical structure of the fundamental balance relations,
+% namely of mass, linear momentum, moment of momentum, energy and entropy, is in principle identical, they can be 
+% formulated within the concise shape of a master balance. To begin with, let $\Psi$ and $\BPsi$ be volume specific
+% scalar and vector value densities of a physical quantity to be balanced, respectively. Then, the general balance relations take 
+% the global \textbf{integral form} as follows 
+% \begin{align}
+% 	\frac{d}{dt}\int_{\Omega} \Psi \,d\Omega  & = 
+% 	-\int_{\partial\Omega}\Bphi\cdot\Bn\,d\partial\Omega 
+% 	+ \int_{\Omega}\sigma\,d\Omega
+% 	+ \int_{\Omega}\hat{\Psi}\,d\Omega             \\
+% 	\frac{d}{dt}\int_{\Omega} \BPsi \,d\Omega & = 
+% 	-\int_{\partial\Omega}\BPhi\cdot\Bn\,d\partial\Omega 
+% 	+ \int_{\Omega}\Bsigma\,d\Omega
+% 	+ \int_{\Omega}\hat{\BPsi}\,d\Omega
+% \end{align}
+% where $(\Bphi\cdot\Bn)$ and $(\BPhi\cdot\Bn)$ describe action at the vicinity; $\sigma$ and 
+% $\Bsigma$ present for action from a distance; and $\hat{\Psi}$ and $\hat{\BPsi}$ for production or nucleation.
+% \begin{example}
+% 	Conservation of mass: A derivation from integral to differential form.
+% \end{example}
+% \inputfig{floats/massx1x2}{massx1x2}
+% Let $x$ represent the distance along the tube and let $\rho(x,t)$ be the mass density of the 
+% fluid at point $x$ and time $t$. Then, the total mass $M$ in the section 
+% $[x_{1},x_{2}]$ at time $t$ is defined as follows
+% \begin{equation}
+% 	M := \int_{x_{1}}^{x_{2}} \rho(x,t)\,dx.
+% \end{equation}
+% Assume that the walls of the tube are impermeable and mass is neither created nor destroyed, 
+% this total mass $M$ in this interval $[x_1,x_2]$ varies over time only due to the fluid flowing
+% across at the boundaries $x=x_{1}$ and $x=x_{2}$. 
+% % Besides, the flow rate (also called \emph{rate of flow}, or \emph{flux}) is denoted as $f(\rho)$.
+% Now let $v(x,t)$ be the measured velocity of flow at point $x$ and time $t$.
+% Then, the flow rate (also called \emph{rate of flow}, or \emph{flux})
+% passing the end points of the interval $[x_{1},x_{2}]$ at time $t$ is given by
+% \begin{equation}
+% 	\rho(x_{1},t)v(x_{1},t)-\rho(x_{2},t)v(x_{2},t).
+% \end{equation}
+% The rate of change of mass in $[x_{1},x_{2}]$ given by the difference of fluxes at 
+% $x_1$ and $x_2$ flow rate has to be equal with the time rate of change of total mass
+% \begin{equation}\label{eq:relation0}
+% 	\boxed{
+% 		\frac{d}{dt}\int_{x_{1}}^{x_{2}} \rho(x,t)\,dx 
+% 		% \stackrel{!}{=} f(\rho(x_{1},t))-f(\rho(x_{2},t))
+% 		= \rho(x_{1},t)v(x_{1},t)-\rho(x_{2},t)v(x_{2},t)
+% 	}
+% \end{equation}
+% which is the \textbf{integral form} of the conservation law. Next, note that the following relation holds
+% \begin{equation}\label{eq:relation1}
+% 	\int_{x_{1}}^{x_{2}} \frac{\partial}{\partial x}f(\rho)\,dx 
+% 	= f(\rho(x_{2},t))-f(\rho(x_{1},t)).
+% \end{equation}
+% Substitution of \eqref{eq:relation1} into \eqref{eq:relation0} leads to
+% \begin{equation}\label{eq:relation2}
+% 	\frac{d}{dt}\int_{x_{1}}^{x_{2}} \rho(x,t)\,dx 
+% 	= -\int_{x_{1}}^{x_{2}}\frac{\partial}{\partial x}f(\rho)\,dx.
+% \end{equation}
+% If $\rho(x,t)$ is sufficiently smooth, time derivative on the LHS of \eqref{eq:relation2}
+% can be brought inside the integral. Then, an arrangement of \eqref{eq:relation2} yields
+% \begin{equation}\label{eq:relation3}
+% 	\int_{x_{1}}^{x_{2}}
+% 	\left(\frac{\partial}{\partial t}\rho(x,t) + \frac{\partial}{\partial x}f(\rho)\right)\,dx 
+% 	= 0.
+% \end{equation}
+% Since \eqref{eq:relation3} holds for any choice of $x_{1}$ and $x_{2}$, the integrant must be vanished
+% everywhere. Therefore, one obtains the \textbf{differential form} of the conservation law
+% \begin{equation}\label{eq:deri}
+% 	\therefore \quad
+% 	\boxed{\rho_{t} + f(\rho)_{x} = 0}
+% \end{equation}
+% % \begin{enumerate}
+% % 	\item gas dynamics
+% % 	\item oil-water mixtures
+% % 	\item plasmas
+% % 	\item shallow water flows
+% % 	\item meteology
+% % 	\item traffic
+% % 	\item ...
+% % \end{enumerate}
+% % \begin{definition}
+% % 	Cauchy problem
+% % \end{definition}
+% % Cauchy problem\\
+% % Riemann problem\\
+% % \begin{equation}
+% % 	u_{t} + f(u)_{x} = 0 
+% % \end{equation}
+% \begin{example}
+% 	Different definitions of flux function yields different applications
+% \end{example}
+% \begin{enumerate}
+% 	\item Advection equation: \eqref{eq:deri} with flux function
+% 	      $\displaystyle  f(\rho) =  a\rho, \ a\in \mathbb{R^+}$, taking form
+% 	      \begin{equation}
+% 		      \boxed{
+% 			      \rho_{t} + a\rho_{x} = 0
+% 		      }
+% 	      \end{equation}
+% 	\item \emph{Inviscid} Burgers' equation: \eqref{eq:deri} with flux function
+% 	      $\displaystyle  f(\rho) =  \frac{1}{2}\rho^2$, yielding
+% 	      \begin{equation}
+% 		      \boxed{
+% 			      \rho_{t} + \rho\rho_{x} = 0
+% 		      }
+% 	      \end{equation}
+% 	      which is used to illustrate the distortion of waveform in simple waves.
+% 	      Meanwhile, \emph{viscous} Burgers' equation is a scalar parabolic PDE, taking the form
+% 	      $$\rho_t + \rho\rho_{x} = \varepsilon\rho_{xx}$$
+% 	      which is the simplest differential model for a fluid flow.
+% 	\item Lighthill-Whitham-Richards (LWR) equation: \eqref{eq:deri} with flux function
+% 	      $$\displaystyle  f(\rho) =  u_{max}\,\rho\left(1-\frac{\rho}{\rho_{max}}\right)$$
+% 	      which is used to model traffic flow; $u_{max}$ is the given maximal speed of vehicle to be allowed, 
+% 	      $\rho_{max}$ the given maximal density of vehicle; taking the form
+% 	      \begin{equation}
+% 		      \rho_{t} + \left(u_{max}-\frac{2u_{max}}{\rho_{max}}\rho\right)\rho_{x} = 0
+% 	      \end{equation}
+% 	\item (Typical) Buckley-Leverett petroleum equation: \eqref{eq:deri} with flux function
+% 	      $$\displaystyle f(\rho) =  \frac{\rho^2}{\rho^2 + (1-\rho)^2\mu_{\text{water}}/\mu_{\text{oil}}}$$
+% 	      which is a one-dimensional model for a two-phase flow; $\rho$ stands for water saturation
+% 	      and takes the value in the interval $[0,1]$.
+% 	\item \emph{Euler} equations of gas dynamics in 1D
+% 	      %   \begin{align}
+% 	      %       \begin{cases}
+% 	      % 	      \begin{aligned}
+% 	      % 		      \rho_{t}     & + (\rho v)_x & = 0 \\
+% 	      % 		      (\rho v)_{t} & + (\rho v^2 + p)_x & = 0 \\
+% 	      % 		      E_{t}        & + (v(E+p))_x & = 0
+% 	      % 	      \end{aligned}
+% 	      %       \end{cases}
+% 	      %   \end{align}
+% 	      \begin{align}
+% 		      \begin{pmatrix} \rho\\\rho v \\ E \end{pmatrix}_{t}
+% 		      +
+% 		      \begin{pmatrix} \rho v\\\rho v^2 + p \\ v(E+p) \end{pmatrix}_{x}
+% 		      =
+% 		      \begin{pmatrix} 0\\ 0 \\ 0 \end{pmatrix}
+% 	      \end{align}
+% 	      $\rightarrow$ The pressure $p$ should be specified as a given function of 
+% 	      mass density $\rho$, linear momentum $\rho v$ and/or energy $E$ in order to 
+% 	      fulfill the \emph{closure} problem.
+% 	      Such additional equation is called \emph{equation of state} (normally in fluid), or 
+% 	      \emph{constitutive equation} (normally in solid). 
+% 	\item \emph{Euler} equations of gas dynamics in 2D
+% 	      \begin{align}
+% 		      \begin{pmatrix} \rho\\ \rho u\\ \rho v \\ E \end{pmatrix}_{t}
+% 		      +
+% 		      \begin{pmatrix} \rho u\\ \rho u^2 + p \\ \rho uv \\ u(E+p) \end{pmatrix}_{x}
+% 		      + 
+% 		      \begin{pmatrix} \rho v\\ \rho uv \\ \rho v^2 + p \\ v(E+p) \end{pmatrix}_{y}
+% 		      =
+% 		      \begin{pmatrix} 0 \\ 0 \\ 0 \\ 0 \end{pmatrix}
+% 	      \end{align}
+% \end{enumerate}
+% % \begin{recall}
+% % 	Convexity
+% % \end{recall}
+% \begin{definition}
+% 	Cauchy problem and Riemann problem
+% \end{definition}
+% Let $u$ be a conserved unknown quantity to be modelled and defined as follows
+% \begin{align}\label{eq:conservedquantity}
+% 	u:
+% 	\begin{cases}
+% 		\mathbb{R}\times\mathbb{R}^+ \rightarrow \mathbb{R}, \\
+% 		(x,t) \mapsto u(x,t).
+% 	\end{cases}
+% \end{align}
+% \emph{Cauchy's problem} is simply the pure initial value problem (IVP), e.g. 
+% find a function $u$ holding \eqref{eq:conservedquantity} that is a solution of
+% $\eqref{eq:cauchy}_1$ satisfying the initial condition $\eqref{eq:cauchy}_2$:
+% \begin{equation}\label{eq:cauchy}
+% 	\boxed{
+% 		\begin{aligned}
+% 			\partial_{t}u + \partial_{x}f(u) & = 0,        \\
+% 			u(x,0)                           & = u_{0}(x).
+% 		\end{aligned}
+% 	}
+% \end{equation}
+% \emph{Riemann's problem} is simply the conservation law together with particular initial data
+% consisting of two constant states separated by a single discontinuity, e.g.
+% find a function $u$ holding \eqref{eq:conservedquantity} that is a solution of
+% $\eqref{eq:riemann}_1$ satisfying the initial condition $\eqref{eq:riemann}_2$:
+% \begin{equation}\label{eq:riemann}
+% 	\boxed{
+% 		\begin{aligned}
+% 			\partial_{t}u + \partial_{x}f(u) & = 0,        \\
+% 			u(x,0)                           & = u_{0}(x)=
+% 			\begin{cases}
+% 				u_{L}, \quad x<0, \\
+% 				u_{R}, \quad x>0.
+% 			\end{cases}
+% 		\end{aligned}
+% 	}
+% \end{equation}
+% % \begin{definition}
+% % 	Hyperbolic
+% % \end{definition}
+% % Let $\Omega$ be 
+% % \inputfig{floats/comparehyperbolic}{comparehyperbolic}
+% %------------------------------------------------------------------------------
+% \section{Characteristics}
+% Let $f:\mathbb{R}\rightarrow\mathbb{R}$ be a $C^1$ function. We consider the \emph{Cauchy} problem
+% \begin{align}\label{eq:charac}
+% 	\frac{\partial u}{\partial t} + \frac{\partial}{\partial x}f(u) & = 0,        \qquad  x\in\mathbb{R}, t>0, \\
+% 	u(x,0)                                                          & = u_{0}(x), \qquad  x\in\mathbb{R}.
+% \end{align}
+% By setting $a(u) = f'(u)$, and letting $u$ be a classical solution of \eqref{eq:charac},
+% one obtains from \eqref{eq:charac} the \emph{non-conservative} form as follows
+% \begin{equation}
+% 	\frac{\partial u}{\partial t} + a(u)\frac{\partial u}{\partial x} = 0.
+% \end{equation}
+% The characteristic curves associated with \eqref{eq:charac} are defined as the integral curves
+% of the differential equation
+% \begin{equation}
+% 	\frac{dx}{dt} = a(u(x(t),t)).
+% \end{equation}
+% \begin{proposition}
+% 	Assume that u is a smooth solution of the Cauchy problem. The characteristic curves 
+% 	are straight lines along which u is constant.
+% \end{proposition}
+% \begin{proof}
+% 	Consider a characteristic curve passing through the point $(x_{0},0)$, i.e.
+% 	a solution of the ordinary differential system
+% 	\begin{align}
+% 		\begin{cases}\displaystyle
+% 			\frac{dx}{dt} & = a(u(x(t),t)), \\
+% 			x(0)          & = x_{0}.
+% 		\end{cases}
+% 	\end{align}
+% 	It exists at least on a small time interval $[0,t_{0})$. 
+% 	Along such a curve, u is constant since
+% 	\begin{align*}
+% 		\frac{d}{dt}u(x(t),t) 
+% 		 & = \frac{\partial u}{\partial t}(x(t),t)
+% 		+ \frac{\partial u}{\partial x}(x(t),t) \frac{dx}{dt}(t)                                    \\
+% 		 & =\left(\frac{\partial u}{\partial t} + a(u)\frac{\partial u}{\partial x}\right)(x(t),t) 
+% 		= 0.
+% 	\end{align*}
+% 	Therefore, the characteristic curves are straight lines whose constant slopes depend
+% 	on the initial data. As a result, the characteristic straight line passing through
+% 	the point $(x_{0},0)$ is defined by the equation
+% 	\begin{equation}
+% 		\boxed{
+% 			x = x_{0} + ta(u_{0}(x_{0}))
+% 		}
+% 	\end{equation}
+% \end{proof}
+% \begin{example}
+% 	Determine characteristics of the inviscid Burgers' equation with initial conditions given as
+% 	\begin{equation}
+% 		u(x,0) = u_{0}(x) =
+% 		\begin{cases}
+% 			\begin{aligned}
+% 				 & 1,   & x\leq 0,        &                        \\
+% 				 & 1-x, & 0\leq x \leq 1, & \quad x\in \mathbb{R}, \\
+% 				 & 0,   & x\geq 1.        & 
+% 			\end{aligned}
+% 		\end{cases}
+% 	\end{equation}
+% \end{example}
+% By using the method of characteristics, the solution can be solved up to the time when
+% those characteristics first intersect with each other, i.e. so-called breaking time or shock.
+% Since the $f'(u) = u$ in the inviscid Burgers' equation, it yields the characteristics 
+% passing through the point $(x_{0},t)$
+% \begin{equation}
+% 	x = x_{0} + t\,u_{0}(x_{0})
+% \end{equation}
+% which leads to
+% \begin{equation}
+% 	x(x_{0},t) = 
+% 	\begin{cases}
+% 		\begin{aligned}
+% 			 & x_{0}+t,          & x_{0}\leq 0,          \\
+% 			 & x_{0}+t(1-x_{0}), & 0\leq x_{0} \leq 1,   \\
+% 			 & x_{0},            & x_{0}\geq 1.         
+% 		\end{aligned}
+% 	\end{cases}
+% \end{equation}
+% (Sketch)
+% %------------------------------------------------------------------------------
+% % \section{General strategy for solving the first-order PDE}
+% % Supposed 
+% %------------------------------------------------------------------------------
+% % \section{Rankine-Hugoniot (RH) jump condition}
+
+% % Characteristic curves
+% % \begin{equation}
+% % 	\dot{x} = f'(u)\\
+% % \end{equation}
+% % \begin{align*}
+% % 	\frac{d}{dt}u(x(t),t) 
+% % 	= \frac{\partial u}{\partial t}(x(t),t)
+% % 	+ \frac{\partial u}{\partial x}(x(t),t) \frac{dx}{dt}(t)
+% % \end{align*}
+
+
+% % \inputfig{floats/multistructures}{multistructures}
+\bibliographystyle{acm}
+% \bibliography{literature.bib}
+\end{document}
