@@ -270,24 +270,27 @@ The following relation holds
 		Pz = z + v
 	}
 \end{align}
-Next, we shall need to find an expression of $v$ w.r.t. $z$. 
+but we also have
+\begin{align}
+	\norm[1]{Pz} = \norm[1]{z}
+\end{align}
+hence, the vector $Pz$ should take the form
+\begin{align}
+	Pz = \norm[1]{z} e_{1}
+\end{align}
+Substitution
+\begin{align}
+	\norm[1]{z} e_{1} = z + v
+\end{align}
+which leads to 
+\begin{align}
+	\label{eq:vonly}
+	\boxed{
+		v = \norm[1]{z} e_{1} - z
+	}
+\end{align}
+Next, we shall need to find a multiplicative expression of $v$ w.r.t. $z$. 
 Hence, we will consider the angle between $v$ and $z$ as follows
-% but we also have
-% \begin{align}
-% 	\norm[1]{Pz} = \norm[1]{z}
-% \end{align}
-% hence, the vector $Pz$ should take the form
-% \begin{align}
-% 	Pz = \norm[1]{z} e_{1}
-% \end{align}
-% Substitution
-% \begin{align}
-% 	\norm[1]{z} e_{1} = z + v
-% \end{align}
-% which leads to 
-% \begin{align}
-% 	v = \norm[1]{z} e_{1} - z
-% \end{align}
 \begin{align}
 	\label{eq:zv}
 	-z \cdot v = \norm[1]{z}\norm[1]{v}\cos{(\alpha)}
@@ -323,16 +326,19 @@ which further leads to
 Finally, substitution \eqref{eq:vexplicit} into \eqref{eq:Pzv} results in
 \begin{align}
 	Pz = z -2 \frac{vv^{\top} z}{\norm[1]{v}^2}
-	 & = Iz -2 \frac{vv^{\top} z}{\norm[1]{v}^2} \\
-	 & = Iz -2 \frac{vv^{\top}}{\norm[1]{v}^2}z  \\
-	& = \left( I -2 \frac{vv^{\top}}{\norm[1]{v}^2} \right)z
+	 & = Iz -2 \frac{vv^{\top} z}{\norm[1]{v}^2}          \\
+	 & = Iz -2 \frac{vv^{\top}}{\norm[1]{v}^2}z           \\
+	 & = \left( I -2 \frac{vv^{\top}}{v^{\top}v} \right)z
 \end{align}
 Therefore, the Householder-Reflection matrix takes the form
 \begin{align}
 	\therefore\quad\boxed{
-		P:=	I -2 \frac{vv^{\top}}{\norm[1]{v}^2}
+		P:=	I -2 \frac{vv^{\top}}{v^{\top}v},
 	}
 \end{align}
+which can be narrated that applying the Householder-Reflection matrix $P$
+onto any vector $z$ from the left, one obtain 
+reflected image of vector $z$ over a hyperplane.
 %------------------------------------------------------------------------------ hhex1
 \clearpage
 \begin{exampleboxed}
@@ -341,7 +347,42 @@ Therefore, the Householder-Reflection matrix takes the form
 		A = \begin{pmatrix} 5 &1 &2 \\ 1 &-1 &0 \\ 1 &1 &6 \end{pmatrix}_{3\times 3}.
 	\end{align}
 \end{exampleboxed}
-
+Based on \eqref{eq:vonly} we obtain 
+\begin{align}
+	v 
+	= \norm[1]{z}e_1 - z 
+	= \sqrt{5^2+1^2+1^2}
+	\begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}
+	- 
+	\begin{pmatrix} 5 \\ 1 \\ 1 \end{pmatrix}
+	=
+	\begin{pmatrix} \sqrt{27}-5 \\ -1 \\ -1 \end{pmatrix}
+\end{align}
+Hence, the components $vv^{\top}$ and $v^{\top}v$ are computed as follows
+\begin{align}
+	vv^{\top} = 
+	\begin{pmatrix} \sqrt{27}-5 \\ -1 \\ -1 \end{pmatrix}
+	\begin{pmatrix} \sqrt{27}-5 & -1 & -1 \end{pmatrix}
+	=
+	\cdots
+\end{align}
+Besides, 
+\begin{align}
+	v^{\top}v = 
+	\begin{pmatrix} \sqrt{27}-5 & -1 & -1 \end{pmatrix}
+	\begin{pmatrix} \sqrt{27}-5 \\ -1 \\ -1 \end{pmatrix}
+	= 54-10\sqrt{27}
+\end{align}
+which leads to 
+\begin{align}
+	P_1 = I -2 \frac{vv^{\top}}{v^{\top}v} = \cdots = 
+\end{align}
+Therefore,
+\begin{align}
+	P_1A 
+	= \cdots 
+	=
+\end{align}
 %------------------------------------------------------------------------------
 \clearpage
 \section{Numerics: QR-algorithm}
