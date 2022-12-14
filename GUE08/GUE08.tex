@@ -393,9 +393,35 @@ we will need to perform another Householder-Reflection, as follows
 	= \sqrt{0.8075^2 + 1.1925^2}
 	\begin{pmatrix} 1 \\ 0  \end{pmatrix}
 	- 
-	\begin{pmatrix} 5 \\ 1 \\ 1 \end{pmatrix}
+	\begin{pmatrix} -0.8075 \\ 1.1925 \end{pmatrix}
 	=
-	\begin{pmatrix} \sqrt{27}-5 \\ -1 \\ -1 \end{pmatrix}
+	\begin{pmatrix} 2.2477 \\ -1.1925  \end{pmatrix}
+\end{align}
+Similarly
+\begin{align}
+	v_2v_2^{\top} =	
+	\begin{pmatrix} 2.2477 \\ -1.1925  \end{pmatrix}
+	\begin{pmatrix} 2.2477 & -1.1925  \end{pmatrix}
+	= \dots 
+\end{align}
+\begin{align}
+	v_2^{\top}v_2 =	
+	\begin{pmatrix} 2.2477 & -1.1925  \end{pmatrix}
+	\begin{pmatrix} 2.2477 \\ -1.1925  \end{pmatrix}
+	= 6.4742
+\end{align}
+which leads to 
+\begin{align}
+	P_2 = I -2 \frac{v_2v_2^{\top}}{v_2^{\top}v_2} = \cdots = 
+\end{align}
+Therefore, we obtain
+\begin{align}
+	\therefore\quad
+	\boxed{
+		P_2(P_1A) 
+		= \cdots 
+		= \begin{pmatrix} 27 & 7.8947 & 12.2397 \\ 0 &1.4402 & 3.4975 \\ 0 &0 &-4.2762 \end{pmatrix}
+	}
 \end{align}
 %------------------------------------------------------------------------------
 \clearpage
@@ -408,6 +434,19 @@ we will need to perform another Householder-Reflection, as follows
 	a matrix $A$ into an orthogonal matrix $Q$ and a right upper triangular matrix $R$.
 	Nevertheless, we will still need QR-decomposition for QR-algorithm.
 \end{observationboxed}
+\begin{mdframed}
+	\begin{enumerate}
+		\item $A_0 := A$,
+		\item Perform QR-decomposition $A_0 = Q_0R_0$
+		\item Next step: $A_1 = R_0Q_0$
+	\end{enumerate}
+\end{mdframed}
+\begin{align*}
+	\boxed{
+		\text{Be aware that the position of Q and R is switched at step 3!}
+	}
+\end{align*}
+
 \clearpage
 %------------------------------------------------------------------------------
 \section{Analysis: Application of Hölder's inequality}
