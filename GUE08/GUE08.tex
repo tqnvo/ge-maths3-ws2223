@@ -248,6 +248,19 @@ The Givens-Rotation matrix $G_{32}$ takes the form
 	G_{32} = 
 	\begin{pmatrix}  1 &0 &0 \\ 0 &c &-s \\ 0 &s &c \end{pmatrix}
 \end{align}
+
+%------------------------------------------------------------------------------ hh
+\clearpage
+\subsection{Step-by-step with Householder-Reflection}
+\inputfig{floats/matrixA213132}{matrixA213132}
+%------------------------------------------------------------------------------ hhex1
+\begin{exampleboxed}
+	Examine the following matrix $A$ given as follows
+	\begin{align}
+		A = \begin{pmatrix} 5 &1 &2 \\ 1 &-1 &0 \\ 1 &1 &6 \end{pmatrix}_{3\times 3}.
+	\end{align}
+\end{exampleboxed}
+
 %------------------------------------------------------------------------------
 \clearpage
 \section{Numerics: QR-algorithm}
@@ -347,6 +360,7 @@ Finally, we can estimate the integral by using the Hölder's inequality
 \end{equation}
 
 %------------------------------------------------------------------------------
+% \clearpage
 \begin{exampleboxed}
 	Estimate the value of the following integral
 	\begin{align}
