@@ -1,9 +1,8 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
-\usepackage{amsmath}
-\usepackage{amsthm}
-\usepackage{amsfonts}
-\usepackage{scalerel,amssymb}  % for mathbb
+\usepackage{amsmath,amsfonts,amssymb,amsthm}
+% \usepackage{mathtools}
+\usepackage{scalerel}  % for mathbb
 %---------------------------------------------------------
 \usepackage{authblk}
 \usepackage{blindtext}
@@ -66,3 +65,10 @@
 
 %For color
 \usepackage[dvipsnames]{xcolor}
+
+%Norm package
+\usepackage{commath}
+% \usepackage[sc,osf]{mathpazo}
+% \let\oldnorm\norm   % <-- Store original \norm as \oldnorm
+% \let\norm\undefined % <-- "Undefine" \norm
+% \DeclarePairedDelimiter\norm{\lVert}{\rVert}
