@@ -377,11 +377,25 @@ which leads to
 \begin{align}
 	P_1 = I -2 \frac{vv^{\top}}{v^{\top}v} = \cdots = 
 \end{align}
-Therefore,
+Therefore, we obtain 
 \begin{align}
-	P_1A 
-	= \cdots 
+	\boxed{
+		P_1A 
+		= \cdots 
+		= \begin{pmatrix} 5.1962 & 0.9623 & 3.0792 \\ 0 &-0.8075 & -5.5019 \\ 0 &1.1925 &0.4981 \end{pmatrix}
+	}
+\end{align}
+Since the matrix $P_1A$ is not yet in forms of a right upper triangular matrix,
+we will need to perform another Householder-Reflection, as follows 
+\begin{align}
+	v_2 
+	= \norm[1]{z_2}e_1 - z_2 
+	= \sqrt{0.8075^2 + 1.1925^2}
+	\begin{pmatrix} 1 \\ 0  \end{pmatrix}
+	- 
+	\begin{pmatrix} 5 \\ 1 \\ 1 \end{pmatrix}
 	=
+	\begin{pmatrix} \sqrt{27}-5 \\ -1 \\ -1 \end{pmatrix}
 \end{align}
 %------------------------------------------------------------------------------
 \clearpage
