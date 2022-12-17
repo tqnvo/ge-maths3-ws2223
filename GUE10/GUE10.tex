@@ -27,17 +27,31 @@ Mathe III $\cdot$ GUE09 $\cdot$ WS22/23
 \end{center}
 Content covered:
 \begin{itemize}
-	\item[\checkmark] Demo programming exercise 03 (PRU02)
-	%       \begin{enumerate}
-	% 	      \item Review: QR-decomposition by using
-	% 	            \begin{enumerate}
-	% 		            \item Givens-Rotation
-	% 		            \item Householder-Reflection
-	% 	            \end{enumerate}
-	% 	      \item QR algorithm to find all eigenvalues of a matrix $A$.
-	%       \end{enumerate}
-	% \item[\checkmark] Analysis: Application of Hölder's inequality to approximate integral
+	\item[\checkmark] Analysis: Surface integral
+	      \begin{enumerate}
+		      \item Area
+		      \item Orientable surface
+	      \end{enumerate}
+	\item[\checkmark] Numerics: Optimization
 \end{itemize}
+%------------------------------------------------------------------------------
+\section{Analysis: Surface integral}
+\begin{exampleboxed}
+	Examine the \textbf{Möbius band} given as follows
+	\begin{align*}
+		\vec{\gamma}: (-1,1) \times (0,2\pi) \to \mathbb{R}^3	
+	\end{align*}
+	with
+	\begin{align*}
+		\vec{\gamma}(t,\phi) = 
+		\begin{pmatrix} \cos(\phi) \\ \sin(\phi) \\ 0 \end{pmatrix}
+		+ \frac{t}{2}
+		\begin{pmatrix} \cos(\phi) \cos(\phi/2)\\ \sin(\phi) \cos(\phi/2)\\\sin(\phi/2) \end{pmatrix}.
+	\end{align*}
+	Show that this surface is \textbf{not orientable}.
+\end{exampleboxed}
+
+\clearpage
 % %------------------------------------------------------------------------------
 % \section{Numerics: Review of QR-decomposition}
 % There are two main methods used to decompose a matrix into an orthogonal matrix $Q$
