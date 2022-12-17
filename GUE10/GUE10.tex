@@ -50,6 +50,31 @@ Content covered:
 	\end{align*}
 	Show that this surface is \textbf{not orientable}.
 \end{exampleboxed}
+Approach:
+\begin{proof} 
+	The normal field is computed as follows
+	\begin{align*}
+		n(t,\phi) 
+		 & = \pm \frac{\partial_t \vec{\gamma} \times \partial_{\phi} \vec{\gamma}}{||\partial_t \vec{\gamma} \times \partial_{\phi} \vec{\gamma}||} \\
+		 & = \frac{\mp 1}{a} \begin{pmatrix}\cos(\phi) \sin(\frac{\phi}{2}) - \frac{t}{4} \sin(\phi)(1-\cos(\phi)) \\ \sin(\phi) \sin(\phi/2) + \frac{t}{4} (\sin^2(\phi)+ \cos(\phi))\\ - \cos(\phi/2) - \frac{t}{4}(1+\cos(\phi)) \end{pmatrix}
+	\end{align*}
+	with 
+	\begin{align*}
+		a = \sqrt{1+t \cos(\phi/2)+\frac{t^2}{16}(3+2 \cos(\phi))}.
+	\end{align*}
+	We choose the positive sign and consider the position 
+	$(1,0,0)^T = \vec{\gamma}(0,0) = \vec{\gamma}(0,2\pi)$:
+	\begin{align*}
+		\lim_{\phi \to 0} n(0,\phi) 
+		= \begin{pmatrix} 0\\0\\-1\end{pmatrix} \neq \lim_{\phi\to 2\pi} n(0,\phi) 
+		= \begin{pmatrix} 0\\0\\1\end{pmatrix}.
+	\end{align*}
+	Since the normal field is not continuous on 
+	\begin{align*}
+		\gamma([-1,1] \times [0,2\pi])
+	\end{align*}
+	the surface is \textbf{not orientable}.
+\end{proof}
 
 \clearpage
 % %------------------------------------------------------------------------------
