@@ -10,7 +10,7 @@
 \makeatletter
 \renewcommand{\@oddfoot}{\hfil 
 % Aachen, November $04^{th}$, 2021 \hspace{300pt} 
-Mathe III $\cdot$ GUE09 $\cdot$ WS22/23 
+Mathe III $\cdot$ GUE10 $\cdot$ WS22/23 
 \hspace{220pt} 
 \thepage/\pageref{LastPage}\hfil}
 \makeatother
@@ -55,8 +55,15 @@ Approach:
 	The normal field is computed as follows
 	\begin{align*}
 		n(t,\phi) 
-		 & = \pm \frac{\partial_t \vec{\gamma} \times \partial_{\phi} \vec{\gamma}}{||\partial_t \vec{\gamma} \times \partial_{\phi} \vec{\gamma}||} \\
-		 & = \frac{\mp 1}{a} \begin{pmatrix}\cos(\phi) \sin(\frac{\phi}{2}) - \frac{t}{4} \sin(\phi)(1-\cos(\phi)) \\ \sin(\phi) \sin(\phi/2) + \frac{t}{4} (\sin^2(\phi)+ \cos(\phi))\\ - \cos(\phi/2) - \frac{t}{4}(1+\cos(\phi)) \end{pmatrix}
+		 & = \pm 
+		 \frac{\partial_t \vec{\gamma} \times \partial_{\phi} \vec{\gamma}}
+		 {\big\|\partial_t \vec{\gamma} \times \partial_{\phi} \vec{\gamma}\big\|} \\
+		 & = \frac{\mp 1}{a} 
+		 \begin{pmatrix}
+			\cos(\phi) \sin(\frac{\phi}{2}) - \frac{t}{4} \sin(\phi)(1-\cos(\phi)) \\ 
+			\sin(\phi) \sin(\phi/2) + \frac{t}{4} (\sin^2(\phi)+ \cos(\phi))\\ 
+			- \cos(\phi/2) - \frac{t}{4}(1+\cos(\phi)) 
+		\end{pmatrix}
 	\end{align*}
 	with 
 	\begin{align*}
