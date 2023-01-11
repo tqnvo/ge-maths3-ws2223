@@ -113,15 +113,15 @@ i.e. truncated cone
 \begin{align*}
 	\bm{\gamma}: 
 	\begin{cases}
-		(0,2\pi)\times (0,H) \to \mathbb{R}^3,\\
+		(0,2\pi)\times (0,H) \to \mathbb{R}^3, \\
 		(\phi,z) \mapsto \bm{\gamma}(\phi,z) :=
-	\begin{pmatrix} \left(R - \frac{R-r}{H}z\right) \cos(\phi) \\
-		\left(R - \frac{R-r}{H}z\right) \sin(\phi) \\
-		z
-	\end{pmatrix}.
+		\begin{pmatrix} \left(R - \frac{R-r}{H}z\right) \cos(\phi) \\
+			\left(R - \frac{R-r}{H}z\right) \sin(\phi) \\
+			z
+		\end{pmatrix}
 	\end{cases}
 \end{align*}
-Wir erhalten das Normalenfeld
+which leads to the following expression
 \begin{align*}
 	\boxed{
 		\begin{aligned}
@@ -142,29 +142,38 @@ Wir erhalten das Normalenfeld
 		\end{aligned}
 	}
 \end{align*}
-und die Norm des Normalenfelds wird wie folgt berechnet
+where the normalization yields
 \begin{align*}
 	\boxed{
-		||\partial_{\phi} \bm{\gamma} (\phi,z) \times \partial_z \bm{\gamma} (\phi,z)||
+		\Big\|
+		\partial_{\phi} \bm{\gamma} (\phi,z) \times \partial_z \bm{\gamma} (\phi,z)
+		\Big\|
 		= \left(R - \frac{R-r}{H}z\right) \sqrt{1 + \frac{(R-r)^2}{H^2}}.
 	}
 \end{align*}
-Somit ergibt sich f\"ur den Fl\"acheninhalt der Mantelfl\"ache
+
+After that, the lateral surface of the truncated cone 
+is computed as follows
 \begin{align*}
-	\mathcal{A} & =
+	\mathcal{A}
+	=
 	\bigintsss_{0}^H \bigintsss_0^{2 \pi}
-	||\partial_{\phi} \bm{\gamma} \times \partial_z \bm{\gamma} || \, d\phi \, dz \\
-	            & = 2 \pi \sqrt{1 + \frac{(R-r)^2}{H^2}}
-	\bigintsss_{0}^H \left(R - \frac{R-r}{H}z\right) \,dt
-	= \pi \sqrt{1 + \frac{(R-r)^2}{H^2}}\frac{H}{R-r} \left(R^2-r^2\right).
+	\Big\| 
+	\partial_{\phi} \bm{\gamma} \times \partial_z \bm{\gamma}
+	\Big\|
+	\, d\phi \, dz                            
+	= 2 \pi \sqrt{1 + \frac{(R-r)^2}{H^2}}
+	\bigintsss_{0}^H \left(R - \frac{R-r}{H}z\right) \, dt = \dots
+	% = \pi \sqrt{1 + \frac{(R-r)^2}{H^2}}\frac{H}{R-r} \left(R^2-r^2\right).
 \end{align*}
-Daher ist der Fl\"acheninhalt der Mantelfl\"ache
+
+Therefore, we obtain
 \begin{align*}
 	\therefore\quad\boxed{
 		\mathcal{A} =
 		\bigintsss_{0}^H \bigintsss_0^{2 \pi}
 		||\partial_{\phi} \bm{\gamma} \times \partial_z \bm{\gamma} || \, d\phi \, dz
-		= \pi \sqrt{H^2 + (R-r)^2} (R+r).
+		= \dots.
 	}
 \end{align*}
 %------------------------------------------------------------------------------
@@ -172,6 +181,11 @@ Daher ist der Fl\"acheninhalt der Mantelfl\"ache
 \section{Numerics: Demo programming exercise 3 PRU(02)}
 \inputfig{floats/pe03_QR_2}{pe03_QR_2}
 \inputfig{floats/pe03_QR_4}{pe03_QR_4}
+\begin{observationboxed}
+	For the sake of rapid checks and coding prototype
+	we may first start with a matrix sized $4\times 4$
+	for the case $C_{ij}=\sin(ij)$ as given in the programming exercise.
+\end{observationboxed}
 \inputfig{floats/pe03_QR_2_plots}{pe03_QR_2_plots}
 
 \bibliographystyle{acm}
