@@ -35,16 +35,17 @@ Content covered:
 \section{Analysis: Surface integral}
 \begin{exampleboxed}
 	Examine the \textbf{Möbius band} given as follows
-	\begin{align*}
-		\vec{\gamma}: (-1,1) \times (0,2\pi) \to \mathbb{R}^3	
-	\end{align*}
-	with
-	\begin{align*}
-		\vec{\gamma}(t,\phi) = 
-		\begin{pmatrix} \cos(\phi) \\ \sin(\phi) \\ 0 \end{pmatrix}
-		+ \frac{t}{2}
-		\begin{pmatrix} \cos(\phi) \cos(\phi/2)\\ \sin(\phi) \cos(\phi/2)\\\sin(\phi/2) \end{pmatrix}.
-	\end{align*}
+	\begin{align}
+		\vec{\gamma}:
+		\begin{cases}
+			(-1,1) \times (0,2\pi) \to \mathbb{R}^3, \\
+			(t,\phi) \mapsto 
+			\vec{\gamma}(t,\phi) := 
+			\begin{pmatrix} \cos(\phi) \\ \sin(\phi) \\ 0 \end{pmatrix}
+			+ \frac{t}{2}
+			\begin{pmatrix} \cos(\phi) \cos(\phi/2)\\ \sin(\phi) \cos(\phi/2)\\\sin(\phi/2) \end{pmatrix}.
+		\end{cases}
+	\end{align}
 	Show that this surface is \textbf{not orientable}.
 \end{exampleboxed}
 Approach:
