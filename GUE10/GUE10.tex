@@ -27,11 +27,7 @@ Mathe III $\cdot$ GUE10 $\cdot$ WS22/23
 \end{center}
 Content covered:
 \begin{itemize}
-	\item[\checkmark] Analysis: Surface integral
-	      \begin{enumerate}
-		      \item Area
-		      \item Orientable surface
-	      \end{enumerate}
+	\item[\checkmark] Analysis: Review
 	\item[\checkmark] Numerics: Demo programming exercise 3 (PRU02)
 \end{itemize}
 %------------------------------------------------------------------------------
@@ -56,13 +52,13 @@ Approach:
 	\begin{align*}
 		n(t,\phi) 
 		 & = \pm 
-		 \frac{\partial_t \vec{\gamma} \times \partial_{\phi} \vec{\gamma}}
-		 {\big\|\partial_t \vec{\gamma} \times \partial_{\phi} \vec{\gamma}\big\|} \\
-		 & = \frac{\mp 1}{a} 
-		 \begin{pmatrix}
+		\frac{\partial_t \vec{\gamma} \times \partial_{\phi} \vec{\gamma}}
+		{\big\|\partial_t \vec{\gamma} \times \partial_{\phi} \vec{\gamma}\big\|} \\
+		 & = \frac{\mp 1}{a}
+		\begin{pmatrix}
 			\cos(\phi) \sin(\frac{\phi}{2}) - \frac{t}{4} \sin(\phi)(1-\cos(\phi)) \\ 
-			\sin(\phi) \sin(\phi/2) + \frac{t}{4} (\sin^2(\phi)+ \cos(\phi))\\ 
-			- \cos(\phi/2) - \frac{t}{4}(1+\cos(\phi)) 
+			\sin(\phi) \sin(\phi/2) + \frac{t}{4} (\sin^2(\phi)+ \cos(\phi))       \\ 
+			- \cos(\phi/2) - \frac{t}{4}(1+\cos(\phi))
 		\end{pmatrix}
 	\end{align*}
 	with 
