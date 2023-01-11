@@ -27,18 +27,194 @@ Mathe III $\cdot$ GUE09 $\cdot$ WS22/23
 \end{center}
 Content covered:
 \begin{itemize}
-	\item[\checkmark] Demo programming exercise 03 (PRU02)
-	%       \begin{enumerate}
-	% 	      \item Review: QR-decomposition by using
-	% 	            \begin{enumerate}
-	% 		            \item Givens-Rotation
-	% 		            \item Householder-Reflection
-	% 	            \end{enumerate}
-	% 	      \item QR algorithm to find all eigenvalues of a matrix $A$.
-	%       \end{enumerate}
-	% \item[\checkmark] Analysis: Application of Hölder's inequality to approximate integral
+	\item[\checkmark] Analysis:
+		\begin{enumerate}[(i)]
+			\item Step-by-step with Line integral of scalar field
+			\item Step-by-step with Line integral of vector field
+		\end{enumerate}
+	\item[\checkmark] Numerics: Demo programming exercise 03 (PRU02)
+		%       \begin{enumerate}
+		% 	      \item Review: QR-decomposition by using
+		% 	            \begin{enumerate}
+		% 		            \item Givens-Rotation
+		% 		            \item Householder-Reflection
+		% 	            \end{enumerate}
+		% 	      \item QR algorithm to find all eigenvalues of a matrix $A$.
+		%       \end{enumerate}
+		% \item[\checkmark] Analysis: Application of Hölder's inequality to approximate integral
 \end{itemize}
-% %------------------------------------------------------------------------------
+%------------------------------------------------------------------------------
+\begin{recallboxed}
+	\label{recall:scalar}
+	Line integral of a scalar field $\phi: \Omega \to \mathbb{R}$ is defined as follows
+	\begin{align}
+		\bigintsss_{\Gamma} \phi \, ds 
+		:= \bigintsss_{a}^{b} \phi(\gamma(t)) \big\| \gamma'(t) \big\| \, dt
+	\end{align}
+\end{recallboxed}
+\begin{recallboxed}
+	\label{recall:vector}
+	Line integral of a vector field $\Bf: \Omega \to \mathbb{R}^{n}$ is defined as follows
+	\begin{align}
+		\bigintsss_{\Gamma} \Bf \cdot d\Bx 
+		:= \bigintsss_{a}^{b} \big\langle \Bf(\gamma(t)), \gamma'(t) \big\rangle \, dt
+	\end{align}
+\end{recallboxed}
+%------------------------------------------------------------------------------
+\clearpage
+\section{Step-by-step with Line integral of scalar field}
+\begin{exampleboxed}
+	Examine the following trajectory $\Gamma = \gamma([0,2\pi])$
+	\begin{align}
+		\gamma:
+		\begin{cases}
+			[0,2\pi]\rightarrow\mathbb{R}^3 , \\ 
+			(t) \mapsto \gamma(t) := 
+			\begin{pmatrix} \cos(t) \\ \sin(t) \\ ht \end{pmatrix}.
+		\end{cases}
+	\end{align}
+	The curve $\gamma$ is known as the helix. 
+	We now would like to compute the total mass $\mathcal{M}$ of the helix
+	whose density function $\rho$ defined as follows
+	\begin{align}
+		\rho: 
+		\begin{cases}
+			\Gamma \to \mathbb{R}, \\
+			(x,y,z) \mapsto \rho(x,y,z) := z.
+		\end{cases}
+	\end{align}
+\end{exampleboxed}
+Approach: By using \cref{recall:scalar}.
+\begin{observationboxed}
+	Since the parametrized curve $\gamma$ from the given trajectory or path $\Gamma$ is already known, 
+	we, therefore, do not have to seek any further parametrized curve.
+	However, in case this information is not yet already given, it is necessary to find such parametrized curve,
+	i.e. the \cref{section2} is such an example.
+\end{observationboxed}
+The mass of the helix is computed as follows
+\begin{align*}
+	\therefore\quad\boxed{
+		\begin{aligned}
+			\mathcal{M}^{\text{helix}}
+			 & = \bigintsss_0^{2\pi} \rho \, {\|\gamma'(t)\|}_2 \, dt               \\
+			 & = \bigintsss_0^{2\pi} h  t \, \sqrt{\sin^2 t + \cos^2 t + h^2} \, dt \\
+			 & = \bigintsss_0^{2\pi} h  \sqrt{1 + h^2} \, t \, dt                   \\
+			 & = h  \sqrt{1+h^2} \, \frac{t^2}2 \bigg|_0^{2\pi}                     \\
+			 & = 2 \pi^2 h \sqrt{1+h^2}.		
+		\end{aligned}
+	}
+\end{align*}
+%------------------------------------------------------------------------------
+\clearpage
+\section{Step-by-step with Line integral of vector field}
+\label{section2}
+\begin{exampleboxed}
+	Examine the following trajectory $\Gamma_{1}$ as shown in \cref{lineintegral_vectorfield}
+	from the origin point $(0, 0)$ to point $(1, 1)$.
+	Besides, the vector field $f$ is given as follows
+	\begin{align*}
+		\Bf:
+		\begin{cases}
+			\mathbb{R}^{2} \rightarrow \mathbb{R}^{2}, \\
+			(x,y) \mapsto \Bf(x,y)
+			=
+			\begin{pmatrix}
+				x e^y \\
+				\sin(x) + y
+			\end{pmatrix},
+		\end{cases}
+	\end{align*}
+	We would like now to compute the line integral of the vector field $\Bf$, 
+	i.e. Work integral/Arbeitsintegral
+	\begin{align}
+		\bigintsss \limits_{\Gamma_1} \Bf \cdot d\Bx.
+	\end{align}
+\end{exampleboxed}
+\inputfig{floats/lineintegral_vectorfield}{lineintegral_vectorfield}
+Approach: By using \cref{recall:vector}.
+\clearpage
+\begin{observationboxed}
+	There is no parametrized curve for the trajectory $\Gamma_1$.
+	Therefore, we shall need to find a parametrized curve for the path $\Gamma_1$.
+	Since the path $\Gamma_1$ is a union of two smaller paths $l_1$ and $l_2$,
+	we obtain the following relation
+	\begin{align*}
+		\boxed{
+			\Gamma_1 := \texttt{Image}(l_1) \cup \texttt{Image}(l_2)
+		}
+	\end{align*}
+	where the parametrized $l_1$ and $l_2$, and their gradients take the forms
+	\begin{align*}
+		l_1(t) & := \begin{pmatrix} t \\ 0 \end{pmatrix} 
+		\text{ for } t \in [0,1] 
+		\Rightarrow l_1' 
+		= \begin{pmatrix} 1 \\ 0 \end{pmatrix}  \\
+		l_2(t) & := \begin{pmatrix} 1 \\ t \end{pmatrix} 
+		\text{ for } t \in [0,1] 
+		\Rightarrow l_2' 
+		= \begin{pmatrix} 0 \\ 1 \end{pmatrix}.
+	\end{align*}
+	Substitution of $l_1(t)$ and $l_2(t)$ into $\Bf$ leads to the following expressions
+	\begin{align*}
+		\Bf(l_1(t)) & 
+		= \begin{pmatrix} t e^0 \\ \sin(t) + 0 \end{pmatrix}
+		= \begin{pmatrix} t \\ \sin(t) \end{pmatrix}, \\
+		\Bf(l_2(t)) & 
+		= \begin{pmatrix} 1 e^t \\ \sin(1) + t \end{pmatrix}
+		= \begin{pmatrix} e^t \\ \sin(1) + t \end{pmatrix}.
+	\end{align*}
+\end{observationboxed}
+The line integral of the vector field is computed as follows
+\begin{align*}
+	\boxed{
+		\begin{aligned}
+			\bigintsss_{\Gamma_1} \Bf \cdot d\Bx
+			= & \bigintsss_{l_1} \Bf \cdot d\Bx 
+			+ \bigintsss_{l_2} \Bf \cdot d\Bx                                    \\
+			= & \bigintsss_0^1 \Big\langle f(l_1(t)), l_1'(t) \Big\rangle \, dt 
+			+ \bigintsss_0^1 \Big\langle f(l_2(t)), l_2'(t) \Big\rangle \, dt    \\
+			= & \bigintsss_0^1 t  \, dt
+			+ \bigintsss_0^1 \left( \sin(1) + t \right) \,  dt                   \\
+			  & =  \sin(1) + \bigintsss_0^1 2t  \, dt                            \\
+			  & =  \sin(1) + \Big[ t^2 \Big]_0^1
+		\end{aligned}
+	}
+\end{align*}
+Therefore, we obtain
+\begin{align*}
+	\therefore\quad\boxed{
+		\bigintsss_{\Gamma_1} \Bf \cdot d\Bx =  \sin(1) + 1.
+	}
+\end{align*}
+
+
+% Wir können $\Gamma_2$ gem"ass
+% \begin{align*}
+% 	\boxed{
+% 		\Gamma_2(t) := (t, t) \text{ für } t \in [0,1] \Rightarrow \gamma_2' = (1, 1)^T
+% 	}
+% \end{align*}
+% angeben. Einsetzen in $f$ ergibt
+% \begin{align*}
+% 	f(\Gamma_2(t)) = (t e^t, \sin(t) + t)^T.
+% \end{align*}
+% Das Arbeitsintegral berechnet sich nun durch
+% \begin{align*}
+% 	\bigintsss_{\Gamma_2} f \cdot dx
+% 	 & =  \bigintsss_0^1 \left< f(\gamma_2(t)), \gamma_2'(t) \right> dt
+% 	=  \bigintsss_0^1 \left( te^t + sin(t) + t \right) \, dt                           \\
+% 	 & =  \Big[\frac{1}{2} t^2\Big]_0^1 + \Big[- \cos(t)\Big]_0^1 + \Big[te^t\Big]_0^1
+% 	- \bigintsss_0^1 e^t \, dt                                                         \\
+% 	 & =  \frac{1}{2} - \cos(1) + 1 + e^1 - \Big[e^t\Big]_0^1
+% 	=  \frac{1}{2} - \cos(1) + 1 + e^1 - e^1 + 1
+% \end{align*}
+% Daher
+% \begin{align*}
+% 	\therefore\quad\boxed{
+% 		\bigintsss_{\Gamma_2} f \cdot dx = \frac{5}{2} - \cos(1).
+% 	}
+% \end{align*}
+
 % \section{Numerics: Review of QR-decomposition}
 % There are two main methods used to decompose a matrix into an orthogonal matrix $Q$
 % and a right upper triangular matrix $R$
@@ -3181,7 +3357,6 @@ Content covered:
 % % 	= \frac{\partial u}{\partial t}(x(t),t)
 % % 	+ \frac{\partial u}{\partial x}(x(t),t) \frac{dx}{dt}(t)
 % % \end{align*}
-
 
 % % \inputfig{floats/multistructures}{multistructures}
 \bibliographystyle{acm}
