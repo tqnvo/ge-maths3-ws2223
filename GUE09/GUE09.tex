@@ -32,7 +32,11 @@ Content covered:
 			\item Step-by-step with Line integral of scalar field
 			\item Step-by-step with Line integral of vector field
 		\end{enumerate}
-	\item[\checkmark] Numerics: Demo programming exercise 03 (PRU02)
+	\item[\checkmark] Numerics:
+		\begin{enumerate}
+			\item Singular value decomposition (SVD)
+			\item Demo mini programming exercise (A1-HA09)
+		\end{enumerate}
 		%       \begin{enumerate}
 		% 	      \item Review: QR-decomposition by using
 		% 	            \begin{enumerate}
@@ -188,8 +192,61 @@ Therefore, we obtain
 \end{align*}
 %------------------------------------------------------------------------------
 \clearpage
-\section{Demo programming exercise 3 (PRU02)}
-
+\section{Demo mini programming exercise (A1-HA09)}
+\begin{lstlisting}
+clear all;
+close all;
+clc;
+img = flipud(imread('rogowski_in_color.jpeg'));
+size(img)
+image(img)
+A = double(rgb2gray(img));
+size(A)
+image(A)
+pcolor(A); 
+shading interp; colormap('gray'); 
+axis equal
+[U,S,V] = svd(A);
+figure(1)
+set(gcf,'Position',[10 200 700 700])
+semilogy(diag(S), '--', 'LineWidth', 2, 'Color', '[0.8500 0.3250 0.0980]');
+title('Singular values versus indices in semi-log scale',...
+    'fontsize', 20,...
+    'interpreter','latex');
+xlabel('Index of singular value [-]', 'fontsize', 15, 'interpreter','latex');
+ylabel('Singular values [-]', 'fontsize', 15, 'interpreter','latex');
+xticks([0:250:2500, 2731])
+set(gca,'TickLabelInterpreter','latex');
+grid on
+% print -depsc pics_rogowski_svd.eps
+print -dpng pics_rogowski_svd.png
+%----------------------------------
+n = 100;
+S_re = S * diag([ones(1,n), zeros(1,size(S,2)-n)]);
+figure(2)
+set(gcf,'Position',[900 200 600 400])
+pcolor(U*S_re*V'); shading interp; colormap('gray'); axis equal
+title('Number of singular values used: $n=100/2731$',...
+    'fontsize', 20,...
+    'interpreter','latex');
+xlabel('Width of image matrix', 'fontsize', 15, 'interpreter','latex');
+ylabel('Height of image matrix', 'fontsize', 15, 'interpreter','latex');
+xticks([0:500:3500,4096])
+yticks([0:250:2500,2731])
+% ylim([-30 950])
+set(gca,'TickLabelInterpreter','latex');
+grid on
+% print -depsc -tiff -r300 -painters plots.eps
+print -dpng plots.png
+\end{lstlisting}
+\begin{remarkboxed}
+	Depending on the size of photos to be examined,
+	number in lines 22, 38, and 39 should be adjusted accordingly. 
+\end{remarkboxed}
+\begin{remarkboxed}
+	The lines of \texttt{matlab} code above is uploaded in Moodle
+	and ready for running tests.
+\end{remarkboxed}
 
 \bibliographystyle{acm}
 % \bibliography{literature.bib}
