@@ -59,18 +59,20 @@ or via the following link
 	\textbf{scalar field} $\phi: \Omega \to \mathbb{R}$ is defined as follows
 	\begin{align}
 		\bigintsss_{\Gamma} \phi \, ds 
-		:= \bigintsss_{a}^{b} \phi(\gamma(t)) \big\| \gamma'(t) \big\| \, dt
+		:= \bigintsss_{a}^{b} \phi(\gamma(t))  \, \big\| \gamma'(t) \big\| \, dt
 	\end{align}
 \end{recallboxed}
+$\rightarrow$ Mass
 \begin{recallboxed}
 	\label{recall:scalarsurface}
 	Surface integral of a 
 	\textbf{scalar field} $\phi: \Omega \to \mathbb{R}$ is defined as follows
 	\begin{align}
-		\bigintsss_{\Gamma} \phi \, ds 
-		:= \bigintsss_{a}^{b} \phi(\gamma(t)) \big\| \gamma'(t) \big\| \, dt
+		\bigintsss_{\Gamma} \phi \, dA 
+		:= \bigintsss_{B} \phi(\Phi(p,q)) \, \big\| \Phi_p \times \Phi_q \big\| \, d(p,q)
 	\end{align}
 \end{recallboxed}
+$\rightarrow$ Mass
 %------------------------------------------------------------------------------
 \subsection{Second kind: Vector field}
 \begin{recallboxed}
@@ -78,17 +80,25 @@ or via the following link
 	Line integral of a \textbf{vector field} $\Bf: \Omega \to \mathbb{R}^{n}$ is defined as follows
 	\begin{align}
 		\bigintsss_{\Gamma} \Bf \cdot d\Bx 
-		:= \bigintsss_{a}^{b} \big\langle \Bf(\gamma(t)), \gamma'(t) \big\rangle \, dt
+		:= \bigintsss_{a}^{b}
+		\Big\langle \Bf(\gamma(t)), \gamma'(t) \Big\rangle \, dt
 	\end{align}
 \end{recallboxed}
+$\rightarrow$ Work done
 \begin{recallboxed}
 	\label{recall:vector}
-	Line integral of a \textbf{vector field} $\Bf: \Omega \to \mathbb{R}^{n}$ is defined as follows
+	Surface integral of a \textbf{vector field} $\Bf: \Omega \to \mathbb{R}^{n}$ is defined as follows
 	\begin{align}
-		\bigintsss_{\Gamma} \Bf \cdot d\Bx 
-		:= \bigintsss_{a}^{b} \big\langle \Bf(\gamma(t)), \gamma'(t) \big\rangle \, dt
+		\bigintsss_{\Gamma} \langle \Bf, \Bv \rangle \, dA 
+		= \bigintsss_{\Gamma} \Bf \cdot d\BA
+		:= \bigintsss_{B}
+		\Big\langle 
+		\phi(\Phi(p,q)), \Phi_p \times \Phi_q
+		\Big\rangle
+		\, d(p,q)
 	\end{align}
 \end{recallboxed}
+$\rightarrow$ Work done
 %------------------------------------------------------------------------------
 \clearpage
 \section{Analysis: Surface integral of the first kind}
