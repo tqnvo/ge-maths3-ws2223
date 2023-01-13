@@ -1,0 +1,14 @@
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.ps
+*.synctex.gz
+packages_styles.tex
+literature.bib
+dfcmd.sty
+floats/

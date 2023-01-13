@@ -1,0 +1,188 @@
+\documentclass[12pt]{article}
+\usepackage{anysize}
+\usepackage[ngerman,english]{babel}
+\marginsize{3.5cm}{2.5cm}{1cm}{2cm}
+
+\input{packages_styles.tex}
+%Page numbering in style 1/3...
+\usepackage{lastpage}  
+\usepackage{hyperref}
+\makeatletter
+\renewcommand{\@oddfoot}{\hfil 
+% Aachen, November $04^{th}$, 2021 \hspace{300pt} 
+Mathe III $\cdot$ GUE11 $\cdot$ WS22/23 
+\hspace{250pt} 
+\thepage/\pageref{LastPage}\hfil}
+\makeatother
+%------------------------------------------------------------------------------
+\begin{document}
+\begin{center}
+	\section*{Global exercise - GUE11}
+\end{center}
+\begin{center}
+	Tuan Vo
+\end{center}
+\begin{center}
+	$12^{\text{th}}$ January, 2023
+\end{center}
+Content covered:
+\begin{itemize}
+	\item[\checkmark] Analysis: Surface integral of the first kind (scalar field)
+	\item[\checkmark] Analysis: Surface integral of the second kind (vector field)
+	\item[\checkmark] Analysis: Gauss's theorem
+\end{itemize}
+
+%------------------------------------------------------------------------------
+\section{Analysis: Orientable integral}
+\begin{exampleboxed}
+	Examine the \textbf{Möbius band} given as follows
+	\begin{align}
+		\vec{\gamma}:
+		\begin{cases}
+			(-1,1) \times (0,2\pi) \to \mathbb{R}^3, \\
+			(t,\phi) \mapsto 
+			\vec{\gamma}(t,\phi) := 
+			\begin{pmatrix} \cos(\phi) \\ \sin(\phi) \\ 0 \end{pmatrix}
+			+ \frac{t}{2}
+			\begin{pmatrix} \cos(\phi) \cos(\phi/2)\\ \sin(\phi) \cos(\phi/2)\\\sin(\phi/2) \end{pmatrix}.
+		\end{cases}
+	\end{align}
+	Show that this surface is \textbf{not orientable}.
+\end{exampleboxed}
+Approach:
+\begin{proof} 
+	The normal field is computed as follows
+	\begin{align*}
+		n(t,\phi) 
+		 & = \pm 
+		\frac{\partial_t \vec{\gamma} \times \partial_{\phi} \vec{\gamma}}
+		{\big\|\partial_t \vec{\gamma} \times \partial_{\phi} \vec{\gamma}\big\|} \\
+		 & = \frac{\mp 1}{a}
+		\begin{pmatrix}
+			\cos(\phi) \sin(\frac{\phi}{2}) - \frac{t}{4} \sin(\phi)(1-\cos(\phi)) \\ 
+			\sin(\phi) \sin(\phi/2) + \frac{t}{4} (\sin^2(\phi)+ \cos(\phi))       \\ 
+			- \cos(\phi/2) - \frac{t}{4}(1+\cos(\phi))
+		\end{pmatrix}
+	\end{align*}
+	with 
+	\begin{align*}
+		a = \sqrt{1+t \cos(\phi/2)+\frac{t^2}{16}(3+2 \cos(\phi))}.
+	\end{align*}
+	We choose the positive sign and consider the position 
+	$(1,0,0)^T = \vec{\gamma}(0,0) = \vec{\gamma}(0,2\pi)$:
+	\begin{align*}
+		\lim_{\phi \to 0} n(0,\phi) 
+		= \begin{pmatrix} 0\\0\\-1\end{pmatrix} \neq \lim_{\phi\to 2\pi} n(0,\phi) 
+		= \begin{pmatrix} 0\\0\\1\end{pmatrix}.
+	\end{align*}
+	Since the normal field is not continuous on 
+	\begin{align*}
+		\gamma([-1,1] \times [0,2\pi])
+	\end{align*}
+	the surface is \textbf{not orientable}.
+\end{proof}
+\clearpage
+%------------------------------------------------------------------------------
+\section{Analysis: Surface integral}
+\begin{exampleboxed}
+	Examine the lateral surface of the \textbf{Frustum} given as follows
+	\begin{align*}
+		K =
+		\left\{
+		\bm{x} \in \mathbb{R}^3,\,
+		0 < r \leq R
+		\, \Bigg| \,
+		0 \leq x_3 < H,\,
+		0 \leq x_1^2 + x_2^2 <
+		\left(R - \frac{R-r}{H} x_3\right)^2
+		\right\}.
+	\end{align*}
+	where $H$ is the height, and $r$ is the radius.
+\end{exampleboxed}
+Approach:
+By using the cylinder coordination 
+$\bm{x} = (r \cos (\phi), r \sin(\phi),z)^T$
+we obtain the parametrization of the lateral surface of the frustum,
+i.e. truncated cone
+\begin{align*}
+	\bm{\gamma}: 
+	\begin{cases}
+		(0,2\pi)\times (0,H) \to \mathbb{R}^3, \\
+		(\phi,z) \mapsto \bm{\gamma}(\phi,z) :=
+		\begin{pmatrix} \left(R - \frac{R-r}{H}z\right) \cos(\phi) \\
+			\left(R - \frac{R-r}{H}z\right) \sin(\phi) \\
+			z
+		\end{pmatrix}
+	\end{cases}
+\end{align*}
+which leads to the following expression
+\begin{align*}
+	\boxed{
+		\begin{aligned}
+			\partial_{\phi} \bm{\gamma}(\phi,z)\times \partial_z \bm{\gamma}(\phi,z)
+			 & = \begin{pmatrix} -\left(R - \frac{R-r}{H}z\right) \sin(\phi) \\
+				     \left(R - \frac{R-r}{H}z\right) \cos(\phi)  \\
+				     0
+			     \end{pmatrix}
+			\times
+			\begin{pmatrix}
+				-\frac{R-r}{H}\cos(\phi) \\-\frac{R-r}{H} \sin(\phi)\\1
+			\end{pmatrix}             \\
+			 & = \begin{pmatrix}
+				     \left(R- \frac{R-r}{H}z\right)\cos(\phi) \\
+				     \left(R- \frac{R-r}{H}z\right)\sin(\phi) \\
+				     \left(R- \frac{R-r}{H}z\right)\frac{R-r}{H}
+			     \end{pmatrix}
+		\end{aligned}
+	}
+\end{align*}
+where the normalization yields
+\begin{align*}
+	\boxed{
+		\Big\|
+		\partial_{\phi} \bm{\gamma} (\phi,z) \times \partial_z \bm{\gamma} (\phi,z)
+		\Big\|
+		= \left(R - \frac{R-r}{H}z\right) \sqrt{1 + \frac{(R-r)^2}{H^2}}.
+	}
+\end{align*}
+
+After that, the lateral surface of the truncated cone 
+is computed as follows
+\begin{align*}
+	\mathcal{A}
+	=
+	\bigintsss_{0}^H \bigintsss_0^{2 \pi}
+	\Big\| 
+	\partial_{\phi} \bm{\gamma} \times \partial_z \bm{\gamma}
+	\Big\|
+	\, d\phi \, dz                            
+	= 2 \pi \sqrt{1 + \frac{(R-r)^2}{H^2}}
+	\bigintsss_{0}^H \left(R - \frac{R-r}{H}z\right) \, dt 
+	= \dots
+	% = \pi \sqrt{1 + \frac{(R-r)^2}{H^2}}\frac{H}{R-r} \left(R^2-r^2\right).
+\end{align*}
+
+Therefore, we obtain
+\begin{align*}
+	\therefore\quad\boxed{
+		\mathcal{A} =
+		\bigintsss_{0}^H \bigintsss_0^{2 \pi}
+		||\partial_{\phi} \bm{\gamma} \times \partial_z \bm{\gamma} || \, d\phi \, dz
+		= \dots.
+	}
+\end{align*}
+%------------------------------------------------------------------------------
+\clearpage
+\section{Numerics: Demo programming exercise 3 PRU(02)}
+\inputfig{floats/pe03_QR_2}{pe03_QR_2}
+\inputfig{floats/pe03_QR_4}{pe03_QR_4}
+\begin{observationboxed}
+	For the sake of rapid checks and coding prototype
+	we may first start with a matrix sized $4\times 4$
+	for the case $C_{ij}=\sin(ij)$ as given in the programming exercise.
+\end{observationboxed}
+\inputfig{floats/pe03_QR_2_plots}{pe03_QR_2_plots}
+
+\bibliographystyle{acm}
+% \bibliography{literature.bib}
+\end{document}
