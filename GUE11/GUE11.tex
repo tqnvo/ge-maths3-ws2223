@@ -35,92 +35,9 @@ Content covered:
 %------------------------------------------------------------------------------
 \section{Analysis: Surface integral of the first kind}
 \begin{exampleboxed}
-	Examine the lateral surface of the \textbf{Frustum} given as follows
-	\begin{align*}
-		K =
-		\left\{
-		\bm{x} \in \mathbb{R}^3,\,
-		0 < r \leq R
-		\, \Bigg| \,
-		0 \leq x_3 < H,\,
-		0 \leq x_1^2 + x_2^2 <
-		\left(R - \frac{R-r}{H} x_3\right)^2
-		\right\}.
-	\end{align*}
-	where $H$ is the height, and $r$ is the radius.
+	Examine
 \end{exampleboxed}
 Approach:
-By using the cylinder coordination 
-$\bm{x} = (r \cos (\phi), r \sin(\phi),z)^T$
-we obtain the parametrization of the lateral surface of the frustum,
-i.e. truncated cone
-\begin{align*}
-	\bm{\gamma}: 
-	\begin{cases}
-		(0,2\pi)\times (0,H) \to \mathbb{R}^3, \\
-		(\phi,z) \mapsto \bm{\gamma}(\phi,z) :=
-		\begin{pmatrix} \left(R - \frac{R-r}{H}z\right) \cos(\phi) \\
-			\left(R - \frac{R-r}{H}z\right) \sin(\phi) \\
-			z
-		\end{pmatrix}
-	\end{cases}
-\end{align*}
-which leads to the following expression
-\begin{align*}
-	\boxed{
-		\begin{aligned}
-			\partial_{\phi} \bm{\gamma}(\phi,z)\times \partial_z \bm{\gamma}(\phi,z)
-			 & = \begin{pmatrix} -\left(R - \frac{R-r}{H}z\right) \sin(\phi) \\
-				     \left(R - \frac{R-r}{H}z\right) \cos(\phi)  \\
-				     0
-			     \end{pmatrix}
-			\times
-			\begin{pmatrix}
-				-\frac{R-r}{H}\cos(\phi) \\-\frac{R-r}{H} \sin(\phi)\\1
-			\end{pmatrix}             \\
-			 & = \begin{pmatrix}
-				     \left(R- \frac{R-r}{H}z\right)\cos(\phi) \\
-				     \left(R- \frac{R-r}{H}z\right)\sin(\phi) \\
-				     \left(R- \frac{R-r}{H}z\right)\frac{R-r}{H}
-			     \end{pmatrix}
-		\end{aligned}
-	}
-\end{align*}
-where the normalization yields
-\begin{align*}
-	\boxed{
-		\Big\|
-		\partial_{\phi} \bm{\gamma} (\phi,z) \times \partial_z \bm{\gamma} (\phi,z)
-		\Big\|
-		= \left(R - \frac{R-r}{H}z\right) \sqrt{1 + \frac{(R-r)^2}{H^2}}.
-	}
-\end{align*}
-
-After that, the lateral surface of the truncated cone 
-is computed as follows
-\begin{align*}
-	\mathcal{A}
-	=
-	\bigintsss_{0}^H \bigintsss_0^{2 \pi}
-	\Big\| 
-	\partial_{\phi} \bm{\gamma} \times \partial_z \bm{\gamma}
-	\Big\|
-	\, d\phi \, dz                            
-	= 2 \pi \sqrt{1 + \frac{(R-r)^2}{H^2}}
-	\bigintsss_{0}^H \left(R - \frac{R-r}{H}z\right) \, dt 
-	= \dots
-	% = \pi \sqrt{1 + \frac{(R-r)^2}{H^2}}\frac{H}{R-r} \left(R^2-r^2\right).
-\end{align*}
-
-Therefore, we obtain
-\begin{align*}
-	\therefore\quad\boxed{
-		\mathcal{A} =
-		\bigintsss_{0}^H \bigintsss_0^{2 \pi}
-		||\partial_{\phi} \bm{\gamma} \times \partial_z \bm{\gamma} || \, d\phi \, dz
-		= \dots.
-	}
-\end{align*}
 %------------------------------------------------------------------------------
 \clearpage
 \section{Evaluation}
