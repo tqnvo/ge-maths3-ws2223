@@ -36,6 +36,46 @@ Summary of content covered: Analysis
 
 %------------------------------------------------------------------------------
 \clearpage
+\section{Analysis: Line integral and Surface integral}
+\subsection{First kind: Scalar field}
+\begin{recallboxed}
+	\label{recall:scalar}
+	Line integral of a 
+	\textbf{scalar field} $\phi: \Omega \to \mathbb{R}$ is defined as follows
+	\begin{align}
+		\bigintsss_{\Gamma} \phi \, ds 
+		:= \bigintsss_{a}^{b} \phi(\gamma(t)) \big\| \gamma'(t) \big\| \, dt
+	\end{align}
+\end{recallboxed}
+\begin{recallboxed}
+	\label{recall:scalarsurface}
+	Surface integral of a 
+	\textbf{scalar field} $\phi: \Omega \to \mathbb{R}$ is defined as follows
+	\begin{align}
+		\bigintsss_{\Gamma} \phi \, ds 
+		:= \bigintsss_{a}^{b} \phi(\gamma(t)) \big\| \gamma'(t) \big\| \, dt
+	\end{align}
+\end{recallboxed}
+%------------------------------------------------------------------------------
+\subsection{Second kind: Vector field}
+\begin{recallboxed}
+	\label{recall:vectorsurface}
+	Line integral of a \textbf{vector field} $\Bf: \Omega \to \mathbb{R}^{n}$ is defined as follows
+	\begin{align}
+		\bigintsss_{\Gamma} \Bf \cdot d\Bx 
+		:= \bigintsss_{a}^{b} \big\langle \Bf(\gamma(t)), \gamma'(t) \big\rangle \, dt
+	\end{align}
+\end{recallboxed}
+\begin{recallboxed}
+	\label{recall:vector}
+	Line integral of a \textbf{vector field} $\Bf: \Omega \to \mathbb{R}^{n}$ is defined as follows
+	\begin{align}
+		\bigintsss_{\Gamma} \Bf \cdot d\Bx 
+		:= \bigintsss_{a}^{b} \big\langle \Bf(\gamma(t)), \gamma'(t) \big\rangle \, dt
+	\end{align}
+\end{recallboxed}
+%------------------------------------------------------------------------------
+\clearpage
 \section{Analysis: Surface integral of the first kind}
 \begin{exampleboxed}
 	Examine
