@@ -170,8 +170,8 @@ Therefore, we obtain
 		\Big( e^\alpha, \alpha\cos(\beta), \alpha\sin(\beta) \Big)
 		\right\},
 	\end{align}
-	and the vector field  $f$ given by
-	$f(x,y,z) = \Big( x\sqrt{y^2+z^2}, y, z \Big)$.
+	and the vector field  $\Bf$ given by
+	$\Bf(x,y,z) = \Big( x\sqrt{y^2+z^2}, y, z \Big)$.
 \end{exampleboxed}
 Approach:
 
@@ -198,7 +198,7 @@ Approach:
 		        \end{pmatrix},
 	      \end{align}
 	      \begin{observationboxed}
-		      Be aware of the sign when using \textbf{cofactor method} to compute the determinant 
+		      Be aware of the sign switching $(+,-,+)$ when using \textbf{cofactor method} to compute the determinant 
 		      \begin{align}
 			      \partial_{\alpha} F \times \partial_{\beta} F
 			       & =
@@ -215,32 +215,31 @@ Approach:
 			      k \begin{vmatrix} e^\alpha & \cos(\beta) \\ 0        & -\alpha\sin(\beta) \end{vmatrix}
 		      \end{align}
 	      \end{observationboxed}
-	      mit der Norm
+	      and the norm of the normal vector is computed as follows
 	      \begin{align}
-		      \|\tilde{\nu}\|
-		      = \Big(\alpha^2 + \alpha^2\cos^2(\beta)e^{2\alpha} + \alpha^2\sin^2(\beta)e^{2\alpha}\Big)^{1/2}
-		      = \alpha\Big(1+e^{2\alpha}\Big)^{1/2}.
+		      \| \Bn \|_2
+		      = \sqrt{\alpha^2 + \alpha^2\cos^2(\beta)e^{2\alpha} + \alpha^2\sin^2(\beta)e^{2\alpha}}
+		      = \alpha \sqrt {1+e^{2\alpha}}.
 	      \end{align}
-	      Unter Ber"ucksichtigung des Vorzeichens der ersten Komponente
-	      folglich ist
+	      which leads to the normalized normal vector of the surface $F$ as follows
 	      \begin{align}
 		      \boxed{
-			      \nu
+			      \bm{\nu}
 			      = \left(1+e^{2\alpha}\right)^{-1/2}
 			      \begin{pmatrix} 1\\-\cos(\beta)e^\alpha\\-\sin(\beta)e^\alpha\end{pmatrix}.
 		      }
 	      \end{align}
 	      
-	\item Oberflächenintegral 2. Art
+	\item We now compute the surface integral of the second kind as follows
 	      \begin{align}
 		      \boxed{
 			      \begin{aligned}
 				      \bigintsss_F
-				      \Big\langle f , \nu \Big\rangle \,d\sigma
-				       & = \bigintsss_0^1\bigintsss_0^{2\pi}
-				      \Big\langle f\big(F(\alpha,\beta)\big), \tilde{\nu} \Big\rangle
-				      \,d\beta \, d\alpha                    \\
-				       & = \bigintsss_0^1\bigintsss_0^{2\pi}
+				      \Big\langle \Bf , \bm{\nu} \Big\rangle \,d\sigma
+				       & = \bigintsss_0^1 \!\!\! \bigintsss_0^{2\pi}
+				      \Big\langle \Bf\big(F(\alpha,\beta)\big), \bm{\nu} \Big\rangle
+				      \,d\beta \, d\alpha                                                                                               \\
+				       & = \bigintsss_0^1 \!\!\! \bigintsss_0^{2\pi}
 				      \begin{pmatrix}
 					      e^\alpha\left(\alpha^2\cos^2(\beta)+\alpha^2\sin^2(\beta)\right)^{1/2} \\ 
 					      \alpha\cos(\beta)                                                      \\
@@ -251,11 +250,11 @@ Approach:
 					      \alpha                     \\ 
 					      -\alpha\cos(\beta)e^\alpha \\ 
 					      -\alpha\sin(\beta)e^\alpha
-				      \end{pmatrix}\;  d\beta \,  d\alpha    \\
+				      \end{pmatrix}\;  d\beta \,  d\alpha                                                                               \\
 				       & = 
-				      \bigintsss_0^1\bigintsss_0^{2\pi}
-				      \Big( \alpha^2 e^\alpha - \alpha^2\cos^2(\beta)e^\alpha - \alpha^2\sin^2(\beta)e^\alpha \Big)\; d\beta \, d\alpha
-				      = 0.
+				      \bigintsss_0^1 \!\!\! \bigintsss_0^{2\pi}
+				      \Big( \alpha^2 e^\alpha - \alpha^2\cos^2(\beta)e^\alpha - \alpha^2\sin^2(\beta)e^\alpha \Big)\; d\beta \, d\alpha \\
+				       & = \dots
 			      \end{aligned}
 		      }
 	      \end{align}
