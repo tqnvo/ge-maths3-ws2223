@@ -362,6 +362,7 @@ Approach:
 \begin{enumerate}[(i)]
 	\item First, we compute the surface integral of the scalar field
 	      \begin{align}
+		      \label{eq:firstresult}
 		      \therefore\quad
 		      \boxed{
 			      \begin{aligned}
@@ -482,6 +483,7 @@ Approach:
 	      Now, we compute the line integral of the second kind
 	      $\bigintsss_{\partial B} \bm{f}\cdot \bm{\nu} \, ds$
 	      \begin{align}
+		      \label{eq:secondresult}
 		      \bigintsss_{\partial B} \bm{f}\cdot\bm{\nu} \, ds
 		       & =
 		      \bigintsss_{\partial B = \gamma_1(t) + \gamma_2(t) + \gamma_3(t)} \bm{f}\cdot\bm{\nu} \, ds
@@ -490,11 +492,11 @@ Approach:
 		      \bigintsss_{\gamma_1(t)} \bm{f}\cdot\bm{\nu}_1 \, ds +
 		      \bigintsss_{\gamma_2(t)} \bm{f}\cdot\bm{\nu}_2 \, ds +
 		      \bigintsss_{\gamma_3(t)} \bm{f}\cdot\bm{\nu}_3 \, ds                                  \\
-		    %    & =
-		    %   \bigintsss_{\gamma_1(t)} \bm{f}(\gamma_1'(t)) \cdot\bm{\nu}_1 \, dt +
-		    %   \bigintsss_{\gamma_2(t)} \bm{f}(\gamma_2'(t)) \cdot\bm{\nu}_2 \, dt +
-		    %   \bigintsss_{\gamma_3(t)} \bm{f}(\gamma_3'(t)) \cdot\bm{\nu}_3 \, dt
-		    %   \\
+		      %    & =
+		      %   \bigintsss_{\gamma_1(t)} \bm{f}(\gamma_1'(t)) \cdot\bm{\nu}_1 \, dt +
+		      %   \bigintsss_{\gamma_2(t)} \bm{f}(\gamma_2'(t)) \cdot\bm{\nu}_2 \, dt +
+		      %   \bigintsss_{\gamma_3(t)} \bm{f}(\gamma_3'(t)) \cdot\bm{\nu}_3 \, dt
+		      %   \\
 		       & =\bigintsss_0^1
 		      \begin{pmatrix}t+0 \\0^2 \end{pmatrix} \cdot \begin{pmatrix}0 \\-1 \end{pmatrix} \, dt
 		      + \bigintsss_0^2
@@ -510,12 +512,14 @@ Approach:
 \end{enumerate}
 
 
-Therefore, we have verified the Gauss's theorem
+Therefore, by comparing 
+\eqref{eq:firstresult} and \eqref{eq:secondresult}
+we have verified the Gauss's theorem
 \begin{align}
 	\therefore\quad
 	\boxed{
-		\bigintsss_{\partial B} \bm{f} \cdot \bm{\nu}
-		= \bigintsss_B \div \bm{f} \, d\lambda_2.
+		\bigintsss_{\partial B} \bm{f} \cdot \bm{\nu} \, ds
+		= \bigintsss_B \div \bm{f} \, dA.
 	}
 \end{align}
 
