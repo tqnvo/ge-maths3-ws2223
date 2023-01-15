@@ -62,7 +62,7 @@ or via the following link
 		:= \bigintsss_{a}^{b} \phi(\gamma(t))  \, \big\| \gamma'(t) \big\| \, dt
 	\end{align}
 \end{recallboxed}
-$\rightarrow$ Mass
+$\rightarrow$ Intuitively: Mass
 \begin{recallboxed}
 	\label{recall:scalarsurface}
 	Surface integral of a 
@@ -72,7 +72,7 @@ $\rightarrow$ Mass
 		:= \bigintsss_{B} \phi(\Phi(p,q)) \, \big\| \Phi_p \times \Phi_q \big\| \, d(p,q)
 	\end{align}
 \end{recallboxed}
-$\rightarrow$ Mass
+$\rightarrow$ Intuitively: Mass
 %------------------------------------------------------------------------------
 \subsection{Second kind: Vector field}
 \begin{recallboxed}
@@ -84,7 +84,7 @@ $\rightarrow$ Mass
 		\Big\langle \Bf(\gamma(t)), \gamma'(t) \Big\rangle \, dt
 	\end{align}
 \end{recallboxed}
-$\rightarrow$ Work done
+$\rightarrow$ Intuitively: Work done
 \begin{recallboxed}
 	\label{recall:vector}
 	Surface integral of a \textbf{vector field} $\Bf: \Omega \to \mathbb{R}^{n}$ is defined as follows
@@ -98,7 +98,7 @@ $\rightarrow$ Work done
 		\, d(p,q)
 	\end{align}
 \end{recallboxed}
-$\rightarrow$
+$\rightarrow$ Intuitively: Flow 
 %------------------------------------------------------------------------------
 \clearpage
 \section{Step-by-step: Surface integral of the 1st kind}
@@ -122,8 +122,8 @@ $\rightarrow$
 		\item Calculate the surface integral (\ref{eq:surf_int}) using the defined spherical coordinates.
 	\end{enumerate}
 \end{exampleboxed}
-Approach: 
-On the surface $\Omega$, we have $r = 2$, so we choose kind of sphere coordinates with:
+Approach:\\
+On the surface $\Omega$, we have $r = 2$, so we choose the sphere coordinate with:
 \begin{align}
 	\Phi(\phi,\theta)
 	= (2\cdot \cos \phi \cdot \sin \theta, 2\cdot \sin \phi \cdot \sin \theta, 2 \cdot \cos \theta)^T,
@@ -245,25 +245,28 @@ Approach:
 				            \begin{aligned}
 					            \bigintsss_F
 					            \Big\langle \Bf , \Bn \Big\rangle \,d\sigma
-					             & = \bigintsss_0^1 \!\!\! \bigintsss_0^{2\pi}
+					             & 
+					            = \bigintsss_0^1 \!\!\! \bigintsss_0^{2\pi}
 					            \Big\langle \Bf\big(F(\alpha,\beta)\big), \Bn \Big\rangle
-					            \,d\beta \, d\alpha                                                                                               \\
+					            \,d\beta \, d\alpha 
+								\\
 					            %  & = \bigintsss_0^1 \!\!\! \bigintsss_0^{2\pi}
 					            % \begin{pmatrix}
-						        %     e^\alpha\left(\alpha^2\cos^2(\beta)+\alpha^2\sin^2(\beta)\right)^{1/2} \\ 
-						        %     \alpha\cos(\beta)                                                      \\
-						        %     \alpha\sin(\beta)
+					            %     e^\alpha\left(\alpha^2\cos^2(\beta)+\alpha^2\sin^2(\beta)\right)^{1/2} \\ 
+					            %     \alpha\cos(\beta)                                                      \\
+					            %     \alpha\sin(\beta)
 					            % \end{pmatrix}
 					            % \cdot
 					            % \begin{pmatrix}
-						        %     \alpha                     \\ 
-						        %     -\alpha\cos(\beta)e^\alpha \\ 
-						        %     -\alpha\sin(\beta)e^\alpha
+					            %     \alpha                     \\ 
+					            %     -\alpha\cos(\beta)e^\alpha \\ 
+					            %     -\alpha\sin(\beta)e^\alpha
 					            % \end{pmatrix}\;  d\beta \,  d\alpha                                                                               \\
 					            %  & = 
 					            % \bigintsss_0^1 \!\!\! \bigintsss_0^{2\pi}
 					            % \Big( \alpha^2 e^\alpha - \alpha^2\cos^2(\beta)e^\alpha - \alpha^2\sin^2(\beta)e^\alpha \Big)\; d\beta \, d\alpha \\
-					             & = \dots
+								& 
+					            = \dots
 				            \end{aligned}
 			            }
 		            \end{align}
@@ -274,25 +277,28 @@ Approach:
 				            \begin{aligned}
 					            \bigintsss_F
 					            \Big\langle \Bf , \bm{\nu} \Big\rangle \,d\sigma
-					             & = \bigintsss_0^1 \!\!\! \bigintsss_0^{2\pi}
+					             & 
+					            = \bigintsss_0^1 \!\!\! \bigintsss_0^{2\pi}
 					            \Big\langle \Bf\big(F(\alpha,\beta)\big), \bm{\nu} \Big\rangle
-					            \,d\beta \, d\alpha                                                                                               \\
+					            \,d\beta \, d\alpha                            
+					            \\
 					            %  & = \bigintsss_0^1 \!\!\! \bigintsss_0^{2\pi}
 					            % \begin{pmatrix}
-						        %     e^\alpha\left(\alpha^2\cos^2(\beta)+\alpha^2\sin^2(\beta)\right)^{1/2} \\ 
-						        %     \alpha\cos(\beta)                                                      \\
-						        %     \alpha\sin(\beta)
+					            %     e^\alpha\left(\alpha^2\cos^2(\beta)+\alpha^2\sin^2(\beta)\right)^{1/2} \\ 
+					            %     \alpha\cos(\beta)                                                      \\
+					            %     \alpha\sin(\beta)
 					            % \end{pmatrix}
 					            % \cdot
 					            % \begin{pmatrix}
-						        %     \alpha                     \\ 
-						        %     -\alpha\cos(\beta)e^\alpha \\ 
-						        %     -\alpha\sin(\beta)e^\alpha
+					            %     \alpha                     \\ 
+					            %     -\alpha\cos(\beta)e^\alpha \\ 
+					            %     -\alpha\sin(\beta)e^\alpha
 					            % \end{pmatrix}\;  d\beta \,  d\alpha                                                                               \\
 					            %  & = 
 					            % \bigintsss_0^1 \!\!\! \bigintsss_0^{2\pi}
 					            % \Big( \alpha^2 e^\alpha - \alpha^2\cos^2(\beta)e^\alpha - \alpha^2\sin^2(\beta)e^\alpha \Big)\; d\beta \, d\alpha \\
-					             & = \dots
+					             & 
+					            = \dots
 				            \end{aligned}
 			            }
 		            \end{align}
