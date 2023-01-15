@@ -25,7 +25,7 @@ Mathe III $\cdot$ GUE11 $\cdot$ WS22/23
 \begin{center}
 	$12^{\text{th}}$ January, 2023
 \end{center}
-Summary of content covered: Analysis
+\textbf{\textsc{Summary of content covered:}} Analysis
 \begin{itemize}
 	\item Review line integral of the 1st kind (scalar field) and 2nd kind (vector field)
 	\item Surface integral of the 1st kind (scalar field) and 2nd kind (vector field)
@@ -98,30 +98,383 @@ $\rightarrow$ Work done
 		\, d(p,q)
 	\end{align}
 \end{recallboxed}
-$\rightarrow$ 
+$\rightarrow$
 %------------------------------------------------------------------------------
 \clearpage
-\section{Analysis: Surface integral of the first kind}
+\section{Step-by-step: Surface integral of the 1st kind}
 \begin{exampleboxed}
 	Examine
+	Given surface integral
+	\begin{align}
+		\bigintsss_{\Omega} 2\sqrt{4 - x^2 - y^2} \, d\sigma
+		\label{eq:surf_int}
+	\end{align}
+	where $\Omega = S \cap Z$ is the portion of the sphere
+	\begin{align}
+		S = \Big\{ (x,y,z) \in \mathbb{R}^3 :z \geq 0,\, x^2 + y^2 + z^2 = 4 \Big\}
+	\end{align}
+	inside the cylinder
+	\begin{align}
+		Z = \Big\{ (x,y,z) \in \mathbb{R}^3 : x^2+y^2 \leq 1 \Big\}
+	\end{align}
+	\begin{enumerate}
+		\item Define spherical coordinates in $\Omega$ (parameterize the surface of interest $\Omega$).
+		\item Calculate the surface integral (\ref{eq:surf_int}) using the defined spherical coordinates.
+	\end{enumerate}
 \end{exampleboxed}
-Approach:
+Approach: 
+On the surface $\Omega$, we have $r = 2$, so we choose kind of sphere coordinates with:
+\begin{align}
+	\Phi(\phi,\theta)
+	= (2\cdot \cos \phi \cdot \sin \theta, 2\cdot \sin \phi \cdot \sin \theta, 2 \cdot \cos \theta)^T,
+	~~ \phi \in [0,2\pi], \theta \in [0,\frac{\pi}{6}]
+\end{align}
+Hence, we obtain
+\begin{align}
+	\Bigg\| \frac{\partial \Phi}{\partial \phi}\times\frac{\partial \Phi}{\partial \theta} \Bigg\|
+	= 2^2 \cdot |\sin \theta|
+\end{align}
+
+Furthermore, on the surface we have
+$x^2+y^2 = 4~$
+so that
+\begin{align}
+	2 \sqrt{4-x^2-y^2} = 2\sqrt{z^2} = 2 \cdot z = 4 \cdot \cos \theta
+\end{align}
+Therefore, we obtain
+\begin{align}
+	\therefore\quad\boxed{
+		\begin{aligned}
+			\bigintsss_{\Omega} 2\sqrt{4 - x^2 - y^2} \, d\sigma
+			 & =
+			\bigintsss\limits_{0}^{2\pi}
+			\bigintsss\limits_{0}^{\frac{\pi}{6}} 4 \cos(\theta) \cdot 2^2 \sin \theta d\theta d\phi     \\
+			 & = 32 \pi \bigintsss\limits_{0}^{\frac{\pi}{6}} \cos \theta \cdot \sin(\theta) \,  d\theta \\
+			 & = 4 \pi
+		\end{aligned}
+	}
+\end{align}
 
 %------------------------------------------------------------------------------
 \clearpage
-\section{Analysis: Surface integral of the second kind}
+\section{Step-by-step: Surface integral of the 2nd kind}
 \begin{exampleboxed}
-	Examine
+	Examine the 
+	surface integral of a vector field based on 
+	the surface
+	\begin{align}
+		F =
+		\left\{
+		\alpha\in[0,1],\; \beta \in \Big[ 0,2\pi \Big)
+		\,\Bigg|\,
+		\Big( e^\alpha, \alpha\cos(\beta), \alpha\sin(\beta) \Big)
+		\right\},
+	\end{align}
+	and the vector field  $f$ given by
+	$f(x,y,z) = \Big( x\sqrt{y^2+z^2}, y, z \Big)$.
 \end{exampleboxed}
 Approach:
 
+\begin{enumerate}[(i)]
+	\item The normal vector of the surface is computed as follows
+	      \begin{align}
+		      \Bn
+		       & 
+		      = \partial_{\alpha} F \times \partial_{\beta} F
+		      = \begin{pmatrix} 
+			        e^\alpha \\\cos(\beta)\\\sin(\beta)
+		        \end{pmatrix}
+		      \times
+		      \begin{pmatrix} 
+			      0 \\ -\alpha\sin(\beta) \\  \alpha\cos(\beta)
+		      \end{pmatrix}                                                          \\
+		       & 
+		      = \begin{pmatrix} 
+			        \alpha\cos^2(\beta) + \alpha\sin^2(\beta) \\ -\alpha\cos(\beta)e^\alpha\\ -\alpha\sin(\beta)e^\alpha
+		        \end{pmatrix} \\
+		       & 
+		      = \begin{pmatrix} 
+			        \alpha \\ -\alpha\cos(\beta)e^\alpha\\ -\alpha\sin(\beta)e^\alpha
+		        \end{pmatrix},
+	      \end{align}
+	      \begin{observationboxed}
+		      Be aware of the sign when using \textbf{cofactor method} to compute the determinant 
+		      \begin{align}
+			      \partial_{\alpha} F \times \partial_{\beta} F
+			       & =
+			      \begin{vmatrix}
+				      i        & j                  & k                 \\
+				      e^\alpha & \cos(\beta)        & \sin(\beta)       \\
+				      0        & -\alpha\sin(\beta) & \alpha\cos(\beta)
+			      \end{vmatrix} \\
+			       & =
+			      i \begin{vmatrix} \cos(\beta) & \sin(\beta) \\ -\alpha\sin(\beta) & \alpha\cos(\beta) \end{vmatrix}
+			      - 
+			      j \begin{vmatrix} e^\alpha & \sin(\beta) \\ 0 & \alpha\cos(\beta) \end{vmatrix}
+			      + 
+			      k \begin{vmatrix} e^\alpha & \cos(\beta) \\ 0        & -\alpha\sin(\beta) \end{vmatrix}
+		      \end{align}
+	      \end{observationboxed}
+	      mit der Norm
+	      \begin{align}
+		      \|\tilde{\nu}\|
+		      = \Big(\alpha^2 + \alpha^2\cos^2(\beta)e^{2\alpha} + \alpha^2\sin^2(\beta)e^{2\alpha}\Big)^{1/2}
+		      = \alpha\Big(1+e^{2\alpha}\Big)^{1/2}.
+	      \end{align}
+	      Unter Ber"ucksichtigung des Vorzeichens der ersten Komponente
+	      folglich ist
+	      \begin{align}
+		      \boxed{
+			      \nu
+			      = \left(1+e^{2\alpha}\right)^{-1/2}
+			      \begin{pmatrix} 1\\-\cos(\beta)e^\alpha\\-\sin(\beta)e^\alpha\end{pmatrix}.
+		      }
+	      \end{align}
+	      
+	\item Oberflächenintegral 2. Art
+	      \begin{align}
+		      \boxed{
+			      \begin{aligned}
+				      \bigintsss_F
+				      \Big\langle f , \nu \Big\rangle \,d\sigma
+				       & = \bigintsss_0^1\bigintsss_0^{2\pi}
+				      \Big\langle f\big(F(\alpha,\beta)\big), \tilde{\nu} \Big\rangle
+				      \,d\beta \, d\alpha                    \\
+				       & = \bigintsss_0^1\bigintsss_0^{2\pi}
+				      \begin{pmatrix}
+					      e^\alpha\left(\alpha^2\cos^2(\beta)+\alpha^2\sin^2(\beta)\right)^{1/2} \\ 
+					      \alpha\cos(\beta)                                                      \\
+					      \alpha\sin(\beta)
+				      \end{pmatrix}
+				      \cdot
+				      \begin{pmatrix}
+					      \alpha                     \\ 
+					      -\alpha\cos(\beta)e^\alpha \\ 
+					      -\alpha\sin(\beta)e^\alpha
+				      \end{pmatrix}\;  d\beta \,  d\alpha    \\
+				       & = 
+				      \bigintsss_0^1\bigintsss_0^{2\pi}
+				      \Big( \alpha^2 e^\alpha - \alpha^2\cos^2(\beta)e^\alpha - \alpha^2\sin^2(\beta)e^\alpha \Big)\; d\beta \, d\alpha
+				      = 0.
+			      \end{aligned}
+		      }
+	      \end{align}
+\end{enumerate}
+
 %------------------------------------------------------------------------------
 \clearpage
-\section{Analysis: Gauss theorem}
+\section{Step-by-step with Gauss's theorem example}
 \begin{exampleboxed}
-	Examine
+	Examine the vector field $\bm{f}$ with
+	\begin{align}
+		\bm{f}:
+		\begin{cases}
+			\mathbb{R}^2 \rightarrow \mathbb{R}^2, \\
+			(x,y) \mapsto \bm{f}(x,y)
+			= \begin{pmatrix} x+y, y^2\end{pmatrix},
+		\end{cases}
+	\end{align}
+	and let $B\subset \mathbb{R}^2$ be a triangle with vertices at $(0,0),(1,0)$ and $(1,2).$
+	Verify the Gauss's theorem, by calculating the two integrals
+	$\bigintsss_{\partial B} \bm{f}\cdot \bm{\nu} \, ds$ and
+	$\bigintsss_B \div \bm{f} \, dA$, and compare them.
 \end{exampleboxed}
-Approach:
+Approach: 
+\begin{observationboxed}[2nd kind line integral]
+	We note that the integral
+	\begin{align}
+		\bigintsss_{\partial B} \bm{f}\cdot \bm{\nu} \, ds
+	\end{align}
+	is the line integral of the second kind, i.e.
+	line integral of a vector field.
+\end{observationboxed}
+\begin{observationboxed}[1st kind surface integral]
+	We note that the integral
+	\begin{align}
+		\bigintsss_B \div \bm{f} \, dA
+	\end{align}
+	is the surface integral of the first kind, i.e.
+	surface integral of a scalar field. 
+	Note in passing that divergence of vector field $ \Bf \in \mathbb{R}^3$ yields a scalar 
+	\begin{align}
+		\div \Bf = 
+		\begin{pmatrix} \partial_x \\ \partial_y \\ \partial_z \end{pmatrix}
+		\cdot 
+		\begin{pmatrix} f_1 \\ f_2 \\ f_3 \end{pmatrix}
+		=
+		\partial_x f_1 + \partial_yf_2 + \partial_zf_3.
+	\end{align}
+	Likewise, divergence of vector field $ \Bf \in \mathbb{R}^2$ yields a scalar
+	\begin{align}
+		\div \Bf = 
+		\begin{pmatrix} \partial_x \\ \partial_y \end{pmatrix}
+		\cdot 
+		\begin{pmatrix} f_1 \\ f_2 \end{pmatrix}
+		=
+		\partial_x f_1 + \partial_yf_2.
+	\end{align}
+\end{observationboxed}
+
+\begin{enumerate}[(i)]
+	\item First, we compute the surface integral of the scalar field
+	      \begin{align}
+		      \therefore\quad
+		      \boxed{
+			      \begin{aligned}
+				      \bigintsss_B \div \bm{f} \, dA
+				       & =\bigintsss_0^1 \!\!\! \bigintsss_0^{2x}
+				      \div
+				      \begin{pmatrix} x+y\\y^2 \end{pmatrix} \, dy \, dx                     \\
+				       & =\bigintsss_0^1 \!\!\! \bigintsss_0^{2x} \Big(1+2y\Big) \, dy \, dx \\
+				       & =\bigintsss_0^1 \Big( 4x^2 + 2x \Big) \, dx                         \\
+				       & = \dots
+			      \end{aligned}
+		      }
+	      \end{align}
+	      where we have computed the divergence of vector field $\Bf$ as follows
+	      \begin{align}
+		      \div \Bf 
+		       & = 	
+		      \begin{pmatrix} \partial_x \\ \partial_y \end{pmatrix}
+		      \cdot 
+		      \begin{pmatrix} f_1 \\ f_2 \end{pmatrix}
+		      =
+		      \begin{pmatrix} \partial_x \\ \partial_y \end{pmatrix}
+		      \cdot 
+		      \begin{pmatrix} x+y \\ y^2 \end{pmatrix} \\
+		       & 
+		      = \partial_x f_1 + \partial_yf_2         \\
+		       & 
+		      = \partial_x (x+y) + \partial_y(y^2)     \\
+		       & 
+		      = \dots
+	      \end{align}
+	      
+	\item Since the area $B$ is bounded by the three curves, we obtain the following relations
+	      \begin{align}
+		      \boxed{
+			      \begin{aligned}
+				      \gamma_1(t)
+				       & = \begin{pmatrix}t\\0\end{pmatrix}, \, t\in \left[0,1\right]
+				       & \quad \rightarrow
+				       & \quad
+				      \gamma_1'(t) = \begin{pmatrix} 1\\0 \end{pmatrix}
+				       & \quad \rightarrow
+				      \quad
+				      \Vert \gamma'_1 \Vert_2
+				       & = 1                                                                 \\
+				      %-------------------------------------------------
+				      \gamma_2(t)
+				       & = \begin{pmatrix} 1\\ t \end{pmatrix}, \, t\in \left[ 0,2 \right]
+				       & \quad \rightarrow
+				       & \quad
+				      \gamma_2'(t) = \begin{pmatrix} 0\\ 1 \end{pmatrix}
+				       & \quad \rightarrow
+				      \quad
+				      \Vert \gamma'_2 \Vert_2
+				       & = 1                                                                 \\
+				      %-------------------------------------------------
+				      \gamma_3(t)
+				       & = \begin{pmatrix}1-t\\2-2t\end{pmatrix}, \, t\in \left[ 0,1 \right]
+				       & \quad \rightarrow
+				       & \quad
+				      \gamma_3'(t) = \begin{pmatrix} -1 \\ -2 \end{pmatrix}
+				       & \quad \rightarrow
+				      \quad
+				      \Vert \gamma'_3 \Vert_2
+				       & = \sqrt{5}
+			      \end{aligned}
+		      }
+	      \end{align}
+	      \clearpage
+	      \begin{observationboxed}
+		      Parametrization of a line function may lead to various options. 
+		      However, we should be aware of the limit of the parameter variable.
+		      For example
+		      \begin{align}
+			      \gamma_2(t) = 
+			      \begin{pmatrix} 1 \\ 0 \end{pmatrix}
+			      + t
+			      \left(
+			      \begin{pmatrix} 1 \\ 2 \end{pmatrix}
+			      -
+			      \begin{pmatrix} 1 \\ 0 \end{pmatrix}
+			      \right)
+			      =
+			      \begin{pmatrix} 1 \\ 2t \end{pmatrix}
+		      \end{align}
+		      which leads to new limit applied on $t$ taking $\left[ 0,1 \right]$
+		      instead of $\left[ 0,2 \right]$
+		      \begin{align}
+			      \gamma_2(t)
+			       & = \begin{pmatrix} 1\\ 2t \end{pmatrix}, \, t\in \left[ 0,1 \right]
+			       & \quad \rightarrow
+			       & \quad
+			      \gamma_2'(t) = \begin{pmatrix} 0\\ 2 \end{pmatrix}
+			       & \quad \rightarrow
+			      \quad
+			      \Vert \gamma'_2 \Vert_2
+			       & = 2
+		      \end{align}
+	      \end{observationboxed}
+	      
+	      Likewise, normal vectors take the form
+	      \begin{align}
+		      \boxed{
+			      \bm{\nu}_1 = \begin{pmatrix}0\\-1\end{pmatrix} \text{ on}\ \gamma_1(t),
+			      \qquad
+			      \bm{\nu}_2 = \begin{pmatrix}1\\0\end{pmatrix} \text{ on}\ \gamma_2(t),
+			      \qquad
+			      \bm{\nu}_3 = \begin{pmatrix}-2\\1\end{pmatrix}\frac{1}{\sqrt{5}} \text{ on}\ \gamma_3(t),
+		      }
+	      \end{align}
+	      which have been computed based on the following relations
+	      \begin{align}
+		      \bm{\nu}_{1}\cdot\gamma_{1}'(t) \stackrel{!}{=} 0 \\
+		      \bm{\nu}_{2}\cdot\gamma_{2}'(t) \stackrel{!}{=} 0 \\
+		      \bm{\nu}_{3}\cdot\gamma_{3}'(t) \stackrel{!}{=} 0 
+	      \end{align}
+	      
+	      Now, we compute the line integral of the second kine
+	      $\bigintsss_{\partial B} \bm{f}\cdot \bm{\nu} \, ds$
+	      \begin{align}
+		      \bigintsss_{\partial B} \bm{f}\cdot\bm{\nu} \, ds
+		       & =
+		      \bigintsss_{\partial B = \gamma_1(t) + \gamma_2(t) + \gamma_3(t)} \bm{f}\cdot\bm{\nu} \, ds
+		      \\
+		       & =
+		      \bigintsss_{\gamma_1(t)} \bm{f}\cdot\bm{\nu}_1 \, ds +
+		      \bigintsss_{\gamma_2(t)} \bm{f}\cdot\bm{\nu}_2 \, ds +
+		      \bigintsss_{\gamma_3(t)} \bm{f}\cdot\bm{\nu}_3 \, ds                                  \\
+		       & =
+		      \bigintsss_{\gamma_1(t)} \bm{f}(\gamma_1'(t)) \cdot\bm{\nu}_1 \, ds +
+		      \bigintsss_{\gamma_2(t)} \bm{f}\cdot\bm{\nu}_2 \, ds +
+		      \bigintsss_{\gamma_3(t)} \bm{f}\cdot\bm{\nu}_3 \, ds
+		      \\
+		       & =\bigintsss_0^1
+		      \begin{pmatrix}t+0 \\0^2 \end{pmatrix} \cdot \begin{pmatrix}0 \\-1 \end{pmatrix} \, dt
+		      + \bigintsss_0^2
+		      \begin{pmatrix}1+t \\t^2 \end{pmatrix} \cdot \begin{pmatrix}1 \\0 \end{pmatrix} \, dt \\
+		       & \quad\quad\quad\quad\quad\quad\quad
+		      + \bigintsss_0^1
+		      \begin{pmatrix}1-t+2-2t \\ 4-8t+4t^2\end{pmatrix} \cdot \begin{pmatrix}-2\\1\end{pmatrix}
+		      \frac{\sqrt{5}}{\sqrt{5}} \, dt                                                       \\
+		       & =\bigintsss_0^2 (1+t) \, dt
+		      + \bigintsss_0^1 (4t^2-2t-2) \, dt
+		      = \frac{7}{3}.
+	      \end{align}
+\end{enumerate}
+
+
+Therefore, we have verified the Gauss's theorem
+\begin{align}
+	\therefore\quad
+	\boxed{
+		\bigintsss_{\partial B} \bm{f} \cdot \bm{\nu}
+		= \bigintsss_B \div \bm{f} \, d\lambda_2.
+	}
+\end{align}
+
 
 \bibliographystyle{acm}
 % \bibliography{literature.bib}
