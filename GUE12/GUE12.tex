@@ -27,20 +27,56 @@ Mathe III $\cdot$ GUE12 $\cdot$ WS22/23
 \end{center}
 \textbf{\textsc{Summary of content covered:}} Numerics
 \begin{itemize}
-	\item[\checkmark] Optimization: Line search method
-	\item[\checkmark] Optimization: Newton method
+	\item[\checkmark] Optimization: Line search method $+$ Step-by-step standard Newton method
 	\item[\checkmark] Optimization: Demo the $4$th programming exercise PRU03
 \end{itemize}
 %------------------------------------------------------------------------------
-\section{Line search method}
-
-%------------------------------------------------------------------------------
-\clearpage
-\section{Step-by-step: Line search method}
-\begin{exampleboxed}
-	Examine
-\end{exampleboxed}
-Approach:\\
+\section{Line search method: Main points}
+\begin{mdframed}
+	\begin{enumerate}
+		\item Line search method is an iteration scheme with the form
+		      \begin{align}
+			      x^{(k+1)} = x^{(k)} + \alpha_k \, d^{(k)}
+		      \end{align}
+		      
+		\item Typically, for the sake of minimum-searching problem we take
+		      \begin{align}
+			      \nabla f \Big( x^{(k)} \Big) \, d^{(k)} < 0.
+		      \end{align}
+		      
+		\item Searching direction  $d^{(k)}$ takes the form
+		      \begin{align}
+			      d^{(k)} = - B^{-1}_k \nabla f \Big( x^{(k)} \Big)
+		      \end{align}
+		      
+		      \begin{enumerate}[(i)]
+			      \item When $B_k = I$: \textbf{Gradient descent} or
+			            \textbf{Steepest descent} method.
+			            \begin{align}
+				            \begin{cases}
+					            x^{(k+1)} = x^{(k)} + \alpha_k \, d^{(k)} \\
+					            d^{(k)} = - \nabla f \Big( x^{(k)} \Big)
+				            \end{cases}
+			            \end{align}
+			            
+			      \item When $B_k = \nabla^2 f \Big( x^{(k)} \Big)$: \textbf{Newton} method.
+			            \begin{align}
+				            \begin{cases}
+					            x^{(k+1)} = x^{(k)} + \alpha_k \, d^{(k)} \\
+					            d^{(k)} = - \left( \nabla^2 f \Big( x^{(k)} \right)^{-1} \nabla f \Big( x^{(k)} \Big)
+				            \end{cases}
+			            \end{align}
+			            
+			      \item When $B_k \approx \nabla^2 f \Big( x^{(k)} \Big)$: Quasi-\textbf{Newton} method.
+		      \end{enumerate}
+		      
+		\item Controlling the coefficient $a_k$ leads to examining the two \textbf{Wolfe} conditions:
+		      \begin{enumerate}[(i)]
+			      \item Upper bound of $a_k$: \textbf{Armijo} condition.
+			      \item Lower bound of $a_k$: Curvature condition.
+		      \end{enumerate}
+	\end{enumerate}
+\end{mdframed}
 
 %------------------------------------------------------------------------------
 \clearpage
@@ -174,6 +210,8 @@ Approach:
 		      \big| x^{(0)} \big|  < 1
 	      \end{align}
 	      where $(\star)$ is enabled only if the radius of the starting point $x^{(0)}$ is less than $1$.
+
+		  \clearpage
 	      Therefore, it leads us to the following conclusion
 	      \begin{enumerate}[(i)]
 		      \item \( \big| x^{(0)} \big| < 1 \): The method will be converged.
