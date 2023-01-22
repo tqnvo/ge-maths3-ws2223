@@ -44,19 +44,172 @@ Approach:\\
 
 %------------------------------------------------------------------------------
 \clearpage
-\section{Step-by-step: Newton method}
+\section{Step-by-step: standard Newton method}
 \begin{exampleboxed}
-	Examine
+	Given the following function $f$ as follows
+	\begin{align}
+		f:
+		\begin{cases}
+			\mathbb{R} \to \mathbb{R}, \\
+			x \mapsto f(x):=\sqrt{1+x^2},
+		\end{cases}
+	\end{align}
+	and the standard Newton method is taken into consideration
+	\begin{align}
+		\label{eq:standardNewton}
+		\begin{cases}
+			x^{(k+1)} = x^{(k)} + \alpha_k d^{(k)} \\
+			d^{(k)}   = - {\left( \nabla^2 f\Big(x^{(k)}\Big) \right)}^{-1} \nabla f\Big(x^{(k)}\Big)
+		\end{cases}
+	\end{align}
+	\begin{enumerate}[(i)]
+		\item Compute $3$ steps of the Newton method using $\alpha_k = 1/2$ and $x^{(0)} = -3/2$.
+		\item Given $\alpha_k = 1$. Check all possibilities of the starting points,
+		      and examine whether the standard Newton method is converged, diverged, or oscillating.
+	\end{enumerate}
 \end{exampleboxed}
-Approach:\\
+Approach:
+\begin{enumerate}[(i)]
+	\item First, we shall need to compute
+	      the gradient $\nabla f(x)$
+	      as follows
+	      \begin{align}
+		      \label{eq:gradient1}
+		      \nabla f (x)  
+		      = 
+		      \frac{d}{dx}f(x)
+		      =
+		      \frac{\big(1+x^2\big)'}{2\sqrt{1+x^2}}
+		      =
+		      \frac{x}{\sqrt{1+x^2}}
+	      \end{align}
+	      and the second gradient $\nabla^2 f$ is computed as follows
+	      \begin{align}
+		      \label{eq:gradient2}
+		      \nabla^2 f(x) 
+		      = 
+		      \frac{d^2}{dx^2}f(x)
+		      =
+		      \frac{d}{dx}\left( \frac{x}{\sqrt{1+x^2}} \right)
+		      =
+		      \big(1+x^2\big)^{-3/2}
+	      \end{align}
+	      
+	      Next, the direction $d^{(k)}$ for the standard Newton method is ready computed
+	      \begin{align}
+		      d^{(k)}
+		       & = - {\left( \nabla^2 f\Big(x^{(k)}\Big) \right)}^{-1} \nabla f\Big(x^{(k)}\Big) \\
+		       & = - {\left( 1+{\Big(x^{(k)}\Big)}^2 \right)}^{3/2}
+		      \frac{x^{(k)}}{{\left( 1+{\Big(x^{(k)}\Big)}^2 \right)}^{1/2}}                     \\
+		       & = - x^{(k)} \left(1 + {\left(x^{(k)} \right)}^2 \right)
+	      \end{align}
+	      
+	      Then, taking into consideration $\alpha_{k} = 1/2$
+	      the next step of the standard Newton method takes the form
+	      \begin{align}
+		      x^{(k+1)}
+		       & = x^{(k)} + \alpha_k \, d^{(k)}                                        \\
+		       & = x^{(k)} - \frac{1}{2} x^{(k)} \Bigg(1 + {\Big(x^{(k)}\Big)}^2 \Bigg)
+	      \end{align}
+	      
+	      With the starting point $x^{(0)} = -3/2$ we gradually obtain the next steps
+	      \begin{enumerate}
+		      \item First step:
+		            \begin{align}
+			            x^{(1)} 
+			            = x^{(0)} - \frac{1}{2} x^{(0)} \Bigg(1 + {\Big(x^{(0)}\Big)}^2 \Bigg)
+			            = \dots
+		            \end{align}
+		            
+		      \item Second step:
+		            \begin{align}
+			            x^{(2)} 
+			            = x^{(1)} - \frac{1}{2} x^{(1)} \Bigg(1 + {\Big(x^{(1)}\Big)}^2 \Bigg)
+			            = \dots
+		            \end{align}
+		            
+		      \item Third step:
+		            \begin{align}
+			            x^{(3)} 
+			            = x^{(2)} - \frac{1}{2} x^{(2)} \Bigg(1 + {\Big(x^{(2)}\Big)}^2 \Bigg)
+			            = \dots
+		            \end{align}
+	      \end{enumerate}
+	      
+	\item Examine the convergence
+	      \begin{observationboxed}
+		      When studying the convergence of the line search in general or 
+		      the Newton method in particular,
+		      we shall need to know first the minimum $x^*$ of the function $f(x)$,
+		      so that we may examine the following expression
+		      \begin{align}
+			      \label{eq:limitconvergence}
+			      \lim_{k \to \infty} \Big| x^{(k+1)} - x^* \Big|.
+		      \end{align}
+		      Should the scheme converges, the limit results in $0$.
+	      \end{observationboxed}
+	      By taking into consideration \eqref{eq:gradient1}
+	      we may compute the extremum 
+	      \begin{align}
+		      \nabla f (x)  
+		      = 
+		      \frac{x}{\sqrt{1+x^2}}
+		      = 0
+		      \Rightarrow
+		      x^* = 0.
+	      \end{align}
+	      Then, the extremum $x^* = 0$, which is a local minimum
+	      by considering the \eqref{eq:gradient2},
+	      can be inserted into the 
+	      \eqref{eq:limitconvergence}
+	      to examine the converged ability
+	      \begin{align}
+		      \lim_{k \to \infty} \Big| x^{(k+1)} - x^* \Big| \stackrel{!}{=} 0
+		       & \Leftrightarrow
+		      \lim_{k \to \infty} \Big| x^{(k+1)} - 0 \Big| \stackrel{!}{=} 0                                 \\
+		       & \Leftrightarrow
+		      \lim_{k \to \infty} \Big| x^{(k+1)} - 0 \Big| \stackrel{!}{=} 0                                 \\
+		       & \Leftrightarrow \lim_{k \to \infty} \Big| - { \Big( x^{(k)} \Big)}^3 \Big| \stackrel{!}{=} 0
+		      \stackrel{(\star)}{\Rightarrow}
+		      \big| x^{(0)} \big|  < 1
+	      \end{align}
+	      where $(\star)$ is enabled only if the radius of the starting point $x^{(0)}$ is less than $1$.
+	      Therefore, it leads us to the following conclusion
+	      \begin{enumerate}[(i)]
+		      \item \( \big| x^{(0)} \big| < 1 \): The method will be converged.
+		      \item \( \big| x^{(0)} \big| = 1 \): The method will be oscillating, i.e. by flipping around.
+		      \item \( \big| x^{(0)} \big| > 1 \): The method will be diverged.
+	      \end{enumerate}
+	      
+	      Note in passing that we have computed the Newton step 
+	      in the context of $\alpha_k = 1$ as follows
+	      \begin{align}
+		      x^{(k+1)}
+		       & = x^{(k)} + \alpha_k \, d^{(k)}                                    \\
+		       & = x^{(k)} - 1 \cdot x^{(k)} \Bigg(1 + {\Big(x^{(k)}\Big)}^2 \Bigg) \\
+		       & = - \Big( x^{(k)} \Big)^3
+	      \end{align}
+\end{enumerate}
+
 
 %------------------------------------------------------------------------------
 \clearpage
 \section{Demo programming exercise PRU03}
  (White board + Projector)
- \begin{exampleboxed}
-	Examine the Rosenbrock function
-\end{exampleboxed}
+\begin{remarkboxed}
+	Rosenbrock function
+	\begin{align}
+		f:
+		\begin{cases}
+			\mathbb{R} \times \mathbb{R} \to \mathbb{R}, \\
+			(x,y) \mapsto f(x,y) := a\, (y-x^2)^2 + (1-x)^2,
+		\end{cases}
+	\end{align}
+	where $a=100$,
+	is well-known in Optimization. It is often used as a test problem 
+	for evaluating algorithms in Optimization.
+	This function has a \textbf{global minimum} $x^* = 0$ at the point $(1,1)$.
+\end{remarkboxed}
 
 
 \bibliographystyle{acm}
