@@ -1,0 +1,45 @@
+\documentclass[12pt]{article}
+\usepackage{anysize}
+\usepackage[ngerman,english]{babel}
+\marginsize{3.5cm}{2.5cm}{1cm}{2cm}
+
+\input{packages_styles.tex}
+%Page numbering in style 1/3...
+\usepackage{lastpage}  
+\usepackage{hyperref}
+\makeatletter
+\renewcommand{\@oddfoot}{\hfil 
+% Aachen, November $04^{th}$, 2021 \hspace{300pt} 
+Mathe III $\cdot$ GUE13-extra + SRU13 $\cdot$ WS22/23
+\hspace{200pt} 
+\thepage/\pageref{LastPage}\hfil}
+\makeatother
+%------------------------------------------------------------------------------
+\begin{document}
+\begin{center}
+	\section*{Global exercise - GUE13-extra + SRU13}
+\end{center}
+\begin{center}
+	Tuan Vo $+$ Jan Habscheid
+\end{center}
+\begin{center}
+	$27^{\text{th}}$ January, 2023
+\end{center}
+%------------------------------------------------------------------------------
+\section{Step-by-step with A2-SRU12}
+
+\begin{enumerate}[(i)]
+	\item Parametrized surface $S$ given in the cylindrical coordinate
+	      \begin{align}
+		      \Phi(s,t) = 
+		      \begin{pmatrix}
+			      s \cos(t) \\ s \sin(t) \\ t
+		      \end{pmatrix}
+		      \quad 
+		      \forall \, s\in [0,1], \, t\in[0,\pi/2].
+	      \end{align}
+\end{enumerate}
+
+\bibliographystyle{acm}
+% \bibliography{literature.bib}
+\end{document}
