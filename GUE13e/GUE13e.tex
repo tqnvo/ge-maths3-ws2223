@@ -3,10 +3,12 @@
 \usepackage[ngerman,english]{babel}
 \marginsize{3.5cm}{2.5cm}{1cm}{2cm}
 
-\input{packages_styles.tex}
+\input{packages_vo.tex}
+
 %Page numbering in style 1/3...
 \usepackage{lastpage}  
 \usepackage{hyperref}
+
 \makeatletter
 \renewcommand{\@oddfoot}{\hfil 
 % Aachen, November $04^{th}$, 2021 \hspace{300pt} 
@@ -27,6 +29,9 @@ Mathe III $\cdot$ GUE13-extra + SRU13 $\cdot$ WS22/23
 \end{center}
 %------------------------------------------------------------------------------
 \section{Step-by-step with A2-SRU12}
+\begin{mdframed}
+	Examine the surface integral in the Stokes' theorem.
+\end{mdframed}
 
 \begin{enumerate}[(i)]
 	\item Parametrized surface $S$ given in the cylindrical coordinate
@@ -38,8 +43,239 @@ Mathe III $\cdot$ GUE13-extra + SRU13 $\cdot$ WS22/23
 		      \quad 
 		      \forall \, s\in [0,1], \, t\in[0,\pi/2].
 	      \end{align}
+	      \inputfig{floats/surface_S}{surface_S}
+	      
+	\item \textbf{Outward normal vector} of the surface $S$
+	      \begin{align}
+		      \label{eq:normalvector}
+		      \Bn:=
+		      \partial_{s}\Phi(s,t) \times \partial_{t}\Phi(s,t)
+		       & =
+		      \begin{pmatrix}
+			      \cos(t) \\ \sin(t) \\ 0
+		      \end{pmatrix}
+		      \times
+		      \begin{pmatrix}
+			      -s\,\sin(t) \\ s\,\cos(t) \\ 1
+		      \end{pmatrix} \notag \\
+		       & =
+		      \begin{vmatrix}
+			      i           & j          & k \\
+			      \cos(t)     & \sin(t)    & 0 \\
+			      -s\,\sin(t) & s\,\cos(t) & 1
+		      \end{vmatrix}
+		      =
+		      \begin{pmatrix}
+			      \sin(t) \\ -\cos(t) \\  s
+		      \end{pmatrix}
+	      \end{align}
+	      \begin{observationboxed}
+		      Note in passing that the $z$-component of the above normal vector 
+		      for the surface $S$ is already positive, which satisfies 
+		      the convention mentioned in this exercise
+		      for an \textbf{outward} normal vector.
+		      It is due to the fact that the cross product
+		      $\partial_{s}\Phi(s,t) \times \partial_{t}\Phi(s,t)$
+		      is different from 
+		      $\partial_{t}\Phi(s,t) \times \partial_{s}\Phi(s,t)$
+		      in terms of sign. We can have a quick check as follows
+		      \begin{align}
+			      \partial_{t}\Phi(s,t) \times \partial_{s}\Phi(s,t)
+			       & =
+			      \begin{pmatrix}
+				      -s\,\sin(t) \\ s\,\cos(t) \\ 1
+			      \end{pmatrix}
+			      \times
+			      \begin{pmatrix}
+				      \cos(t) \\ \sin(t) \\ 0
+			      \end{pmatrix} \\
+			       & =
+			      \begin{vmatrix}
+				      i           & j          & k  \\
+				      -s\,\sin(t) & s\,\cos(t) & 1  \\
+				      \cos(t)     & \sin(t)    & 0 
+			      \end{vmatrix}
+			      =
+			      \begin{pmatrix}
+				      -\sin(t) \\ \cos(t) \\  -s
+			      \end{pmatrix}
+			      = -\Bn
+		      \end{align}
+		      whose $z$-component is obviously negative,
+		      and according to the convention mentioned in this exercise
+		      this normal vector is \textbf{not} an outward normal vector.
+		      Nevertheless, either option is still correct,
+		      and we just have to be consistent with the 
+		      option that we have chosen. 
+		      In the context of this exercise,
+		      we will go with the positive $z$-component.
+	      \end{observationboxed}
+	      
+	\item \textbf{Norm} of the outward normal vector
+	      \begin{align}
+		      \label{eq:norm}
+		      \| \Bn \|_2 
+		      := 
+		      \| \partial_{s}\Phi(s,t) \times \partial_{t}\Phi(s,t) \|_2
+		      \stackrel{\eqref{eq:normalvector}}{=}
+		      \sqrt{\sin^2(t) + \left( - \cos(t)\right)^2 + s}
+		      =
+		      \sqrt{1+s}
+	      \end{align}
+	      
+	\item \textbf{Outward unit normal vector}: Normalization of the normal vector
+	      \begin{align}
+		      \label{eq:unitnormalvector}
+		      \bm{\nu} := \frac{\Bn}{\| \Bn \|_2 }
+		      \stackrel{\eqref{eq:normalvector},\eqref{eq:norm}}{=}
+		      \frac{1}{\sqrt{1+s}}
+		      \begin{pmatrix}
+			      \sin(t) \\ -\cos(t) \\  s
+		      \end{pmatrix}
+	      \end{align}
+	      
+	\item Now, consider a vector field $\Bf$ defined as follows
+	      \begin{align}
+		      \label{eq:vectorfieldf}
+		      \Bf:
+		      \begin{cases}
+			      \mathbb{R}\times\mathbb{R}\times\mathbb{R} \to \mathbb{R}^3 \\
+			      (x,y,z) \mapsto \Bf(x,y,z)
+			      =
+			      \begin{pmatrix}
+				      f_{1}(x,y,z) \\ f_{2}(x,y,z) \\f_{3}(x,y,z)
+			      \end{pmatrix}
+			      :=
+			      \begin{pmatrix}
+				      z \\x\\y
+			      \end{pmatrix}.
+		      \end{cases}
+	      \end{align}
+	      
+	\item The Stokes' theorem requires the equality of
+	      a surface integral and a line integral, meaning that 
+	      \begin{mdframed}
+		      \begin{align}
+			      \bigintsss_{S} \left( \nabla \times \Bf \right) \cdot d\bm{\sigma}
+			      =
+			      \bigointsss_{\partial S} \Bf \cdot d \Bs
+		      \end{align}
+	      \end{mdframed}
+	      
+	\item Examine the urface integral:
+	      \begin{mdframed}
+		      \begin{align}
+			      \bigintsss_{S} \left( \nabla \times \Bf \right) \cdot d\bm{\sigma}
+		      \end{align}
+		      which is also written as follows 
+		      \begin{align}
+			      \label{eq:surfacsimilar}
+			      \bigintsss_{S} \left( \nabla \times \Bf \right) \cdot d\bm{\sigma}
+			      = 
+			      \bigintsss_{S} \left( \nabla \times \Bf \right) \cdot \bm{\nu} \, d\sigma
+			      =
+			      \bigintsss_{S} \Big\langle \left( \nabla \times \Bf \right), \bm{\nu} \Big\rangle \, d\sigma
+		      \end{align}
+	      \end{mdframed}
+	      
+	      The curl of $\Bf$ is computed straightforwardly as follows
+	      \begin{align}
+		      \label{eq:curl}
+		      \nabla \times \Bf 
+		       & =
+		      \begin{pmatrix}
+			      \partial_x \\ \partial_y \\ \partial_z
+		      \end{pmatrix}
+		      \times
+		      \begin{pmatrix}
+			      f_{1}(x,y,z) \\ f_{2}(x,y,z) \\ f_{3}(x,y,z)
+		      \end{pmatrix} \notag \\
+		       & = 
+		      \begin{vmatrix}
+			      i            & j            & k            \\
+			      \partial_x   & \partial_y   & \partial_z   \\
+			      f_{1}(x,y,z) & f_{2}(x,y,z) & f_{3}(x,y,z)
+		      \end{vmatrix}
+		      =
+		      \begin{pmatrix}
+			      \partial_yf_3 - \partial_zf_2   \\
+			      - \partial_xf_3 + \partial_zf_1 \\
+			      \partial_xf_2 - \partial_yf_1 
+		      \end{pmatrix}
+		      \stackrel{\eqref{eq:vectorfieldf}}{=}
+		      \begin{pmatrix}
+			      1 \\1\\1
+		      \end{pmatrix}
+	      \end{align}
+	      
+	      \begin{observationboxed}
+		      The integral $\eqref{eq:surfacsimilar}_{3}$
+		      is a surface integral of the first kind, i.e.
+		      surface integral of a \textbf{scalar} field.
+		      It is due to the fact that 
+		      the inner product $(\nabla \times \Bf)$
+		      and the outward unit normal vector $\bm{\nu}$
+		      results in a \textbf{scalar}. 
+	      \end{observationboxed}
+	      \begin{recallboxed}
+		      Surface integral of a 
+		      \textbf{scalar field} $\phi: \Omega \to \mathbb{R}$ is defined as
+		      \begin{align}
+			      \label{recall:scalarsurface}
+			      \bigintsss_{\Gamma} \phi \, dA 
+			      := \bigintsss_{B} \phi(\Phi(p,q)) \, \big\| \Phi_p \times \Phi_q \big\| \, d(p,q)
+		      \end{align}
+	      \end{recallboxed}
+	      
+	      Therefore, the integral $\eqref{eq:surfacsimilar}_{3}$
+	      is computed as follows
+	      \begin{align}
+		      \bigintsss_{S} \Big\langle \left( \nabla \times \Bf \right), \bm{\nu} \Big\rangle \, d\sigma
+		       & 
+		      \stackrel{\eqref{eq:curl}}{=}
+		      \bigintsss_{S} \Big\langle \begin{pmatrix} 1\\1\\1\end{pmatrix}, \bm{\nu} \Big\rangle \, d\sigma \\
+		       & 
+		      \stackrel{\eqref{recall:scalarsurface}}{=}
+		      \bigintsss_{0}^{1} \!\!\!\!\! \bigintsss_{0}^{\pi/2}
+		      \Big\langle \begin{pmatrix} 1\\1\\1\end{pmatrix}, \bm{\nu} \Big\rangle 
+		      \big\| \Phi_s \times \Phi_t \big\|_2 \, dt \,ds                                                  \\
+		       & 
+		      \stackrel{\eqref{eq:normalvector}}{=}
+		      \bigintsss_{0}^{1} \!\!\!\!\! \bigintsss_{0}^{\pi/2}
+		      \Big\langle \begin{pmatrix} 1\\1\\1\end{pmatrix}, \bm{\nu} \Big\rangle 
+		      \big\| \Bn \big\|_2 \, dt \,ds                                                                   \\
+		       & 
+		      \stackrel{\eqref{eq:unitnormalvector}}{=}
+		      \bigintsss_{0}^{1} \!\!\!\!\! \bigintsss_{0}^{\pi/2}
+		      \Big\langle \begin{pmatrix} 1\\1\\1\end{pmatrix}, \frac{\Bn}{\| \Bn \|_2} \Big\rangle 
+		      \big\| \Bn \big\|_2 \, dt \,ds                                                                   \\
+		       & 
+		      =
+		      \bigintsss_{0}^{1} \!\!\!\!\! \bigintsss_{0}^{\pi/2}
+		      \Big\langle \begin{pmatrix} 1\\1\\1\end{pmatrix}, \Bn \Big\rangle  \, dt \,ds                    \\
+		       & 
+		      \stackrel{\eqref{eq:normalvector}}{=}
+		      \bigintsss_{0}^{1} \!\!\!\!\! \bigintsss_{0}^{\pi/2}
+		      \Big\langle \begin{pmatrix} 1\\1\\1\end{pmatrix}, 
+		      \begin{pmatrix} \sin(t) \\ -\cos(t) \\  s \end{pmatrix}
+		      \Big\rangle  \, dt \,ds                                                                          \\
+		       & 
+		      \stackrel{\eqref{eq:normalvector}}{=}
+		      \bigintsss_{0}^{1} \!\!\!\!\! \bigintsss_{0}^{\pi/2}
+		      \Big( \sin(t) - \cos(t) + s \Big)
+		      \, dt \,ds                                                                                       \\
+		       & = \dots                                                                                       \\
+		       & = \frac{\pi}{4}
+	      \end{align}
+	      
+	      Consequentially, the normal vector $\Bn$ is needed to be normalized, i.e. 
+	      we need the unit normal vector $\bm{\nu}$.
+	      However, due to the sense of the surface integral of the first kind,
+	      the norm of the normal vector is canceled within integral.
+	      Therefore, it was actually not necessary to compute the norm, 
+	      and we may compute the integral directly with the non-normalized normal vector $\Bn$.
 \end{enumerate}
 
 \bibliographystyle{acm}
-% \bibliography{literature.bib}
+% \bibliography{literature_vo.bib}
 \end{document}
