@@ -162,7 +162,7 @@ Mathe III $\cdot$ GUE13-extra + SRU13 $\cdot$ WS22/23
 		      \end{align}
 	      \end{mdframed}
 	      
-	\item Examine the urface integral:
+	\item Examine the surface integral:
 	      \begin{mdframed}
 		      \begin{align}
 			      \bigintsss_{S} \left( \nabla \times \Bf \right) \cdot d\bm{\sigma}
@@ -213,9 +213,9 @@ Mathe III $\cdot$ GUE13-extra + SRU13 $\cdot$ WS22/23
 		      is a surface integral of the first kind, i.e.
 		      surface integral of a \textbf{scalar} field.
 		      It is due to the fact that 
-		      the inner product $(\nabla \times \Bf)$
+		      the inner product between the curl of vector field $\Bf$, i.e. $(\nabla \times \Bf)$,
 		      and the outward unit normal vector $\bm{\nu}$
-		      results in a \textbf{scalar}. 
+		      results in a \textbf{scalar}, as seen at \eqref{eq:curl}.
 	      \end{observationboxed}
 	      \begin{recallboxed}
 		      Surface integral of a 
@@ -225,6 +225,7 @@ Mathe III $\cdot$ GUE13-extra + SRU13 $\cdot$ WS22/23
 			      \bigintsss_{\Gamma} \phi \, dA 
 			      := \bigintsss_{B} \phi(\Phi(p,q)) \, \big\| \Phi_p \times \Phi_q \big\| \, d(p,q)
 		      \end{align}
+		      Note in passing that we can also write $\Phi_p \times \Phi_q = \partial_{p}\Phi \times \partial_{q}\Phi$.
 	      \end{recallboxed}
 	      
 	      Therefore, the integral $\eqref{eq:surfacsimilar}_{3}$
@@ -248,7 +249,8 @@ Mathe III $\cdot$ GUE13-extra + SRU13 $\cdot$ WS22/23
 		      \stackrel{\eqref{eq:unitnormalvector}}{=}
 		      \bigintsss_{0}^{1} \!\!\!\!\! \bigintsss_{0}^{\pi/2}
 		      \Big\langle \begin{pmatrix} 1\\1\\1\end{pmatrix}, \frac{\Bn}{\| \Bn \|_2} \Big\rangle 
-		      \big\| \Bn \big\|_2 \, dt \,ds                                                                   \\
+		      \big\| \Bn \big\|_2 \, dt \,ds                                                                   
+		      \label{eq:canceledoutvector}                                                                     \\
 		       & 
 		      =
 		      \bigintsss_{0}^{1} \!\!\!\!\! \bigintsss_{0}^{\pi/2}
@@ -268,51 +270,58 @@ Mathe III $\cdot$ GUE13-extra + SRU13 $\cdot$ WS22/23
 		       & = \frac{\pi}{4}
 	      \end{align}
 	      
-	      Consequentially, the normal vector $\Bn$ is needed to be normalized, i.e. 
-	      we need the unit normal vector $\bm{\nu}$.
-	      However, due to the sense of the surface integral of the first kind,
-	      the norm of the normal vector is canceled within integral.
+	      Consequentially, we need the unit normal vector $\bm{\nu}$.
+	      However, we may not need to compute its result explicitly, i.e. no need \eqref{eq:norm}. 
+	      This evidence points to the fact that 
+	      the norm of the normal vector is canceled within integral,
+	      which can be seen at \eqref{eq:canceledoutvector},
+	      due to the sense of the surface integral of the first kind.
 	      Therefore, it was actually not necessary to compute the norm, 
 	      and we may compute the integral directly with the non-normalized normal vector $\Bn$.
 \end{enumerate}
 
+%------------------------------------------------------------------------------
 \clearpage
+\section{Step-by-step with A2d-SRU13}
 Given 
 \begin{align}
 	\nabla\times\bm{v} = \sum\limits_{i,j,k=1}^3 \epsilon_{ijk}\, \bm{e}_i \, \partial_{x_j}v_k
 \end{align}
 
-Evaluate
-\begin{align}
-	\nabla\times(\nabla\times\bm{v})
-	 & = \sum\limits_{ijk}\epsilon_{ijk}\bm{e}_i\partial_{x_j}(\nabla\times\bm{v})_k                                                                                                                     \\
-	 & = \sum\limits_{ijk}\epsilon_{ijk}\bm{e}_i\partial_{x_j} \left( \sum\limits_{lm} \epsilon_{klm}\partial_{x_l}v_m \right)                                                                           \\
-	 & = \sum\limits_{ijk}\sum\limits_{lm}\epsilon_{ijk}\bm{e}_i\partial_{x_j}\epsilon_{klm}\partial_{x_l}v_m                                                                                            \\
-	 & = \sum\limits_{ijklm} \epsilon_{kij}\epsilon_{klm} \bm{e}_i\partial_{x_j}\partial_{x_l}v_m                                                                         \label{eq:epsilonepsilon}      \\
-	 & = \sum\limits_{ijklm} \left( \delta_{il}\delta_{jm} - \delta_{im}\delta_{jl} \right)\bm{e}_i\partial_{x_j}\partial_{x_l}v_m                                        \label{eq:deltafour}           \\
-	 & = \sum\limits_{ijklm} \left( \delta_{il}\delta_{jm}\bm{e}_i\partial_{x_j}\partial_{x_l}v_m - \delta_{im}\delta_{jl}\bm{e}_i\partial_{x_j}\partial_{x_l}v_m \right) \label{eq:deltafourtwo}        \\
-	 & = \sum\limits_{ijklm} \left( \bm{e}_i\partial_{x_j}\partial_{x_i}v_j - \bm{e}_i\partial_{x_j}\partial_{x_j}v_i \right)                                             \label{eq:deltafourtwoshorter} \\
-	 & = \sum\limits_{ij}\left( \bm{e}_i\partial_{x_j}\partial_{x_i}v_j-\bm{e}_i\partial_{x_j}\partial_{x_j}v_i\right)                                                                                   \\
-	 & = \nabla (\nabla\cdot\bm{v})-\Delta \bm{v}
-\end{align}
-Note in passing that 
-\begin{enumerate}[(i)]
-	\item From step \eqref{eq:epsilonepsilon} to step \eqref{eq:deltafour} we have used the equality
-	      \begin{align}
-		      \epsilon_{kij}\epsilon_{klm} = \delta_{il}\delta_{jm} - \delta_{im}\delta_{jl},
-	      \end{align}
-	      which leads to the fact that there is no more index $k$ from step \eqref{eq:deltafour} onwards.
-	      
-	\item From step \eqref{eq:deltafourtwo} to step \eqref{eq:deltafourtwoshorter} we have used the equality
-	      \begin{align}
-		      \delta_{il}\, \partial_{x_l} & = \partial_{x_i} \\
-		      \delta_{jm}\, v_m            & = v_j            \\
-		      \delta_{im}\, v_m            & = v_i            \\
-		      \delta_{jl}\, \partial_{x_l} & = \partial_{x_j}
-	      \end{align}
-	      which we have basically tried to reduce the indices $l$ and $m$.
-\end{enumerate}
-Therefore, we have only two indices $i$ and $j$.
+\begin{mdframed}
+	Evaluate
+	\begin{align}
+		\nabla\times(\nabla\times\bm{v})
+		 & = \sum\limits_{ijk}\epsilon_{ijk}\bm{e}_i\partial_{x_j}(\nabla\times\bm{v})_k                                                                                                                     \\
+		 & = \sum\limits_{ijk}\epsilon_{ijk}\bm{e}_i\partial_{x_j} \left( \sum\limits_{lm} \epsilon_{klm}\partial_{x_l}v_m \right)                                                                           \\
+		 & = \sum\limits_{ijk}\sum\limits_{lm}\epsilon_{ijk}\bm{e}_i\partial_{x_j}\epsilon_{klm}\partial_{x_l}v_m                                                                                            \\
+		 & = \sum\limits_{ijklm} \epsilon_{kij}\epsilon_{klm} \bm{e}_i\partial_{x_j}\partial_{x_l}v_m                                                                         \label{eq:epsilonepsilon}      \\
+		 & = \sum\limits_{ijklm} \left( \delta_{il}\delta_{jm} - \delta_{im}\delta_{jl} \right)\bm{e}_i\partial_{x_j}\partial_{x_l}v_m                                        \label{eq:deltafour}           \\
+		 & = \sum\limits_{ijklm} \left( \delta_{il}\delta_{jm}\bm{e}_i\partial_{x_j}\partial_{x_l}v_m - \delta_{im}\delta_{jl}\bm{e}_i\partial_{x_j}\partial_{x_l}v_m \right) \label{eq:deltafourtwo}        \\
+		 & = \sum\limits_{ijklm} \left( \bm{e}_i\partial_{x_j}\partial_{x_i}v_j - \bm{e}_i\partial_{x_j}\partial_{x_j}v_i \right)                                             \label{eq:deltafourtwoshorter} \\
+		 & = \sum\limits_{ij}\left( \bm{e}_i\partial_{x_j}\partial_{x_i}v_j-\bm{e}_i\partial_{x_j}\partial_{x_j}v_i\right) = \nabla (\nabla\cdot\bm{v})-\Delta \bm{v}
+	\end{align}
+\end{mdframed}
+\begin{mdframed}
+	Note in passing that 
+	\begin{enumerate}[(i)]
+		\item From step \eqref{eq:epsilonepsilon} to step \eqref{eq:deltafour} we have used the equality
+		      \begin{align}
+			      \epsilon_{kij}\epsilon_{klm} = \delta_{il}\delta_{jm} - \delta_{im}\delta_{jl},
+		      \end{align}
+		      which also implies that there is no more index $k$ from step \eqref{eq:deltafour} onwards.
+		      
+		\item From step \eqref{eq:deltafourtwo} to step \eqref{eq:deltafourtwoshorter} we have used the equality
+		      \begin{align}
+			      \delta_{il}\, \partial_{x_l} = \partial_{x_i} \quad & \text{and} \quad 
+			      \delta_{jm}\, v_m            = v_j                                      \\
+			      \delta_{im}\, v_m            = v_i            \quad & \text{and} \quad 
+			      \delta_{jl}\, \partial_{x_l} = \partial_{x_j}
+		      \end{align}
+		      which implies that the indices $l$ and $m$ are reduced.
+	\end{enumerate}
+	Therefore, we have only two indices $i$ and $j$.
+\end{mdframed}
 
 \bibliographystyle{acm}
 % \bibliography{literature_vo.bib}
